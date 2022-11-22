@@ -14,7 +14,7 @@ interface teitter {
 export const useTeitterStore = defineStore("teitter", () => {
     const isLoading = ref(false);
     const data = ref({
-        isLogin: false,
+        isLogin: true,
         teitterCurrentPage: 1,
 
         userInfo: {

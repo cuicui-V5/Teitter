@@ -4,7 +4,8 @@
         @scroll="scroll"
     >
         <div class="tittle">首页</div>
-        <publishTeitter></publishTeitter>
+        <button @click="data.isLogin = !data.isLogin">login</button>
+        <publishTeitter v-if="data.isLogin"></publishTeitter>
         <TheTeitterCard
             v-for="item in data.teitters"
             :teitter="item"

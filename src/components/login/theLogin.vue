@@ -19,12 +19,19 @@
         <br />
         <button class="loginBtn">登录</button>
         还没有账号？
-        <a href="">注册</a>
+        <RouterLink
+            :to="{
+                name: 'register',
+            }"
+        >
+            注册
+        </RouterLink>
     </div>
 </template>
 
 <script setup lang="ts">
     import { ref } from "vue";
+    import { RouterLink } from "vue-router";
 
     const username = ref("");
     const password = ref("");
@@ -35,7 +42,7 @@
         width: 60%;
         margin: 0 auto;
         h1 {
-            font-size: 3.1vw;
+            font-size: 2.5vw;
         }
         input {
             border-radius: 0.2vw;
@@ -47,12 +54,17 @@
             font-size: 1.5vw;
         }
         .loginBtn {
-            margin-top: 1vw;
+            margin: 1vw 0;
+
             width: 100%;
             height: 3vw;
             border-radius: 1.5vw;
             background-color: #0f1419;
             color: white;
+        }
+        a {
+            text-decoration: none;
+            color: #1f9cf0;
         }
     }
 </style>
