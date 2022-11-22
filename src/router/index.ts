@@ -5,7 +5,10 @@ import accountView from "../views/homePageView/accountView.vue";
 import searchView from "../views/homePageView/searchView.vue";
 import noticeView from "../views/homePageView/noticeView.vue";
 import emailView from "../views/homePageView/emailView.vue";
-import loginViewVue from "@/views/loginView/loginView.vue";
+
+import loginRegisterView from "@/views/loginView/loginRegisterView.vue";
+import theLoginVue from "@/components/login/theLogin.vue";
+import theRegisterVue from "@/components/login/theRegister.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -19,7 +22,6 @@ const router = createRouter({
                 {
                     path: "/home",
                     name: "home",
-
                     component: homepageView,
                 },
                 {
@@ -45,9 +47,21 @@ const router = createRouter({
             ],
         },
         {
-            path: "/login",
-            name: "login",
-            component: loginViewVue,
+            path: "/loginRegister",
+            component: loginRegisterView,
+            redirect: "login",
+            children: [
+                {
+                    path: "/login",
+                    name: "login",
+                    component: theLoginVue,
+                },
+                {
+                    path: "/register",
+                    name: "register",
+                    component: theRegisterVue,
+                },
+            ],
         },
     ],
 });

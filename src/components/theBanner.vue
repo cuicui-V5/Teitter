@@ -7,39 +7,31 @@
         <div class="buttons">
             <button
                 class="login"
-                @click="isShowLogin = !isShowLogin"
+                @click="gologin"
             >
                 登录
             </button>
             <button
                 class="register"
-                @click="gologin"
+                @click="goRegister"
             >
                 注册
             </button>
-            <Teleport
-                to="html"
-                v-if="isShowLogin"
-            >
-                <theLoginVue></theLoginVue>
-            </Teleport>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-    import { useTeitterStore } from "@/stores/teitter";
-    import { ref, Teleport, toRefs } from "vue";
-
     import router from "@/router";
-    import theLoginVue from "./login/theLogin.vue";
-    const store = useTeitterStore();
-    const { data } = toRefs(store);
-    const isShowLogin = ref(false);
 
     function gologin() {
         router.push({
             name: "login",
+        });
+    }
+    function goRegister() {
+        router.push({
+            name: "register",
         });
     }
 </script>
