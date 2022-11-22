@@ -4,7 +4,6 @@
 
         <input
             type="text"
-            id=""
             v-model="username"
             placeholder="用户名"
         />
@@ -12,12 +11,16 @@
 
         <input
             type="password"
-            id=""
             v-model="password"
             placeholder="密码"
         />
         <br />
-        <button class="loginBtn">登录</button>
+        <button
+            class="loginBtn"
+            @click="login()"
+        >
+            登录
+        </button>
         还没有账号？
         <RouterLink
             :to="{
@@ -30,11 +33,50 @@
 </template>
 
 <script setup lang="ts">
-    import { ref } from "vue";
+    import axios from "axios";
+    import { ref, toRefs } from "vue";
     import { RouterLink } from "vue-router";
+    import { useTeitterStore } from "@/stores/teitter";
+    import router from "@/router/index";
+    const store = useTeitterStore();
+    const { data } = toRefs(store);
+
+    axios.defaults.baseURL = "http://117.78.0.131:8080";
+    axios.defaults.withCredentials = true;
 
     const username = ref("");
     const password = ref("");
+
+    async function login() {
+        const user = {
+            username: username.value,
+            password: password.value,
+        };
+        let res;
+        try {
+            res = await axios.get("/teitter/login", {
+                params: user,
+            });
+            console.log(res);
+        } catch (error: unknown) {
+            alert("网络错误! " + (error as Error).message);
+        } finally {
+            if (res?.data.status != 200) {
+                alert("登录失败, 用户名或密码错误");
+            } else {
+                username.value = "";
+                password.value = "";
+
+                data.value.isLogin = true;
+                data.value.userInfo = res.data.userInfo;
+                data.value.userInfo.avatarUrl =
+                    "http://117.78.0.131:8080" + res.data.userInfo.avatarUrl;
+                router.push({
+                    name: "home",
+                });
+            }
+        }
+    }
 </script>
 
 <style scoped lang="scss">

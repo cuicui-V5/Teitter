@@ -4,7 +4,6 @@
 
         <input
             type="text"
-            id=""
             v-model="username"
             placeholder="用户名"
         />
@@ -12,12 +11,16 @@
 
         <input
             type="password"
-            id=""
             v-model="password"
             placeholder="密码"
         />
+        <input
+            type="password"
+            v-model="password"
+            placeholder="确认密码"
+        />
         <br />
-        <button class="loginBtn">登录</button>
+        <button class="registerBtn">注册</button>
         已经有账号了？
         <RouterLink
             :to="{
@@ -53,7 +56,7 @@
             margin: 1vw 0;
             font-size: 1.5vw;
         }
-        .loginBtn {
+        .registerBtn {
             margin: 1vw 0;
             width: 100%;
             height: 3vw;

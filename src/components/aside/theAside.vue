@@ -50,7 +50,7 @@
                 @click.stop="isShowUserInfoCard = !isShowUserInfoCard"
             >
                 <img
-                    :src="data.userInfo.avatar"
+                    :src="data.userInfo.avatarUrl"
                     class="avatar"
                 />
 

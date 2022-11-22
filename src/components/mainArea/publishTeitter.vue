@@ -2,7 +2,7 @@
     <div class="publishTeitter">
         <div class="avatarShow">
             <img
-                :src="data.userInfo.avatar"
+                :src="data.userInfo.avatarUrl"
                 class="avatar"
             />
         </div>
@@ -15,7 +15,7 @@
                 :class="activeClass"
                 @click="publish"
             >
-                发推
+                发忒
             </button>
         </div>
     </div>
@@ -43,8 +43,6 @@
 
     async function publish() {
         const tw = {
-            nickName: data.value.userInfo.nickName,
-            userName: data.value.userInfo.userName,
             content: content.value,
         };
 

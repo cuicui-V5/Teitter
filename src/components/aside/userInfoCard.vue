@@ -6,13 +6,13 @@
         <div class="info">
             <div class="avatarDiv">
                 <img
-                    :src="data.userInfo.avatar"
+                    :src="data.userInfo.avatarUrl"
                     class="avatar"
                 />
             </div>
             <div class="content">
-                <div class="nickName">cuicui</div>
-                <div class="userName">@cuicuiv5</div>
+                <div class="nickName">{{ data.userInfo.nickName }}</div>
+                <div class="userName">{{ data.userInfo.userName }}</div>
             </div>
         </div>
         <RouterLink
@@ -28,7 +28,7 @@
             class="signOut option"
             @click="closeCard"
         >
-            登出 @cuicuiv5
+            登出 {{ data.userInfo.userName }}
         </div>
     </div>
 </template>
@@ -42,6 +42,7 @@
     const emit = defineEmits(["closeCard"]);
     function closeCard() {
         emit("closeCard");
+        data.value.isLogin = false;
     }
 
     const store = useTeitterStore();
@@ -67,6 +68,7 @@
                 width: 5.2vw;
                 margin-right: 1vw;
                 .avatar {
+                    border-radius: 50%;
                     display: block;
                     width: 5.2vw;
                     height: 5.2vw;

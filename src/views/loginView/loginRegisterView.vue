@@ -29,12 +29,13 @@
         background-color: #0000004a;
         z-index: 999;
         .main {
+            padding: 1vw;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 40vw;
-            height: 31vw;
+            min-height: 31vw;
             background-color: white;
             border-radius: 2vw;
             .top {

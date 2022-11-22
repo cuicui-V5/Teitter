@@ -38,20 +38,11 @@
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
     import { computed } from "vue";
+    import type { teitter } from "@/interfaces/pubInterface";
+
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
 
-    interface teitter {
-        tweetId: Number;
-        nickName: String;
-        userName: String;
-        content: String;
-        likeCount: Number;
-        commentCount: Number;
-        forwardCount: Number;
-        updatetime: String;
-        isDeleted: Number;
-    }
     const { teitter } = defineProps<{
         teitter: teitter;
     }>();
@@ -78,7 +69,7 @@
                 height: 5.2vw;
                 margin: 0 auto;
                 border-radius: 50%;
-                background-image: url(../../img/elonma.jpg);
+                background-image: url(../../img/defaultAvatar.jpg);
                 background-size: contain;
             }
         }

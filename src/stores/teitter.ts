@@ -1,27 +1,19 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-interface teitter {
-    tweetId: number;
-    nickName: string;
-    userName: string;
-    content: string;
-    likeCount: number;
-    commentCount: number;
-    forwardCount: number;
-    updatetime: string;
-}
+import type { teitter } from "@/interfaces/pubInterface";
+axios.defaults.withCredentials = true;
+
 export const useTeitterStore = defineStore("teitter", () => {
     const isLoading = ref(false);
     const data = ref({
-        isLogin: true,
+        isLogin: false,
         teitterCurrentPage: 1,
 
         userInfo: {
             nickName: "cuicuiV5",
             userName: "cuicuiv5",
-            avatar: "https://picx.zhimg.com/v2-d7be5fcd1fb35461336a3db94ca1ff9c_xll.jpg?source=32738c0c",
-            introduction: "我是cuicui",
+            avatarUrl: "",
         },
         teitters: <unknown>[],
     });
@@ -35,8 +27,15 @@ export const useTeitterStore = defineStore("teitter", () => {
         const res = await axios.get(
             `/teitter/getAllTweet/${data.value.teitterCurrentPage++}`,
         );
+        console.log(res);
+
+        //更新用户信息
+        if (res.data.isLogin == true) {
+            data.value.userInfo = res.data.userInfo;
+            data.value.userInfo.avatarUrl =
+                "http://117.78.0.131:8080" + res.data.userInfo.avatarUrl;
+        }
         const resTeitters: Array<teitter> = res.data.data;
-        console.log(resTeitters);
 
         // 追加到现有的数据中
         resTeitters.forEach((item) => {
