@@ -1,0 +1,73 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1668862674635') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shouye:before {
+  content: "\f012b";
+}
+
+.icon-notice:before {
+  content: "\e63e";
+}
+
+.icon-xihuan:before {
+  content: "\e761";
+}
+
+.icon-zhuye:before {
+  content: "\e625";
+}
+
+.icon-pinglun:before {
+  content: "\e603";
+}
+
+.icon-notice1:before {
+  content: "\e6cc";
+}
+
+.icon-xihuan1:before {
+  content: "\e86f";
+}
+
+.icon-account:before {
+  content: "\e615";
+}
+
+.icon-account1:before {
+  content: "\e655";
+}
+
+.icon-zhuanfa:before {
+  content: "\e609";
+}
+
+.icon-searchfill:before {
+  content: "\e742";
+}
+
+.icon-fenxiang:before {
+  content: "\e634";
+}
+
+.icon-search:before {
+  content: "\e6e1";
+}
+
+.icon-email:before {
+  content: "\e74f";
+}
+
+.icon-email-fill:before {
+  content: "\e77e";
+}
+
