@@ -51,7 +51,11 @@
         background-color: #1d9bf0;
         .text {
             margin: 1vw 10vw 1vw 10vw;
+            h1 {
+                font-size: 2.125vw;
+            }
             h2 {
+                font-size: 1.375vw;
                 font-weight: normal;
             }
         }

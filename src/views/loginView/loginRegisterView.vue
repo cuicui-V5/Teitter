@@ -6,10 +6,8 @@
                     :to="{
                         name: 'home',
                     }"
-                    class="close"
-                >
-                    x
-                </RouterLink>
+                    class="close iconfont icon-close"
+                ></RouterLink>
                 <span class="logo"></span>
             </div>
             <RouterView></RouterView>
@@ -22,44 +20,45 @@
 <style scoped lang="scss">
     .mask {
         position: absolute;
-        top: 0%;
-        left: 0%;
-        right: 0%;
-        bottom: 0%;
-        background-color: #0000004a;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         z-index: 999;
+        background-color: #0000004a;
         .main {
-            padding: 1vw;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
             width: 40vw;
             min-height: 31vw;
-            background-color: white;
+            padding: 1vw;
             border-radius: 2vw;
+            background-color: white;
+            transform: translate(-50%, -50%);
             .top {
                 height: 5vw;
                 .close {
                     position: absolute;
-                    color: #0f1419;
-                    left: 0;
-                    top: 0;
-                    height: 5vw;
-                    width: 5vw;
+                    top: 0.2vw;
+                    left: 0.2vw;
+                    width: 3vw;
+                    height: 3vw;
                     border-radius: 50%;
+                    color: #0f1419;
                     text-align: center;
-                    font-size: 3vw;
-                    line-height: 4vw;
                     text-decoration: none;
+                    font-size: 2vw;
+                    line-height: 3vw;
+                    transition: all 0.2s;
                     &:hover {
                         background-color: #e7e7e8;
                     }
                 }
                 .logo {
                     display: block;
-                    height: 5vw;
                     width: 5vw;
+                    height: 5vw;
                     margin: 0 auto;
                     background-image: url(../../img/logo.png);
                     background-size: contain;

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1668862674635') format('truetype');
+  src: url('iconfont.ttf?t=1669206183819') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +13,10 @@
 
 .icon-shouye:before {
   content: "\f012b";
+}
+
+.icon-close:before {
+  content: "\e69a";
 }
 
 .icon-notice:before {
