@@ -3,12 +3,15 @@
         <TheAside></TheAside>
         <RouterView></RouterView>
         <theBannerVue v-if="!data.isLogin"></theBannerVue>
+        <statusPanel></statusPanel>
     </div>
 </template>
 
 <script setup lang="ts">
     import TheAside from "../../components/aside/theAside.vue";
     import theBannerVue from "@/components/theBanner.vue";
+    import statusPanel from "@/components/statusPanel.vue";
+
     import { useTeitterStore } from "@/stores/teitter";
     import { toRefs } from "vue";
     import { RouterView } from "vue-router";

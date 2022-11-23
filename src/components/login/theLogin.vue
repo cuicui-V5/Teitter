@@ -1,5 +1,5 @@
 <template>
-    <div class="login">
+    <div class="login animate__animated animate__fadeInLeft animate__faster">
         <h1>登录 Teitter</h1>
 
         <input
@@ -54,7 +54,7 @@
         };
         let res;
         try {
-            res = await axios.get("/teitter/login", {
+            res = await axios.get("/teitter/api/login", {
                 params: user,
             });
             console.log(res);

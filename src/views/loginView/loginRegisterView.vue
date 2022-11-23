@@ -1,6 +1,6 @@
 <template>
     <div class="mask">
-        <div class="main">
+        <div class="main animate__animated animate__fadeIn">
             <div class="top">
                 <RouterLink
                     :to="{

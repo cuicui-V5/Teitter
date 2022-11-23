@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card animate__animated animate__faster animate__flipInX">
         <div class="avatar">
             <span></span>
         </div>

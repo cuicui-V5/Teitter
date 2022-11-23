@@ -25,12 +25,13 @@ export const useTeitterStore = defineStore("teitter", () => {
         isLoading.value = true;
 
         const res = await axios.get(
-            `/teitter/getAllTweet/${data.value.teitterCurrentPage++}`,
+            `/teitter/api/getAllTweet/${data.value.teitterCurrentPage++}`,
         );
         console.log(res);
 
         //更新用户信息
         if (res.data.isLogin == true) {
+            data.value.isLogin = true;
             data.value.userInfo = res.data.userInfo;
             data.value.userInfo.avatarUrl =
                 "http://117.78.0.131:8080" + res.data.userInfo.avatarUrl;

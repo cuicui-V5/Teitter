@@ -1,5 +1,5 @@
 <template>
-    <div class="banner">
+    <div class="banner animate__animated animate__slideInUp animate__faster">
         <div class="text">
             <h1>新鲜事一网打尽</h1>
             <h2>在 Teitter 上的人会第一时间知道。</h2>

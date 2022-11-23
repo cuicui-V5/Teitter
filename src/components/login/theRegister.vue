@@ -1,5 +1,5 @@
 <template>
-    <div class="login">
+    <div class="login animate__animated animate__fadeInRight animate__faster">
         <h1>现在就加入 Teitter</h1>
 
         <input

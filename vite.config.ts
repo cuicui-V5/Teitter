@@ -12,4 +12,14 @@ export default defineConfig({
         },
     },
     base: "/teitter/",
+    // 配置代理
+    server: {
+        cors: true,
+        proxy: {
+            "/teitter/api": {
+                target: "http://117.78.0.131:8080",
+                changeOrigin: true,
+            },
+        },
+    },
 });

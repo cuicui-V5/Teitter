@@ -3,7 +3,7 @@
         class="mainArea"
         @scroll="scroll"
     >
-        <div class="tittle">首页</div>
+        <div class="tittle animate__animated animate__bounceIn">首页</div>
         <publishTeitter v-if="data.isLogin"></publishTeitter>
         <TheTeitterCard
             v-for="item in data.teitters"
@@ -31,8 +31,6 @@
         let scrollProgress =
             e.target.scrollTop /
             (e.target.scrollHeight - e.target.offsetHeight);
-        console.log(scrollProgress);
-
         if (scrollProgress > 0.8 && !isLoading.value) {
             console.log("滚动超过一大半, 加载下一页");
             getTeitter.value();

@@ -46,7 +46,7 @@
             content: content.value,
         };
 
-        const res = await axios.post("/teitter/sendTwt", tw, {
+        const res = await axios.post("/teitter/api/sendTwt", tw, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
