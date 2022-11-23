@@ -3,7 +3,7 @@
         class="mainArea"
         @scroll="scroll"
     >
-        <div class="tittle">忒特-首页</div>
+        <div class="tittle">首页</div>
         <publishTeitter v-if="data.isLogin"></publishTeitter>
         <TheTeitterCard
             v-for="item in data.teitters"
