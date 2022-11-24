@@ -36,12 +36,13 @@
             border-radius: 2vw;
             background-color: white;
             transform: translate(-50%, -50%);
+            box-shadow: 0 0 3vw -1vw black;
             .top {
                 height: 5vw;
                 .close {
                     position: absolute;
-                    top: 0.2vw;
-                    left: 0.2vw;
+                    top: 1.5vw;
+                    left: 1.5vw;
                     width: 3vw;
                     height: 3vw;
                     border-radius: 50%;

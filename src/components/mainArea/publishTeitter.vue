@@ -10,6 +10,7 @@
             <textarea
                 placeholder="有什么新鲜事 ?"
                 v-model="content"
+                @keydown.enter="publish()"
             ></textarea>
             <button
                 :class="activeClass"
@@ -81,7 +82,7 @@
                 height: 7vw;
                 padding: 1vw;
                 border: 0;
-                color: #536471;
+                color: #000000;
                 font-weight: normal;
                 font-size: 2.1vw;
                 resize: none;

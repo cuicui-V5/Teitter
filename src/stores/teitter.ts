@@ -8,11 +8,12 @@ export const useTeitterStore = defineStore("teitter", () => {
     const isLoading = ref(false);
     const data = ref({
         isLogin: false,
-        teitterCurrentPage: 1,
+        teitterCount: -1, // 推文总数
+        teitterCurrentPage: 1, // 当前是第几页的推文
 
         userInfo: {
-            nickName: "cuicuiV5",
-            userName: "cuicuiv5",
+            nickName: "",
+            userName: "",
             avatarUrl: "",
         },
         teitters: <unknown>[],
@@ -29,12 +30,14 @@ export const useTeitterStore = defineStore("teitter", () => {
         );
         console.log(res);
 
-        //更新用户信息
+        data.value.teitterCount = res.data.teitterCount;
+
+        // 如果用户登录了, 那么设置信息
         if (res.data.isLogin == true) {
             data.value.isLogin = true;
             data.value.userInfo = res.data.userInfo;
             data.value.userInfo.avatarUrl =
-                "http://117.78.0.131:8080" + res.data.userInfo.avatarUrl;
+                "https://www.heron.love:8888/" + res.data.userInfo.avatarUrl;
         }
         const resTeitters: Array<teitter> = res.data.data;
 

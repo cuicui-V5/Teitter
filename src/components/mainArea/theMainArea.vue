@@ -68,7 +68,7 @@
             line-height: 5vw;
             user-select: none;
             text-indent: 2vw;
-            backdrop-filter: blur(1vw);
+            backdrop-filter: blur(2vw);
             opacity: 0.5;
         }
         .loadMore {

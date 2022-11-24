@@ -14,12 +14,18 @@
             v-model="password"
             placeholder="密码"
         />
+
         <input
             type="password"
-            v-model="password"
+            v-model="rePassword"
             placeholder="确认密码"
         />
         <br />
+        <input
+            type="file"
+            accept="image/*"
+            ref="avatarFile"
+        />
         <button class="registerBtn">注册</button>
         已经有账号了？
         <RouterLink
@@ -38,6 +44,8 @@
 
     const username = ref("");
     const password = ref("");
+    const rePassword = ref("");
+    const avatarFile = ref();
 </script>
 
 <style scoped lang="scss">

@@ -13,6 +13,7 @@
             type="password"
             v-model="password"
             placeholder="密码"
+            @keydown.enter="login()"
         />
         <br />
         <button
@@ -67,7 +68,8 @@
                 data.value.isLogin = true;
                 data.value.userInfo = res.data.userInfo;
                 data.value.userInfo.avatarUrl =
-                    "http://117.78.0.131:8080" + res.data.userInfo.avatarUrl;
+                    "https://www.heron.love:8888/" +
+                    res.data.userInfo.avatarUrl;
                 router.push({
                     name: "home",
                 });
