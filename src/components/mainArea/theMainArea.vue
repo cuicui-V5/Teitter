@@ -3,13 +3,21 @@
         class="mainArea"
         @scroll="scroll"
     >
-        <button @click="showCookie">点击输出cookie</button>
         <div class="tittle animate__animated animate__bounceIn">首页</div>
         <publishTeitter v-if="data.isLogin"></publishTeitter>
         <TheTeitterCard
             v-for="item in data.teitters"
             :teitter="item"
         ></TheTeitterCard>
+        <div
+            class="lds-ring"
+            v-if="store.isLoading"
+        >
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <button
             @click="getTeitter"
             class="loadMore"
@@ -24,7 +32,6 @@
     import publishTeitter from "./publishTeitter.vue";
     import { useTeitterStore } from "@/stores/teitter";
     import { toRefs } from "vue";
-    import LoginRegisterView from "@/views/loginView/loginRegisterView.vue";
 
     const store = useTeitterStore();
     const { data, getTeitter, isLoading } = toRefs(store);
@@ -38,10 +45,6 @@
             getTeitter.value();
         }
     }
-
-    function showCookie() {
-        console.log(document.cookie);
-    }
 </script>
 
 <style scoped lang="scss">
@@ -52,13 +55,21 @@
         &::-webkit-scrollbar1 {
             display: none;
         }
+        padding-top: 6vw;
         .tittle {
+            z-index: 9999;
+            position: absolute;
+            top: 0;
+            left: 8.3vw;
             height: 5vw;
-            padding: 0 1.5vw;
+            width: 59.3vw;
             font-weight: bold;
             font-size: 2vw;
             line-height: 5vw;
             user-select: none;
+            text-indent: 2vw;
+            backdrop-filter: blur(1vw);
+            opacity: 0.5;
         }
         .loadMore {
             position: relative;
@@ -72,6 +83,41 @@
             color: white;
             font-size: 1.5vw;
             transform: translateX(-50%);
+        }
+        .lds-ring {
+            display: block;
+            margin: 0 auto;
+            width: 80px;
+            height: 80px;
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border: 8px solid #cef;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #1d9bf0 transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     }
 </style>

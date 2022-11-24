@@ -18,7 +18,7 @@ export const useTeitterStore = defineStore("teitter", () => {
         teitters: <unknown>[],
     });
 
-    axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
+    // axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
 
     async function getTeitter() {
         // 发送请求时让isLoading为真, 防止发送重复请求

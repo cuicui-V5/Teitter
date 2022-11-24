@@ -25,7 +25,7 @@
     import { useTeitterStore } from "@/stores/teitter";
     import { ref, toRefs, watch } from "vue";
     import axios from "axios";
-    axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
+    // axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
 
     const store = useTeitterStore();
     const { data } = toRefs(store);

@@ -41,9 +41,6 @@
     const store = useTeitterStore();
     const { data } = toRefs(store);
 
-    axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
-    axios.defaults.withCredentials = true;
-
     const username = ref("");
     const password = ref("");
 
