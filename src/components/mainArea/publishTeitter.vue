@@ -25,7 +25,7 @@
     import { useTeitterStore } from "@/stores/teitter";
     import { ref, toRefs, watch } from "vue";
     import axios from "axios";
-    axios.defaults.baseURL = "http://117.78.0.131:8080";
+    axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
 
     const store = useTeitterStore();
     const { data } = toRefs(store);
@@ -46,7 +46,7 @@
             content: content.value,
         };
 
-        const res = await axios.post("/teitter/api/sendTwt", tw, {
+        const res = await axios.post("/sendTwt", tw, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },

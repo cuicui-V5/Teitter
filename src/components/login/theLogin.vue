@@ -41,7 +41,7 @@
     const store = useTeitterStore();
     const { data } = toRefs(store);
 
-    axios.defaults.baseURL = "http://117.78.0.131:8080";
+    axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
     axios.defaults.withCredentials = true;
 
     const username = ref("");
@@ -54,7 +54,7 @@
         };
         let res;
         try {
-            res = await axios.get("/teitter/api/login", {
+            res = await axios.get("/login", {
                 params: user,
             });
             console.log(res);

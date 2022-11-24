@@ -17,7 +17,7 @@ export default defineConfig({
         cors: true,
         proxy: {
             "/teitter/api": {
-                target: "http://117.78.0.131:8080",
+                target: "https://www.heron.love:8090/teitter/api",
                 changeOrigin: true,
             },
         },

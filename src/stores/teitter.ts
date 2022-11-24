@@ -18,14 +18,14 @@ export const useTeitterStore = defineStore("teitter", () => {
         teitters: <unknown>[],
     });
 
-    axios.defaults.baseURL = "http://117.78.0.131:8080";
+    axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
 
     async function getTeitter() {
         // 发送请求时让isLoading为真, 防止发送重复请求
         isLoading.value = true;
 
         const res = await axios.get(
-            `/teitter/api/getAllTweet/${data.value.teitterCurrentPage++}`,
+            `/getAllTweet/${data.value.teitterCurrentPage++}`,
         );
         console.log(res);
 

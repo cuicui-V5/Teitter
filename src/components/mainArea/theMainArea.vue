@@ -3,6 +3,7 @@
         class="mainArea"
         @scroll="scroll"
     >
+        <button @click="showCookie">点击输出cookie</button>
         <div class="tittle animate__animated animate__bounceIn">首页</div>
         <publishTeitter v-if="data.isLogin"></publishTeitter>
         <TheTeitterCard
@@ -23,6 +24,7 @@
     import publishTeitter from "./publishTeitter.vue";
     import { useTeitterStore } from "@/stores/teitter";
     import { toRefs } from "vue";
+    import LoginRegisterView from "@/views/loginView/loginRegisterView.vue";
 
     const store = useTeitterStore();
     const { data, getTeitter, isLoading } = toRefs(store);
@@ -35,6 +37,10 @@
             console.log("滚动超过一大半, 加载下一页");
             getTeitter.value();
         }
+    }
+
+    function showCookie() {
+        console.log(document.cookie);
     }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div
         @click.stop
-        class="userInfoCard animate__animated animate__fast animate__bounceInUp"
+        class="userInfoCard animate__animated animate__fast animate__shakeY"
     >
         <div class="info">
             <div class="avatarDiv">
