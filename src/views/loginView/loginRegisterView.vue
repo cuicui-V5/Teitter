@@ -25,7 +25,7 @@
         bottom: 0;
         left: 0;
         z-index: 999;
-        background-color: #0000004a;
+        background-color: white;
         .main {
             position: absolute;
             top: 50%;
@@ -36,7 +36,7 @@
             border-radius: 2vw;
             background-color: white;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 3vw -1vw black;
+            box-shadow: 0 0 3vw 0.5vw rgba(0, 0, 0, 0.5);
             .top {
                 height: 5vw;
                 .close {
