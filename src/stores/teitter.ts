@@ -38,6 +38,7 @@ export const useTeitterStore = defineStore("teitter", () => {
             data.value.userInfo = res.data.userInfo;
             data.value.userInfo.avatarUrl =
                 "https://www.heron.love:8888/" + res.data.userInfo.avatarUrl;
+            data.value.userInfo.userName = "@" + res.data.userInfo.userName;
         }
         const resTeitters: Array<teitter> = res.data.data;
 

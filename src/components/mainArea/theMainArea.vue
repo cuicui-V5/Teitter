@@ -3,7 +3,7 @@
         class="mainArea"
         @scroll="scroll"
     >
-        <div class="tittle animate__animated animate__bounceIn">首页</div>
+        <div class="tittle animate__animated animate__bounceIn">主页</div>
         <publishTeitter v-if="data.isLogin"></publishTeitter>
         <TheTeitterCard
             v-for="item in data.teitters"
