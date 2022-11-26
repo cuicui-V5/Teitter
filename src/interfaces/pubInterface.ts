@@ -1,4 +1,5 @@
 export interface teitter {
+    avatarUrl: string;
     tweetId: number;
     nickName: string;
     userName: string;

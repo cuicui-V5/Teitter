@@ -9,21 +9,13 @@
             v-for="item in data.teitters"
             :teitter="item"
         ></TheTeitterCard>
-        <div
-            class="lds-ring"
-            v-if="store.isLoading"
-        >
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <button
+        <theLoad class="loader"></theLoad>
+        <!-- <button
             @click="getTeitter"
             class="loadMore"
         >
             更多
-        </button>
+        </button> -->
     </div>
 </template>
 
@@ -32,6 +24,7 @@
     import publishTeitter from "./publishTeitter.vue";
     import { useTeitterStore } from "@/stores/teitter";
     import { toRefs } from "vue";
+    import theLoad from "../theLoad.vue";
 
     const store = useTeitterStore();
     const { data, getTeitter, isLoading } = toRefs(store);
@@ -49,6 +42,7 @@
 
 <style scoped lang="scss">
     .mainArea {
+        position: relative;
         width: 59.3vw;
         height: 100vh;
         overflow-y: scroll;
@@ -60,7 +54,7 @@
             z-index: 9999;
             position: absolute;
             top: 0;
-            left: 8.3vw;
+            // left: 8.3vw;
             height: 5vw;
             width: 59.3vw;
             font-weight: bold;
@@ -71,53 +65,24 @@
             backdrop-filter: blur(2vw);
             opacity: 0.5;
         }
-        .loadMore {
-            position: relative;
-            left: 50%;
-            width: 5.12vw;
-            height: 3.65vw;
-            margin-top: 1vw;
-            border: 0;
-            border-radius: 1.82vw;
-            background-color: #1a8cd8;
-            color: white;
-            font-size: 1.5vw;
-            transform: translateX(-50%);
-        }
-        .lds-ring {
-            display: block;
-            margin: 0 auto;
-            width: 80px;
-            height: 80px;
-        }
-        .lds-ring div {
-            box-sizing: border-box;
-            display: block;
+        .loader {
             position: absolute;
-            width: 64px;
-            height: 64px;
-            margin: 8px;
-            border: 8px solid #cef;
-            border-radius: 50%;
-            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            border-color: #1d9bf0 transparent transparent transparent;
+            left: 47%;
+            width: 4vw;
+            height: 4vw;
         }
-        .lds-ring div:nth-child(1) {
-            animation-delay: -0.45s;
-        }
-        .lds-ring div:nth-child(2) {
-            animation-delay: -0.3s;
-        }
-        .lds-ring div:nth-child(3) {
-            animation-delay: -0.15s;
-        }
-        @keyframes lds-ring {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        // .loadMore {
+        //     position: absolute;
+        //     left: 50%;
+        //     transform: translate(-50%);
+        //     width: 5.12vw;
+        //     height: 3.65vw;
+        //     margin-top: 5vw;
+        //     border: 0;
+        //     border-radius: 1.82vw;
+        //     background-color: #1a8cd8;
+        //     color: white;
+        //     font-size: 1.5vw;
+        // }
     }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="card animate__animated animate__faster animate__flipInX">
         <div class="avatar">
-            <span></span>
+            <span :style="avatarUrlStyle"></span>
         </div>
         <div class="mainArea">
             <div class="top">
@@ -50,6 +50,10 @@
     const timeComputed = computed(() => {
         return dayjs(Number(teitter.updatetime)).fromNow();
     });
+
+    const avatarUrlStyle = computed(() => {
+        return `background-image: url(https://www.heron.love:8888${teitter.avatarUrl});`;
+    });
 </script>
 
 <style scoped lang="scss">
@@ -69,7 +73,7 @@
                 height: 5.2vw;
                 margin: 0 auto;
                 border-radius: 50%;
-                background-image: url(../../img/defaultAvatar.jpg);
+                // background-image: url(../../img/defaultAvatar.jpg);
                 background-size: contain;
             }
         }

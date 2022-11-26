@@ -12,12 +12,18 @@
                 v-model="content"
                 @keydown.enter="publish()"
             ></textarea>
+
             <button
                 :class="activeClass"
                 @click="publish"
+                v-if="!isLoading"
             >
                 发忒
             </button>
+            <TheLoad
+                v-if="isLoading"
+                class="loader"
+            ></TheLoad>
         </div>
     </div>
 </template>
@@ -26,7 +32,9 @@
     import { useTeitterStore } from "@/stores/teitter";
     import { ref, toRefs, watch } from "vue";
     import axios from "axios";
-    // axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
+    import TheLoad from "../theLoad.vue";
+    // 是否正在请求, 如果正在请求, 那么就播放加载的动画
+    const isLoading = ref(false);
 
     const store = useTeitterStore();
     const { data } = toRefs(store);
@@ -43,18 +51,30 @@
     });
 
     async function publish() {
+        isLoading.value = true;
+
         const tw = {
             content: content.value,
         };
 
-        const res = await axios.post("/sendTwt", tw, {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-        });
-        console.log(res);
-        content.value = "";
-        location.reload();
+        try {
+            const res = await axios.post("/sendTwt", tw, {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            });
+            if (res.data.status == 200) {
+                console.log(res);
+                location.reload();
+            } else {
+                alert("出现问题了哦");
+            }
+        } catch (error) {
+            alert("发送失败" + (error as Error).message);
+            content.value = "";
+        } finally {
+            isLoading.value = false;
+        }
     }
 </script>
 
@@ -108,6 +128,13 @@
             .btnActive {
                 background-color: #1a8cd8;
                 pointer-events: all;
+            }
+            .loader {
+                width: 3vw;
+
+                height: 3vw;
+                position: absolute;
+                right: 2vw;
             }
         }
     }

@@ -19,9 +19,16 @@
         <button
             class="loginBtn"
             @click="login()"
+            v-if="!isLoading"
         >
             登录
         </button>
+        <TheLoad
+            v-if="isLoading"
+            style="width: 3vw; height: 3vw; margin: 0 auto"
+        ></TheLoad>
+        <br />
+
         还没有账号？
         <RouterLink
             :to="{
@@ -39,13 +46,18 @@
     import { RouterLink } from "vue-router";
     import { useTeitterStore } from "@/stores/teitter";
     import router from "@/router/index";
+    import TheLoad from "../theLoad.vue";
     const store = useTeitterStore();
     const { data } = toRefs(store);
 
     const username = ref("");
     const password = ref("");
 
+    // 是否正在请求, 如果正在请求, 那么就播放加载的动画
+    const isLoading = ref(false);
+
     async function login() {
+        isLoading.value = true;
         const user = {
             username: username.value,
             password: password.value,
@@ -56,9 +68,6 @@
                 params: user,
             });
             console.log(res);
-        } catch (error: unknown) {
-            alert("网络错误! " + (error as Error).message);
-        } finally {
             if (res?.data.status != 200) {
                 alert("登录失败, 用户名或密码错误");
             } else {
@@ -74,6 +83,10 @@
                     name: "home",
                 });
             }
+        } catch (error: unknown) {
+            alert("网络错误! " + (error as Error).message);
+        } finally {
+            isLoading.value = false;
         }
     }
 </script>

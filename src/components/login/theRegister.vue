@@ -57,9 +57,15 @@
             class="registerBtn"
             :class="{ disable: !isOK }"
             @click="register"
+            v-if="!isLoading"
         >
             注册
         </button>
+        <TheLoad
+            v-if="isLoading"
+            style="width: 3vw; height: 3vw; margin: 0 auto"
+        ></TheLoad>
+        <br />
         已经有账号了？
         <RouterLink
             :to="{
@@ -68,7 +74,6 @@
         >
             登录
         </RouterLink>
-        <button @click="test">click</button>
     </div>
 </template>
 
@@ -76,6 +81,7 @@
     import axios from "axios";
     import { ref, type Ref, watchEffect } from "vue";
     import { RouterLink } from "vue-router";
+    import TheLoad from "../theLoad.vue";
 
     import router from "@/router/index";
 
@@ -86,9 +92,8 @@
     const isOK = ref(false);
     const avatarFile: Ref<HTMLInputElement> | Ref<null> = ref(null);
 
-    function test() {
-        console.log(avatarFile?.value?.files?.length);
-    }
+    // 是否正在请求, 如果正在请求, 那么就播放加载的动画
+    const isLoading = ref(false);
 
     watchEffect(() => {
         if (
@@ -104,6 +109,8 @@
     });
 
     async function register() {
+        isLoading.value = true;
+
         const fd = new FormData();
 
         fd.append("userName", username.value);
@@ -126,8 +133,10 @@
                     name: "login",
                 });
             }
-        } catch (error) {
-            alert("oops 出现问题了哦");
+        } catch (error: unknown) {
+            alert("oops 出现问题了哦" + (error as Error).message);
+        } finally {
+            isLoading.value = false;
         }
     }
 </script>
