@@ -6,7 +6,7 @@
         <div class="mainArea">
             <div class="top">
                 <span class="nick">{{ teitter.nickName }}</span>
-                <span class="username">{{ teitter.userName }}</span>
+                <span class="username">@{{ teitter.userName }}</span>
                 -
                 <span class="time">{{ timeComputed }}</span>
             </div>
@@ -52,7 +52,7 @@
     });
 
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(https://www.heron.love:8888${teitter.avatarUrl});`;
+        return `background-image: url(https://www.heron.love:8888${teitter.avatarUrl}); `;
     });
 </script>
 
@@ -74,7 +74,8 @@
                 margin: 0 auto;
                 border-radius: 50%;
                 // background-image: url(../../img/defaultAvatar.jpg);
-                background-size: contain;
+                background-size: cover;
+                background-position: center;
             }
         }
         .mainArea {

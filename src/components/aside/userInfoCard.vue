@@ -26,7 +26,7 @@
         </RouterLink>
         <div
             class="signOut option"
-            @click="closeCard"
+            @click="logout"
         >
             登出 {{ data.userInfo.userName }}
         </div>
@@ -35,6 +35,7 @@
 
 <script setup lang="ts">
     import { useTeitterStore } from "@/stores/teitter";
+    import axios from "axios";
     import { toRefs } from "vue";
     import { RouterLink } from "vue-router";
 
@@ -47,6 +48,17 @@
 
     const store = useTeitterStore();
     const { data } = toRefs(store);
+
+    async function logout() {
+        let res;
+        try {
+            res = await axios.post("/logout");
+            if (res.data.status == 200) location.reload();
+        } catch {
+            alert("登出失败");
+        } finally {
+        }
+    }
 </script>
 
 <style scoped lang="scss">
