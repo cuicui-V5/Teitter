@@ -30,27 +30,27 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 40vw;
-            min-height: 31vw;
-            padding: 1vw;
-            border-radius: 2vw;
+            width: 40vmax;
+            min-height: 31vmax;
+            padding: 1vmax;
+            border-radius: 2vmax;
             background-color: white;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 3vw 0.5vw rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 3vmax 0.5vmax rgba(0, 0, 0, 0.5);
             .top {
-                height: 5vw;
+                height: 5vmax;
                 .close {
                     position: absolute;
-                    top: 1.5vw;
-                    left: 1.5vw;
-                    width: 3vw;
-                    height: 3vw;
+                    top: 1.5vmax;
+                    left: 1.5vmax;
+                    width: 3vmax;
+                    height: 3vmax;
                     border-radius: 50%;
                     color: #0f1419;
                     text-align: center;
                     text-decoration: none;
-                    font-size: 2vw;
-                    line-height: 3vw;
+                    font-size: 2vmax;
+                    line-height: 3vmax;
                     transition: all 0.2s;
                     &:hover {
                         background-color: #e7e7e8;
@@ -58,8 +58,8 @@
                 }
                 .logo {
                     display: block;
-                    width: 5vw;
-                    height: 5vw;
+                    width: 5vmax;
+                    height: 5vmax;
                     margin: 0 auto;
                     background-image: url(../../img/logo.png);
                     background-size: contain;

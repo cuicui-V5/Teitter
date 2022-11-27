@@ -63,7 +63,7 @@
         </button>
         <TheLoad
             v-if="isLoading"
-            style="width: 3vw; height: 3vw; margin: 0 auto"
+            style="width: 3vmax; height: 3vmax; margin: 0 auto"
         ></TheLoad>
         <br />
         已经有账号了？
@@ -146,30 +146,30 @@
         width: 70%;
         margin: 0 auto;
         h1 {
-            font-size: 2.5vw;
+            font-size: 2.5vmax;
         }
         input {
-            border-radius: 0.2vw;
+            border-radius: 0.2vmax;
             border: #cfd9de 1px solid;
-            padding: 0.2vw;
+            padding: 0.2vmax;
             width: 100%;
-            height: 3vw;
-            margin: 1vw 0;
-            font-size: 1.5vw;
+            height: 3vmax;
+            margin: 1vmax 0;
+            font-size: 1.5vmax;
         }
         .avatarFile {
-            font-size: 1.5vw;
+            font-size: 1.5vmax;
             display: flex;
             span {
-                width: 8vw;
-                line-height: 5vw;
+                width: 8vmax;
+                line-height: 5vmax;
             }
         }
         .registerBtn {
-            margin: 1vw 0;
+            margin: 1vmax 0;
             width: 100%;
-            height: 3vw;
-            border-radius: 1.5vw;
+            height: 3vmax;
+            border-radius: 1.5vmax;
             background-color: #0f1419;
             color: white;
         }

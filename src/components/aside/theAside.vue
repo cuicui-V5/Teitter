@@ -87,7 +87,7 @@
 <style scoped lang="scss">
     .aside_main {
         z-index: 9;
-        width: 8.3vw;
+        width: 8.3vmax;
         height: 100vh;
         ul {
             position: relative;
@@ -101,9 +101,9 @@
             }
             .logo {
                 display: block;
-                width: 5.12vw;
-                height: 5.12vw;
-                margin: 0.5vw auto;
+                width: 5.12vmax;
+                height: 5.12vmax;
+                margin: 0.5vmax auto;
                 background-image: url(../../img/logo.png);
                 background-size: contain;
                 &:hover {
@@ -112,11 +112,11 @@
             }
             .iconfont {
                 display: block;
-                width: 2.6vw;
-                margin: 1vw auto;
-                padding: 1vw;
+                width: 2.6vmax;
+                margin: 1vmax auto;
+                padding: 1vmax;
                 border-radius: 50%;
-                font-size: 2.6vw;
+                font-size: 2.6vmax;
                 transition: all 0.2s;
                 &:hover {
                     background-color: #e7e7e8;
@@ -126,7 +126,7 @@
                 position: absolute;
                 bottom: 0;
                 left: 50%;
-                padding: 1vw;
+                padding: 1vmax;
                 border-radius: 50%;
                 transition: all 0.2s;
                 transform: translateX(-50%);
@@ -136,8 +136,8 @@
                 }
                 span {
                     display: block;
-                    width: 5.2vw;
-                    height: 5.2vw;
+                    width: 5.2vmax;
+                    height: 5.2vmax;
                     margin: 0 auto;
                     border-radius: 50%;
                     // background-image: url(../../img/defaultAvatar.jpg);

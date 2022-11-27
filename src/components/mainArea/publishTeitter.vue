@@ -81,14 +81,14 @@
 <style scoped lang="scss">
     .publishTeitter {
         display: flex;
-        height: 13vw;
+        height: 13vmax;
         border-bottom: #eff3f4 1px solid;
         .avatarShow {
-            width: 7vw;
+            width: 7vmax;
             span {
                 display: block;
-                width: 5.2vw;
-                height: 5.2vw;
+                width: 5.2vmax;
+                height: 5.2vmax;
                 margin: 0 auto;
                 border-radius: 50%;
                 // background-image: url(../../img/defaultAvatar.jpg);
@@ -102,12 +102,12 @@
             textarea {
                 position: relative;
                 width: 100%;
-                height: 7vw;
-                padding: 1vw;
+                height: 7vmax;
+                padding: 1vmax;
                 border: 0;
                 color: #000000;
                 font-weight: normal;
-                font-size: 2.1vw;
+                font-size: 2.1vmax;
                 resize: none;
                 &:focus {
                     outline: 0;
@@ -118,14 +118,14 @@
                 position: absolute;
                 right: 0;
                 bottom: 0;
-                width: 5.12vw;
-                height: 3.65vw;
-                margin: 1vw;
+                width: 5.12vmax;
+                height: 3.65vmax;
+                margin: 1vmax;
                 border: 0;
-                border-radius: 1.82vw;
+                border-radius: 1.82vmax;
                 background-color: #8ecdf7;
                 color: white;
-                font-size: 1.62vw;
+                font-size: 1.62vmax;
                 pointer-events: none;
             }
             .btnActive {
@@ -133,11 +133,11 @@
                 pointer-events: all;
             }
             .loader {
-                width: 3vw;
+                width: 3vmax;
 
-                height: 3vw;
+                height: 3vmax;
                 position: absolute;
-                right: 2vw;
+                right: 2vmax;
             }
         }
     }

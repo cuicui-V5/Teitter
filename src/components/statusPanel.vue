@@ -45,11 +45,11 @@
     .panel {
         background-color: #e7f4fd;
         flex: 1;
-        padding: 2vw;
-        font-size: 1vw;
+        padding: 2vmax;
+        font-size: 1vmax;
         .text {
             word-wrap: break-word;
-            width: 20vw;
+            width: 20vmax;
         }
     }
 </style>

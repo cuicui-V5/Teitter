@@ -38,7 +38,7 @@
 
 <style scoped lang="scss">
     .banner {
-        box-shadow: 0vw 4.2vw 2.2vw 3.2vw black;
+        box-shadow: 0vmax 4.2vmax 2.2vmax 3.2vmax black;
         display: flex;
         justify-content: space-between;
         color: white;
@@ -46,35 +46,35 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        height: 7.3vw;
-        width: 100vw;
+        height: 7.3vmax;
+        width: 100vmax;
         background-color: #1d9bf0;
         .text {
-            margin: 1vw 10vw 1vw 10vw;
+            margin: 1vmax 10vmax 1vmax 10vmax;
             h1 {
-                font-size: 2.125vw;
+                font-size: 2.125vmax;
             }
             h2 {
-                font-size: 1.375vw;
+                font-size: 1.375vmax;
                 font-weight: normal;
             }
         }
         .buttons {
-            margin-right: 2vw;
+            margin-right: 2vmax;
             height: 100%;
-            width: 15vw;
+            width: 15vmax;
             justify-content: space-around;
             display: flex;
             align-items: center;
             button {
                 background-color: #fff;
-                width: 6vw;
-                height: 4vw;
+                width: 6vmax;
+                height: 4vmax;
                 border: 1px solid #71c0f6;
-                border-radius: 2vw;
+                border-radius: 2vmax;
                 background-color: #1a8cd8;
                 color: white;
-                font-size: 1.5vw;
+                font-size: 1.5vmax;
                 font-weight: bold;
             }
             .register {

@@ -59,18 +59,18 @@
 <style scoped lang="scss">
     .card {
         display: flex;
-        min-height: 10vw;
-        padding: 1vw;
+        min-height: 10vmax;
+        padding: 1vmax;
         transition: all 0.2s;
         &:hover {
             background-color: #f7f7f7;
         }
         .avatar {
-            width: 7vw;
+            width: 7vmax;
             span {
                 display: block;
-                width: 5.2vw;
-                height: 5.2vw;
+                width: 5.2vmax;
+                height: 5.2vmax;
                 margin: 0 auto;
                 border-radius: 50%;
                 // background-image: url(../../img/defaultAvatar.jpg);
@@ -81,7 +81,7 @@
         .mainArea {
             flex: 1;
             .top {
-                font-size: 1.45vw;
+                font-size: 1.45vmax;
 
                 .nick {
                     color: #0f1419;
@@ -96,19 +96,19 @@
                 }
             }
             .content {
-                padding: 0.3vw;
-                font-size: 1.5vw;
-                margin-top: 0.3vw;
+                padding: 0.3vmax;
+                font-size: 1.5vmax;
+                margin-top: 0.3vmax;
                 color: #0f1419;
             }
             .bottom {
-                margin-top: 2.5vw;
+                margin-top: 2.5vmax;
                 display: flex;
                 justify-content: space-between;
-                font-size: 1.45vw;
+                font-size: 1.45vmax;
 
                 .share {
-                    margin-right: 10vw;
+                    margin-right: 10vmax;
                 }
 
                 & > span {
@@ -119,8 +119,8 @@
                         color: #46acf1;
                     }
                     i {
-                        padding: 0.5vw;
-                        font-size: 1.82vw;
+                        padding: 0.5vmax;
+                        font-size: 1.82vmax;
                         font-weight: bold;
                         border-radius: 50%;
                         transition: all 0.2s;

@@ -8,7 +8,7 @@
     .loader {
         width: 48px;
         height: 48px;
-        border: 0.6vw solid #d2ebfc;
+        border: 0.6vmax solid #d2ebfc;
         border-bottom-color: #1d9bf0;
         border-radius: 50%;
         display: inline-block;

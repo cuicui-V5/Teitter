@@ -43,46 +43,46 @@
 <style scoped lang="scss">
     .mainArea {
         position: relative;
-        width: 59.3vw;
+        width: 59.3vmax;
         height: 100vh;
         overflow-y: scroll;
         &::-webkit-scrollbar1 {
             display: none;
         }
-        padding-top: 6vw;
+        padding-top: 6vmax;
         .tittle {
             z-index: 9999;
             position: absolute;
             top: 0;
-            // left: 8.3vw;
-            height: 5vw;
-            width: 59.3vw;
+            // left: 8.3vmax;
+            height: 5vmax;
+            width: 59.3vmax;
             font-weight: bold;
-            font-size: 2vw;
-            line-height: 5vw;
+            font-size: 2vmax;
+            line-height: 5vmax;
             user-select: none;
-            text-indent: 2vw;
-            backdrop-filter: blur(2vw);
+            text-indent: 2vmax;
+            backdrop-filter: blur(2vmax);
             opacity: 0.5;
         }
         .loader {
             position: absolute;
             left: 47%;
-            width: 4vw;
-            height: 4vw;
+            width: 4vmax;
+            height: 4vmax;
         }
         // .loadMore {
         //     position: absolute;
         //     left: 50%;
         //     transform: translate(-50%);
-        //     width: 5.12vw;
-        //     height: 3.65vw;
-        //     margin-top: 5vw;
+        //     width: 5.12vmax;
+        //     height: 3.65vmax;
+        //     margin-top: 5vmax;
         //     border: 0;
-        //     border-radius: 1.82vw;
+        //     border-radius: 1.82vmax;
         //     background-color: #1a8cd8;
         //     color: white;
-        //     font-size: 1.5vw;
+        //     font-size: 1.5vmax;
         // }
     }
 </style>

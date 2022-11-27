@@ -64,25 +64,25 @@
 <style scoped lang="scss">
     .userInfoCard {
         position: absolute;
-        top: -24vw;
-        width: 30.2vw;
-        height: 20vw;
-        padding: 2vw;
+        top: -24vmax;
+        width: 30.2vmax;
+        height: 20vmax;
+        padding: 2vmax;
         border: 1px solid #e1e4e6;
-        border-radius: 2vw;
+        border-radius: 2vmax;
         background-color: white;
-        box-shadow: 0 0 1vw 0.1vw #e1e4e6;
+        box-shadow: 0 0 1vmax 0.1vmax #e1e4e6;
         .info {
             display: flex;
-            height: 6vw;
-            margin-bottom: 2vw;
+            height: 6vmax;
+            margin-bottom: 2vmax;
             .avatarDiv {
-                width: 5.2vw;
-                margin-right: 1vw;
+                width: 5.2vmax;
+                margin-right: 1vmax;
                 span {
                     display: block;
-                    width: 5.2vw;
-                    height: 5.2vw;
+                    width: 5.2vmax;
+                    height: 5.2vmax;
                     margin: 0 auto;
                     border-radius: 50%;
                     // background-image: url(../../img/defaultAvatar.jpg);
@@ -91,25 +91,25 @@
                 }
             }
             .content {
-                font-size: 1.35vw;
+                font-size: 1.35vmax;
                 user-select: none;
                 .nickName {
-                    margin-top: 0.5vw;
+                    margin-top: 0.5vmax;
                     font-weight: bold;
-                    font-size: 1.5vw;
+                    font-size: 1.5vmax;
                 }
                 .userName {
-                    margin-top: 0.5vw;
-                    margin-left: -0.1vw;
+                    margin-top: 0.5vmax;
+                    margin-left: -0.1vmax;
                 }
             }
         }
         .option {
             display: block;
-            padding: 2vw 0;
+            padding: 2vmax 0;
             color: black;
             text-decoration: none;
-            font-size: 1.6vw;
+            font-size: 1.6vmax;
             user-select: none;
             transition: all 0.2s;
             &:hover {
