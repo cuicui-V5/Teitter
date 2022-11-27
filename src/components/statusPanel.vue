@@ -44,12 +44,12 @@
 <style scoped lang="scss">
     .panel {
         background-color: #e7f4fd;
-        flex: 1;
+        flex: 2;
         padding: 2vmax;
         font-size: 1vmax;
+        overflow: hidden;
         .text {
             word-wrap: break-word;
-            width: 10vmax;
         }
     }
 </style>

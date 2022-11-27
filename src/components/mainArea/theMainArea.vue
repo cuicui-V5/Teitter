@@ -44,21 +44,22 @@
     .mainArea {
         position: relative;
         // width: 59.3vmax;
-        flex: 8;
-        height: 100vh;
+        flex: 7;
+        height: 85vh;
         overflow-y: scroll;
-        &::-webkit-scrollbar1 {
+        overflow-x: hidden;
+        &::-webkit-scrollbar {
             display: none;
         }
         padding-top: 6vmax;
         .tittle {
             z-index: 9999;
-            position: absolute;
+            position: fixed;
             top: 0;
             // left: 8.3vmax;
             height: 5vmax;
             // width: 59.3vmax;
-            width: 75%;
+            width: 67%;
             font-weight: bold;
             font-size: 2vmax;
             line-height: 5vmax;

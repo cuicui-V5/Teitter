@@ -130,7 +130,7 @@
                 height: 4vmax;
                 position: relative;
                 left: 50%;
-                padding: 1vmax;
+                padding: 0.5vmax;
                 border-radius: 50%;
                 transition: all 0.2s;
                 transform: translateX(-50%);
@@ -144,8 +144,8 @@
                     left: 50%;
                     transform: translate(-50%, -50%);
                     display: block;
-                    width: 3vmax;
-                    height: 3vmax;
+                    width: 4vmax;
+                    height: 4vmax;
                     border-radius: 50%;
                     // background-image: url(../../img/defaultAvatar.jpg);
                     background-size: cover;
