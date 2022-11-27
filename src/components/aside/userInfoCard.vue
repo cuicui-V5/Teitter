@@ -5,10 +5,7 @@
     >
         <div class="info">
             <div class="avatarDiv">
-                <img
-                    :src="data.userInfo.avatarUrl"
-                    class="avatar"
-                />
+                <span :style="avatarUrlStyle"></span>
             </div>
             <div class="content">
                 <div class="nickName">{{ data.userInfo.nickName }}</div>
@@ -36,7 +33,7 @@
 <script setup lang="ts">
     import { useTeitterStore } from "@/stores/teitter";
     import axios from "axios";
-    import { toRefs } from "vue";
+    import { computed, toRefs } from "vue";
     import { RouterLink } from "vue-router";
 
     // 调用父组件的事件来关闭卡片
@@ -48,6 +45,9 @@
 
     const store = useTeitterStore();
     const { data } = toRefs(store);
+    const avatarUrlStyle = computed(() => {
+        return `background-image: url(${data.value.userInfo.avatarUrl}); `;
+    });
 
     async function logout() {
         let res;
@@ -79,11 +79,15 @@
             .avatarDiv {
                 width: 5.2vw;
                 margin-right: 1vw;
-                .avatar {
-                    border-radius: 50%;
+                span {
                     display: block;
                     width: 5.2vw;
                     height: 5.2vw;
+                    margin: 0 auto;
+                    border-radius: 50%;
+                    // background-image: url(../../img/defaultAvatar.jpg);
+                    background-size: cover;
+                    background-position: center;
                 }
             }
             .content {

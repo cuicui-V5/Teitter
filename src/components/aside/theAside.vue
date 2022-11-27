@@ -49,10 +49,7 @@
                 class="userAvatar"
                 @click.stop="isShowUserInfoCard = !isShowUserInfoCard"
             >
-                <img
-                    :src="data.userInfo.avatarUrl"
-                    class="avatar"
-                />
+                <span :style="avatarUrlStyle"></span>
 
                 <userInfoCard
                     v-if="isShowUserInfoCard"
@@ -64,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-    import { ref, toRefs } from "vue";
+    import { computed, ref, toRefs } from "vue";
     import userInfoCard from "./userInfoCard.vue";
     import { useTeitterStore } from "../../stores/teitter";
     import { RouterLink } from "vue-router";
@@ -73,6 +70,9 @@
     const { data } = toRefs(store);
 
     const isShowUserInfoCard = ref(false);
+    const avatarUrlStyle = computed(() => {
+        return `background-image: url(${data.value.userInfo.avatarUrl}); `;
+    });
     // 点击窗口其他区域, 关闭用户卡片
     document.addEventListener("click", (e) => {
         isShowUserInfoCard.value = false;
@@ -134,11 +134,15 @@
                 &:hover {
                     background-color: #e7e7e8;
                 }
-                .avatar {
-                    border-radius: 50%;
+                span {
                     display: block;
-                    width: 4.42vw;
-                    height: 4.42vw;
+                    width: 5.2vw;
+                    height: 5.2vw;
+                    margin: 0 auto;
+                    border-radius: 50%;
+                    // background-image: url(../../img/defaultAvatar.jpg);
+                    background-size: cover;
+                    background-position: center;
                 }
             }
             .homeActive {

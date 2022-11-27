@@ -1,10 +1,7 @@
 <template>
     <div class="publishTeitter">
         <div class="avatarShow">
-            <img
-                :src="data.userInfo.avatarUrl"
-                class="avatar"
-            />
+            <span :style="avatarUrlStyle"></span>
         </div>
         <div class="publish">
             <textarea
@@ -30,7 +27,7 @@
 
 <script setup lang="ts">
     import { useTeitterStore } from "@/stores/teitter";
-    import { ref, toRefs, watch } from "vue";
+    import { computed, ref, toRefs, watch } from "vue";
     import axios from "axios";
     import TheLoad from "../theLoad.vue";
     // 是否正在请求, 如果正在请求, 那么就播放加载的动画
@@ -38,6 +35,9 @@
 
     const store = useTeitterStore();
     const { data } = toRefs(store);
+    const avatarUrlStyle = computed(() => {
+        return `background-image: url(${data.value.userInfo.avatarUrl}); `;
+    });
 
     const activeClass = ref("");
     const content = ref("");
@@ -85,12 +85,15 @@
         border-bottom: #eff3f4 1px solid;
         .avatarShow {
             width: 7vw;
-            .avatar {
-                border-radius: 50%;
+            span {
                 display: block;
-                width: 5.12vw;
-                height: 5.12vw;
+                width: 5.2vw;
+                height: 5.2vw;
                 margin: 0 auto;
+                border-radius: 50%;
+                // background-image: url(../../img/defaultAvatar.jpg);
+                background-size: cover;
+                background-position: center;
             }
         }
         .publish {
