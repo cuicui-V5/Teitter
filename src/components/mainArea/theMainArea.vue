@@ -43,7 +43,8 @@
 <style scoped lang="scss">
     .mainArea {
         position: relative;
-        width: 59.3vmax;
+        // width: 59.3vmax;
+        flex: 8;
         height: 100vh;
         overflow-y: scroll;
         &::-webkit-scrollbar1 {
@@ -56,7 +57,8 @@
             top: 0;
             // left: 8.3vmax;
             height: 5vmax;
-            width: 59.3vmax;
+            // width: 59.3vmax;
+            width: 100%;
             font-weight: bold;
             font-size: 2vmax;
             line-height: 5vmax;

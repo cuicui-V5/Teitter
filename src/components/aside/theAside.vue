@@ -87,7 +87,8 @@
 <style scoped lang="scss">
     .aside_main {
         z-index: 9;
-        width: 8.3vmax;
+        // width: 8.3vmax;
+        flex: 1;
         height: 100vh;
         ul {
             position: relative;

@@ -49,7 +49,7 @@
         font-size: 1vmax;
         .text {
             word-wrap: break-word;
-            width: 20vmax;
+            // width: 20vmax;
         }
     }
 </style>

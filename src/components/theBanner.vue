@@ -47,7 +47,7 @@
         bottom: 0;
         left: 0;
         height: 7.3vmax;
-        width: 100vmax;
+        width: 100vw;
         background-color: #1d9bf0;
         .text {
             margin: 1vmax 10vmax 1vmax 10vmax;
