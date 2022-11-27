@@ -58,7 +58,7 @@
             // left: 8.3vmax;
             height: 5vmax;
             // width: 59.3vmax;
-            width: 100%;
+            width: 75%;
             font-weight: bold;
             font-size: 2vmax;
             line-height: 5vmax;

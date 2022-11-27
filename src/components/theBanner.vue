@@ -50,7 +50,7 @@
         width: 100vw;
         background-color: #1d9bf0;
         .text {
-            margin: 1vmax 10vmax 1vmax 10vmax;
+            margin: 1vmax -6vmax 1vmax 7vmax;
             h1 {
                 font-size: 2.125vmax;
             }

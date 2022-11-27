@@ -93,6 +93,8 @@
         ul {
             position: relative;
             height: 100vh;
+            display: flex;
+            flex-direction: column;
             a {
                 color: black;
                 text-decoration: none;
@@ -124,8 +126,9 @@
                 }
             }
             .userAvatar {
-                position: absolute;
-                bottom: 0;
+                width: 4vmax;
+                height: 4vmax;
+                position: relative;
                 left: 50%;
                 padding: 1vmax;
                 border-radius: 50%;
@@ -136,10 +139,13 @@
                     background-color: #e7e7e8;
                 }
                 span {
+                    position: relative;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                     display: block;
-                    width: 5.2vmax;
-                    height: 5.2vmax;
-                    margin: 0 auto;
+                    width: 3vmax;
+                    height: 3vmax;
                     border-radius: 50%;
                     // background-image: url(../../img/defaultAvatar.jpg);
                     background-size: cover;
