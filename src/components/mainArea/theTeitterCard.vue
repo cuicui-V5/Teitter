@@ -14,11 +14,13 @@
             <div class="bottom">
                 <span class="comment">
                     <i class="iconfont icon-pinglun"></i>
-                    <span class="number">{{ teitter.commentCount }}</span>
+                    <!--todo <span class="number">{{ teitter.commentCount }}</span> -->
+                    <span class="number">0</span>
                 </span>
                 <span class="forward">
                     <i class="iconfont icon-zhuanfa"></i>
-                    <span class="number">{{ teitter.forwardCount }}</span>
+                    <!--todo <span class="number">{{ teitter.forwardCount }}</span> -->
+                    <span class="number">0</span>
                 </span>
                 <span class="like">
                     <i class="iconfont icon-xihuan"></i>
@@ -48,7 +50,7 @@
     }>();
 
     const timeComputed = computed(() => {
-        return dayjs(Number(teitter.updatetime)).fromNow();
+        return dayjs(Number(teitter.createDate)).fromNow();
     });
 
     const avatarUrlStyle = computed(() => {

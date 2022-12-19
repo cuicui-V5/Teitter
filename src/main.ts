@@ -6,8 +6,12 @@ import router from "./router";
 import "../public/main.less";
 import "animate.css";
 import axios from "axios";
-axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api"; // 开发环境
+
+// axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api"; // 开发环境
 // axios.defaults.baseURL = "/teitter/api"; //测试环境
+axios.defaults.baseURL = import.meta.env.DEV
+    ? "/teitter/api"
+    : "https://www.heron.love:8090/teitter/api";
 axios.defaults.withCredentials = true;
 axios.defaults.timeout = 2000;
 const app = createApp(App);

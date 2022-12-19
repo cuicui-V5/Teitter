@@ -34,9 +34,9 @@
     const isLoading = ref(false);
 
     const store = useTeitterStore();
-    const { data } = toRefs(store);
+    const { userInfo } = toRefs(store);
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(${data.value.userInfo.avatarUrl}); `;
+        return `background-image: url(${userInfo.value.avatarUrl}); `;
     });
 
     const activeClass = ref("");

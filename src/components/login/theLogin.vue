@@ -23,6 +23,7 @@
         >
             登录
         </button>
+        <button @click="test()">测试</button>
         <TheLoad
             v-if="isLoading"
             style="width: 3vmax; height: 3vmax; margin: 0 auto"
@@ -48,7 +49,7 @@
     import router from "@/router/index";
     import TheLoad from "../theLoad.vue";
     const store = useTeitterStore();
-    const { data } = toRefs(store);
+    const { userInfo } = toRefs(store);
 
     const username = ref("");
     const password = ref("");
@@ -59,13 +60,15 @@
     async function login() {
         isLoading.value = true;
         const user = {
-            username: username.value,
-            password: password.value,
+            userName: username.value,
+            userPassword: password.value,
         };
         let res;
         try {
-            res = await axios.get("/login", {
-                params: user,
+            res = await axios.post("/login", user, {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
             });
             console.log(res);
             if (res?.data.status != 200) {
@@ -74,20 +77,46 @@
                 username.value = "";
                 password.value = "";
 
-                data.value.isLogin = true;
-                data.value.userInfo = res.data.userInfo;
-                data.value.userInfo.avatarUrl =
-                    "https://www.heron.love:8888/" +
-                    res.data.userInfo.avatarUrl;
-                router.push({
-                    name: "home",
-                });
+                // data.value.isLogin = true;
+                // data.value.userInfo = res.data.userInfo;
+                // data.value.userInfo.avatarUrl =
+                //     "https://www.heron.love:8888/" +
+                //     res.data.userInfo.avatarUrl;
+                // router.push({
+                //     name: "home",
+                // });
             }
         } catch (error: unknown) {
             alert("网络错误! " + (error as Error).message);
         } finally {
             isLoading.value = false;
         }
+    }
+    function test() {
+        var data = {
+            userName: "",
+            userPassword: "",
+        };
+        var config = {
+            method: "post",
+            url: "http://localhost:5173/teitter/api/login",
+            headers: {
+                "User-Agent": "Apifox/1.0.0 (https://www.apifox.cn)",
+                Accept: "*/*",
+                Host: "localhost:5173",
+                Connection: "keep-alive",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            data: data,
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 </script>
 

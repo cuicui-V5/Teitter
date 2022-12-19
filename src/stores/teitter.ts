@@ -1,61 +1,65 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-import type { teitter } from "@/interfaces/pubInterface";
+import type { teitter, userInfo } from "@/interfaces/pubInterface";
 axios.defaults.withCredentials = true;
 
 export const useTeitterStore = defineStore("teitter", () => {
-    const isLoading = ref(false);
-    const data = ref({
-        isLogin: false,
-        teitterCount: -1, // 推文总数
-        teitterCurrentPage: 1, // 当前是第几页的推文
+    // const isLoading = ref(false);
+    // const data = ref({
+    //     isLogin: false,
+    //     teitterCount: -1, // 推文总数
+    //     teitterCurrentPage: 1, // 当前是第几页的推文
 
-        userInfo: {
-            nickName: "",
-            userName: "",
-            avatarUrl: "",
-        },
-        teitters: <unknown>[],
+    //     userInfo: {
+    //         nickName: "",
+    //         userName: "",
+    //         avatarUrl: "",
+    //     },
+    //     teitters: <unknown>[],
+    // });
+
+    const teitters = ref<teitter[]>([]);
+    const userInfo = ref<userInfo>({
+        isLogin: false,
     });
+
+    const option = ref({
+        isLoading: false,
+        teitterCount: -1,
+    });
+    let teitterCurrentPage = 1;
 
     // axios.defaults.baseURL = "https://www.heron.love:8090/teitter/api";
 
     async function getTeitter() {
         // 发送请求时让isLoading为真, 防止发送重复请求
-        isLoading.value = true;
+        option.value.isLoading = true;
 
-        const res = await axios.get(
-            `/getAllTweet/${data.value.teitterCurrentPage++}`,
+        const { data: resData } = await axios.get(
+            `/getAllTweet/${teitterCurrentPage++}`,
         );
-        console.log(res);
+        console.log(resData);
 
-        data.value.teitterCount = res.data.teitterCount;
+        option.value.teitterCount = resData.data.total;
 
-        // 如果用户登录了, 那么设置信息
-        if (res.data.isLogin == true) {
-            data.value.isLogin = true;
-            data.value.userInfo = res.data.userInfo;
-            data.value.userInfo.avatarUrl =
-                "https://www.heron.love:8888/" + res.data.userInfo.avatarUrl;
-            data.value.userInfo.userName = "@" + res.data.userInfo.userName;
-        }
-        const resTeitters: Array<teitter> = res.data.data;
+        const resTeitters: Array<teitter> = resData.data.records;
 
         // 追加到现有的数据中
         resTeitters.forEach((item) => {
-            (data.value.teitters as teitter[]).push(item);
+            teitters.value.push(item);
         });
 
         // 如果当前页码超过总页码. 那么就不加载了
-        if (res.data.currentPageNum > res.data.totalPageNum) {
+        if (resData.data.current > resData.data.pages) {
             console.log("没有更多了");
 
-            isLoading.value = true;
+            option.value.isLoading = true;
         } else {
-            isLoading.value = false;
+            option.value.isLoading = false;
         }
     }
     getTeitter();
-    return { data, getTeitter, isLoading };
+    // todo 获取登陆状态的函数
+    return { teitters, getTeitter, option, userInfo };
 });

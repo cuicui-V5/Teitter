@@ -2,7 +2,7 @@
     <div class="container">
         <TheAside></TheAside>
         <RouterView></RouterView>
-        <theBannerVue v-if="!data.isLogin"></theBannerVue>
+        <theBannerVue v-if="!userInfo.isLogin"></theBannerVue>
         <statusPanel></statusPanel>
     </div>
 </template>
@@ -16,7 +16,7 @@
     import { toRefs } from "vue";
     import { RouterView } from "vue-router";
     const store = useTeitterStore();
-    const { data } = toRefs(store);
+    const { userInfo } = toRefs(store);
 </script>
 
 <style scoped>

@@ -67,11 +67,11 @@
     import { RouterLink } from "vue-router";
 
     const store = useTeitterStore();
-    const { data } = toRefs(store);
+    const { userInfo } = toRefs(store);
 
     const isShowUserInfoCard = ref(false);
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(${data.value.userInfo.avatarUrl}); `;
+        return `background-image: url(${userInfo.value.avatarUrl}); `;
     });
     // 点击窗口其他区域, 关闭用户卡片
     document.addEventListener("click", (e) => {

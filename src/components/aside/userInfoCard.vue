@@ -8,8 +8,8 @@
                 <span :style="avatarUrlStyle"></span>
             </div>
             <div class="content">
-                <div class="nickName">{{ data.userInfo.nickName }}</div>
-                <div class="userName">{{ data.userInfo.userName }}</div>
+                <div class="nickName">{{ userInfo.nickName }}</div>
+                <div class="userName">{{ userInfo.userName }}</div>
             </div>
         </div>
         <RouterLink
@@ -25,7 +25,7 @@
             class="signOut option"
             @click="logout"
         >
-            登出 {{ data.userInfo.userName }}
+            登出 {{ userInfo.userName }}
         </div>
     </div>
 </template>
@@ -40,13 +40,13 @@
     const emit = defineEmits(["closeCard"]);
     function closeCard() {
         emit("closeCard");
-        data.value.isLogin = false;
+        userInfo.value.isLogin = false;
     }
 
     const store = useTeitterStore();
-    const { data } = toRefs(store);
+    const { userInfo } = toRefs(store);
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(${data.value.userInfo.avatarUrl}); `;
+        return `background-image: url(${userInfo.value.avatarUrl}); `;
     });
 
     async function logout() {

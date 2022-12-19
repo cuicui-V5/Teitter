@@ -4,18 +4,15 @@
         @scroll="scroll"
     >
         <div class="tittle animate__animated animate__bounceIn">主页</div>
-        <publishTeitter v-if="data.isLogin"></publishTeitter>
+        <publishTeitter v-if="userInfo.isLogin"></publishTeitter>
         <TheTeitterCard
-            v-for="item in data.teitters"
+            v-for="item in teitters"
             :teitter="item"
         ></TheTeitterCard>
-        <theLoad class="loader"></theLoad>
-        <!-- <button
-            @click="getTeitter"
-            class="loadMore"
-        >
-            更多
-        </button> -->
+        <theLoad
+            class="loader"
+            v-if="option.isLoading"
+        ></theLoad>
     </div>
 </template>
 
@@ -27,13 +24,13 @@
     import theLoad from "../theLoad.vue";
 
     const store = useTeitterStore();
-    const { data, getTeitter, isLoading } = toRefs(store);
+    const { option, getTeitter, userInfo, teitters } = toRefs(store);
 
     function scroll(e: any) {
         let scrollProgress =
             e.target.scrollTop /
             (e.target.scrollHeight - e.target.offsetHeight);
-        if (scrollProgress > 0.8 && !isLoading.value) {
+        if (scrollProgress > 0.8 && !option.value.isLoading) {
             console.log("滚动超过一大半, 加载下一页");
             getTeitter.value();
         }
@@ -65,8 +62,8 @@
             line-height: 5vmax;
             user-select: none;
             text-indent: 2vmax;
-            backdrop-filter: blur(2vmax);
-            opacity: 0.5;
+            backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, 0.9);
         }
         .loader {
             position: absolute;

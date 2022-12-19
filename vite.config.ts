@@ -19,6 +19,14 @@ export default defineConfig({
             "/teitter/api": {
                 target: "https://www.heron.love:8090",
                 changeOrigin: true,
+                secure: true,
+                configure: (proxy, options) => {
+                    console.log("CONFIGURE");
+                    proxy.on("proxyReq", function (proxyReq, req, res): void {
+                        proxyReq.removeHeader("origin");
+                        console.log("EVENT");
+                    });
+                },
             },
         },
     },
