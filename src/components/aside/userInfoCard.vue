@@ -23,7 +23,7 @@
         </RouterLink>
         <div
             class="signOut option"
-            @click="logout"
+            @click="logoutBtn"
         >
             登出 {{ userInfo.userName }}
         </div>
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
     import { useTeitterStore } from "@/stores/teitter";
-    import axios from "axios";
+    import { logout } from "@/api";
     import { computed, toRefs } from "vue";
     import { RouterLink } from "vue-router";
 
@@ -40,7 +40,6 @@
     const emit = defineEmits(["closeCard"]);
     function closeCard() {
         emit("closeCard");
-        userInfo.value.isLogin = false;
     }
 
     const store = useTeitterStore();
@@ -49,10 +48,10 @@
         return `background-image: url(${userInfo.value.avatarUrl}); `;
     });
 
-    async function logout() {
+    async function logoutBtn() {
         let res;
         try {
-            res = await axios.post("/logout");
+            res = await logout();
             if (res.data.status == 200) location.reload();
         } catch {
             alert("登出失败");

@@ -11,7 +11,7 @@
         ></TheTeitterCard>
         <theLoad
             class="loader"
-            v-if="option.isLoading"
+            v-if="option.requesting"
         ></theLoad>
     </div>
 </template>
@@ -23,16 +23,18 @@
     import { toRefs } from "vue";
     import theLoad from "../theLoad.vue";
 
+    import { getTeitter } from "@/api";
     const store = useTeitterStore();
-    const { option, getTeitter, userInfo, teitters } = toRefs(store);
+    const { option, userInfo, teitters } = toRefs(store);
+    getTeitter();
 
-    function scroll(e: any) {
+    async function scroll(e: any) {
         let scrollProgress =
             e.target.scrollTop /
             (e.target.scrollHeight - e.target.offsetHeight);
-        if (scrollProgress > 0.8 && !option.value.isLoading) {
+        if (scrollProgress > 0.8 && !option.value.isBusy) {
             console.log("滚动超过一大半, 加载下一页");
-            getTeitter.value();
+            getTeitter();
         }
     }
 </script>
@@ -50,7 +52,7 @@
         }
         padding-top: 6vmax;
         .tittle {
-            z-index: 9999;
+            z-index: 1;
             position: fixed;
             top: 0;
             // left: 8.3vmax;
@@ -63,7 +65,7 @@
             user-select: none;
             text-indent: 2vmax;
             backdrop-filter: blur(20px);
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.8);
         }
         .loader {
             position: absolute;

@@ -13,19 +13,18 @@
             type="password"
             v-model="password"
             placeholder="密码"
-            @keydown.enter="login()"
+            @keydown.enter="loginBtn()"
         />
         <br />
         <button
             class="loginBtn"
-            @click="login()"
-            v-if="!isLoading"
+            @click="loginBtn()"
+            v-if="!isBusy"
         >
             登录
         </button>
-        <button @click="test()">测试</button>
         <TheLoad
-            v-if="isLoading"
+            v-if="isBusy"
             style="width: 3vmax; height: 3vmax; margin: 0 auto"
         ></TheLoad>
         <br />
@@ -48,6 +47,7 @@
     import { useTeitterStore } from "@/stores/teitter";
     import router from "@/router/index";
     import TheLoad from "../theLoad.vue";
+    import { login } from "@/api";
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);
 
@@ -55,68 +55,23 @@
     const password = ref("");
 
     // 是否正在请求, 如果正在请求, 那么就播放加载的动画
-    const isLoading = ref(false);
+    const isBusy = ref(false);
 
-    async function login() {
-        isLoading.value = true;
-        const user = {
+    async function loginBtn() {
+        const res = await login({
             userName: username.value,
             userPassword: password.value,
-        };
-        let res;
-        try {
-            res = await axios.post("/login", user, {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-            });
-            console.log(res);
-            if (res?.data.status != 200) {
-                alert("登录失败, 用户名或密码错误");
-            } else {
-                username.value = "";
-                password.value = "";
+        });
 
-                // data.value.isLogin = true;
-                // data.value.userInfo = res.data.userInfo;
-                // data.value.userInfo.avatarUrl =
-                //     "https://www.heron.love:8888/" +
-                //     res.data.userInfo.avatarUrl;
-                // router.push({
-                //     name: "home",
-                // });
-            }
-        } catch (error: unknown) {
-            alert("网络错误! " + (error as Error).message);
-        } finally {
-            isLoading.value = false;
+        if (res == "ok") {
+            console.log("登录成功");
+            alert("登录成功");
+            router.push({
+                name: "home",
+            });
+        } else {
+            alert(res);
         }
-    }
-    function test() {
-        var data = {
-            userName: "",
-            userPassword: "",
-        };
-        var config = {
-            method: "post",
-            url: "http://localhost:5173/teitter/api/login",
-            headers: {
-                "User-Agent": "Apifox/1.0.0 (https://www.apifox.cn)",
-                Accept: "*/*",
-                Host: "localhost:5173",
-                Connection: "keep-alive",
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            data: data,
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 </script>
 

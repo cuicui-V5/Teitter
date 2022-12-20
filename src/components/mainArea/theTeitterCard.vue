@@ -54,7 +54,7 @@
     });
 
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(https://www.heron.love:8888${teitter.avatarUrl}); `;
+        return `background-image: url(${teitter.avatarUrl}); `;
     });
 </script>
 

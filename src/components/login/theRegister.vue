@@ -1,18 +1,17 @@
 <template>
     <div class="login animate__animated animate__fadeInRight animate__faster">
         <h1>现在就加入 Teitter</h1>
-
         <input
             type="text"
-            v-model="username"
-            placeholder="用户名"
+            v-model="nickname"
+            placeholder="昵称"
             autocomplete="new-password"
         />
         <br />
         <input
             type="text"
-            v-model="nickname"
-            placeholder="昵称"
+            v-model="username"
+            placeholder="用户名"
             autocomplete="new-password"
         />
         <br />
@@ -43,26 +42,17 @@
             两次输入不匹配
         </div>
         <br />
-        <div class="avatarFile">
-            <span>头像</span>
-            <input
-                class=""
-                type="file"
-                accept="image/*"
-                ref="avatarFile"
-            />
-        </div>
 
         <button
             class="registerBtn"
             :class="{ disable: !isOK }"
-            @click="register"
-            v-if="!isLoading"
+            @click="registerBtn"
+            v-if="!isBusy"
         >
             注册
         </button>
         <TheLoad
-            v-if="isLoading"
+            v-if="isBusy"
             style="width: 3vmax; height: 3vmax; margin: 0 auto"
         ></TheLoad>
         <br />
@@ -84,6 +74,7 @@
     import TheLoad from "../theLoad.vue";
 
     import router from "@/router/index";
+    import { register } from "@/api";
 
     const nickname = ref("");
     const username = ref("");
@@ -93,7 +84,7 @@
     const avatarFile: Ref<HTMLInputElement> | Ref<null> = ref(null);
 
     // 是否正在请求, 如果正在请求, 那么就播放加载的动画
-    const isLoading = ref(false);
+    const isBusy = ref(false);
 
     watchEffect(() => {
         if (
@@ -108,36 +99,25 @@
         }
     });
 
-    async function register() {
-        isLoading.value = true;
+    async function registerBtn() {
+        isBusy.value = true;
 
         const fd = new FormData();
 
         fd.append("userName", username.value);
         fd.append("nickName", nickname.value);
         fd.append("userPassword", password.value);
-        if (avatarFile.value?.files != null) {
-            fd.append("file", avatarFile.value.files[0]);
-        }
-        let res;
-        try {
-            res = await axios.post("/RegisterUser", fd, {
-                headers: {
-                    "Content-Type": "multipart/form-data; ",
-                },
+
+        const res = await register(fd);
+        if (res == "ok") {
+            alert("注册成功");
+            router.push({
+                name: "login",
             });
-            console.log(res);
-            if (res.data.status == 200) {
-                alert("注册成功");
-                router.push({
-                    name: "login",
-                });
-            }
-        } catch (error: unknown) {
-            alert("oops 出现问题了哦" + (error as Error).message);
-        } finally {
-            isLoading.value = false;
+        } else {
+            alert(res);
         }
+        isBusy.value = false;
     }
 </script>
 

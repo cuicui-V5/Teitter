@@ -7,18 +7,18 @@
             <textarea
                 placeholder="有什么新鲜事 ?"
                 v-model="content"
-                @keydown.enter="publish()"
+                @keydown.enter="publishBtn()"
             ></textarea>
 
             <button
                 :class="activeClass"
-                @click="publish"
-                v-if="!isLoading"
+                @click="publishBtn"
+                v-if="!isBusy"
             >
                 发忒
             </button>
             <TheLoad
-                v-if="isLoading"
+                v-if="isBusy"
                 class="loader"
             ></TheLoad>
         </div>
@@ -30,8 +30,10 @@
     import { computed, ref, toRefs, watch } from "vue";
     import axios from "axios";
     import TheLoad from "../theLoad.vue";
+
+    import { publish } from "@/api";
     // 是否正在请求, 如果正在请求, 那么就播放加载的动画
-    const isLoading = ref(false);
+    const isBusy = ref(false);
 
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);
@@ -50,30 +52,20 @@
         }
     });
 
-    async function publish() {
-        isLoading.value = true;
+    async function publishBtn() {
+        isBusy.value = true;
 
         const tw = {
             content: content.value,
         };
-
-        try {
-            const res = await axios.post("/sendTwt", tw, {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-            });
-            if (res.data.status == 200) {
-                console.log(res);
-                location.reload();
-            } else {
-                alert("出现问题了哦");
-            }
-        } catch (error) {
-            alert("发送失败" + (error as Error).message);
+        const res = await publish(tw);
+        if (res == "ok") {
+            // debugger;
+            location.reload();
+        } else {
+            alert(res);
             content.value = "";
-        } finally {
-            isLoading.value = false;
+            isBusy.value = false;
         }
     }
 </script>
