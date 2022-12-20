@@ -22,24 +22,24 @@
                     <!--todo <span class="number">{{ teitter.forwardCount }}</span> -->
                     <span class="number">0</span>
                 </span>
-                <span
-                    class="likeSpan"
-                    @click="likeBtn(teitter.tweetId)"
-                >
-                    <i
-                        class="iconfont icon-xihuan"
-                        :class="{
-                            like: !teitter.likeStatus,
-                        }"
-                    ></i>
-                    <i
-                        class="iconfont icon-likefill"
-                        :class="{
-                            liked: teitter.likeStatus,
-                        }"
-                    ></i>
-                    <span class="number">{{ teitter.likeCount }}</span>
+                <span class="likeSpan">
+                    <div class="like-button">
+                        <div
+                            class="heart-bg"
+                            @click="likeBtn(teitter.tweetId)"
+                        >
+                            <div
+                                class="heart-icon"
+                                :class="{
+                                    liked: teitter.likeStatus,
+                                    unLike: !teitter.likeStatus,
+                                }"
+                            ></div>
+                        </div>
+                        <div class="likes-amount">{{ teitter.likeCount }}</div>
+                    </div>
                 </span>
+
                 <span class="share">
                     <i class="iconfont icon-fenxiang"></i>
                     <span class="number"></span>
@@ -79,6 +79,7 @@
             if (res == "ok") {
                 console.log("取消点赞成功 " + id.toString());
                 teitter.likeStatus = false;
+                teitter.likeCount--;
             } else {
                 alert(res);
             }
@@ -89,6 +90,7 @@
                 // alert("点赞成功");
                 console.log("点赞成功 " + id.toString());
                 teitter.likeStatus = true;
+                teitter.likeCount++;
             } else {
                 alert(res);
             }
@@ -146,16 +148,64 @@
                 display: flex;
                 justify-content: space-between;
                 font-size: 1.45vmax;
+                @keyframes like-anim {
+                    to {
+                        background-position: right;
+                    }
+                }
+                @keyframes unLike-anim {
+                    from {
+                        background-position: right;
+                    }
+                    to {
+                        background-position: left;
+                    }
+                }
                 .likeSpan {
-                    i {
-                        display: none;
-                    }
-                    .like {
-                        display: inline;
-                    }
-                    .liked {
-                        display: inline;
-                        color: red;
+                    position: relative;
+                    .like-button {
+                        position: absolute;
+                        top: -50%;
+                        left: -2vmax;
+                        display: flex;
+                        align-items: center;
+
+                        .heart-icon {
+                            height: 6vmax;
+                            width: 6vmax;
+                            background: url("@/img/heart.png");
+                            background-size: cover;
+                            background-position: left;
+                            cursor: pointer;
+                            position: absolute;
+                        }
+                        .heart-icon.liked {
+                            animation: like-anim 0.7s steps(28) forwards;
+                        }
+                        .heart-icon.unLike {
+                            animation: unLike-anim 0.6s steps(28) backwards;
+                        }
+                        .heart-bg {
+                            background: rgba(255, 192, 200, 0);
+                            border-radius: 50%;
+                            height: 4vmax;
+                            width: 4vmax;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transition: all 100ms ease;
+                            &:hover {
+                                background: rgba(255, 192, 200, 0.7);
+                            }
+                        }
+
+                        .likes-amount {
+                            font-size: 1.2vmax;
+                            font-family: "Roboto", sans-serif;
+                            color: #888;
+                            font-weight: 900;
+                            margin-left: 6px;
+                        }
                     }
                 }
 
