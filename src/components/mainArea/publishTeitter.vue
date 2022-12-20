@@ -32,6 +32,7 @@
     import TheLoad from "../theLoad.vue";
 
     import { publish } from "@/api";
+    import request from "@/api/request";
     // 是否正在请求, 如果正在请求, 那么就播放加载的动画
     const isBusy = ref(false);
 

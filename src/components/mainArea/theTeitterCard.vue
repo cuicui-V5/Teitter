@@ -22,8 +22,22 @@
                     <!--todo <span class="number">{{ teitter.forwardCount }}</span> -->
                     <span class="number">0</span>
                 </span>
-                <span class="like">
-                    <i class="iconfont icon-xihuan"></i>
+                <span
+                    class="likeSpan"
+                    @click="likeBtn(teitter.tweetId)"
+                >
+                    <i
+                        class="iconfont icon-xihuan"
+                        :class="{
+                            like: !teitter.likeStatus,
+                        }"
+                    ></i>
+                    <i
+                        class="iconfont icon-likefill"
+                        :class="{
+                            liked: teitter.likeStatus,
+                        }"
+                    ></i>
                     <span class="number">{{ teitter.likeCount }}</span>
                 </span>
                 <span class="share">
@@ -41,6 +55,7 @@
     import "dayjs/locale/zh-cn";
     import { computed } from "vue";
     import type { teitter } from "@/interfaces/pubInterface";
+    import { like, unLike } from "@/api";
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
@@ -56,6 +71,29 @@
     const avatarUrlStyle = computed(() => {
         return `background-image: url(${teitter.avatarUrl}); `;
     });
+
+    async function likeBtn(id: number) {
+        if (teitter.likeStatus) {
+            //取消点赞的逻辑
+            const res = await unLike(id);
+            if (res == "ok") {
+                console.log("取消点赞成功 " + id.toString());
+                teitter.likeStatus = false;
+            } else {
+                alert(res);
+            }
+        } else {
+            // 点赞的逻辑
+            const res = await like(id);
+            if (res == "ok") {
+                // alert("点赞成功");
+                console.log("点赞成功 " + id.toString());
+                teitter.likeStatus = true;
+            } else {
+                alert(res);
+            }
+        }
+    }
 </script>
 
 <style scoped lang="scss">
@@ -108,6 +146,18 @@
                 display: flex;
                 justify-content: space-between;
                 font-size: 1.45vmax;
+                .likeSpan {
+                    i {
+                        display: none;
+                    }
+                    .like {
+                        display: inline;
+                    }
+                    .liked {
+                        display: inline;
+                        color: red;
+                    }
+                }
 
                 .share {
                     margin-right: 10vmax;

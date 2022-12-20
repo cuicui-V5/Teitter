@@ -13,6 +13,13 @@
       "unicode_decimal": 983339
     },
     {
+      "icon_id": "30417",
+      "name": "like_fill",
+      "font_class": "likefill",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
       "icon_id": "122691",
       "name": "close",
       "font_class": "close",

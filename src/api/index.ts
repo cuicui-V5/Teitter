@@ -120,3 +120,52 @@ export async function register(fd: FormData): Promise<string> {
         return (error as Error).message;
     }
 }
+
+export async function like(teitterID: number) {
+    console.log(teitterID.toString());
+
+    try {
+        const res = await request.post(
+            "/incrlike",
+            { tweetId: teitterID.toString() },
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            },
+        );
+        console.log(res);
+
+        if (res.data.status == 200) {
+            return "ok";
+        } else {
+            return res.data.msg;
+        }
+    } catch (error) {
+        return (error as Error).message;
+    }
+}
+export async function unLike(teitterID: number) {
+    console.log(teitterID.toString());
+
+    try {
+        const res = await request.post(
+            "/decrlike",
+            { tweetId: teitterID.toString() },
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            },
+        );
+        console.log(res);
+
+        if (res.data.status == 200) {
+            return "ok";
+        } else {
+            return res.data.msg;
+        }
+    } catch (error) {
+        return (error as Error).message;
+    }
+}

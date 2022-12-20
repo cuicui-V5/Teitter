@@ -1,12 +1,16 @@
 import axios from "axios";
 import nprogress from "nprogress";
 import { useTeitterStore } from "@/stores/teitter";
+import jsonbig from "json-bigint";
 const request = axios.create({
     baseURL: import.meta.env.DEV
         ? "/teitter/api"
         : "https://www.heron.love:8090/teitter/api",
     withCredentials: true,
     timeout: 3000,
+    transformResponse: (data) => {
+        return jsonbig.parse(data);
+    },
 });
 
 request.interceptors.request.use(
