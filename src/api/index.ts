@@ -14,7 +14,7 @@ export async function getTeitter() {
     option.value.isBusy = true;
 
     const { data: resData } = await request.get(
-        `/getAllTweet/${teitterCurrentPage++}`,
+        `/tweet/getAllTweet/${teitterCurrentPage++}`,
     );
     console.log(resData);
 
@@ -38,11 +38,11 @@ export async function getTeitter() {
 }
 
 export async function logout() {
-    return request.get("/logout");
+    return request.get("/user/logout");
 }
 export async function isLogin() {
     // 如果登陆了, 返回用户信息, 如果没登陆,返回false
-    const res = await request.get("/isLogin");
+    const res = await request.get("/user/isLogin");
     console.log(res.data);
     if (res.data.isLogin == true) {
         //    登陆成功后, 用户信息写入store
@@ -59,7 +59,7 @@ export async function login(user: {
     userPassword: string;
 }): Promise<string> {
     try {
-        const res = await request.post("/login", user, {
+        const res = await request.post("/user/login", user, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
@@ -85,7 +85,7 @@ export async function login(user: {
 
 export async function publish(tw: { content: string }): Promise<string> {
     try {
-        const res = await request.post("/sendTwt", tw, {
+        const res = await request.post("/tweet/sendTwt", tw, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
@@ -105,7 +105,7 @@ export async function publish(tw: { content: string }): Promise<string> {
 
 export async function register(fd: FormData): Promise<string> {
     try {
-        const res = await request.post("/regist", fd, {
+        const res = await request.post("/user/regist", fd, {
             headers: {
                 "Content-Type": "multipart/form-data; ",
             },
@@ -126,7 +126,7 @@ export async function like(teitterID: number) {
 
     try {
         const res = await request.post(
-            "/incrlike",
+            "/tweet/like",
             { tweetId: teitterID.toString() },
             {
                 headers: {
@@ -150,7 +150,7 @@ export async function unLike(teitterID: number) {
 
     try {
         const res = await request.post(
-            "/decrlike",
+            "/tweet/unLike",
             { tweetId: teitterID.toString() },
             {
                 headers: {
