@@ -11,15 +11,18 @@ const request = axios.create({
     transformResponse: (data) => {
         return jsonbig.parse(data);
     },
+    // headers:{
+    //     Authorization: localStorage.getItem("token"),
+    // }
 });
 
 request.interceptors.request.use(
     (config) => {
         // 添加header
         if (localStorage.getItem("token")) {
-            config.headers = {
-                Authorization: localStorage.getItem("token"),
-            };
+            if (config.headers) {
+                config.headers.Authorization = localStorage.getItem("token");
+            }
         }
 
         nprogress.start();

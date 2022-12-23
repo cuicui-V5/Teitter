@@ -62,6 +62,8 @@
         const res = await publish(tw);
         if (res == "ok") {
             getTeitter(true);
+            content.value = "";
+            isBusy.value = false;
         } else {
             alert(res);
             content.value = "";

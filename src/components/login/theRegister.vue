@@ -110,7 +110,6 @@
 
         const res = await register(fd);
         if (res == "ok") {
-            alert("注册成功");
             router.push({
                 name: "login",
             });

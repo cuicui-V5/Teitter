@@ -65,7 +65,6 @@
 
         if (res == "ok") {
             console.log("登录成功");
-            alert("登录成功");
             router.push({
                 name: "home",
             });
