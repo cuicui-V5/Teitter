@@ -32,8 +32,8 @@
 
 <script setup lang="ts">
     import { useTeitterStore } from "@/stores/teitter";
-    import { logout } from "@/api";
-    import { computed, toRefs } from "vue";
+    import { getTeitter, logout } from "@/api";
+    import { computed, nextTick, toRefs } from "vue";
     import { RouterLink } from "vue-router";
 
     // 调用父组件的事件来关闭卡片
@@ -52,7 +52,13 @@
         let res;
         try {
             res = await logout();
-            if (res.data.status == 200) location.reload();
+            if (res.data.status == 200) {
+                store.userInfo.isLogin = false;
+                localStorage.clear();
+                closeCard();
+
+                getTeitter(true);
+            }
         } catch {
             alert("登出失败");
         } finally {

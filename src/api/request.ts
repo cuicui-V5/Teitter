@@ -15,6 +15,13 @@ const request = axios.create({
 
 request.interceptors.request.use(
     (config) => {
+        // 添加header
+        if (localStorage.getItem("token")) {
+            config.headers = {
+                Authorization: localStorage.getItem("token"),
+            };
+        }
+
         nprogress.start();
         const store = useTeitterStore();
         store.option.requesting = true;

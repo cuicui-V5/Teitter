@@ -26,7 +26,7 @@
     import { getTeitter } from "@/api";
     const store = useTeitterStore();
     const { option, userInfo, teitters } = toRefs(store);
-    getTeitter();
+    getTeitter(true);
 
     async function scroll(e: any) {
         let scrollProgress =

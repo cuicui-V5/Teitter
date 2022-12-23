@@ -32,7 +32,6 @@
                                 class="heart-icon"
                                 :class="{
                                     liked: teitter.likeStatus,
-                                    unLike: !teitter.likeStatus,
                                 }"
                             ></div>
                         </div>
@@ -182,9 +181,7 @@
                         .heart-icon.liked {
                             animation: like-anim 0.7s steps(28) forwards;
                         }
-                        .heart-icon.unLike {
-                            animation: unLike-anim 0.6s steps(28) backwards;
-                        }
+
                         .heart-bg {
                             background: rgba(255, 192, 200, 0);
                             border-radius: 50%;

@@ -6,10 +6,15 @@ import { storeToRefs } from "pinia";
 
 let teitterCurrentPage = 1;
 
-export async function getTeitter() {
-    // 获取首页推文. 从第一页开始查, 每一次查询都加一页, 查到之后直接存到pinia中
+// 获取新推文, 如果isFlush为true, 那么就重置从头获取
+export async function getTeitter(isFlush?: boolean) {
     const store = useTeitterStore();
     const { option, teitters } = storeToRefs(store);
+    if (isFlush) {
+        teitterCurrentPage = 1;
+        store.teitters = [];
+    }
+    // 获取首页推文. 从第一页开始查, 每一次查询都加一页, 查到之后直接存到pinia中
     // 发送请求时让isBusy为真, 防止发送重复请求
     option.value.isBusy = true;
 
@@ -61,7 +66,7 @@ export async function login(user: {
     try {
         const res = await request.post("/user/login", user, {
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+                "Content-Type": "application/json",
             },
         });
         console.log(res.data);
@@ -74,6 +79,8 @@ export async function login(user: {
             userInfo.value.nickName = res.data.data.nickName;
             userInfo.value.userName = res.data.data.userName;
 
+            // 将token存到localStorage
+            localStorage.setItem("token", res.data.map.token);
             return "ok";
         } else {
             return res.data.msg;
