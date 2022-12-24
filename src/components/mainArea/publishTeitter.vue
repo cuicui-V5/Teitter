@@ -33,6 +33,9 @@
 
     import { publish, getTeitter } from "@/api";
     import request from "@/api/request";
+    import { inject } from "vue";
+    const sendMsg = inject("sendMsg") as Function;
+
     // 是否正在请求, 如果正在请求, 那么就播放加载的动画
     const isBusy = ref(false);
 
@@ -64,8 +67,10 @@
             getTeitter(true);
             content.value = "";
             isBusy.value = false;
+            sendMsg("推文发送成功");
         } else {
-            alert(res);
+            sendMsg(res);
+            // alert(res);
             content.value = "";
             isBusy.value = false;
         }

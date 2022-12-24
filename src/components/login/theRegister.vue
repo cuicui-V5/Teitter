@@ -69,12 +69,13 @@
 
 <script setup lang="ts">
     import axios from "axios";
-    import { ref, type Ref, watchEffect } from "vue";
+    import { ref, type Ref, watchEffect, inject } from "vue";
     import { RouterLink } from "vue-router";
     import TheLoad from "../theLoad.vue";
 
     import router from "@/router/index";
     import { register } from "@/api";
+    const sendMsg = inject("sendMsg") as Function;
 
     const nickname = ref("");
     const username = ref("");
@@ -110,11 +111,15 @@
 
         const res = await register(fd);
         if (res == "ok") {
+            sendMsg("注册成功");
+
             router.push({
                 name: "login",
             });
         } else {
-            alert(res);
+            sendMsg(res);
+
+            // alert(res);
         }
         isBusy.value = false;
     }

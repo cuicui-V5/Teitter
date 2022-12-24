@@ -52,9 +52,10 @@
     import dayjs from "dayjs";
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
-    import { computed } from "vue";
+    import { computed, inject } from "vue";
     import type { teitter } from "@/interfaces/pubInterface";
     import { like, unLike } from "@/api";
+    const sendMsg = inject("sendMsg") as Function;
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
@@ -76,22 +77,28 @@
             //取消点赞的逻辑
             const res = await unLike(id);
             if (res == "ok") {
+                sendMsg("取消点赞成功 " + id.toString());
                 console.log("取消点赞成功 " + id.toString());
                 teitter.likeStatus = false;
                 teitter.likeCount--;
             } else {
-                alert(res);
+                sendMsg(res);
+
+                // alert(res);
             }
         } else {
             // 点赞的逻辑
             const res = await like(id);
             if (res == "ok") {
+                sendMsg("点赞成功 " + id.toString());
+
                 // alert("点赞成功");
                 console.log("点赞成功 " + id.toString());
                 teitter.likeStatus = true;
                 teitter.likeCount++;
             } else {
-                alert(res);
+                // alert(res);
+                sendMsg(res);
             }
         }
     }

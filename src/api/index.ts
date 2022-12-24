@@ -3,11 +3,13 @@ import type { teitter } from "@/interfaces/pubInterface";
 
 import { useTeitterStore } from "./../stores/teitter";
 import { storeToRefs } from "pinia";
+import { inject } from "vue";
 
 let teitterCurrentPage = 1;
 
 // 获取新推文, 如果isFlush为true, 那么就重置从头获取
 export async function getTeitter(isFlush?: boolean) {
+    const sendMsg = inject("sendMsg") as Function;
     const store = useTeitterStore();
     const { option, teitters } = storeToRefs(store);
     if (isFlush) {
@@ -32,9 +34,11 @@ export async function getTeitter(isFlush?: boolean) {
         teitters.value.push(item);
     });
 
+    sendMsg("获取到" + resTeitters.length + "条新推文");
     // 如果当前页码超过总页码. 那么就不加载了
     if (resData.data.current > resData.data.pages) {
-        console.log("没有更多了");
+        sendMsg("没有更多了");
+        // console.log("没有更多了");
 
         option.value.isBusy = true;
     } else {
@@ -102,7 +106,6 @@ export async function publish(tw: { content: string }): Promise<string> {
 
             return "ok";
         } else {
-            alert("出现问题了哦");
             return res.data.msg;
         }
     } catch (error) {

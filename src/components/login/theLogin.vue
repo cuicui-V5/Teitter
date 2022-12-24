@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
     import axios from "axios";
-    import { ref, toRefs } from "vue";
+    import { ref, toRefs, inject } from "vue";
     import { RouterLink } from "vue-router";
     import { useTeitterStore } from "@/stores/teitter";
     import router from "@/router/index";
@@ -50,6 +50,7 @@
     import { login } from "@/api";
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);
+    const sendMsg = inject("sendMsg") as Function;
 
     const username = ref("");
     const password = ref("");
@@ -64,12 +65,15 @@
         });
 
         if (res == "ok") {
-            console.log("登录成功");
+            sendMsg("登录成功");
+
+            // console.log("登录成功");
             router.push({
                 name: "home",
             });
         } else {
-            alert(res);
+            // alert(res);
+            sendMsg(res);
         }
     }
 </script>
