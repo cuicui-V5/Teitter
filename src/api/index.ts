@@ -6,10 +6,15 @@ import { storeToRefs } from "pinia";
 import { inject } from "vue";
 
 let teitterCurrentPage = 1;
+let sendMsg: any;
 
 // 获取新推文, 如果isFlush为true, 那么就重置从头获取
 export async function getTeitter(isFlush?: boolean) {
-    const sendMsg = inject("sendMsg") as Function;
+    if (!sendMsg) {
+        sendMsg = inject("sendMsg") as Function;
+    }
+    console.log(sendMsg);
+
     const store = useTeitterStore();
     const { option, teitters } = storeToRefs(store);
     if (isFlush) {
@@ -18,31 +23,35 @@ export async function getTeitter(isFlush?: boolean) {
     }
     // 获取首页推文. 从第一页开始查, 每一次查询都加一页, 查到之后直接存到pinia中
     // 发送请求时让isBusy为真, 防止发送重复请求
-    option.value.isBusy = true;
-
-    const { data: resData } = await request.get(
-        `/tweet/getAllTweet/${teitterCurrentPage++}`,
-    );
-    console.log(resData);
-
-    option.value.teitterCount = resData.data.total;
-
-    const resTeitters: Array<teitter> = resData.data.records;
-
-    // 追加到现有的数据中
-    resTeitters.forEach((item) => {
-        teitters.value.push(item);
-    });
-
-    sendMsg("获取到" + resTeitters.length + "条新推文");
-    // 如果当前页码超过总页码. 那么就不加载了
-    if (resData.data.current > resData.data.pages) {
-        sendMsg("没有更多了");
-        // console.log("没有更多了");
-
+    try {
         option.value.isBusy = true;
-    } else {
-        option.value.isBusy = false;
+
+        const { data: resData } = await request.get(
+            `/tweet/getAllTweet/${teitterCurrentPage++}`,
+        );
+
+        option.value.teitterCount = resData.data.total;
+
+        const resTeitters: Array<teitter> = resData.data.records;
+
+        // 追加到现有的数据中
+        resTeitters.forEach((item) => {
+            teitters.value.push(item);
+        });
+        console.log(resData);
+
+        sendMsg("获取到" + resTeitters.length + "条新推文");
+        // 如果当前页码超过总页码. 那么就不加载了
+        if (resData.data.current > resData.data.pages) {
+            sendMsg("没有更多了", true);
+            console.log("没有更多了");
+
+            option.value.isBusy = true;
+        } else {
+            option.value.isBusy = false;
+        }
+    } catch (error) {
+        // sendMsg("获取首页推文出错" + (error as Error).message);
     }
 }
 

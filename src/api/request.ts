@@ -40,6 +40,8 @@ request.interceptors.request.use(
 );
 request.interceptors.response.use(
     (config) => {
+        if (config.data) {
+        }
         nprogress.done();
         const store = useTeitterStore();
         store.option.requesting = false;

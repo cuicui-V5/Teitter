@@ -69,7 +69,7 @@
             isBusy.value = false;
             sendMsg("推文发送成功");
         } else {
-            sendMsg(res);
+            sendMsg(res, true);
             // alert(res);
             content.value = "";
             isBusy.value = false;

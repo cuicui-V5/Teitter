@@ -82,7 +82,7 @@
                 teitter.likeStatus = false;
                 teitter.likeCount--;
             } else {
-                sendMsg(res);
+                sendMsg(res, true);
 
                 // alert(res);
             }
@@ -98,7 +98,7 @@
                 teitter.likeCount++;
             } else {
                 // alert(res);
-                sendMsg(res);
+                sendMsg(res, true);
             }
         }
     }

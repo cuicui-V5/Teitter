@@ -63,7 +63,7 @@
             }
         } catch {
             // alert("登出失败");
-            sendMsg("登出失败");
+            sendMsg("登出失败", true);
         } finally {
         }
     }

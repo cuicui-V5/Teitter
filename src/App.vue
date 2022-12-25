@@ -3,6 +3,7 @@
     <Teleport to="html">
         <msgBox
             :msg="msg"
+            :warn="Warn"
             v-if="showMsgBox"
         ></msgBox>
     </Teleport>
@@ -16,8 +17,9 @@
 
     const showMsgBox = ref(false);
     const msg = ref("");
+    const Warn = ref(false);
     let timer: any;
-    const sendMsg = (message: string, timeout = 2000) => {
+    const sendMsg = (message: string, isWarn = false, timeout = 2000) => {
         console.log(message);
         if (timer) {
             clearTimeout(timer);
@@ -27,6 +29,7 @@
         timer = setTimeout(() => {
             showMsgBox.value = false;
         }, timeout);
+        Warn.value = isWarn;
     };
     provide("sendMsg", sendMsg);
 </script>

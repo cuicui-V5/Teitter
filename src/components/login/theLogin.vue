@@ -73,7 +73,7 @@
             });
         } else {
             // alert(res);
-            sendMsg(res);
+            sendMsg(res, true);
         }
     }
 </script>

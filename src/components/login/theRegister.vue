@@ -117,7 +117,7 @@
                 name: "login",
             });
         } else {
-            sendMsg(res);
+            sendMsg(res, true);
 
             // alert(res);
         }
