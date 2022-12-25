@@ -18,3 +18,31 @@ export interface userInfo {
     nickName?: string;
     userName?: string;
 }
+
+export interface commentRes {
+    msg: string;
+    comments: Comment[];
+    tweet: Tweet;
+    status: number;
+}
+
+export interface Comment {
+    uid: number;
+    commentContent: string;
+    createDate: number;
+    isDeleted: number;
+    userName: string;
+    nickName: string;
+    avatarUrl: string;
+}
+
+export interface Tweet {
+    tweetId: number;
+    uid: number;
+    content: string;
+    createDate: number;
+    likeCount: number;
+    commentCount: number;
+    pv: number;
+    isDeleted: number;
+}

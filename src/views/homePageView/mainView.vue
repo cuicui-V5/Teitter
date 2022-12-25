@@ -3,8 +3,15 @@
         <TheAside></TheAside>
         <RouterView v-slot="{ Component }">
             <KeepAlive>
-                <component :is="Component"></component>
+                <component
+                    :is="Component"
+                    v-if="$route.meta.keepAlive"
+                ></component>
             </KeepAlive>
+            <component
+                :is="Component"
+                v-if="!$route.meta.keepAlive"
+            ></component>
         </RouterView>
         <theBannerVue v-if="!userInfo.isLogin"></theBannerVue>
         <statusPanel></statusPanel>

@@ -196,3 +196,16 @@ export async function unLike(teitterID: bigint) {
         return (error as Error).message;
     }
 }
+export async function getComment(tweetId: string) {
+    try {
+        const res = await request.get(`/comment/getComment/${tweetId}`);
+        // console.log(res.data);
+
+        return res.data;
+    } catch (error) {
+        sendMsg((error as Error).message);
+        return {
+            status: 400,
+        };
+    }
+}

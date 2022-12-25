@@ -25,6 +25,9 @@ const router = createRouter({
                     path: "/home",
                     name: "home",
                     component: homepageView,
+                    meta: {
+                        keepAlive: true,
+                    },
                 },
                 {
                     path: "/search",

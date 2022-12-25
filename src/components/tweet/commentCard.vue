@@ -6,50 +6,14 @@
         >
             <span :style="avatarUrlStyle"></span>
         </div>
-        <div
-            class="mainArea"
-            @click="goTweetInfo($event)"
-        >
+        <div class="mainArea">
             <div class="top">
-                <span class="nick">{{ teitter.nickName }}</span>
-                <span class="username">@{{ teitter.userName }}</span>
+                <span class="nick">{{ comment.nickName }}</span>
+                <span class="username">@{{ comment.userName }}</span>
                 -
                 <span class="time">{{ timeComputed }}</span>
             </div>
-            <div class="content">{{ teitter.content }}</div>
-            <div class="bottom">
-                <span class="comment">
-                    <i class="iconfont icon-pinglun"></i>
-                    <!--todo <span class="number">{{ teitter.commentCount }}</span> -->
-                    <span class="number">0</span>
-                </span>
-                <span class="forward">
-                    <i class="iconfont icon-zhuanfa"></i>
-                    <!--todo <span class="number">{{ teitter.forwardCount }}</span> -->
-                    <span class="number">0</span>
-                </span>
-                <span class="likeSpan">
-                    <span
-                        class="like-button"
-                        @click="likeBtn(teitter.tweetId)"
-                    >
-                        <div class="heart-bg">
-                            <div
-                                class="heart-icon"
-                                :class="{
-                                    liked: teitter.likeStatus,
-                                }"
-                            ></div>
-                        </div>
-                        <div class="likes-amount">{{ teitter.likeCount }}</div>
-                    </span>
-                </span>
-
-                <span class="share">
-                    <i class="iconfont icon-fenxiang"></i>
-                    <span class="number"></span>
-                </span>
-            </div>
+            <div class="content">{{ comment.commentContent }}</div>
         </div>
     </div>
 </template>
@@ -62,74 +26,29 @@
     import type { teitter } from "@/interfaces/pubInterface";
     import { like, unLike } from "@/api";
     import router from "@/router";
+    import { useTeitterStore } from "@/stores/teitter";
+    import type { Comment } from "@/interfaces/pubInterface";
+
     const sendMsg = inject("sendMsg") as Function;
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
-
-    const { teitter } = defineProps<{
-        teitter: teitter;
-    }>();
+    const { comment } = defineProps<{ comment: Comment }>();
+    console.log(comment);
 
     const timeComputed = computed(() => {
-        return dayjs(Number(teitter.createDate)).fromNow();
+        return dayjs(Number(comment.createDate)).fromNow();
     });
 
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(${teitter.avatarUrl}); `;
+        return `background-image: url(${comment.avatarUrl}); `;
     });
 
-    async function likeBtn(id: bigint) {
-        if (teitter.likeStatus) {
-            //取消点赞的逻辑
-            const res = await unLike(id);
-            if (res == "ok") {
-                sendMsg("取消点赞成功 " + id.toString());
-                teitter.likeStatus = false;
-                teitter.likeCount--;
-            } else {
-                sendMsg(res, true);
-
-                // alert(res);
-            }
-        } else {
-            // 点赞的逻辑
-            const res = await like(id);
-            if (res == "ok") {
-                sendMsg("点赞成功 " + id.toString());
-
-                // alert("点赞成功");
-                teitter.likeStatus = true;
-                teitter.likeCount++;
-            } else {
-                // alert(res);
-                sendMsg(res, true);
-            }
-        }
-    }
-    const blackList = [
-        "iconfont icon-pinglun",
-        "iconfont icon-zhuanfa",
-        "heart-icon",
-        "heart-icon liked",
-        "iconfont icon-fenxiang",
-        "likes-amount",
-    ];
-    const goTweetInfo = (e: MouseEvent) => {
-        if (!blackList.includes((e.target as HTMLElement).className)) {
-            router.push({
-                name: "tweetInfo",
-                params: {
-                    tweetId: teitter.tweetId.toString(),
-                },
-            });
-        }
-    };
     const goAccount = () => {
         router.push({
             name: "account",
             params: {
-                userId: teitter.uid.toString(),
+                userId: comment.uid.toString(),
             },
         });
     };

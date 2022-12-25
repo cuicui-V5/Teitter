@@ -5,15 +5,21 @@
                 class="back iconfont icon-jiantou_xiangzuo"
                 @click="goHome"
             ></span>
-            忒文
+            <span>忒文</span>
         </div>
-
         <div>这里是{{ route.params }}推特详情</div>
+        <TweetInfoCard :tweetInfo="commentInfo?.tweet"></TweetInfoCard>
+        <Comment :comments="commentInfo?.comments"></Comment>
     </div>
 </template>
 
 <script setup lang="ts">
+    import { getComment } from "@/api";
+    import Comment from "@/components/tweet/comment.vue";
+    import TweetInfoCard from "@/components/tweet/tweetInfoCard.vue";
+    import type { commentRes } from "@/interfaces/pubInterface";
     import router from "@/router";
+    import { ref } from "vue";
     import { useRoute } from "vue-router";
 
     const route = useRoute();
@@ -23,16 +29,24 @@
             name: "home",
         });
     };
+    const commentInfo = ref<commentRes>();
+    const init = async () => {
+        commentInfo.value = await getComment(route.params.tweetId as string);
+        console.log(commentInfo);
+    };
+    init();
 </script>
 
 <style scoped lang="less">
     .twtInfo {
         flex: 8;
         padding-top: 6vmax;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         .tittle {
-            display: flex;
-            align-items: center;
             z-index: 1;
             position: fixed;
             top: 0;
@@ -44,14 +58,14 @@
             font-size: 2vmax;
             line-height: 5vmax;
             user-select: none;
-            text-indent: 2vmax;
             backdrop-filter: blur(20px);
             background-color: rgba(255, 255, 255, 0.8);
             .back {
-                width: 5vmax;
-                height: 5vmax;
-                text-align: left;
-                display: block;
+                // width: 3vmax;
+                // height: 3vmax;
+                padding: 1vmax;
+                vertical-align: middle;
+
                 border-radius: 50%;
                 transition: 0.2s all;
                 font-size: 3vmax;
