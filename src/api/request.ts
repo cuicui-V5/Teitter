@@ -40,7 +40,9 @@ request.interceptors.request.use(
 );
 request.interceptors.response.use(
     (config) => {
-        if (config.data) {
+        if (config.data.status == 401) {
+            console.log("登录失效, 清理token");
+            localStorage.clear();
         }
         nprogress.done();
         const store = useTeitterStore();

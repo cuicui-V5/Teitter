@@ -2,8 +2,9 @@
     <div
         class="mainArea"
         @scroll="scroll"
+        ref="mainArea"
     >
-        <div class="tittle animate__animated animate__bounceIn">主页</div>
+        <div class="tittle animate__animated animate__fadeIn">主页</div>
         <publishTeitter v-if="userInfo.isLogin"></publishTeitter>
         <TheTeitterCard
             v-for="item in teitters"
@@ -20,15 +21,28 @@
     import TheTeitterCard from "./theTeitterCard.vue";
     import publishTeitter from "./publishTeitter.vue";
     import { useTeitterStore } from "@/stores/teitter";
-    import { toRefs } from "vue";
     import theLoad from "../theLoad.vue";
 
     import { getTeitter } from "@/api";
+    import { toRefs, onActivated, onDeactivated, ref } from "vue";
+    const mainArea = ref<HTMLElement>();
+
+    let scrollTop: number;
+    onActivated(() => {
+        // 恢复滚动位置
+        console.log("active");
+        mainArea.value?.scrollTo({
+            top: scrollTop,
+        });
+    });
+    onDeactivated(() => {});
+
     const store = useTeitterStore();
     const { option, userInfo, teitters } = toRefs(store);
     getTeitter(true);
 
     async function scroll(e: any) {
+        scrollTop = e.target.scrollTop;
         let scrollProgress =
             e.target.scrollTop /
             (e.target.scrollHeight - e.target.offsetHeight);

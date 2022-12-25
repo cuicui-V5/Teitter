@@ -76,6 +76,13 @@
       "unicode_decimal": 58901
     },
     {
+      "icon_id": "5387584",
+      "name": "箭头_向左",
+      "font_class": "jiantou_xiangzuo",
+      "unicode": "eb09",
+      "unicode_decimal": 60169
+    },
+    {
       "icon_id": "5776868",
       "name": "account",
       "font_class": "account1",

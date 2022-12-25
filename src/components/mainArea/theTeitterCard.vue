@@ -1,9 +1,15 @@
 <template>
     <div class="card animate__animated animate__faster animate__flipInX">
-        <div class="avatar">
+        <div
+            class="avatar"
+            @click="goAccount"
+        >
             <span :style="avatarUrlStyle"></span>
         </div>
-        <div class="mainArea">
+        <div
+            class="mainArea"
+            @click="goTweetInfo($event)"
+        >
             <div class="top">
                 <span class="nick">{{ teitter.nickName }}</span>
                 <span class="username">@{{ teitter.userName }}</span>
@@ -23,7 +29,7 @@
                     <span class="number">0</span>
                 </span>
                 <span class="likeSpan">
-                    <div class="like-button">
+                    <span class="like-button">
                         <div
                             class="heart-bg"
                             @click="likeBtn(teitter.tweetId)"
@@ -36,7 +42,7 @@
                             ></div>
                         </div>
                         <div class="likes-amount">{{ teitter.likeCount }}</div>
-                    </div>
+                    </span>
                 </span>
 
                 <span class="share">
@@ -55,6 +61,7 @@
     import { computed, inject } from "vue";
     import type { teitter } from "@/interfaces/pubInterface";
     import { like, unLike } from "@/api";
+    import router from "@/router";
     const sendMsg = inject("sendMsg") as Function;
 
     dayjs.extend(RelativeTime);
@@ -72,13 +79,12 @@
         return `background-image: url(${teitter.avatarUrl}); `;
     });
 
-    async function likeBtn(id: number) {
+    async function likeBtn(id: bigint) {
         if (teitter.likeStatus) {
             //取消点赞的逻辑
             const res = await unLike(id);
             if (res == "ok") {
                 sendMsg("取消点赞成功 " + id.toString());
-                console.log("取消点赞成功 " + id.toString());
                 teitter.likeStatus = false;
                 teitter.likeCount--;
             } else {
@@ -93,7 +99,6 @@
                 sendMsg("点赞成功 " + id.toString());
 
                 // alert("点赞成功");
-                console.log("点赞成功 " + id.toString());
                 teitter.likeStatus = true;
                 teitter.likeCount++;
             } else {
@@ -102,6 +107,24 @@
             }
         }
     }
+    const goTweetInfo = (e: MouseEvent) => {
+        if ((e.target as HTMLElement).tagName === "DIV") {
+            router.push({
+                name: "tweetInfo",
+                params: {
+                    tweetId: teitter.tweetId.toString(),
+                },
+            });
+        }
+    };
+    const goAccount = () => {
+        router.push({
+            name: "account",
+            params: {
+                userId: teitter.uid.toString(),
+            },
+        });
+    };
 </script>
 
 <style scoped lang="scss">
@@ -148,9 +171,9 @@
                 font-size: 1.5vmax;
                 margin-top: 0.3vmax;
                 color: #0f1419;
+                margin-bottom: 2.5vmax;
             }
             .bottom {
-                margin-top: 2.5vmax;
                 display: flex;
                 justify-content: space-between;
                 font-size: 1.45vmax;
@@ -170,6 +193,7 @@
                 .likeSpan {
                     position: relative;
                     .like-button {
+                        display: block;
                         position: absolute;
                         top: -50%;
                         left: -2vmax;

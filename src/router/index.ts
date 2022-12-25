@@ -6,6 +6,8 @@ import searchView from "../views/homePageView/searchView.vue";
 import noticeView from "../views/homePageView/noticeView.vue";
 import emailView from "../views/homePageView/emailView.vue";
 
+import tweetInfoView from "../views/homePageView/tweetInfoView.vue";
+
 import loginRegisterView from "@/views/loginView/loginRegisterView.vue";
 import theLoginVue from "@/components/login/theLogin.vue";
 import theRegisterVue from "@/components/login/theRegister.vue";
@@ -40,9 +42,14 @@ const router = createRouter({
                     component: emailView,
                 },
                 {
-                    path: "/account",
+                    path: "/account/:userId?",
                     name: "account",
                     component: accountView,
+                },
+                {
+                    path: "/tweet/:tweetId?",
+                    name: "tweetInfo",
+                    component: tweetInfoView,
                 },
             ],
         },

@@ -1,17 +1,6 @@
-// export interface teitter {
-//     avatarUrl: string;
-//     tweetId: number;
-//     nickName: string;
-//     userName: string;
-//     content: string;
-//     likeCount: number;
-//     commentCount: number;
-//     forwardCount: number;
-//     updatetime: string;
-// }
 export interface teitter {
-    tweetId: number;
-    uid: number;
+    tweetId: bigint;
+    uid: bigint;
     content: string;
     createDate: number;
     likeCount: number;
@@ -24,6 +13,7 @@ export interface teitter {
 
 export interface userInfo {
     isLogin: boolean;
+    userId?: bigint;
     avatarUrl?: string;
     nickName?: string;
     userName?: string;

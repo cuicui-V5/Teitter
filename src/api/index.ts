@@ -13,7 +13,7 @@ export async function getTeitter(isFlush?: boolean) {
     if (!sendMsg) {
         sendMsg = inject("sendMsg") as Function;
     }
-    console.log(sendMsg);
+    // console.log(sendMsg);
 
     const store = useTeitterStore();
     const { option, teitters } = storeToRefs(store);
@@ -26,9 +26,15 @@ export async function getTeitter(isFlush?: boolean) {
     try {
         option.value.isBusy = true;
 
-        const { data: resData } = await request.get(
+        let { data: resData } = await request.get(
             `/tweet/getAllTweet/${teitterCurrentPage++}`,
         );
+        if (resData.status == 401) {
+            localStorage.clear();
+            resData = (
+                await request.get(`/tweet/getAllTweet/${teitterCurrentPage++}`)
+            ).data;
+        }
 
         option.value.teitterCount = resData.data.total;
 
@@ -38,7 +44,7 @@ export async function getTeitter(isFlush?: boolean) {
         resTeitters.forEach((item) => {
             teitters.value.push(item);
         });
-        console.log(resData);
+        // console.log(resData);
 
         sendMsg("获取到" + resTeitters.length + "条新推文");
         // 如果当前页码超过总页码. 那么就不加载了
@@ -70,6 +76,7 @@ export async function isLogin() {
         userInfo.value.avatarUrl = res.data.userInfo.avatarUrl;
         userInfo.value.nickName = res.data.userInfo.nickName;
         userInfo.value.userName = res.data.userInfo.userName;
+        userInfo.value.userId = res.data.userInfo.uid;
     }
 }
 export async function login(user: {
@@ -91,6 +98,7 @@ export async function login(user: {
             userInfo.value.avatarUrl = res.data.data.avatarUrl;
             userInfo.value.nickName = res.data.data.nickName;
             userInfo.value.userName = res.data.data.userName;
+            userInfo.value.userId = res.data.data.uid;
 
             // 将token存到localStorage
             localStorage.setItem("token", res.data.map.token);
@@ -140,7 +148,7 @@ export async function register(fd: FormData): Promise<string> {
     }
 }
 
-export async function like(teitterID: number) {
+export async function like(teitterID: bigint) {
     console.log(teitterID.toString());
 
     try {
@@ -164,7 +172,7 @@ export async function like(teitterID: number) {
         return (error as Error).message;
     }
 }
-export async function unLike(teitterID: number) {
+export async function unLike(teitterID: bigint) {
     console.log(teitterID.toString());
 
     try {

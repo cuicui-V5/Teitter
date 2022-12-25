@@ -20,9 +20,9 @@
         position: absolute;
         bottom: 8vmax;
         left: 50%;
+        z-index: 9999;
         transform: translate(-50%);
         .msgBox {
-            z-index: 9999;
             min-width: 20vmax;
             height: 5vmax;
 

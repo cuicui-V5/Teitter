@@ -1,7 +1,11 @@
 <template>
     <div class="container">
         <TheAside></TheAside>
-        <RouterView></RouterView>
+        <RouterView v-slot="{ Component }">
+            <KeepAlive>
+                <component :is="Component"></component>
+            </KeepAlive>
+        </RouterView>
         <theBannerVue v-if="!userInfo.isLogin"></theBannerVue>
         <statusPanel></statusPanel>
     </div>

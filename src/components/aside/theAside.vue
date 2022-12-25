@@ -41,6 +41,9 @@
             <RouterLink
                 :to="{
                     name: 'account',
+                    params: {
+                        userId: store.userInfo.userId?.toString(),
+                    },
                 }"
                 class="iconfont icon-account"
                 active-class="accountActive"

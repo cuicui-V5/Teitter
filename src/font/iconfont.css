@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1671537767908') format('truetype');
+  src: url('iconfont.ttf?t=1671961922411') format('truetype');
 }
 
 .iconfont {
@@ -49,6 +49,10 @@
 
 .icon-account:before {
   content: "\e615";
+}
+
+.icon-jiantou_xiangzuo:before {
+  content: "\eb09";
 }
 
 .icon-account1:before {
