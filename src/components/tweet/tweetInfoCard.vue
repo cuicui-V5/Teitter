@@ -2,33 +2,33 @@
     <div class="twtCard">
         <div class="top">
             <div class="avatar">
-                <span></span>
+                <span :style="avatarUrlStyle"></span>
             </div>
             <div class="userinfo">
-                <span class="nickname">牛逼</span>
-                <span class="username">@美尻</span>
+                <span class="nickname">{{ tweetInfo?.nickName }}</span>
+                <span class="username">@{{ tweetInfo?.userName }}</span>
             </div>
         </div>
         <div class="content">
             {{ tweetInfo?.content }}
         </div>
         <div class="info">
-            <div class="time">下午12:34 · 2022年12月25日</div>
+            <div class="time">{{ timeComputed }}</div>
             <div class="detail">
                 <span class="view">
-                    <i>10.7万</i>
+                    <i>0</i>
                     查看
                 </span>
                 <span class="forward">
-                    <i>20</i>
+                    <i>0</i>
                     转推
                 </span>
                 <span class="ref">
-                    <i>4</i>
+                    <i>{{ 0 }}</i>
                     引用推文
                 </span>
                 <span class="like">
-                    <i>299</i>
+                    <i>{{ tweetInfo?.likeCount }}</i>
                     喜欢次数
                 </span>
             </div>
@@ -41,14 +41,17 @@
                 <i class="iconfont icon-zhuanfa"></i>
             </span>
             <span class="likeSpan">
-                <span class="like-button">
-                    <!-- @click="likeBtn(teitter.tweetId)" -->
+                <span
+                    class="like-button"
+                    @click="likeBtn(tweetInfo.tweetId)"
+                >
                     <div class="heart-bg">
                         <div
                             class="heart-icon"
-                            :class="{}"
+                            :class="{
+                                liked: tweetInfo?.likeStatus,
+                            }"
                         ></div>
-                        <!-- liked: teitter.likeStatus, -->
                     </div>
                 </span>
             </span>
@@ -63,10 +66,55 @@
 
 <script setup lang="ts">
     import type { Tweet } from "@/interfaces/pubInterface";
+    import { computed, inject } from "vue";
+    import dayjs from "dayjs";
+    import "dayjs/locale/zh-cn";
+    import { like, unLike } from "@/api";
+    const sendMsg = inject("sendMsg") as Function;
+
+    dayjs.locale("zh-cn");
 
     const { tweetInfo } = defineProps<{
-        tweetInfo: Tweet | undefined;
+        tweetInfo: Tweet;
     }>();
+    // console.log("------", tweetInfo);
+
+    const avatarUrlStyle = computed(() => {
+        return `background-image: url(${tweetInfo?.avatarUrl}); `;
+    });
+    const timeComputed = computed(() => {
+        return dayjs(Number(tweetInfo?.createDate)).format(
+            "AHH:mm · YYYY年MM月DD日",
+        );
+    });
+    async function likeBtn(id: bigint) {
+        if (tweetInfo?.likeStatus) {
+            //取消点赞的逻辑
+            const res = await unLike(id);
+            if (res == "ok") {
+                sendMsg("取消点赞成功 " + id.toString());
+                tweetInfo.likeStatus = false;
+                tweetInfo.likeCount--;
+            } else {
+                sendMsg(res, true);
+
+                // alert(res);
+            }
+        } else {
+            // 点赞的逻辑
+            const res = await like(id);
+            if (res == "ok") {
+                sendMsg("点赞成功 " + id.toString());
+
+                // alert("点赞成功");
+                tweetInfo.likeStatus = true;
+                tweetInfo.likeCount++;
+            } else {
+                // alert(res);
+                sendMsg(res, true);
+            }
+        }
+    }
 </script>
 
 <style scoped lang="less">
@@ -80,7 +128,6 @@
                     height: 5vmax;
                     border-radius: 50%;
                     background-size: cover;
-                    background-image: url("https://picx.zhimg.com/v2-d7be5fcd1fb35461336a3db94ca1ff9c_l.jpg?source=32738c0c");
                 }
             }
             .userinfo {
@@ -98,7 +145,7 @@
             }
         }
         .content {
-            margin-top: 1vmax;
+            margin-top: 2vmax;
             font-size: 2.4vmax;
         }
         .info {

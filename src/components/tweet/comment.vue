@@ -8,9 +8,20 @@
                 class="input"
                 type="text"
                 placeholder="发布你的回复"
+                v-model="cmtContent"
+                @keydown.enter="pubCmtBtn"
             />
-            <div class="btn">
-                <button>回复</button>
+            <div
+                class="btn"
+                @click="pubCmtBtn"
+            >
+                <button
+                    :class="{
+                        btnActive: isOk,
+                    }"
+                >
+                    回复
+                </button>
             </div>
         </div>
         <CommentCard
@@ -23,10 +34,29 @@
 <script setup lang="ts">
     import CommentCard from "./commentCard.vue";
     import type { Comment } from "@/interfaces/pubInterface";
+    import { publishComment } from "@/api";
+    import { ref, inject, computed } from "vue";
+    const cmtContent = ref("");
+    const sendMsg = inject("sendMsg") as Function;
+    const isOk = computed(() => {
+        return cmtContent.value == "" ? false : true;
+    });
+    const emit = defineEmits(["init"]);
 
-    const { comments } = defineProps<{
-        comments: Comment[] | undefined;
+    const { comments, twtId } = defineProps<{
+        comments: Comment[] | null;
+        twtId: bigint;
     }>();
+    const pubCmtBtn = async () => {
+        const res = await publishComment(twtId, cmtContent.value);
+        if (res == "ok") {
+            sendMsg("评论成功!");
+        } else {
+            sendMsg(res, true);
+        }
+        cmtContent.value = "";
+        emit("init");
+    };
 </script>
 
 <style scoped lang="less">
@@ -70,6 +100,10 @@
                     color: white;
                     font-size: 1.62vmax;
                     pointer-events: none;
+                }
+                .btnActive {
+                    background-color: #1a8cd8;
+                    pointer-events: all;
                 }
             }
         }

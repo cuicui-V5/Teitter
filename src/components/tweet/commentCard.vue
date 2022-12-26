@@ -14,6 +14,36 @@
                 <span class="time">{{ timeComputed }}</span>
             </div>
             <div class="content">{{ comment.commentContent }}</div>
+            <div class="bottom">
+                <span class="comment">
+                    <i class="iconfont icon-pinglun"></i>
+                    <!--todo <span class="number">{{ teitter.commentCount }}</span> -->
+                    <span class="number">0</span>
+                </span>
+                <span class="forward">
+                    <i class="iconfont icon-zhuanfa"></i>
+                    <!--todo <span class="number">{{ teitter.forwardCount }}</span> -->
+                    <span class="number">0</span>
+                </span>
+                <span class="likeSpan">
+                    <span class="like-button">
+                        <!-- @click="likeBtn(teitter.tweetId)" -->
+                        <div class="heart-bg">
+                            <div
+                                class="heart-icon"
+                                :class="{}"
+                            ></div>
+                            <!-- liked: teitter.likeStatus, -->
+                        </div>
+                        <!-- <div class="likes-amount">{{ teitter.likeCount }}</div> -->
+                    </span>
+                </span>
+
+                <span class="share">
+                    <i class="iconfont icon-fenxiang"></i>
+                    <span class="number"></span>
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -34,7 +64,7 @@
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
     const { comment } = defineProps<{ comment: Comment }>();
-    console.log(comment);
+    // console.log(comment);
 
     const timeComputed = computed(() => {
         return dayjs(Number(comment.createDate)).fromNow();

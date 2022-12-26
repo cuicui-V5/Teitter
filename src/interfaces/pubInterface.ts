@@ -27,7 +27,7 @@ export interface commentRes {
 }
 
 export interface Comment {
-    uid: number;
+    uid: bigint;
     commentContent: string;
     createDate: number;
     isDeleted: number;
@@ -37,12 +37,16 @@ export interface Comment {
 }
 
 export interface Tweet {
-    tweetId: number;
-    uid: number;
+    tweetId: bigint;
+    uid: bigint;
     content: string;
     createDate: number;
     likeCount: number;
     commentCount: number;
     pv: number;
     isDeleted: number;
+    avatarUrl: string;
+    nickName: string;
+    userName: string;
+    likeStatus: boolean;
 }

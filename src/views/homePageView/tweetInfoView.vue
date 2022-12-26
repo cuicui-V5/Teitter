@@ -7,9 +7,16 @@
             ></span>
             <span>忒文</span>
         </div>
-        <div>这里是{{ route.params }}推特详情</div>
-        <TweetInfoCard :tweetInfo="commentInfo?.tweet"></TweetInfoCard>
-        <Comment :comments="commentInfo?.comments"></Comment>
+        <TweetInfoCard
+            v-if="commentInfo"
+            :tweetInfo="commentInfo?.tweet"
+        ></TweetInfoCard>
+        <Comment
+            v-if="commentInfo"
+            :comments="commentInfo?.comments"
+            :twtId="commentInfo.tweet.tweetId"
+            @init="init"
+        ></Comment>
     </div>
 </template>
 
@@ -19,7 +26,7 @@
     import TweetInfoCard from "@/components/tweet/tweetInfoCard.vue";
     import type { commentRes } from "@/interfaces/pubInterface";
     import router from "@/router";
-    import { ref } from "vue";
+    import { ref, toRef, type Ref } from "vue";
     import { useRoute } from "vue-router";
 
     const route = useRoute();
@@ -29,7 +36,7 @@
             name: "home",
         });
     };
-    const commentInfo = ref<commentRes>();
+    const commentInfo = ref<commentRes | null>(null);
     const init = async () => {
         commentInfo.value = await getComment(route.params.tweetId as string);
         console.log(commentInfo);

@@ -209,3 +209,27 @@ export async function getComment(tweetId: string) {
         };
     }
 }
+export async function publishComment(
+    id: bigint,
+    commentContent: string,
+): Promise<string> {
+    // 发送评论接口
+    try {
+        const data = {
+            tweetId: id.toString(),
+            commentContent,
+        };
+        const res = await request.post("/comment/addComment", data, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        });
+        if (res.data.status == 200) {
+            return "ok";
+        } else {
+            return res.data.msg;
+        }
+    } catch (error) {
+        return (error as Error).message;
+    }
+}
