@@ -58,7 +58,7 @@
     import dayjs from "dayjs";
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
-    import { computed, inject } from "vue";
+    import { computed, inject, toRefs } from "vue";
     import type { teitter } from "@/interfaces/pubInterface";
     import { like, unLike } from "@/api";
     import router from "@/router";
@@ -67,26 +67,27 @@
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
 
-    const { teitter } = defineProps<{
+    const props = defineProps<{
         teitter: teitter;
     }>();
+    const { teitter } = toRefs(props);
 
     const timeComputed = computed(() => {
-        return dayjs(Number(teitter.createDate)).fromNow();
+        return dayjs(Number(teitter.value.createDate)).fromNow();
     });
 
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(${teitter.avatarUrl}); `;
+        return `background-image: url(${teitter.value.avatarUrl}); `;
     });
 
     async function likeBtn(id: bigint) {
-        if (teitter.likeStatus) {
+        if (teitter.value.likeStatus) {
             //取消点赞的逻辑
             const res = await unLike(id);
             if (res == "ok") {
                 sendMsg("取消点赞成功 " + id.toString());
-                teitter.likeStatus = false;
-                teitter.likeCount--;
+                teitter.value.likeStatus = false;
+                teitter.value.likeCount--;
             } else {
                 sendMsg(res, true);
 
@@ -99,8 +100,8 @@
                 sendMsg("点赞成功 " + id.toString());
 
                 // alert("点赞成功");
-                teitter.likeStatus = true;
-                teitter.likeCount++;
+                teitter.value.likeStatus = true;
+                teitter.value.likeCount++;
             } else {
                 // alert(res);
                 sendMsg(res, true);
@@ -120,7 +121,7 @@
             router.push({
                 name: "tweetInfo",
                 params: {
-                    tweetId: teitter.tweetId.toString(),
+                    tweetId: teitter.value.tweetId.toString(),
                 },
             });
         }
@@ -129,7 +130,7 @@
         router.push({
             name: "account",
             params: {
-                userId: teitter.uid.toString(),
+                userId: teitter.value.uid.toString(),
             },
         });
     };

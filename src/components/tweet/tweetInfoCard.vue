@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
     import type { Tweet } from "@/interfaces/pubInterface";
-    import { computed, inject } from "vue";
+    import { computed, inject, toRefs } from "vue";
     import dayjs from "dayjs";
     import "dayjs/locale/zh-cn";
     import { like, unLike } from "@/api";
@@ -74,27 +74,28 @@
 
     dayjs.locale("zh-cn");
 
-    const { tweetInfo } = defineProps<{
+    const props = defineProps<{
         tweetInfo: Tweet;
     }>();
+    const { tweetInfo } = toRefs(props);
     // console.log("------", tweetInfo);
 
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(${tweetInfo?.avatarUrl}); `;
+        return `background-image: url(${tweetInfo.value.avatarUrl}); `;
     });
     const timeComputed = computed(() => {
-        return dayjs(Number(tweetInfo?.createDate)).format(
+        return dayjs(Number(tweetInfo.value.createDate)).format(
             "AHH:mm · YYYY年MM月DD日",
         );
     });
     async function likeBtn(id: bigint) {
-        if (tweetInfo?.likeStatus) {
+        if (tweetInfo.value.likeStatus) {
             //取消点赞的逻辑
             const res = await unLike(id);
             if (res == "ok") {
                 sendMsg("取消点赞成功 " + id.toString());
-                tweetInfo.likeStatus = false;
-                tweetInfo.likeCount--;
+                tweetInfo.value.likeStatus = false;
+                tweetInfo.value.likeCount--;
             } else {
                 sendMsg(res, true);
 
@@ -107,8 +108,8 @@
                 sendMsg("点赞成功 " + id.toString());
 
                 // alert("点赞成功");
-                tweetInfo.likeStatus = true;
-                tweetInfo.likeCount++;
+                tweetInfo.value.likeStatus = true;
+                tweetInfo.value.likeCount++;
             } else {
                 // alert(res);
                 sendMsg(res, true);

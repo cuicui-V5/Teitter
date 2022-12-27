@@ -35,7 +35,7 @@
     import CommentCard from "./commentCard.vue";
     import type { Comment } from "@/interfaces/pubInterface";
     import { publishComment } from "@/api";
-    import { ref, inject, computed } from "vue";
+    import { ref, inject, computed, toRefs } from "vue";
     const cmtContent = ref("");
     const sendMsg = inject("sendMsg") as Function;
     const isOk = computed(() => {
@@ -43,12 +43,13 @@
     });
     const emit = defineEmits(["init"]);
 
-    const { comments, twtId } = defineProps<{
+    const props = defineProps<{
         comments: Comment[] | null;
         twtId: bigint;
     }>();
+    const { comments, twtId } = toRefs(props);
     const pubCmtBtn = async () => {
-        const res = await publishComment(twtId, cmtContent.value);
+        const res = await publishComment(twtId.value, cmtContent.value);
         if (res == "ok") {
             sendMsg("评论成功!");
         } else {

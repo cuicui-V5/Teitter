@@ -7,7 +7,7 @@ import { inject } from "vue";
 
 let teitterCurrentPage = 1;
 let sendMsg: any;
-
+let retry = 0;
 // 获取新推文, 如果isFlush为true, 那么就重置从头获取
 export async function getTeitter(isFlush?: boolean) {
     if (!sendMsg) {
@@ -26,29 +26,30 @@ export async function getTeitter(isFlush?: boolean) {
     try {
         option.value.isBusy = true;
 
-        let { data: resData } = await request.get(
+        let res = await request.get(
             `/tweet/getAllTweet/${teitterCurrentPage++}`,
         );
-        if (resData.status == 401) {
+
+        if (res.data.status == 401) {
             localStorage.clear();
-            resData = (
+            res = (
                 await request.get(`/tweet/getAllTweet/${teitterCurrentPage++}`)
             ).data;
         }
 
-        option.value.teitterCount = resData.data.total;
+        option.value.teitterCount = res.data.data.total;
 
-        const resTeitters: Array<teitter> = resData.data.records;
+        const resTeitters: Array<teitter> = res.data.data.records;
 
         // 追加到现有的数据中
         resTeitters.forEach((item) => {
             teitters.value.push(item);
         });
-        // console.log(resData);
+        // console.log(res.data);
 
         sendMsg("获取到" + resTeitters.length + "条新推文");
         // 如果当前页码超过总页码. 那么就不加载了
-        if (resData.data.current > resData.data.pages) {
+        if (res.data.data.current >= res.data.data.pages) {
             sendMsg("没有更多了", true);
             console.log("没有更多了");
 
@@ -57,7 +58,18 @@ export async function getTeitter(isFlush?: boolean) {
             option.value.isBusy = false;
         }
     } catch (error) {
-        // sendMsg("获取首页推文出错" + (error as Error).message);
+        sendMsg(
+            `获取首页推文出错${(error as Error).message}, 第${retry}次重试`,
+            true,
+        );
+        localStorage.clear();
+        if (retry < 5) {
+            setTimeout(() => {
+                getTeitter(true);
+            }, 1000);
+            console.log(`第${retry}次重试`);
+            retry++;
+        }
     }
 }
 

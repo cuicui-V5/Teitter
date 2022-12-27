@@ -1,0 +1,78 @@
+Date : 2022-12-26 21:16:00
+Directory : c:\学习\前端\Teitter\src
+Total : 36 files,  3690 codes, 46 comments, 399 blanks, all 4135 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| vue        |         25 |      2,126 |          7 |        173 |      2,306 |
+| HTML       |          1 |        528 |          2 |         69 |        599 |
+| CSS        |          2 |        500 |         19 |        107 |        626 |
+| TypeScript |          6 |        400 |         18 |         49 |        467 |
+| JSON       |          1 |        135 |          0 |          1 |        136 |
+| JavaScript |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                        | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                           |         36 |      3,690 |         46 |        399 |      4,135 |
+| api                                                         |          2 |        252 |         18 |         29 |        299 |
+| components                                                  |         14 |      1,794 |          7 |        130 |      1,931 |
+| components\aside                                            |          2 |        300 |          0 |         15 |        315 |
+| components\login                                            |          2 |        254 |          0 |         28 |        282 |
+| components\mainArea                                         |          3 |        486 |          2 |         35 |        523 |
+| components\tweet                                            |          3 |        554 |          5 |         35 |        594 |
+| font                                                        |          5 |      1,164 |         21 |        177 |      1,362 |
+| interfaces                                                  |          1 |         48 |          0 |          5 |         53 |
+| router                                                      |          1 |         74 |          0 |          6 |         80 |
+| stores                                                      |          1 |         15 |          0 |          4 |         19 |
+| views                                                       |         10 |        298 |          0 |         39 |        337 |
+| views\homePageView                                          |          7 |        212 |          0 |         30 |        242 |
+| views\loginView                                             |          3 |         86 |          0 |          9 |         95 |
++-------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                    | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\学习\前端\Teitter\src\App.vue                                | vue        |         34 |          0 |          4 |         38 |
+| c:\学习\前端\Teitter\src\api\index.ts                           | TypeScript |        200 |         14 |         22 |        236 |
+| c:\学习\前端\Teitter\src\api\request.ts                         | TypeScript |         52 |          4 |          7 |         63 |
+| c:\学习\前端\Teitter\src\components\aside\theAside.vue          | vue        |        178 |          0 |          8 |        186 |
+| c:\学习\前端\Teitter\src\components\aside\userInfoCard.vue      | vue        |        122 |          0 |          7 |        129 |
+| c:\学习\前端\Teitter\src\components\login\theLogin.vue          | vue        |        100 |          0 |         12 |        112 |
+| c:\学习\前端\Teitter\src\components\login\theRegister.vue       | vue        |        154 |          0 |         16 |        170 |
+| c:\学习\前端\Teitter\src\components\mainArea\publishTeitter.vue | vue        |        133 |          0 |         11 |        144 |
+| c:\学习\前端\Teitter\src\components\mainArea\theMainArea.vue    | vue        |         98 |          0 |          7 |        105 |
+| c:\学习\前端\Teitter\src\components\mainArea\theTeitterCard.vue | vue        |        255 |          2 |         17 |        274 |
+| c:\学习\前端\Teitter\src\components\msgBox.vue                  | vue        |         42 |          0 |          4 |         46 |
+| c:\学习\前端\Teitter\src\components\statusPanel.vue             | vue        |         51 |          0 |          5 |         56 |
+| c:\学习\前端\Teitter\src\components\theBanner.vue               | vue        |         83 |          0 |          4 |         87 |
+| c:\学习\前端\Teitter\src\components\theLoad.vue                 | vue        |         24 |          0 |          4 |         28 |
+| c:\学习\前端\Teitter\src\components\tweet\comment.vue           | vue        |        108 |          0 |          4 |        112 |
+| c:\学习\前端\Teitter\src\components\tweet\commentCard.vue       | vue        |        203 |          5 |         15 |        223 |
+| c:\学习\前端\Teitter\src\components\tweet\tweetInfoCard.vue     | vue        |        243 |          0 |         16 |        259 |
+| c:\学习\前端\Teitter\src\font\demo.css                          | CSS        |        435 |         19 |         86 |        540 |
+| c:\学习\前端\Teitter\src\font\demo_index.html                   | HTML       |        528 |          2 |         69 |        599 |
+| c:\学习\前端\Teitter\src\font\iconfont.css                      | CSS        |         65 |          0 |         21 |         86 |
+| c:\学习\前端\Teitter\src\font\iconfont.js                       | JavaScript |          1 |          0 |          0 |          1 |
+| c:\学习\前端\Teitter\src\font\iconfont.json                     | JSON       |        135 |          0 |          1 |        136 |
+| c:\学习\前端\Teitter\src\interfaces\pubInterface.ts             | TypeScript |         48 |          0 |          5 |         53 |
+| c:\学习\前端\Teitter\src\main.ts                                | TypeScript |         11 |          0 |          5 |         16 |
+| c:\学习\前端\Teitter\src\router\index.ts                        | TypeScript |         74 |          0 |          6 |         80 |
+| c:\学习\前端\Teitter\src\stores\teitter.ts                      | TypeScript |         15 |          0 |          4 |         19 |
+| c:\学习\前端\Teitter\src\views\homePageView\accountView.vue     | vue        |         59 |          0 |          7 |         66 |
+| c:\学习\前端\Teitter\src\views\homePageView\emailView.vue       | vue        |          9 |          0 |          3 |         12 |
+| c:\学习\前端\Teitter\src\views\homePageView\homePageView.vue    | vue        |          7 |          0 |          3 |         10 |
+| c:\学习\前端\Teitter\src\views\homePageView\mainView.vue        | vue        |         40 |          0 |          4 |         44 |
+| c:\学习\前端\Teitter\src\views\homePageView\noticeView.vue      | vue        |          9 |          0 |          3 |         12 |
+| c:\学习\前端\Teitter\src\views\homePageView\searchView.vue      | vue        |          9 |          0 |          3 |         12 |
+| c:\学习\前端\Teitter\src\views\homePageView\tweetInfoView.vue   | vue        |         79 |          0 |          7 |         86 |
+| c:\学习\前端\Teitter\src\views\loginView\loginRegisterView.vue  | vue        |         68 |          0 |          3 |         71 |
+| c:\学习\前端\Teitter\src\views\loginView\loginView.vue          | vue        |          9 |          0 |          3 |         12 |
+| c:\学习\前端\Teitter\src\views\loginView\register.vue           | vue        |          9 |          0 |          3 |         12 |
+| Total                                                       |            |      3,690 |         46 |        399 |      4,135 |
++-------------------------------------------------------------+------------+------------+------------+------------+------------+

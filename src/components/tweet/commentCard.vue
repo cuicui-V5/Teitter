@@ -52,7 +52,7 @@
     import dayjs from "dayjs";
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
-    import { computed, inject } from "vue";
+    import { computed, inject, toRefs } from "vue";
     import type { teitter } from "@/interfaces/pubInterface";
     import { like, unLike } from "@/api";
     import router from "@/router";
@@ -63,22 +63,23 @@
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
-    const { comment } = defineProps<{ comment: Comment }>();
+    const props = defineProps<{ comment: Comment }>();
+    const { comment } = toRefs(props);
     // console.log(comment);
 
     const timeComputed = computed(() => {
-        return dayjs(Number(comment.createDate)).fromNow();
+        return dayjs(Number(comment.value.createDate)).fromNow();
     });
 
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(${comment.avatarUrl}); `;
+        return `background-image: url(${comment.value.avatarUrl}); `;
     });
 
     const goAccount = () => {
         router.push({
             name: "account",
             params: {
-                userId: comment.uid.toString(),
+                userId: comment.value.uid.toString(),
             },
         });
     };
