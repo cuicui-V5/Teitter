@@ -9,6 +9,13 @@
                 v-model="content"
                 @keydown.enter="publishBtn()"
             ></textarea>
+            <input
+                type="file"
+                name=""
+                id=""
+                @change="fileUpload"
+                ref="fileInput"
+            />
 
             <button
                 :class="activeClass"
@@ -21,6 +28,7 @@
                 v-if="isBusy"
                 class="loader"
             ></TheLoad>
+            <div ref="imageContainer"></div>
         </div>
     </div>
 </template>
@@ -34,6 +42,12 @@
     import { publish, getTeitter } from "@/api";
     import request from "@/api/request";
     import { inject } from "vue";
+
+    // 引入图片压缩
+    import { imgCompress } from "@/utils/index";
+
+    const fileInput = ref<HTMLInputElement>();
+    const imageContainer = ref<HTMLDivElement>();
     const sendMsg = inject("sendMsg") as Function;
 
     // 是否正在请求, 如果正在请求, 那么就播放加载的动画
@@ -47,6 +61,7 @@
 
     const activeClass = ref("");
     const content = ref("");
+    const image = ref<Blob>();
     // 监视是否有内容,有内容就让按钮可用
     watch(content, (value) => {
         if (value) {
@@ -57,30 +72,50 @@
     });
 
     async function publishBtn() {
-        isBusy.value = true;
+        // isBusy.value = true;
 
-        const tw = {
-            content: content.value,
-        };
-        const res = await publish(tw);
-        if (res == "ok") {
-            getTeitter(true);
-            content.value = "";
-            isBusy.value = false;
-            sendMsg("推文发送成功");
-        } else {
-            sendMsg(res, true);
-            // alert(res);
-            content.value = "";
-            isBusy.value = false;
+        // const tw = {
+        //     content: content.value,
+        // };
+        // const res = await publish(tw);
+        // if (res == "ok") {
+        //     getTeitter(true);
+        //     content.value = "";
+        //     isBusy.value = false;
+        //     sendMsg("推文发送成功");
+        // } else {
+        //     sendMsg(res, true);
+        //     // alert(res);
+        //     content.value = "";
+        //     isBusy.value = false;
+        // }
+        const fd = new FormData();
+        if (image.value) {
+            fd.append("img", image.value, "img.png");
         }
+        fd.append("content", content.value);
+        const res = await axios.post("http://127.0.0.1:8888/upload", fd);
+        console.log(res);
     }
+
+    const fileUpload = async () => {
+        if (fileInput.value?.files?.length) {
+            const file = fileInput.value.files[0];
+            const res = await imgCompress(file, 1000, 1000);
+            console.log(res);
+            image.value = res.blob;
+            if (imageContainer.value) {
+                imageContainer.value.innerHTML = "";
+                imageContainer.value?.appendChild(res.canvas);
+            }
+        }
+    };
 </script>
 
 <style scoped lang="scss">
     .publishTeitter {
         display: flex;
-        height: 13vmax;
+        min-height: 13vmax;
         border-bottom: #eff3f4 1px solid;
         .avatarShow {
             width: 7vmax;

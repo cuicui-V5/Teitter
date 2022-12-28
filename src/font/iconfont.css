@@ -1,6 +1,8 @@
 @font-face {
-  font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1671961922411') format('truetype');
+  font-family: "iconfont"; /* Project id 3840361 */
+  src: url('iconfont.woff2?t=1672243427916') format('woff2'),
+       url('iconfont.woff?t=1672243427916') format('woff'),
+       url('iconfont.ttf?t=1672243427916') format('truetype');
 }
 
 .iconfont {
@@ -11,36 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-shouye:before {
-  content: "\f012b";
-}
-
-.icon-likefill:before {
-  content: "\e668";
-}
-
-.icon-close:before {
-  content: "\e69a";
-}
-
-.icon-notice:before {
-  content: "\e63e";
-}
-
-.icon-xihuan:before {
-  content: "\e761";
-}
-
-.icon-zhuye:before {
-  content: "\e625";
-}
-
-.icon-pinglun:before {
-  content: "\e603";
-}
-
-.icon-notice1:before {
-  content: "\e6cc";
+.icon-charutupian:before {
+  content: "\ec7f";
 }
 
 .icon-xihuan1:before {
@@ -81,5 +55,37 @@
 
 .icon-email-fill:before {
   content: "\e77e";
+}
+
+.icon-shouye:before {
+  content: "\e600";
+}
+
+.icon-likefill:before {
+  content: "\e668";
+}
+
+.icon-close:before {
+  content: "\e69a";
+}
+
+.icon-notice:before {
+  content: "\e63e";
+}
+
+.icon-xihuan:before {
+  content: "\e761";
+}
+
+.icon-zhuye:before {
+  content: "\e625";
+}
+
+.icon-pinglun:before {
+  content: "\e603";
+}
+
+.icon-notice1:before {
+  content: "\e6cc";
 }
 
