@@ -8,14 +8,19 @@
                 placeholder="有什么新鲜事 ?"
                 v-model="content"
                 @keydown.enter="publishBtn()"
+                @paste="appendImageOnPaste"
             ></textarea>
             <input
                 type="file"
-                name=""
-                id=""
                 @change="fileUpload"
                 ref="fileInput"
+                class="imageInput"
+                accept="image/*"
             />
+            <span
+                class="imageSelector iconfont icon-charutupian"
+                @click="fileInput?.click()"
+            ></span>
 
             <button
                 :class="activeClass"
@@ -28,7 +33,12 @@
                 v-if="isBusy"
                 class="loader"
             ></TheLoad>
-            <div ref="imageContainer"></div>
+            <div
+                class="imageContainer"
+                v-show="image"
+            >
+                <img ref="imageContainer" />
+            </div>
         </div>
     </div>
 </template>
@@ -47,7 +57,7 @@
     import { imgCompress } from "@/utils/index";
 
     const fileInput = ref<HTMLInputElement>();
-    const imageContainer = ref<HTMLDivElement>();
+    const imageContainer = ref<HTMLImageElement>();
     const sendMsg = inject("sendMsg") as Function;
 
     // 是否正在请求, 如果正在请求, 那么就播放加载的动画
@@ -63,8 +73,8 @@
     const content = ref("");
     const image = ref<Blob>();
     // 监视是否有内容,有内容就让按钮可用
-    watch(content, (value) => {
-        if (value) {
+    watch([content, image], (value) => {
+        if (value.length > 0) {
             activeClass.value = "btnActive";
         } else {
             activeClass.value = "";
@@ -72,30 +82,26 @@
     });
 
     async function publishBtn() {
-        // isBusy.value = true;
-
-        // const tw = {
-        //     content: content.value,
-        // };
-        // const res = await publish(tw);
-        // if (res == "ok") {
-        //     getTeitter(true);
-        //     content.value = "";
-        //     isBusy.value = false;
-        //     sendMsg("推文发送成功");
-        // } else {
-        //     sendMsg(res, true);
-        //     // alert(res);
-        //     content.value = "";
-        //     isBusy.value = false;
-        // }
+        isBusy.value = true;
         const fd = new FormData();
-        if (image.value) {
-            fd.append("img", image.value, "img.png");
-        }
+
         fd.append("content", content.value);
-        const res = await axios.post("http://127.0.0.1:8888/upload", fd);
-        console.log(res);
+        if (image.value) {
+            fd.append("file", image.value, "image.png");
+        }
+        const res = await publish(fd);
+        if (res == "ok") {
+            getTeitter(true);
+            content.value = "";
+            isBusy.value = false;
+            image.value = undefined;
+            sendMsg("推文发送成功");
+        } else {
+            sendMsg(res, true);
+            // alert(res);
+            content.value = "";
+            isBusy.value = false;
+        }
     }
 
     const fileUpload = async () => {
@@ -103,10 +109,24 @@
             const file = fileInput.value.files[0];
             const res = await imgCompress(file, 1000, 1000);
             console.log(res);
-            image.value = res.blob;
+            image.value = res;
             if (imageContainer.value) {
-                imageContainer.value.innerHTML = "";
-                imageContainer.value?.appendChild(res.canvas);
+                imageContainer.value.src = window.URL.createObjectURL(res);
+            }
+        }
+    };
+    const appendImageOnPaste = async (e: ClipboardEvent) => {
+        if (e.clipboardData?.files[0]) {
+            try {
+                const file = e.clipboardData?.files[0];
+                const res = await imgCompress(file, 1000, 1000);
+                console.log(res);
+                image.value = res;
+                if (imageContainer.value) {
+                    imageContainer.value.src = window.URL.createObjectURL(res);
+                }
+            } catch (error) {
+                console.log("用户黏贴的非图片");
             }
         }
     };
@@ -136,13 +156,14 @@
             textarea {
                 position: relative;
                 width: 100%;
-                height: 7vmax;
+                height: 5vmax;
                 padding: 1vmax;
                 border: 0;
                 color: #000000;
                 font-weight: normal;
                 font-size: 2.1vmax;
                 resize: none;
+                margin-bottom: 2vmax;
                 &:focus {
                     outline: 0;
                     border: 0;
@@ -172,6 +193,25 @@
                 height: 3vmax;
                 position: absolute;
                 right: 2vmax;
+            }
+            .imageContainer {
+                margin-top: 2vmax;
+                width: 60%;
+                img {
+                    width: 100%;
+                }
+            }
+            .imageInput {
+                display: none;
+            }
+            .imageSelector {
+                color: #56b4f4;
+                font-size: 2vmax;
+                border-radius: 50%;
+                padding: 1vmax;
+                &:hover {
+                    background-color: #e8f5fd;
+                }
             }
         }
     }

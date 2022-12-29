@@ -3,7 +3,7 @@ import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
-import "../public/main.less";
+import "./style/main.less";
 import "animate.css";
 import "nprogress/nprogress.css";
 

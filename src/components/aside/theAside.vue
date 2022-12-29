@@ -157,7 +157,7 @@
             }
             .homeActive {
                 &::before {
-                    content: "\f012b";
+                    content: "\e600";
                 }
             }
             .searchActive {

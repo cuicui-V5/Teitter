@@ -49,4 +49,5 @@ export interface Tweet {
     nickName: string;
     userName: string;
     likeStatus: boolean;
+    tweetImg: string;
 }

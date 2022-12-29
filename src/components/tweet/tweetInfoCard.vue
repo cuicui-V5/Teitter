@@ -11,6 +11,12 @@
         </div>
         <div class="content">
             {{ tweetInfo?.content }}
+            <br />
+            <img
+                v-if="tweetInfo.tweetImg"
+                :src="tweetInfo.tweetImg"
+                alt=""
+            />
         </div>
         <div class="info">
             <div class="time">{{ timeComputed }}</div>
@@ -148,6 +154,10 @@
         .content {
             margin-top: 2vmax;
             font-size: 2.4vmax;
+            img {
+                margin-top: 1vmax;
+                width: 80%;
+            }
         }
         .info {
             .time {

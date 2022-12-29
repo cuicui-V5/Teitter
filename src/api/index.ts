@@ -123,11 +123,11 @@ export async function login(user: {
     }
 }
 
-export async function publish(tw: { content: string }): Promise<string> {
+export async function publish(fd: FormData): Promise<string> {
     try {
-        const res = await request.post("/tweet/sendTwt", tw, {
+        const res = await request.post("/tweet/sendTwt", fd, {
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+                "Content-Type": "multipart/form-data; ",
             },
         });
         if (res.data.status == 200) {

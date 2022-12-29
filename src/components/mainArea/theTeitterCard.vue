@@ -1,5 +1,5 @@
 <template>
-    <div class="card animate__animated animate__faster animate__flipInX">
+    <div class="card animate__animated animate__faster animate__bounceInUp">
         <div
             class="avatar"
             @click="goAccount"
@@ -16,7 +16,15 @@
                 -
                 <span class="time">{{ timeComputed }}</span>
             </div>
-            <div class="content">{{ teitter.content }}</div>
+            <div class="content">
+                {{ teitter.content }}
+                <br />
+                <img
+                    v-if="teitter.tweetImg"
+                    :src="teitter.tweetImg"
+                    alt=""
+                />
+            </div>
             <div class="bottom">
                 <span class="comment">
                     <i class="iconfont icon-pinglun"></i>
@@ -181,6 +189,10 @@
                 margin-top: 0.3vmax;
                 color: #0f1419;
                 margin-bottom: 2.5vmax;
+                img {
+                    margin-top: 1vmax;
+                    width: 80%;
+                }
             }
             .bottom {
                 display: flex;

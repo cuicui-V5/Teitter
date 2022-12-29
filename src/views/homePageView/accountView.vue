@@ -53,7 +53,7 @@
                     transition: 0.2s all;
                     font-size: 3vmax;
                     &:hover {
-                        background-color: #e7e7e8;
+                        background-color: #a4a4a44b;
                     }
                 }
             }
