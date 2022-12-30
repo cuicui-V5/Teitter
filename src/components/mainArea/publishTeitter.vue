@@ -107,7 +107,7 @@
     const fileUpload = async () => {
         if (fileInput.value?.files?.length) {
             const file = fileInput.value.files[0];
-            const res = await imgCompress(file, 1920, 1080, 0.4, "image/webp");
+            const res = await imgCompress(file, 1920, 1080, 0.92, "image/webp");
             console.log(res);
             image.value = res;
             if (imageContainer.value) {
@@ -123,7 +123,7 @@
                     file,
                     1920,
                     1080,
-                    0.4,
+                    0.92,
                     "image/webp",
                 );
                 console.log(res);
