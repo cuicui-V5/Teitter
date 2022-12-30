@@ -107,7 +107,7 @@
     const fileUpload = async () => {
         if (fileInput.value?.files?.length) {
             const file = fileInput.value.files[0];
-            const res = await imgCompress(file, 1200, 1200, 0.2, "image/webp");
+            const res = await imgCompress(file, 1920, 1080, 0.4, "image/webp");
             console.log(res);
             image.value = res;
             if (imageContainer.value) {
@@ -121,9 +121,9 @@
                 const file = e.clipboardData?.files[0];
                 const res = await imgCompress(
                     file,
-                    1200,
-                    1200,
-                    0.2,
+                    1920,
+                    1080,
+                    0.4,
                     "image/webp",
                 );
                 console.log(res);
