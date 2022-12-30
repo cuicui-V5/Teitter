@@ -87,7 +87,7 @@
 
         fd.append("content", content.value);
         if (image.value) {
-            fd.append("file", image.value, "image.png");
+            fd.append("file", image.value, "image.webp");
         }
         const res = await publish(fd);
         if (res == "ok") {
@@ -107,7 +107,7 @@
     const fileUpload = async () => {
         if (fileInput.value?.files?.length) {
             const file = fileInput.value.files[0];
-            const res = await imgCompress(file, 1000, 1000);
+            const res = await imgCompress(file, 1200, 1200, 0.2, "image/webp");
             console.log(res);
             image.value = res;
             if (imageContainer.value) {
@@ -119,7 +119,13 @@
         if (e.clipboardData?.files[0]) {
             try {
                 const file = e.clipboardData?.files[0];
-                const res = await imgCompress(file, 1000, 1000);
+                const res = await imgCompress(
+                    file,
+                    1200,
+                    1200,
+                    0.2,
+                    "image/webp",
+                );
                 console.log(res);
                 image.value = res;
                 if (imageContainer.value) {

@@ -22,7 +22,7 @@
                 <img
                     v-if="teitter.tweetImg"
                     :src="teitter.tweetImg"
-                    alt=""
+                    loading="lazy"
                 />
             </div>
             <div class="bottom">
