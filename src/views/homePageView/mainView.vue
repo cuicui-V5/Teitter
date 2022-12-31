@@ -1,5 +1,8 @@
 <template>
-    <div class="container">
+    <div
+        class="container"
+        ref="container"
+    >
         <TheAside></TheAside>
         <RouterView v-slot="{ Component }">
             <KeepAlive>
@@ -14,7 +17,7 @@
             ></component>
         </RouterView>
         <theBannerVue v-if="!userInfo.isLogin"></theBannerVue>
-        <statusPanel></statusPanel>
+        <statusPanel v-if="!isMobile"></statusPanel>
     </div>
 </template>
 
@@ -24,10 +27,23 @@
     import statusPanel from "@/components/statusPanel.vue";
 
     import { useTeitterStore } from "@/stores/teitter";
-    import { toRefs } from "vue";
+    import { computed, ref, toRefs } from "vue";
     import { RouterView } from "vue-router";
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);
+    const container = ref<HTMLDivElement>();
+    const isMobile = ref(false);
+
+    // 判断是否是手机端, 如果是那么隐藏状态区域
+    window.addEventListener("resize", () => {
+        if (container.value) {
+            if (container.value.offsetHeight > container.value.offsetWidth) {
+                isMobile.value = true;
+            } else {
+                isMobile.value = false;
+            }
+        }
+    });
 </script>
 
 <style scoped>

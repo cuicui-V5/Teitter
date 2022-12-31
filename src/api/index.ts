@@ -4,6 +4,7 @@ import type { teitter } from "@/interfaces/pubInterface";
 import { useTeitterStore } from "./../stores/teitter";
 import { storeToRefs } from "pinia";
 import { inject } from "vue";
+import type { AxiosResponse } from "axios";
 
 let teitterCurrentPage = 1;
 let sendMsg: any;
@@ -26,16 +27,17 @@ export async function getTeitter(isFlush?: boolean) {
     try {
         option.value.isBusy = true;
 
-        let res = await request.get(
-            `/tweet/getAllTweet/${teitterCurrentPage++}`,
+        let res = await request.post(
+            `/tweet/getAllTweet`,
+            {
+                pageNum: teitterCurrentPage++,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            },
         );
-
-        if (res.data.status == 401) {
-            localStorage.clear();
-            res = (
-                await request.get(`/tweet/getAllTweet/${teitterCurrentPage++}`)
-            ).data;
-        }
 
         option.value.teitterCount = res.data.data.total;
 
@@ -48,6 +50,8 @@ export async function getTeitter(isFlush?: boolean) {
         // console.log(res.data);
 
         sendMsg("获取到" + resTeitters.length + "条新推文");
+        option.value.isNetWorkError = false;
+
         // 如果当前页码超过总页码. 那么就不加载了
         if (res.data.data.current >= res.data.data.pages) {
             sendMsg("没有更多了", true);
@@ -58,17 +62,20 @@ export async function getTeitter(isFlush?: boolean) {
             option.value.isBusy = false;
         }
     } catch (error) {
-        sendMsg(
-            `获取首页推文出错${(error as Error).message}, 第${retry}次重试`,
-            true,
-        );
+        if (retry > 1) {
+            sendMsg(`获取首页推文出错${(error as Error).message}`, true);
+        }
         localStorage.clear();
-        if (retry < 5) {
+        if (retry < 3) {
             setTimeout(() => {
                 getTeitter(true);
-            }, 1000);
+            }, 500);
             console.log(`第${retry}次重试`);
-            retry++;
+        }
+        retry++;
+
+        if (retry > 3) {
+            option.value.isNetWorkError = true;
         }
     }
 }
@@ -245,3 +252,26 @@ export async function publishComment(
         return (error as Error).message;
     }
 }
+export const reqSearch = async (
+    keyWord: string,
+    pageNum: number,
+): Promise<AxiosResponse> => {
+    console.log("search");
+    try {
+        const res = await request.post(
+            "/tweet/getAllTweet",
+            {
+                keyWord,
+                pageNum,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            },
+        );
+        return res;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};

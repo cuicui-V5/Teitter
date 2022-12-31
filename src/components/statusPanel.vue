@@ -1,6 +1,12 @@
 <template>
     <div class="panel">
         <div class="text animate__animated animate__bounceInDown">
+            <input
+                type="text"
+                class="searchBar"
+                v-model="keyWord"
+            />
+            <button @click="goSearch()">搜索忒特</button>
             <div>
                 登陆状态:
                 <span>{{ userInfo.isLogin }}</span>
@@ -31,14 +37,25 @@
 </template>
 
 <script setup lang="ts">
-    import { toRefs } from "vue";
+    import { ref, toRefs } from "vue";
     import { useTeitterStore } from "@/stores/teitter";
+    import router from "@/router/index";
     const store = useTeitterStore();
     const { userInfo, option } = toRefs(store);
+    const keyWord = ref("");
 
-    function showCookie() {
+    const showCookie = () => {
         console.log(document.cookie);
-    }
+    };
+    const goSearch = () => {
+        console.log(keyWord.value);
+        router.push({
+            name: "search",
+            params: {
+                keyWord: keyWord.value,
+            },
+        });
+    };
 </script>
 
 <style scoped lang="scss">

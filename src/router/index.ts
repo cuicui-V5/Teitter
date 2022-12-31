@@ -30,7 +30,7 @@ const router = createRouter({
                     },
                 },
                 {
-                    path: "/search",
+                    path: "/search:keyWord?",
                     name: "search",
                     component: searchView,
                 },

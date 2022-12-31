@@ -5,6 +5,13 @@
         ref="mainArea"
     >
         <div class="tittle animate__animated animate__fadeIn">主页</div>
+        <div
+            class="noNetWork"
+            v-if="option.isNetWorkError"
+        >
+            <span class="noNetWorkSpan iconfont icon-lixian"></span>
+            <div class="content">连接服务器失败, 后端写的什么玩意?</div>
+        </div>
         <publishTeitter v-if="userInfo.isLogin"></publishTeitter>
         <TheTeitterCard
             v-for="item in teitters"
@@ -65,6 +72,16 @@
             display: none;
         }
         padding-top: 6vmax;
+        .noNetWork {
+            text-align: center;
+            .noNetWorkSpan {
+                font-size: 6vmax;
+            }
+            .content {
+                margin-top: 1vmax;
+                font-size: 3vmax;
+            }
+        }
         .tittle {
             z-index: 1;
             position: fixed;
@@ -87,18 +104,5 @@
             width: 4vmax;
             height: 4vmax;
         }
-        // .loadMore {
-        //     position: absolute;
-        //     left: 50%;
-        //     transform: translate(-50%);
-        //     width: 5.12vmax;
-        //     height: 3.65vmax;
-        //     margin-top: 5vmax;
-        //     border: 0;
-        //     border-radius: 1.82vmax;
-        //     background-color: #1a8cd8;
-        //     color: white;
-        //     font-size: 1.5vmax;
-        // }
     }
 </style>
