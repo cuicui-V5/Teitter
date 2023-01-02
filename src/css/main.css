@@ -20,6 +20,6 @@ html::-webkit-scrollbar {
   display: none;
 }
 ::selection {
-  background-color: #62c0ff;
-  color: #fff;
+  background-color: #add8e6;
+  color: #000;
 }

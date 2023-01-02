@@ -1,37 +1,18 @@
 <template>
     <div class="panel">
-        <div class="text animate__animated animate__bounceInDown">
+        <div
+            class="search animate__animated animate__bounceInDown"
+            v-if="$route.name == `home`"
+        >
             <input
                 type="text"
                 class="searchBar"
                 v-model="keyWord"
             />
-            <button @click="goSearch()">搜索忒特</button>
-            <div>
-                登陆状态:
-                <span>{{ userInfo.isLogin }}</span>
-            </div>
-            <div>
-                用户信息:
-                <br />
-                <span>昵称:</span>
-                <span>{{ userInfo.nickName }}</span>
-                <br />
-                <span>用户名:</span>
-                <span>{{ userInfo.userName }}</span>
-                <br />
-                <span>头像url:</span>
-
-                <a :href="userInfo.avatarUrl">
-                    {{ userInfo.avatarUrl }}
-                </a>
-                <br />
-            </div>
-            <div>
-                推文总数:
-                <span>{{ option.teitterCount }}</span>
-            </div>
-            <button @click="showCookie">输出cookie</button>
+            <span
+                @click="goSearch()"
+                class="searchBtn iconfont icon-search"
+            ></span>
         </div>
     </div>
 </template>
@@ -44,9 +25,6 @@
     const { userInfo, option } = toRefs(store);
     const keyWord = ref("");
 
-    const showCookie = () => {
-        console.log(document.cookie);
-    };
     const goSearch = () => {
         console.log(keyWord.value);
         router.push({
@@ -60,13 +38,44 @@
 
 <style scoped lang="scss">
     .panel {
-        background-color: #e7f4fd;
-        flex: 2;
-        padding: 2vmax;
+        z-index: 2;
+        background-color: #f7f9f9;
+        flex: 0.306;
+        flex: 306;
         font-size: 1vmax;
         overflow: hidden;
-        .text {
-            word-wrap: break-word;
+        .search {
+            padding: 2vmax;
+            text-align: center;
+            input {
+                margin-left: -1vmax;
+                width: 100%;
+                height: 4vmax;
+                border-radius: 2vmax;
+                padding-left: 1vmax;
+                font-size: 1.3vmax;
+                background-color: #ffffff;
+                outline: 0;
+                border: 1px solid #47aef2;
+                transition: all 200ms;
+
+                &:focus {
+                    border: 1px dotted #1d9bf0;
+                    outline: 0;
+                    background-color: #eff3f4;
+                }
+            }
+            .searchBtn {
+                vertical-align: middle;
+                margin-left: -5vmax;
+                font-size: 3vmax;
+                padding: 0.2vmax;
+                border-radius: 50%;
+                transition: all 0.2s;
+                &:hover {
+                    background-color: #d1d1d1;
+                }
+            }
         }
     }
 </style>

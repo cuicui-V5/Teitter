@@ -1,17 +1,14 @@
 <template>
     <div
-        class="mainArea"
+        class="mainArea animate__animated animate__fadeIn faster"
         @scroll="scroll"
         ref="mainArea"
     >
         <div class="tittle animate__animated animate__fadeIn">主页</div>
-        <div
-            class="noNetWork"
+        <networkErrorVue
+            @event="getTeitter()"
             v-if="option.isNetWorkError"
-        >
-            <span class="noNetWorkSpan iconfont icon-lixian"></span>
-            <div class="content">连接服务器失败, 后端写的什么玩意?</div>
-        </div>
+        />
         <publishTeitter v-if="userInfo.isLogin"></publishTeitter>
         <TheTeitterCard
             v-for="item in teitters"
@@ -37,7 +34,6 @@
     let scrollTop: number;
     onActivated(() => {
         // 恢复滚动位置
-        console.log("active");
         mainArea.value?.scrollTo({
             top: scrollTop,
         });
@@ -64,7 +60,8 @@
     .mainArea {
         position: relative;
         // width: 59.3vmax;
-        flex: 7;
+        flex: 0.605;
+        flex: 605;
         height: 85vh;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -72,16 +69,7 @@
             display: none;
         }
         padding-top: 6vmax;
-        .noNetWork {
-            text-align: center;
-            .noNetWorkSpan {
-                font-size: 6vmax;
-            }
-            .content {
-                margin-top: 1vmax;
-                font-size: 3vmax;
-            }
-        }
+
         .tittle {
             z-index: 1;
             position: fixed;
@@ -89,7 +77,7 @@
             // left: 8.3vmax;
             height: 5vmax;
             // width: 59.3vmax;
-            width: 67%;
+            width: 100%;
             font-weight: bold;
             font-size: 2vmax;
             line-height: 5vmax;

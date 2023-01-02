@@ -27,12 +27,21 @@
     import statusPanel from "@/components/statusPanel.vue";
 
     import { useTeitterStore } from "@/stores/teitter";
-    import { computed, ref, toRefs } from "vue";
+    import { computed, nextTick, ref, toRefs } from "vue";
     import { RouterView } from "vue-router";
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);
     const container = ref<HTMLDivElement>();
     const isMobile = ref(false);
+    nextTick(() => {
+        if (container.value) {
+            if (container.value.offsetHeight > container.value.offsetWidth) {
+                isMobile.value = true;
+            } else {
+                isMobile.value = false;
+            }
+        }
+    });
 
     // 判断是否是手机端, 如果是那么隐藏状态区域
     window.addEventListener("resize", () => {

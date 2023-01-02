@@ -62,6 +62,8 @@
 
 <style scoped lang="less">
     .comment {
+        padding-bottom: 15vmax;
+
         .publishComment {
             display: flex;
             align-items: center;

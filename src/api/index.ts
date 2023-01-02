@@ -25,6 +25,8 @@ export async function getTeitter(isFlush?: boolean) {
     // 获取首页推文. 从第一页开始查, 每一次查询都加一页, 查到之后直接存到pinia中
     // 发送请求时让isBusy为真, 防止发送重复请求
     try {
+        console.log("请求第", teitterCurrentPage);
+
         option.value.isBusy = true;
 
         let res = await request.post(
@@ -66,7 +68,7 @@ export async function getTeitter(isFlush?: boolean) {
             sendMsg(`获取首页推文出错${(error as Error).message}`, true);
         }
         localStorage.clear();
-        if (retry < 3) {
+        if (retry < 2) {
             setTimeout(() => {
                 getTeitter(true);
             }, 500);
@@ -74,7 +76,7 @@ export async function getTeitter(isFlush?: boolean) {
         }
         retry++;
 
-        if (retry > 3) {
+        if (retry > 2) {
             option.value.isNetWorkError = true;
         }
     }
@@ -85,17 +87,21 @@ export async function logout() {
 }
 export async function isLogin() {
     // 如果登陆了, 返回用户信息, 如果没登陆,返回false
-    const res = await request.get("/user/isLogin");
-    console.log(res.data);
-    if (res.data.isLogin == true) {
-        //    登陆成功后, 用户信息写入store
-        const store = useTeitterStore();
-        const { userInfo } = storeToRefs(store);
-        userInfo.value.isLogin = true;
-        userInfo.value.avatarUrl = res.data.userInfo.avatarUrl;
-        userInfo.value.nickName = res.data.userInfo.nickName;
-        userInfo.value.userName = res.data.userInfo.userName;
-        userInfo.value.userId = res.data.userInfo.uid;
+    try {
+        const res = await request.get("/user/isLogin");
+
+        if (res.data.isLogin == true) {
+            //    登陆成功后, 用户信息写入store
+            const store = useTeitterStore();
+            const { userInfo } = storeToRefs(store);
+            userInfo.value.isLogin = true;
+            userInfo.value.avatarUrl = res.data.userInfo.avatarUrl;
+            userInfo.value.nickName = res.data.userInfo.nickName;
+            userInfo.value.userName = res.data.userInfo.userName;
+            userInfo.value.userId = res.data.userInfo.uid;
+        }
+    } catch (error) {
+        console.log((error as Error).message);
     }
 }
 export async function login(user: {

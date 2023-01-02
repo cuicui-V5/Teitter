@@ -91,7 +91,8 @@
     .aside_main {
         z-index: 9;
         // width: 8.3vmax;
-        flex: 1;
+        flex: 0.0875;
+        flex: 87;
         height: 100vh;
         ul {
             position: relative;

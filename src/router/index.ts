@@ -20,6 +20,7 @@ const router = createRouter({
             path: "/",
             component: mainView,
             redirect: "home",
+
             children: [
                 {
                     path: "/home",
@@ -27,32 +28,48 @@ const router = createRouter({
                     component: homepageView,
                     meta: {
                         keepAlive: true,
+                        cname: "首页/Teitter",
                     },
                 },
                 {
                     path: "/search:keyWord?",
                     name: "search",
                     component: searchView,
+                    meta: {
+                        cname: "搜索/Teitter",
+                    },
                 },
                 {
                     path: "/notice",
                     name: "notice",
                     component: noticeView,
+                    meta: {
+                        cname: "通知/Teitter",
+                    },
                 },
                 {
                     path: "/email",
                     name: "email",
                     component: emailView,
+                    meta: {
+                        cname: "私信/Teitter",
+                    },
                 },
                 {
                     path: "/account/:userId?",
                     name: "account",
                     component: accountView,
+                    meta: {
+                        cname: "个人信息/Teitter",
+                    },
                 },
                 {
                     path: "/tweet/:tweetId?",
                     name: "tweetInfo",
                     component: tweetInfoView,
+                    meta: {
+                        cname: "忒文/Teitter",
+                    },
                 },
             ],
         },
@@ -75,5 +92,11 @@ const router = createRouter({
         },
     ],
 });
-
+router.afterEach((to, from, failure) => {
+    if (failure) {
+        console.log("路由导航错误");
+    } else {
+        document.title = to.meta.cname as string;
+    }
+});
 export default router;
