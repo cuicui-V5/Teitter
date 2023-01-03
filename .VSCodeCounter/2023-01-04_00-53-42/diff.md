@@ -1,0 +1,40 @@
+# Diff Summary
+
+Date : 2023-01-04 00:53:42
+
+Directory c:\\学习\\前端\\Teitter\\src
+
+Total : 26 files,  1442 codes, 20 comments, 82 blanks, all 1544 lines
+
+[Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
+
+## Languages
+| language | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| vue | 14 | 1,058 | 7 | 52 | 1,117 |
+| TypeScript | 7 | 209 | 12 | 8 | 229 |
+| HTML | 1 | 83 | 0 | 13 | 96 |
+| CSS | 2 | 39 | 0 | 5 | 44 |
+| JSON | 1 | 28 | 0 | 0 | 28 |
+| Less | 1 | 25 | 1 | 4 | 30 |
+
+## Directories
+| path | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| . | 26 | 1,442 | 20 | 82 | 1,544 |
+| api | 2 | 98 | -1 | 3 | 100 |
+| components | 11 | 750 | 7 | 37 | 794 |
+| components\\aside | 2 | 4 | 0 | 0 | 4 |
+| components\\mainArea | 3 | 251 | 0 | 20 | 271 |
+| components\\tweet | 3 | 83 | 0 | 2 | 85 |
+| css | 1 | 25 | 0 | 1 | 26 |
+| font | 3 | 125 | 0 | 17 | 142 |
+| interfaces | 1 | 6 | 0 | 0 | 6 |
+| router | 1 | 29 | 0 | 0 | 29 |
+| stores | 1 | 11 | 0 | 2 | 13 |
+| style | 1 | 25 | 1 | 4 | 30 |
+| utils | 1 | 63 | 13 | 3 | 79 |
+| views | 3 | 308 | 0 | 15 | 323 |
+| views\\homePageView | 3 | 308 | 0 | 15 | 323 |
+
+[Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)

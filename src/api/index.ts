@@ -329,7 +329,7 @@ export const editUserInfo = async (userInfo: {
         if (res.data.status == 200) {
             return "ok";
         } else {
-            return res.data.msg as string;
+            return Promise.reject(new Error(res.data.msg));
         }
     } catch (error) {
         return Promise.reject(error);

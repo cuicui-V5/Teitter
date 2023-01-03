@@ -5,12 +5,14 @@
             accept="image/*"
             hidden
             ref="bgInput"
+            @change="updateBg"
         />
         <input
             type="file"
             accept="image/*"
             hidden
             ref="avatarInput"
+            @change="updateAvatar"
         />
         <div
             class="mask"
@@ -24,22 +26,31 @@
                             @click.self="emit('close')"
                         ></span>
                         <span class="text">编辑个人资料</span>
-                        <button class="save">保存</button>
+                        <button
+                            class="save"
+                            @click="updateUser"
+                        >
+                            保存
+                        </button>
                     </div>
-                    <div
-                        class="bgImg"
-                        :style="backGroundUrlStyle"
-                    >
+                    <div class="bgImg">
+                        <img
+                            :src="bgImgUrl"
+                            ref="bgContainer"
+                        />
                         <span
                             class="changeBgImg iconfont icon-charutupian"
+                            @click="bgInput?.click()"
                         ></span>
                     </div>
-                    <div
-                        class="avatar"
-                        :style="avatarUrlStyle"
-                    >
+                    <div class="avatar">
+                        <img
+                            :src="avatarImgUrl"
+                            ref="avatarContainer"
+                        />
                         <span
                             class="changeAvatar iconfont icon-charutupian"
+                            @click="avatarInput?.click()"
                         ></span>
                     </div>
                     <div class="nickName">
@@ -48,6 +59,7 @@
                             type="text"
                             class="nickNameInput"
                             :value="userInfo.nickName"
+                            ref="nickNameInput"
                         />
                     </div>
                     <div class="profile">
@@ -55,6 +67,7 @@
                         <textarea
                             class="profileInput"
                             :value="userInfo.profile"
+                            ref="proFileInput"
                         />
                     </div>
                     <!-- <div class="password">
@@ -71,20 +84,104 @@
 </template>
 
 <script setup lang="ts">
+    import { editUserInfo, uploadFile } from "@/api";
     import type { userInfo } from "@/interfaces/pubInterface";
-    import { computed, toRefs } from "vue";
-
-    const emit = defineEmits(["close"]);
-    const avatarUrlStyle = computed(() => {
-        return `background-image: url(${userInfo?.value?.avatarUrl}); `;
-    });
-    const backGroundUrlStyle = computed(() => {
-        return `background-image: url(${userInfo?.value?.backgroundUrl}); `;
-    });
+    import { useTeitterStore } from "@/stores/teitter";
+    import { imgCompress } from "@/utils";
+    import { computed, inject, ref, toRaw, toRefs } from "vue";
     const props = defineProps<{
         userInfo: userInfo;
     }>();
     const { userInfo } = toRefs(props);
+
+    const sendMsg = inject("sendMsg") as Function;
+    const store = useTeitterStore();
+
+    let bgImgUrl = userInfo.value.backgroundUrl;
+    let avatarImgUrl = userInfo.value.avatarUrl;
+
+    const bgInput = ref<HTMLInputElement>();
+    const avatarInput = ref<HTMLInputElement>();
+    const bgContainer = ref<HTMLImageElement>();
+    const avatarContainer = ref<HTMLImageElement>();
+    const nickNameInput = ref<HTMLInputElement>();
+    const proFileInput = ref<HTMLTextAreaElement>();
+
+    const emit = defineEmits(["close", "getUserInfo"]);
+
+    const updateBg = async () => {
+        try {
+            if (bgInput.value?.files?.length) {
+                const file = bgInput.value.files[0];
+                console.log(file);
+                if (file.size >= 20000000) {
+                    sendMsg("文件过大, 请上传20Mb以内文件", true);
+
+                    return;
+                }
+                const res = await imgCompress(
+                    file,
+                    1920,
+                    1080,
+                    0.92,
+                    "image/webp",
+                );
+                console.log("压缩后的blob为", res);
+                bgImgUrl = await uploadFile(res, "image.webp");
+                // 调用上传接口进行上传
+                console.log("上传完成的url为", bgImgUrl);
+
+                if (bgContainer.value) {
+                    bgContainer.value.src = bgImgUrl;
+                }
+            }
+        } catch (error) {
+            console.log((error as Error).message);
+        }
+    };
+    const updateAvatar = async () => {
+        try {
+            if (avatarInput.value?.files?.length) {
+                const file = avatarInput.value.files[0];
+                console.log(file);
+                if (file.size >= 20000000) {
+                    sendMsg("文件过大, 请上传20Mb以内文件", true);
+
+                    return;
+                }
+                const res = await imgCompress(
+                    file,
+                    1920,
+                    1080,
+                    0.92,
+                    "image/webp",
+                );
+                console.log("压缩后的blob为", res);
+                avatarImgUrl = await uploadFile(res, "image.png");
+                // 调用上传接口进行上传
+                console.log("上传完成的url为", avatarImgUrl);
+                if (avatarContainer.value) {
+                    avatarContainer.value.src = avatarImgUrl;
+                }
+            }
+        } catch (error) {
+            console.log((error as Error).message);
+        }
+    };
+    const updateUser = async () => {
+        const userInfo = {
+            nickName: nickNameInput.value?.value,
+            profile: proFileInput.value?.value,
+            avatarUrl: avatarImgUrl,
+            backgroundUrl: bgImgUrl,
+        };
+        try {
+            const res = await editUserInfo(userInfo);
+            location.reload();
+        } catch (error) {
+            sendMsg("更新用户出错" + (error as Error).message, true);
+        }
+    };
 </script>
 
 <style scoped lang="less">
@@ -152,9 +249,13 @@
                         position: relative;
                         height: 20vmax;
                         margin-bottom: 12vmax;
-                        background: url(@/img/bg.jpg) rgba(0, 0, 0, 0.3);
                         background-size: cover;
-                        background-blend-mode: multiply;
+                        background-color: #1d9bf0;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
                         .changeBgImg {
                             position: absolute;
                             top: 50%;
@@ -177,9 +278,13 @@
                         top: 19vmax;
                         left: 2vmax;
                         border-radius: 50%;
-                        background: url(@/img/avatar.png) rgba(0, 0, 0, 0.3);
-                        background-size: cover;
-                        background-blend-mode: multiply;
+                        border: 2px solid #1d9bf0;
+                        img {
+                            border-radius: 50%;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
                         .changeAvatar {
                             text-align: center;
                             position: absolute;

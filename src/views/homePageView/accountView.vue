@@ -41,6 +41,7 @@
                 <editUserInfoVue
                     v-if="isShowEdit && userInfo"
                     @close="close"
+                    @getUserInfo="getUserInfo"
                     :userInfo="userInfo"
                 ></editUserInfoVue>
             </Teleport>
