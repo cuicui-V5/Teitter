@@ -24,7 +24,6 @@ export default defineConfig({
                     console.log("CONFIGURE");
                     proxy.on("proxyReq", function (proxyReq, req, res): void {
                         proxyReq.removeHeader("origin");
-                        console.log("EVENT");
                     });
                 },
             },

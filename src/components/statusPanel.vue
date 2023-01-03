@@ -8,6 +8,7 @@
                 type="text"
                 class="searchBar"
                 v-model="keyWord"
+                @keydown.enter="goSearch()"
             />
             <span
                 @click="goSearch()"

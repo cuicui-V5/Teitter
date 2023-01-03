@@ -13,7 +13,7 @@
         ></TweetInfoCard>
         <Comment
             v-if="commentInfo"
-            :comments="commentInfo?.comments"
+            :comments="commentInfo?.comments || []"
             :twtId="commentInfo.tweet.tweetId"
             @init="init"
         ></Comment>
@@ -46,7 +46,7 @@
 
 <style scoped lang="less">
     .twtInfo {
-        flex: 8;
+        flex: 605;
         padding-top: 6vmax;
         overflow-y: scroll;
         &::-webkit-scrollbar {

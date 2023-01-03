@@ -2,7 +2,7 @@
     <div class="comment">
         <div class="publishComment">
             <div class="avatar">
-                <span></span>
+                <span :style="avatarUrlStyle"></span>
             </div>
             <input
                 class="input"
@@ -36,6 +36,8 @@
     import type { Comment } from "@/interfaces/pubInterface";
     import { publishComment } from "@/api";
     import { ref, inject, computed, toRefs } from "vue";
+    import { useTeitterStore } from "@/stores/teitter";
+    const store = useTeitterStore();
     const cmtContent = ref("");
     const sendMsg = inject("sendMsg") as Function;
     const isOk = computed(() => {
@@ -58,6 +60,9 @@
         cmtContent.value = "";
         emit("init");
     };
+    const avatarUrlStyle = computed(() => {
+        return `background-image: url(${store.userInfo.avatarUrl}); `;
+    });
 </script>
 
 <style scoped lang="less">
@@ -77,7 +82,6 @@
                     height: 5vmax;
                     border-radius: 50%;
                     background-size: cover;
-                    background-image: url("https://picx.zhimg.com/v2-d7be5fcd1fb35461336a3db94ca1ff9c_l.jpg?source=32738c0c");
                 }
             }
             .input {

@@ -5,6 +5,7 @@ export interface teitter {
     createDate: number;
     likeCount: number;
     tweetImg: string;
+    tweetVideo: string;
     avatarUrl: string;
     nickName: string;
     userName: string;
@@ -15,8 +16,11 @@ export interface userInfo {
     isLogin: boolean;
     userId?: bigint;
     avatarUrl?: string;
+    backgroundUrl?: string;
+    profile?: string;
     nickName?: string;
     userName?: string;
+    createDate?: string;
 }
 
 export interface commentRes {
@@ -50,4 +54,5 @@ export interface Tweet {
     userName: string;
     likeStatus: boolean;
     tweetImg: string;
+    tweetVideo: string;
 }

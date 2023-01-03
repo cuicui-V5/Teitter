@@ -1,6 +1,6 @@
 <template>
     <div
-        class="mainArea animate__animated animate__fadeIn faster"
+        class="mainArea"
         @scroll="scroll"
         ref="mainArea"
     >
@@ -71,7 +71,7 @@
         padding-top: 6vmax;
 
         .tittle {
-            z-index: 1;
+            z-index: 2;
             position: fixed;
             top: 0;
             // left: 8.3vmax;
@@ -83,7 +83,7 @@
             line-height: 5vmax;
             user-select: none;
             text-indent: 2vmax;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
             background-color: rgba(255, 255, 255, 0.8);
         }
         .loader {

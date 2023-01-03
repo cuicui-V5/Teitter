@@ -1,10 +1,11 @@
 import request from "./request";
-import type { teitter } from "@/interfaces/pubInterface";
+import type { teitter, userInfo } from "@/interfaces/pubInterface";
 
 import { useTeitterStore } from "./../stores/teitter";
 import { storeToRefs } from "pinia";
 import { inject } from "vue";
 import type { AxiosResponse } from "axios";
+import type { Tweet } from "./../interfaces/pubInterface";
 
 let teitterCurrentPage = 1;
 let sendMsg: any;
@@ -114,7 +115,6 @@ export async function login(user: {
                 "Content-Type": "application/json",
             },
         });
-        console.log(res.data);
         if (res.data.status === 200) {
             //    登陆成功后, 用户信息写入store
             const store = useTeitterStore();
@@ -144,8 +144,6 @@ export async function publish(fd: FormData): Promise<string> {
             },
         });
         if (res.data.status == 200) {
-            console.log(res);
-
             return "ok";
         } else {
             return res.data.msg;
@@ -162,7 +160,6 @@ export async function register(fd: FormData): Promise<string> {
                 "Content-Type": "multipart/form-data; ",
             },
         });
-        console.log(res);
         if (res.data.status == 200) {
             return "ok";
         } else {
@@ -174,8 +171,6 @@ export async function register(fd: FormData): Promise<string> {
 }
 
 export async function like(teitterID: bigint) {
-    console.log(teitterID.toString());
-
     try {
         const res = await request.post(
             "/tweet/like",
@@ -186,7 +181,6 @@ export async function like(teitterID: bigint) {
                 },
             },
         );
-        console.log(res);
 
         if (res.data.status == 200) {
             return "ok";
@@ -198,8 +192,6 @@ export async function like(teitterID: bigint) {
     }
 }
 export async function unLike(teitterID: bigint) {
-    console.log(teitterID.toString());
-
     try {
         const res = await request.post(
             "/tweet/unLike",
@@ -210,7 +202,6 @@ export async function unLike(teitterID: bigint) {
                 },
             },
         );
-        console.log(res);
 
         if (res.data.status == 200) {
             return "ok";
@@ -262,7 +253,6 @@ export const reqSearch = async (
     keyWord: string,
     pageNum: number,
 ): Promise<AxiosResponse> => {
-    console.log("search");
     try {
         const res = await request.post(
             "/tweet/getAllTweet",
@@ -277,6 +267,70 @@ export const reqSearch = async (
             },
         );
         return res;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+
+export const reqUserInfo = async (uid: string) => {
+    try {
+        const res = await request.get(`/user/getUserInfo/${uid}`);
+        if (res.data.status !== 200) {
+            return Promise.reject(new Error("请求用户信息失败"));
+        }
+        return res.data.userInfo as userInfo;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+export const reqUserTweet = async (uid: string): Promise<Tweet[]> => {
+    try {
+        const res = await request.get(`/tweet/getUserTweet/${uid}`);
+        if (res.data.status !== 200) {
+            return Promise.reject(new Error("请求用户推文失败"));
+        }
+        return res.data.data;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+
+export const uploadFile = async (blob: Blob, fileName: string) => {
+    try {
+        const fd = new FormData();
+        fd.append("file", blob, fileName);
+        const res = await request.post("/upload", fd, {
+            timeout: 10000,
+            headers: {
+                "Content-Type": "multipart/form-data; ",
+            },
+        });
+        if (res.data.status == 200) {
+            return res.data.data as string;
+        } else {
+            return Promise.reject(new Error("上传失败"));
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+export const editUserInfo = async (userInfo: {
+    nickName?: string;
+    profile?: string;
+    avatarUrl?: string;
+    backgroundUrl?: string;
+}) => {
+    try {
+        const res = await request.post("/user/editUserInfo", userInfo, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        });
+        if (res.data.status == 200) {
+            return "ok";
+        } else {
+            return res.data.msg as string;
+        }
     } catch (error) {
         return Promise.reject(error);
     }

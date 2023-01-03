@@ -1,7 +1,10 @@
 <template>
     <div class="twtCard">
         <div class="top">
-            <div class="avatar">
+            <div
+                class="avatar"
+                @click="goAccount"
+            >
                 <span :style="avatarUrlStyle"></span>
             </div>
             <div class="userinfo">
@@ -17,6 +20,17 @@
                 :src="tweetInfo.tweetImg"
                 alt=""
             />
+            <video
+                class="video"
+                :src="tweetInfo.tweetVideo"
+                v-if="tweetInfo.tweetVideo"
+                controls
+                autoplay
+                muted
+                loop
+                @click.prevent="clickVideo"
+                ref="video"
+            ></video>
         </div>
         <div class="info">
             <div class="time">{{ timeComputed }}</div>
@@ -72,13 +86,16 @@
 
 <script setup lang="ts">
     import type { Tweet } from "@/interfaces/pubInterface";
-    import { computed, inject, toRefs } from "vue";
+    import { computed, inject, ref, toRefs } from "vue";
     import dayjs from "dayjs";
     import "dayjs/locale/zh-cn";
     import { like, unLike } from "@/api";
+    import { useTeitterStore } from "@/stores/teitter";
+    import router from "@/router";
     const sendMsg = inject("sendMsg") as Function;
-
+    const store = useTeitterStore();
     dayjs.locale("zh-cn");
+    const video = ref<HTMLVideoElement>();
 
     const props = defineProps<{
         tweetInfo: Tweet;
@@ -102,6 +119,16 @@
                 sendMsg("取消点赞成功 " + id.toString());
                 tweetInfo.value.likeStatus = false;
                 tweetInfo.value.likeCount--;
+                // 更改store中的推文点赞状态
+                store.teitters.forEach((item) => {
+                    if (
+                        item.tweetId.toString() ===
+                        tweetInfo.value.tweetId.toString()
+                    ) {
+                        item.likeStatus = false;
+                        item.likeCount--;
+                    }
+                });
             } else {
                 sendMsg(res, true);
 
@@ -116,12 +143,43 @@
                 // alert("点赞成功");
                 tweetInfo.value.likeStatus = true;
                 tweetInfo.value.likeCount++;
+                // 更改store中的推文点赞状态
+                store.teitters.forEach((item) => {
+                    if (
+                        item.tweetId.toString() ===
+                        tweetInfo.value.tweetId.toString()
+                    ) {
+                        item.likeStatus = true;
+                        item.likeCount++;
+                    }
+                });
             } else {
                 // alert(res);
                 sendMsg(res, true);
             }
         }
     }
+    const goAccount = () => {
+        router.push({
+            name: "account",
+            params: {
+                userId: tweetInfo.value.uid.toString(),
+            },
+        });
+    };
+    const clickVideo = () => {
+        if (video.value) {
+            if (video.value.muted) {
+                video.value.muted = false;
+            } else {
+                if (video.value.paused) {
+                    video.value.play();
+                } else {
+                    video.value.pause();
+                }
+            }
+        }
+    };
 </script>
 
 <style scoped lang="less">
@@ -155,6 +213,14 @@
             margin-top: 2vmax;
             font-size: 2.4vmax;
             img {
+                border-radius: 20px;
+
+                margin-top: 1vmax;
+                width: 80%;
+            }
+            video {
+                border-radius: 20px;
+
                 margin-top: 1vmax;
                 width: 80%;
             }

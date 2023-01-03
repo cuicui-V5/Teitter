@@ -15,6 +15,9 @@
         <RouterLink
             :to="{
                 name: 'account',
+                params: {
+                    userId: userInfo.userId?.toString(),
+                },
             }"
             class="account option"
             @click="closeCard"

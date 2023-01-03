@@ -7,33 +7,48 @@
                     @click="goHome"
                 ></span>
                 <div class="nickNameAndCount">
-                    <div class="nickName">Funny</div>
+                    <div class="nickName">{{ userInfo?.nickName }}</div>
                     <div class="tweetCount">220 推文</div>
                 </div>
             </div>
         </div>
         <div class="infoCard">
-            <div class="bgImg"></div>
-            <div class="avatar"></div>
-            <button>编辑个人资料</button>
+            <div
+                class="bgImg"
+                :style="backGroundUrlStyle"
+            ></div>
+            <div
+                class="avatar"
+                :style="avatarUrlStyle"
+            ></div>
+            <button
+                @click="isShowEdit = true"
+                v-if="store.userInfo.userId?.toString() == route.params?.userId"
+            >
+                编辑个人资料
+            </button>
             <div class="text">
-                <div class="nickName">Funny</div>
-                <div class="userName">@wannaApeach</div>
+                <div class="nickName">{{ userInfo?.nickName }}</div>
+                <div class="userName">@{{ userInfo?.userName }}</div>
                 <div class="profile">
                     <p>
-                        零叉干货铺 | 大橙子社区 我个人微信：BigOrange623
-                        (加我备注：twitter)
-                        小叮当微信：DingdangDD6（加叮当进免费群）
-                        YouTube：http://youtube.com/@0xVeyBigOrange
-                        哔哩哔哩：http://space.bilibili.com/1589802019
+                        {{ userInfo?.profile }}
                     </p>
                 </div>
-                <div class="joinTime">2018年8月 加入</div>
+                <div class="joinTime">{{ timeComputed }} 加入</div>
             </div>
             <Teleport to="body">
-                <editUserInfoVue></editUserInfoVue>
+                <editUserInfoVue
+                    v-if="isShowEdit && userInfo"
+                    @close="close"
+                    :userInfo="userInfo"
+                ></editUserInfoVue>
             </Teleport>
         </div>
+        <theTeitterCardVue
+            :teitter="tweet"
+            v-for="tweet in userTweet"
+        />
     </div>
 </template>
 
@@ -41,14 +56,60 @@
     import editUserInfoVue from "@/components/editUserInfo.vue";
     import router from "@/router";
     import { useRoute } from "vue-router";
+    import { computed, ref } from "vue";
+    import { useTeitterStore } from "@/stores/teitter";
+    import { reqUserInfo, reqUserTweet } from "@/api";
+    import type { userInfo, Tweet } from "@/interfaces/pubInterface";
+    import theTeitterCardVue from "@/components/mainArea/theTeitterCard.vue";
+    import dayjs from "dayjs";
+    import "dayjs/locale/zh-cn";
+    dayjs.locale("zh-cn");
 
+    const store = useTeitterStore();
+
+    const isShowEdit = ref(false);
     const route = useRoute();
+    const userId = route.params.userId as string;
+    const userInfo = ref<userInfo>();
+    const userTweet = ref<Tweet[]>();
+
+    const timeComputed = computed(() => {
+        return dayjs(Number(userInfo.value?.createDate)).format("YYYY年MM月");
+    });
+    const avatarUrlStyle = computed(() => {
+        return `background-image: url(${userInfo?.value?.avatarUrl}); `;
+    });
+    const backGroundUrlStyle = computed(() => {
+        return `background-image: url(${userInfo?.value?.backgroundUrl}); `;
+    });
 
     const goHome = () => {
         router.push({
             name: "home",
         });
     };
+    const close = () => {
+        isShowEdit.value = false;
+    };
+
+    // 如果没登陆,且没有userId,那么说明是从侧边栏访问的account界面 那么重定向到登陆页面;
+    if (store.userInfo.isLogin == false && !route.params.userId) {
+        router.push({
+            name: "login",
+        });
+    }
+
+    const getUserInfo = async () => {
+        const res = await reqUserInfo(userId);
+        userInfo.value = res;
+    };
+    getUserInfo();
+
+    const getUserTweet = async () => {
+        const res = await reqUserTweet(userId);
+        userTweet.value = res;
+    };
+    getUserTweet();
 </script>
 
 <style scoped lang="less">
@@ -107,8 +168,7 @@
             .bgImg {
                 height: 20vmax;
                 margin-bottom: 10vmax;
-                background-color: pink;
-                background-image: url(@/img/bg.jpg);
+                background-color: #1d9bf0;
                 background-position: center;
                 background-size: cover;
             }
@@ -118,8 +178,8 @@
                 height: 15vmax;
                 top: 13vmax;
                 left: 2vmax;
+                border: 2px solid #1d9bf0;
                 border-radius: 50%;
-                background-image: url(@/img/avatar.png);
                 background-size: cover;
             }
             button {

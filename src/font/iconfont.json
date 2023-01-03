@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11520201",
+      "name": "哭脸",
+      "font_class": "kulian",
+      "unicode": "e758",
+      "unicode_decimal": 59224
+    },
+    {
       "icon_id": "1177747",
       "name": "添加图片",
       "font_class": "tianjiatupian",

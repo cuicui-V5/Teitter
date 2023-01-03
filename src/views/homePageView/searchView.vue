@@ -16,8 +16,19 @@
             </div>
         </div>
 
-        <div class="o">
-            {{ $route.params }}
+        <div
+            class="noResult"
+            v-if="$route.params.keyWord && !store.searchResultTeitters"
+        >
+            <span class="emoji iconfont icon-kulian"></span>
+            <div class="text">没有搜索到有效内容</div>
+        </div>
+        <div
+            class="welcome"
+            v-if="!$route.params.keyWord"
+        >
+            <span class="emoji iconfont icon-search"></span>
+            <div class="text">点击搜索 打开新世界大门</div>
         </div>
         <networkErrorVue
             @event="search()"
@@ -34,15 +45,24 @@
     import { useTeitterStore } from "@/stores/teitter";
     import theTeitterCardVue from "@/components/mainArea/theTeitterCard.vue";
     import { useRoute } from "vue-router";
-    import { ref, watch } from "vue";
+    import { ref, watch, onUnmounted } from "vue";
     import router from "@/router";
+
     const route = useRoute();
     const store = useTeitterStore();
     const keyWord = ref("");
+    keyWord.value = route.params.keyWord as string;
+    if (route.params.keyWord) {
+        console.log(route.params.keyWord);
 
-    store.getSearchRes((route.params.keyWord as string) || "", 1);
-    watch(route, () => {
         store.getSearchRes((route.params.keyWord as string) || "", 1);
+    }
+    watch(route, () => {
+        if (route.params.keyWord) {
+            console.log(route.params.keyWord);
+
+            store.getSearchRes((route.params.keyWord as string) || "", 1);
+        }
     });
     const search = () => {
         console.log(keyWord.value);
@@ -54,11 +74,15 @@
             },
         });
     };
+    onUnmounted(() => {
+        store.searchResultTeitters = [];
+    });
 </script>
 
 <style scoped lang="less">
     .searchContainer {
         flex: 605;
+        position: relative;
 
         overflow-y: scroll;
         &::-webkit-scrollbar {
@@ -95,6 +119,34 @@
                         background-color: #d1d1d1;
                     }
                 }
+            }
+        }
+        .noResult {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            text-align: center;
+            margin-top: 5vmax;
+            .emoji {
+                font-size: 6vmax;
+            }
+            .text {
+                font-size: 2vmax;
+                margin-top: 1vmax;
+            }
+        }
+        .welcome {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            text-align: center;
+            margin-top: 5vmax;
+            .emoji {
+                font-size: 6vmax;
+            }
+            .text {
+                font-size: 2vmax;
+                margin-top: 1vmax;
             }
         }
     }

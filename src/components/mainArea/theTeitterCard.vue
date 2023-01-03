@@ -20,10 +20,22 @@
                 {{ teitter.content }}
                 <br />
                 <img
+                    class="img"
                     v-if="teitter.tweetImg"
                     :src="teitter.tweetImg"
                     loading="lazy"
                 />
+                <video
+                    class="video"
+                    :src="teitter.tweetVideo"
+                    v-if="teitter.tweetVideo"
+                    controls
+                    autoplay
+                    muted
+                    loop
+                    @click.prevent="clickVideo"
+                    ref="video"
+                ></video>
             </div>
             <div class="bottom">
                 <span class="comment">
@@ -66,11 +78,12 @@
     import dayjs from "dayjs";
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
-    import { computed, inject, toRefs } from "vue";
+    import { computed, inject, ref, toRefs } from "vue";
     import type { teitter } from "@/interfaces/pubInterface";
     import { like, unLike } from "@/api";
     import router from "@/router";
     const sendMsg = inject("sendMsg") as Function;
+    const video = ref<HTMLVideoElement>();
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
@@ -123,6 +136,8 @@
         "heart-icon liked",
         "iconfont icon-fenxiang",
         "likes-amount",
+        "video",
+        "img",
     ];
     const goTweetInfo = (e: MouseEvent) => {
         if (!blackList.includes((e.target as HTMLElement).className)) {
@@ -141,6 +156,20 @@
                 userId: teitter.value.uid.toString(),
             },
         });
+    };
+    const clickVideo = () => {
+        if (video.value) {
+            if (video.value.muted) {
+                video.value.muted = false;
+                video.value.play();
+            } else {
+                if (video.value.paused) {
+                    video.value.play();
+                } else {
+                    video.value.pause();
+                }
+            }
+        }
     };
 </script>
 
@@ -191,6 +220,14 @@
                 margin-bottom: 2.5vmax;
                 img {
                     margin-top: 1vmax;
+                    border-radius: 20px;
+
+                    width: 80%;
+                }
+                video {
+                    margin-top: 1vmax;
+                    border-radius: 20px;
+
                     width: 80%;
                 }
             }

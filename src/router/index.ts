@@ -32,7 +32,7 @@ const router = createRouter({
                     },
                 },
                 {
-                    path: "/search:keyWord?",
+                    path: "/search/:keyWord?",
                     name: "search",
                     component: searchView,
                     meta: {
@@ -82,11 +82,17 @@ const router = createRouter({
                     path: "/login",
                     name: "login",
                     component: theLoginVue,
+                    meta: {
+                        cname: "登录/Teitter",
+                    },
                 },
                 {
                     path: "/register",
                     name: "register",
                     component: theRegisterVue,
+                    meta: {
+                        cname: "注册/Teitter",
+                    },
                 },
             ],
         },
