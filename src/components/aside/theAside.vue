@@ -111,7 +111,7 @@
                 width: 5.12vmax;
                 height: 5.12vmax;
                 margin: 0.5vmax auto;
-                background-image: url(../../img/logo.png);
+                background-image: url(../../img/logo.webp);
                 background-size: contain;
                 &:hover {
                     background-image: url(../../img/CLIPLY_372109260_TWITTER_LOGO_400.gif);

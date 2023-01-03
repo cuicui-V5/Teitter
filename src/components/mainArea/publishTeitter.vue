@@ -158,7 +158,7 @@
                         "image/webp",
                     );
                     console.log("压缩后的blob为", res);
-                    imageUrl.value = await uploadFile(res, "image.png");
+                    imageUrl.value = await uploadFile(res, "image.webp");
                 }
                 // 调用上传接口进行上传
                 console.log("上传完成的url为", imageUrl.value);
@@ -201,7 +201,7 @@
                         "image/webp",
                     );
                     console.log("压缩后的blob为", res);
-                    imageUrl.value = await uploadFile(res, "image.png");
+                    imageUrl.value = await uploadFile(res, "image.webp");
                 }
                 // 调用上传接口进行上传
                 console.log("上传完成的url为", imageUrl.value);

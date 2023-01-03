@@ -24,7 +24,7 @@ export const imgCompress = (
     maxWidth: number,
     maxHeight: number,
     quality = 0.2,
-    type = "image/png",
+    type = "image/webp",
 ): Promise<Blob> => {
     return new Promise(async (resolve, reject) => {
         try {
