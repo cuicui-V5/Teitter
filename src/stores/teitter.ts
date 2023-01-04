@@ -14,7 +14,7 @@ export const useTeitterStore = defineStore("teitter", () => {
     const option = ref({
         requesting: false,
         isBusy: false,
-        teitterCount: -1,
+        teitterCount: 0,
         isNetWorkError: false,
     });
 

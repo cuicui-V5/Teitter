@@ -9,6 +9,7 @@
                 class="searchBar"
                 v-model="keyWord"
                 @keydown.enter="goSearch()"
+                :placeholder="`搜索目前的${store.option.teitterCount}条忒文`"
             />
             <span
                 @click="goSearch()"
