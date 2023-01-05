@@ -47,8 +47,6 @@ request.interceptors.response.use(
         return config;
     },
     (error) => {
-        localStorage.clear();
-
         nprogress.done();
         const store = useTeitterStore();
         store.option.requesting = false;

@@ -153,7 +153,7 @@
                     file,
                     1920,
                     1080,
-                    0.92,
+                    0.5,
                     "image/webp",
                 );
                 console.log("压缩后的blob为", res);
@@ -279,6 +279,7 @@
                         left: 2vmax;
                         border-radius: 50%;
                         border: 2px solid #1d9bf0;
+                        background-color: #fff;
                         img {
                             border-radius: 50%;
                             width: 100%;

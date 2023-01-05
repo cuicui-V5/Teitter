@@ -154,7 +154,7 @@
                         file,
                         1920,
                         1080,
-                        0.92,
+                        0.6,
                         "image/webp",
                     );
                     console.log("压缩后的blob为", res);
@@ -197,7 +197,7 @@
                         file,
                         1920,
                         1080,
-                        0.92,
+                        0.6,
                         "image/webp",
                     );
                     console.log("压缩后的blob为", res);

@@ -182,6 +182,8 @@
                 border: 2px solid #1d9bf0;
                 border-radius: 50%;
                 background-size: cover;
+                background-color: #fff;
+                background-position: center;
             }
             button {
                 position: absolute;
