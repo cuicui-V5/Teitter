@@ -35,6 +35,10 @@
                     loop
                     @click.prevent="clickVideo"
                     ref="video"
+                    playsinline="true"
+                    webkit-playsinline=""
+                    x5-playsinline=""
+                    x-webkit-airplay="allow"
                 ></video>
             </div>
             <div class="bottom">

@@ -57,6 +57,10 @@
                     autoplay
                     muted
                     loop
+                    playsinline="true"
+                    webkit-playsinline=""
+                    x5-playsinline=""
+                    x-webkit-airplay="allow"
                 />
             </div>
         </div>
