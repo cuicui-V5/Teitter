@@ -11,7 +11,7 @@ export default defineConfig({
             "@": fileURLToPath(new URL("./src", import.meta.url)),
         },
     },
-    base: "/teitter/",
+    base: "/",
     // 配置代理
     server: {
         cors: true,
