@@ -66,7 +66,7 @@
         overflow-y: scroll;
         overflow-x: hidden;
         &::-webkit-scrollbar {
-            display: none;
+            // display: none;
         }
         padding-top: 6vmax;
 
