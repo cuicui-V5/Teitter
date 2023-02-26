@@ -1,11 +1,39 @@
 <template>
-    <div class="animate__animated animate__fadeIn faster">提醒页面</div>
+    <div class="animate__animated animate__fadeIn faster container">
+        <div class="top">通知</div>
+        <main>
+            <noticeCard v-for="n in 10"></noticeCard>
+        </main>
+    </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import noticeCard from "@/components/noticeCard.vue";
+</script>
 
-<style scoped>
-    div {
+<style scoped lang="less">
+    .container {
         flex: 605;
+        .top {
+            z-index: 2;
+            position: fixed;
+            top: 0;
+            // left: 8.3vmax;
+            height: 5vmax;
+            // width: 59.3vmax;
+            width: 100%;
+            font-weight: bold;
+            font-size: 2vmax;
+            line-height: 5vmax;
+            user-select: none;
+            text-indent: 2vmax;
+            backdrop-filter: blur(30px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        main {
+            margin-top: 5vmax;
+            height: 100%;
+            overflow-y: scroll;
+        }
     }
 </style>
