@@ -1,7 +1,8 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import type { teitter, userInfo } from "@/interfaces/pubInterface";
-import { reqSearch } from "@/api";
+import { reqNotice, reqSearch } from "@/api";
+import type { Tweet, noticeData } from "./../interfaces/pubInterface";
 
 export const useTeitterStore = defineStore("teitter", () => {
     const teitters = ref<teitter[]>([]);
@@ -17,7 +18,16 @@ export const useTeitterStore = defineStore("teitter", () => {
         teitterCount: 0,
         isNetWorkError: false,
     });
-
+    const notice = ref<noticeData[]>();
+    // 获取通知
+    const getNotice = async () => {
+        if (userInfo.value.isLogin) {
+            const res = await reqNotice();
+            notice.value = res.sort((a, b) => {
+                return Number(b.createDate) - Number(a.createDate);
+            });
+        }
+    };
     const getSearchRes = async (keyWord: string, pageNum: number) => {
         try {
             const res = await reqSearch(keyWord, pageNum);
@@ -27,5 +37,13 @@ export const useTeitterStore = defineStore("teitter", () => {
         }
     };
 
-    return { teitters, searchResultTeitters, option, userInfo, getSearchRes };
+    return {
+        teitters,
+        searchResultTeitters,
+        option,
+        userInfo,
+        getSearchRes,
+        notice,
+        getNotice,
+    };
 });

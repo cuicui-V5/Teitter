@@ -6,7 +6,7 @@
     >
         <div class="tittle animate__animated animate__fadeIn">主页</div>
         <networkErrorVue
-            @event="getTeitter()"
+            @event="getTeitter(true)"
             v-if="option.isNetWorkError"
         />
         <publishTeitter v-if="userInfo.isLogin"></publishTeitter>
@@ -37,6 +37,7 @@
         mainArea.value?.scrollTo({
             top: scrollTop,
         });
+        store.getNotice();
     });
     onDeactivated(() => {});
 
@@ -62,7 +63,7 @@
         // width: 59.3vmax;
         flex: 0.605;
         flex: 605;
-        height: 85vh;
+        height: calc(100% - 6vmax);
         overflow-y: scroll;
         overflow-x: hidden;
         &::-webkit-scrollbar {

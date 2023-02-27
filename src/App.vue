@@ -13,7 +13,8 @@
     import { isLogin } from "./api";
     import msgBox from "@/components/msgBox.vue";
     import { provide, ref } from "vue";
-    isLogin();
+    import { useTeitterStore } from "./stores/teitter";
+    const store = useTeitterStore();
 
     const showMsgBox = ref(false);
     const msg = ref("");
@@ -32,6 +33,17 @@
         Warn.value = isWarn;
     };
     provide("sendMsg", sendMsg);
+
+    const init = async () => {
+        await isLogin();
+        await store.getNotice();
+    };
+    init();
+
+    // 定时获取通知
+    setInterval(() => {
+        store.getNotice();
+    }, 10000);
 </script>
 
 <style scoped></style>

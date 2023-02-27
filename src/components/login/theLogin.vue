@@ -66,7 +66,7 @@
 
         if (res == "ok") {
             sendMsg("登录成功");
-
+            store.getNotice();
             // console.log("登录成功");
             router.push({
                 name: "home",

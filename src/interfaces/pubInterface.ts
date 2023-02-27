@@ -2,6 +2,7 @@ export interface teitter {
     tweetId: bigint;
     uid: bigint;
     content: string;
+    commentCount: number;
     createDate: number;
     likeCount: number;
     tweetImg: string;
@@ -55,4 +56,16 @@ export interface Tweet {
     likeStatus: boolean;
     tweetImg: string;
     tweetVideo: string;
+}
+export interface noticeData {
+    nickName: string;
+    senderId: bigint;
+    content: string;
+    comment: string;
+    tweetId: bigint;
+    createDate: string;
+    status: boolean;
+    msgType: number;
+    avatar_url: string;
+    messageId: bigint;
 }

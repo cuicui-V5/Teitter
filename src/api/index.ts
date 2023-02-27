@@ -5,7 +5,7 @@ import { useTeitterStore } from "./../stores/teitter";
 import { storeToRefs } from "pinia";
 import { inject } from "vue";
 import type { AxiosResponse } from "axios";
-import type { Tweet } from "./../interfaces/pubInterface";
+import type { Tweet, noticeData } from "./../interfaces/pubInterface";
 
 let teitterCurrentPage = 1;
 let sendMsg: any;
@@ -330,6 +330,45 @@ export const editUserInfo = async (userInfo: {
             return "ok";
         } else {
             return Promise.reject(new Error(res.data.msg));
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+
+// 获取通知
+export const reqNotice = async () => {
+    try {
+        const res = await request.get("/notice/getAllNotice");
+        if (res.data.status == 200) {
+            return res.data.data as noticeData[];
+        } else {
+            return Promise.reject(new Error(res.data.msg));
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+
+// 通知已读
+export const reqHaveRead = async (noticeId: bigint) => {
+    try {
+        const res = await request.post(
+            "/notice/editStatus",
+            {
+                msgId: noticeId.toString(),
+            },
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            },
+        );
+
+        if (res.data.status == 200) {
+            return "ok";
+        } else {
+            return Promise.reject(res.data.msg);
         }
     } catch (error) {
         return Promise.reject(error);

@@ -116,50 +116,57 @@
         );
     });
     async function likeBtn(id: bigint) {
-        if (tweetInfo.value.likeStatus) {
-            //取消点赞的逻辑
-            const res = await unLike(id);
-            if (res == "ok") {
-                sendMsg("取消点赞成功 " + id.toString());
-                tweetInfo.value.likeStatus = false;
-                tweetInfo.value.likeCount--;
-                // 更改store中的推文点赞状态
-                store.teitters.forEach((item) => {
-                    if (
-                        item.tweetId.toString() ===
-                        tweetInfo.value.tweetId.toString()
-                    ) {
-                        item.likeStatus = false;
-                        item.likeCount--;
-                    }
-                });
-            } else {
-                sendMsg(res, true);
-
-                // alert(res);
-            }
+        if (!store.userInfo.isLogin) {
+            // 去登陆页面
+            router.push({
+                name: "login",
+            });
         } else {
-            // 点赞的逻辑
-            const res = await like(id);
-            if (res == "ok") {
-                sendMsg("点赞成功 " + id.toString());
+            if (tweetInfo.value.likeStatus) {
+                //取消点赞的逻辑
+                const res = await unLike(id);
+                if (res == "ok") {
+                    sendMsg("取消点赞成功 " + id.toString());
+                    tweetInfo.value.likeStatus = false;
+                    tweetInfo.value.likeCount--;
+                    // 更改store中的推文点赞状态
+                    store.teitters.forEach((item) => {
+                        if (
+                            item.tweetId.toString() ===
+                            tweetInfo.value.tweetId.toString()
+                        ) {
+                            item.likeStatus = false;
+                            item.likeCount--;
+                        }
+                    });
+                } else {
+                    sendMsg(res, true);
 
-                // alert("点赞成功");
-                tweetInfo.value.likeStatus = true;
-                tweetInfo.value.likeCount++;
-                // 更改store中的推文点赞状态
-                store.teitters.forEach((item) => {
-                    if (
-                        item.tweetId.toString() ===
-                        tweetInfo.value.tweetId.toString()
-                    ) {
-                        item.likeStatus = true;
-                        item.likeCount++;
-                    }
-                });
+                    // alert(res);
+                }
             } else {
-                // alert(res);
-                sendMsg(res, true);
+                // 点赞的逻辑
+                const res = await like(id);
+                if (res == "ok") {
+                    sendMsg("点赞成功 " + id.toString());
+
+                    // alert("点赞成功");
+                    tweetInfo.value.likeStatus = true;
+                    tweetInfo.value.likeCount++;
+                    // 更改store中的推文点赞状态
+                    store.teitters.forEach((item) => {
+                        if (
+                            item.tweetId.toString() ===
+                            tweetInfo.value.tweetId.toString()
+                        ) {
+                            item.likeStatus = true;
+                            item.likeCount++;
+                        }
+                    });
+                } else {
+                    // alert(res);
+                    sendMsg(res, true);
+                }
             }
         }
     }

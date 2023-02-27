@@ -1,19 +1,36 @@
 <template>
-    <div class="warp">
+    <div
+        class="warp"
+        :class="{
+            read: !status,
+        }"
+        @click="goTwt()"
+    >
         <div class="left">
-            <div class="icon iconfont icon-xihuan1"></div>
+            <div
+                class="icon iconfont"
+                :class="{
+                    'icon-xihuan1': type == 1,
+                    'icon-pinglun1': type == 2,
+                }"
+            ></div>
         </div>
         <div class="right">
             <div class="top">
                 <div class="avatar">
-                    <span class="avatar"></span>
+                    <span
+                        class="avatar"
+                        :style="{
+                            backgroundImage: `url(${avatarUrl})`,
+                        }"
+                    ></span>
                 </div>
             </div>
             <div class="msg">
-                <strong>xxx</strong>
-                喜欢了你的回复
+                <strong>{{ nickName }}</strong>
+                {{ msg }}
             </div>
-            <div class="content">推文内容</div>
+            <div class="content">{{ type == 2 ? comment : content }}</div>
         </div>
     </div>
 </template>
@@ -23,19 +40,75 @@
         name: "noticeCard",
     };
 </script>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import { reqHaveRead } from "@/api";
+    import router from "@/router";
+    import { useTeitterStore } from "@/stores/teitter";
+    import { computed, toRefs } from "vue";
+
+    const store = useTeitterStore();
+    const props = defineProps<{
+        uid?: bigint;
+        avatarUrl?: string;
+        nickName?: string;
+        type?: number;
+        content?: string;
+        comment?: string;
+        status?: boolean;
+        tweetId?: bigint;
+        messageId: bigint;
+    }>();
+    const { type, content, status, tweetId, messageId } = toRefs(props);
+
+    const msg = computed(() => {
+        switch (type?.value) {
+            case 1:
+                return "喜欢了你的推文";
+            case 2:
+                return "评论了你";
+            case 3:
+                return "关注了你";
+            case 4:
+                return "回复了你";
+            case 5:
+                return "系统通知";
+
+            default:
+                return "未知通知";
+        }
+    });
+
+    const goTwt = async () => {
+        // 首先设置已读
+        const res = await reqHaveRead(messageId.value);
+        console.log(res);
+        store.getNotice();
+
+        router.push({
+            name: "tweetInfo",
+            params: {
+                tweetId: tweetId?.value!.toString(),
+            },
+        });
+    };
+</script>
 
 <style scoped lang="less">
     .warp {
         border-bottom: 1px solid #f7f7f7;
-        padding: 3vmax;
+        padding: 1.5vmax 3vmax;
         background-color: #fff;
         transition: all 0.2s;
         display: flex;
         .left {
             .icon {
                 font-size: 3vmax;
+            }
+            .icon-xihuan1 {
                 color: #f91880;
+            }
+            .icon-pinglun1 {
+                color: #1da1f2;
             }
         }
 
@@ -66,5 +139,8 @@
     }
     .warp:hover {
         background-color: #f7f7f7;
+    }
+    .read {
+        background-color: #1da0f210;
     }
 </style>

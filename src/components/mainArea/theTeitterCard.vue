@@ -44,8 +44,7 @@
             <div class="bottom">
                 <span class="comment">
                     <i class="iconfont icon-pinglun"></i>
-                    <!--todo <span class="number">{{ teitter.commentCount }}</span> -->
-                    <span class="number">0</span>
+                    <span class="number">{{ teitter.commentCount }}</span>
                 </span>
                 <span class="forward">
                     <i class="iconfont icon-zhuanfa"></i>
@@ -86,6 +85,7 @@
     import type { teitter } from "@/interfaces/pubInterface";
     import { like, unLike } from "@/api";
     import router from "@/router";
+    import { useTeitterStore } from "@/stores/teitter";
     const sendMsg = inject("sendMsg") as Function;
     const video = ref<HTMLVideoElement>();
 
@@ -104,32 +104,40 @@
     const avatarUrlStyle = computed(() => {
         return `background-image: url(${teitter.value.avatarUrl}); `;
     });
+    const store = useTeitterStore();
 
     async function likeBtn(id: bigint) {
-        if (teitter.value.likeStatus) {
-            //取消点赞的逻辑
-            const res = await unLike(id);
-            if (res == "ok") {
-                sendMsg("取消点赞成功 " + id.toString());
-                teitter.value.likeStatus = false;
-                teitter.value.likeCount--;
-            } else {
-                sendMsg(res, true);
-
-                // alert(res);
-            }
+        if (!store.userInfo.isLogin) {
+            // 去登陆页面
+            router.push({
+                name: "login",
+            });
         } else {
-            // 点赞的逻辑
-            const res = await like(id);
-            if (res == "ok") {
-                sendMsg("点赞成功 " + id.toString());
+            if (teitter.value.likeStatus) {
+                //取消点赞的逻辑
+                const res = await unLike(id);
+                if (res == "ok") {
+                    sendMsg("取消点赞成功 " + id.toString());
+                    teitter.value.likeStatus = false;
+                    teitter.value.likeCount--;
+                } else {
+                    sendMsg(res, true);
 
-                // alert("点赞成功");
-                teitter.value.likeStatus = true;
-                teitter.value.likeCount++;
+                    // alert(res);
+                }
             } else {
-                // alert(res);
-                sendMsg(res, true);
+                // 点赞的逻辑
+                const res = await like(id);
+                if (res == "ok") {
+                    sendMsg("点赞成功 " + id.toString());
+
+                    // alert("点赞成功");
+                    teitter.value.likeStatus = true;
+                    teitter.value.likeCount++;
+                } else {
+                    // alert(res);
+                    sendMsg(res, true);
+                }
             }
         }
     }

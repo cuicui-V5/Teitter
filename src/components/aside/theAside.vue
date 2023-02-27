@@ -28,9 +28,18 @@
                 :to="{
                     name: 'notice',
                 }"
-                class="iconfont icon-notice1"
+                class="iconfont icon-notice1 notice"
                 active-class="noticeActive"
-            ></RouterLink>
+            >
+                <div
+                    class="noticeCount"
+                    :style="{
+                        display: noticeNum ? `block` : `none`,
+                    }"
+                >
+                    {{ noticeNum }}
+                </div>
+            </RouterLink>
             <RouterLink
                 :to="{
                     name: 'email',
@@ -85,6 +94,12 @@
     function closeCard() {
         isShowUserInfoCard.value = false;
     }
+    const noticeNum = computed(() => {
+        // 返回未读通知的数量
+        return store.notice?.filter((item) => {
+            return !item.status;
+        }).length;
+    });
 </script>
 
 <style scoped lang="scss">
@@ -156,6 +171,24 @@
                     background-position: center;
                 }
             }
+            .notice {
+                position: relative;
+                .noticeCount {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+
+                    text-align: center;
+                    font-size: 1vmax;
+                    color: #fff;
+                    line-height: 2vmax;
+                    width: 2vmax;
+                    height: 2vmax;
+                    border-radius: 50%;
+                    background-color: #1da1f2;
+                }
+            }
+
             .homeActive {
                 &::before {
                     content: "\e600";
