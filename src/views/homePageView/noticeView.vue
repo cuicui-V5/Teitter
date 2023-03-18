@@ -49,7 +49,10 @@
     const clear = () => {
         const promiseArr: Array<Promise<any>> = [];
         store.notice?.forEach((item) => {
-            promiseArr.push(reqHaveRead(item.messageId));
+            // 如果未读, 那么设为已读;
+            if (!item.status) {
+                promiseArr.push(reqHaveRead(item.messageId));
+            }
         });
         Promise.all(promiseArr)
             .then(() => {

@@ -3,8 +3,36 @@ import sftpUploader from "sftp-uploader";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
+import compressPlugin from "vite-plugin-compression";
 
-// https://vitejs.dev/config/
+export function configCompressPlugin(
+    compress: "gzip" | "brotli" | "none",
+    deleteOriginFile = false,
+) {
+    const compressList = compress.split(",");
+
+    const plugins = [];
+
+    if (compressList.includes("gzip")) {
+        plugins.push(
+            compressPlugin({
+                ext: ".gz",
+                deleteOriginFile,
+            }),
+        );
+    }
+    if (compressList.includes("brotli")) {
+        plugins.push(
+            compressPlugin({
+                ext: ".br",
+                algorithm: "brotliCompress",
+                deleteOriginFile,
+            }),
+        );
+    }
+    return plugins;
+}
+
 export default defineConfig({
     plugins: [
         vue(),
@@ -34,6 +62,7 @@ export default defineConfig({
                 ],
             },
         }),
+        configCompressPlugin("gzip"),
     ],
     resolve: {
         alias: {
