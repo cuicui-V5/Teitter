@@ -122,7 +122,7 @@
                         height: 3vmax;
                         background-size: cover;
                         border-radius: 50%;
-                        background-image: url("https://www.heron.love:8888/teitterfile/images/16d50a5a-f22e-4735-8334-df436831e9fb.webp");
+                        background-image: url("https://teitter.soul87.top:8888/teitterfile/images/16d50a5a-f22e-4735-8334-df436831e9fb.webp");
                     }
                 }
             }

@@ -5,10 +5,10 @@ import jsonbig from "json-bigint";
 const request = axios.create({
     baseURL: import.meta.env.DEV
         ? "/teitter/api"
-        : "https://www.heron.love:8090/teitter/api",
+        : "https://teitter.soul87.top:8090/teitter/api",
     withCredentials: true,
     timeout: 5000,
-    transformResponse: (data) => {
+    transformResponse: data => {
         return jsonbig.parse(data);
     },
     // headers:{
@@ -17,7 +17,7 @@ const request = axios.create({
 });
 
 request.interceptors.request.use(
-    (config) => {
+    config => {
         // 添加header
         if (localStorage.getItem("token")) {
             if (config.headers) {
@@ -30,7 +30,7 @@ request.interceptors.request.use(
         store.option.requesting = true;
         return config;
     },
-    (error) => {
+    error => {
         nprogress.done();
         const store = useTeitterStore();
         store.option.requesting = false;
@@ -39,14 +39,14 @@ request.interceptors.request.use(
     },
 );
 request.interceptors.response.use(
-    (config) => {
+    config => {
         nprogress.done();
         const store = useTeitterStore();
         store.option.requesting = false;
 
         return config;
     },
-    (error) => {
+    error => {
         nprogress.done();
         const store = useTeitterStore();
         store.option.requesting = false;
