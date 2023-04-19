@@ -8,7 +8,7 @@
                 ></span>
                 <div class="nickNameAndCount">
                     <div class="nickName">{{ userInfo?.nickName }}</div>
-                    <div class="tweetCount">220 推文</div>
+                    <div class="tweetCount">{{ userTweet?.length }} 推文</div>
                 </div>
             </div>
         </div>
@@ -22,11 +22,19 @@
                 :style="avatarUrlStyle"
             ></div>
             <button
+                id="editUserInfo"
                 @click="isShowEdit = true"
                 v-if="store.userInfo.userId?.toString() == route.params?.userId"
             >
                 编辑个人资料
             </button>
+            <button
+                id="followBtn"
+                v-if="store.userInfo.userId?.toString() != route.params?.userId"
+            >
+                关注
+            </button>
+
             <div class="text">
                 <div class="nickName">{{ userInfo?.nickName }}</div>
                 <div class="userName">@{{ userInfo?.userName }}</div>
@@ -36,6 +44,9 @@
                     </p>
                 </div>
                 <div class="joinTime">{{ timeComputed }} 加入</div>
+                <span class="follow">123 正在关注</span>
+                &nbsp;
+                <span class="follow">431 关注者</span>
             </div>
             <Teleport to="body">
                 <editUserInfoVue
@@ -185,7 +196,22 @@
                 background-color: #fff;
                 background-position: center;
             }
-            button {
+            #editUserInfo {
+                position: absolute;
+                top: 21vmax;
+                left: 45vmax;
+                width: 13vmax;
+                height: 4vmax;
+                border-radius: 2vmax;
+                font-size: 1.4vmax;
+                font-weight: bold;
+                border: 1px solid #d4dde1;
+                transition: all 200ms;
+                &:hover {
+                    background-color: #e7e7e8;
+                }
+            }
+            #followBtn {
                 position: absolute;
                 top: 21vmax;
                 left: 45vmax;
@@ -217,6 +243,14 @@
                 .joinTime {
                     margin-top: 1vmax;
                     font-size: 1.4vmax;
+                }
+                .follow {
+                    cursor: pointer;
+                    margin-top: 1vmax;
+                    font-size: 1.4vmax;
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
         }

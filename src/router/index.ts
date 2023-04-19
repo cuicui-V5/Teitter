@@ -5,6 +5,9 @@ import accountView from "../views/homePageView/accountView.vue";
 import searchView from "../views/homePageView/searchView.vue";
 import noticeView from "../views/homePageView/noticeView.vue";
 import emailView from "../views/homePageView/emailView.vue";
+import followView from "../views/homePageView/follow/followView.vue";
+import followerView from "../views/homePageView/follow/follower.vue";
+import followingView from "../views/homePageView/follow/following.vue";
 
 import tweetInfoView from "../views/homePageView/tweetInfoView.vue";
 
@@ -70,6 +73,32 @@ const router = createRouter({
                     meta: {
                         cname: "忒文/Teitter",
                     },
+                },
+                {
+                    path: "/follow/:userId",
+                    name: "follow",
+                    component: followView,
+                    meta: {
+                        cname: "关注/Teitter",
+                    },
+                    children: [
+                        {
+                            path: "follower",
+                            name: "follower",
+                            component: followerView,
+                            meta: {
+                                cname: "关注者/Teitter",
+                            },
+                        },
+                        {
+                            path: "following",
+                            name: "following",
+                            component: followingView,
+                            meta: {
+                                cname: "正在关注/Teitter",
+                            },
+                        },
+                    ],
                 },
             ],
         },
