@@ -14,23 +14,25 @@
         </div>
         <div class="topBar">
             <RouterLink
-                class="follower current"
-                :to="{
-                    name: 'follower',
-                }"
-            >
-                关注者
-            </RouterLink>
-            <RouterLink
                 class="following"
+                active-class="current"
                 :to="{
                     name: 'following',
                 }"
             >
                 正在关注
             </RouterLink>
+            <RouterLink
+                class="follower"
+                active-class="current"
+                :to="{
+                    name: 'follower',
+                }"
+            >
+                关注者
+            </RouterLink>
         </div>
-        <RouterView></RouterView>
+        <RouterView :uid="userId"></RouterView>
     </div>
 </template>
 
@@ -59,18 +61,6 @@
             name: "home",
         });
     };
-
-    const getUserInfo = async () => {
-        const res = await reqUserInfo(userId);
-        userInfo.value = res;
-    };
-    // getUserInfo();
-
-    const getUserTweet = async () => {
-        const res = await reqUserTweet(userId);
-        userTweet.value = res;
-    };
-    // getUserTweet();
 </script>
 
 <style scoped lang="less">

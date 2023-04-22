@@ -8,7 +8,9 @@
                 ></span>
                 <div class="nickNameAndCount">
                     <div class="nickName">{{ userInfo?.nickName }}</div>
-                    <div class="tweetCount">{{ userTweet?.length }} 推文</div>
+                    <div class="tweetCount">
+                        {{ userInfo?.tweetCount }} 推文
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,9 +46,23 @@
                     </p>
                 </div>
                 <div class="joinTime">{{ timeComputed }} 加入</div>
-                <span class="follow">123 正在关注</span>
+                <RouterLink
+                    class="follow"
+                    :to="{
+                        name: `following`,
+                    }"
+                >
+                    {{ userInfo?.followsCount }} 正在关注
+                </RouterLink>
                 &nbsp;
-                <span class="follow">431 关注者</span>
+                <RouterLink
+                    class="follow"
+                    :to="{
+                        name: `follower`,
+                    }"
+                >
+                    {{ userInfo?.fansCount }} 关注者
+                </RouterLink>
             </div>
             <Teleport to="body">
                 <editUserInfoVue
@@ -105,7 +121,7 @@
     };
 
     // 如果没登陆,且没有userId,那么说明是从侧边栏访问的account界面 那么重定向到登陆页面;
-    if (store.userInfo.isLogin == false && !route.params.userId) {
+    if (store.userInfo.isLogin == false) {
         router.push({
             name: "login",
         });
@@ -113,6 +129,8 @@
 
     const getUserInfo = async () => {
         const res = await reqUserInfo(userId);
+        console.log(res);
+
         userInfo.value = res;
     };
     getUserInfo();
@@ -245,6 +263,8 @@
                     font-size: 1.4vmax;
                 }
                 .follow {
+                    text-decoration: none;
+                    color: #677682;
                     cursor: pointer;
                     margin-top: 1vmax;
                     font-size: 1.4vmax;

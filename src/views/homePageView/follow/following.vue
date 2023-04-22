@@ -7,6 +7,11 @@
         name: "",
     };
 </script>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    const props = defineProps<{
+        uid: string;
+    }>();
+    console.log(props.uid);
+</script>
 
 <style scoped lang="less"></style>

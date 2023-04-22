@@ -9,7 +9,7 @@
             </div>
             <div class="content">
                 <div class="nickName">{{ userInfo.nickName }}</div>
-                <div class="userName">{{ userInfo.userName }}</div>
+                <span class="userName">@{{ userInfo.userName }}</span>
             </div>
         </div>
         <RouterLink

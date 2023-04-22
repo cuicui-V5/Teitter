@@ -1,5 +1,9 @@
 import request from "./request";
-import type { teitter, userInfo } from "@/interfaces/pubInterface";
+import type {
+    followingType,
+    teitter,
+    userInfo,
+} from "@/interfaces/pubInterface";
 
 import { useTeitterStore } from "./../stores/teitter";
 import { storeToRefs } from "pinia";
@@ -47,7 +51,7 @@ export async function getTeitter(isFlush?: boolean) {
         const resTeitters: Array<teitter> = res.data.data.records;
 
         // 追加到现有的数据中
-        resTeitters.forEach((item) => {
+        resTeitters.forEach(item => {
             teitters.value.push(item);
         });
         // console.log(res.data);
@@ -369,6 +373,59 @@ export const reqHaveRead = async (noticeId: bigint) => {
             return "ok";
         } else {
             return Promise.reject(res.data.msg);
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+
+// 关注系列
+// 关注某个用户
+export const reqFollowSomeOne = async (uid: bigint, isFollow: boolean) => {
+    try {
+        const res = await request.post(
+            "/follows/follow",
+            {
+                userId: uid.toString(),
+                isFollow: isFollow ? 1 : 0,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            },
+        );
+
+        if (res.data.status == 200) {
+            return "ok";
+        } else {
+            return Promise.reject(res.data.msg);
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+// 获取关注者
+export const reqFollower = async (uid: string) => {
+    try {
+        const res = await request.get(`/follows/getAllFans?uid=${uid}`);
+        if (res.data.status == 200) {
+            return res.data.data as followingType[];
+        } else {
+            return Promise.reject(new Error(res.data.msg));
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+// 获取正在关注
+export const reqFollowing = async () => {
+    try {
+        const res = await request.get("/follows/getAllFollow");
+        if (res.data.status == 200) {
+            return res.data.data as followingType[];
+        } else {
+            return Promise.reject(new Error(res.data.msg));
         }
     } catch (error) {
         return Promise.reject(error);

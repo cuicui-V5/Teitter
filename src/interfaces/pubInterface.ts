@@ -22,6 +22,10 @@ export interface userInfo {
     nickName?: string;
     userName?: string;
     createDate?: string;
+    tweetCount?: number;
+    followsCount?: number;
+    fansCount?: number;
+    ptoPRelation?: any[];
 }
 
 export interface commentRes {
@@ -68,4 +72,12 @@ export interface noticeData {
     msgType: number;
     avatar_url: string;
     messageId: bigint;
+}
+export interface followingType {
+    uid: number;
+    fansUserNickname: string;
+    fansUserAvatar: string;
+    fansUsername: string;
+    fansUserProfile: string;
+    createDate: number;
 }
