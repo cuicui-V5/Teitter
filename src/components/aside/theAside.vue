@@ -51,7 +51,7 @@
                 :to="{
                     name: 'account',
                     params: {
-                        userId: store.userInfo.userId?.toString(),
+                        userId: store.userInfo.uid?.toString(),
                     },
                 }"
                 class="iconfont icon-account"
@@ -86,7 +86,7 @@
         return `background-image: url(${userInfo.value.avatarUrl}); `;
     });
     // 点击窗口其他区域, 关闭用户卡片
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", e => {
         isShowUserInfoCard.value = false;
     });
 
@@ -96,7 +96,7 @@
     }
     const noticeNum = computed(() => {
         // 返回未读通知的数量
-        return store.notice?.filter((item) => {
+        return store.notice?.filter(item => {
             return !item.status;
         }).length;
     });

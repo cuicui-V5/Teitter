@@ -1,9 +1,9 @@
 <template>
-    <div>关注者123</div>
-    {{ follower }}
     <userCard
         v-for="user in follower"
-        :user-info="user"
+        :avatar-url="user.fansUserAvatar"
+        :nick-name="user.fansUserNickname"
+        :user-name="user.fansUsername"
         @click="goAccount(user.uid.toString())"
     ></userCard>
 </template>
@@ -15,7 +15,10 @@
 </script>
 <script setup lang="ts">
     import { reqFollower } from "@/api";
-    import type { followingType } from "@/interfaces/pubInterface";
+    import type {
+        followingType,
+        followerType,
+    } from "@/interfaces/pubInterface";
     import { ref, type Ref } from "vue";
     import userCard from "./userCard.vue";
     import router from "@/router";
@@ -23,7 +26,7 @@
         uid: string;
     }>();
     console.log(props.uid);
-    const follower = ref([]) as Ref<followingType[]>;
+    const follower = ref([]) as Ref<followerType[]>;
     const getFollower = async () => {
         follower.value = await reqFollower(props.uid);
     };

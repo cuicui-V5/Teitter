@@ -118,14 +118,14 @@
         if (!userInfo.value?.ptoPRelation) {
             return 0; //未关注
         }
+        if (userInfo.value?.ptoPRelation?.length == 2) {
+            return 3; //互相关注
+        }
         if (userInfo.value?.ptoPRelation[0] == 1) {
             return 1; //你关注了对方
         }
         if (userInfo.value?.ptoPRelation[0] == 2) {
             return 2; //对方关注了你
-        }
-        if (userInfo.value?.ptoPRelation?.length == 2) {
-            return 3; //互相关注
         }
     });
     const followBtnText = computed(() => {
@@ -146,21 +146,20 @@
         }
         return text;
     });
-    const changeFollowStatus = () => {
+    const changeFollowStatus = async () => {
         if (followStatus.value == 1 || followStatus.value == 3) {
             // 取消关注的操作
-            reqFollowSomeOne(userInfo.value!.uid as bigint, false);
+            await reqFollowSomeOne(userInfo.value!.uid as bigint, false);
         }
         if (followStatus.value == 0 || followStatus.value == 2) {
             // 关注的操作
-            reqFollowSomeOne(userInfo.value!.uid as bigint, true);
+            await reqFollowSomeOne(userInfo.value!.uid as bigint, true);
         }
+        await getUserInfo();
     };
 
     const goHome = () => {
-        router.push({
-            name: "home",
-        });
+        router.back();
     };
     const close = () => {
         isShowEdit.value = false;

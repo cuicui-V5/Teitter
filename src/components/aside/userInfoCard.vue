@@ -16,7 +16,7 @@
             :to="{
                 name: 'account',
                 params: {
-                    userId: userInfo.userId?.toString(),
+                    userId: userInfo.uid?.toString(),
                 },
             }"
             class="account option"

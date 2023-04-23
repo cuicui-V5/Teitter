@@ -58,7 +58,7 @@
         tweetId?: bigint;
         messageId: bigint;
     }>();
-    const { type, content, status, tweetId, messageId } = toRefs(props);
+    const { type, uid, content, status, tweetId, messageId } = toRefs(props);
 
     const msg = computed(() => {
         switch (type?.value) {
@@ -71,7 +71,7 @@
             case 4:
                 return "回复了你";
             case 5:
-                return "系统通知";
+                return "你关注的人发送了新推文";
 
             default:
                 return "未知通知";
@@ -83,7 +83,14 @@
         const res = await reqHaveRead(messageId.value);
         console.log(res);
         store.getNotice();
-
+        if (type?.value == 3) {
+            router.push({
+                name: "account",
+                params: {
+                    userId: uid?.value!.toString(),
+                },
+            });
+        }
         router.push({
             name: "tweetInfo",
             params: {

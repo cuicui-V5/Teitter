@@ -4,8 +4,8 @@
             <span :style="avatarUrlStyle"></span>
         </div>
         <div class="content">
-            <div class="nickName">{{ props.userInfo.fansUserNickname }}</div>
-            <div class="userName">@{{ props.userInfo.fansUsername }}</div>
+            <div class="nickName">{{ props.nickName }}</div>
+            <div class="userName">@{{ props.userName }}</div>
         </div>
     </div>
 </template>
@@ -16,13 +16,14 @@
     };
 </script>
 <script setup lang="ts">
-    import type { followingType } from "@/interfaces/pubInterface";
     import { computed } from "vue";
     const avatarUrlStyle = computed(() => {
-        return `background-image: url(${props.userInfo.fansUserAvatar}); `;
+        return `background-image: url(${props.avatarUrl}); `;
     });
     const props = defineProps<{
-        userInfo: followingType;
+        avatarUrl: string;
+        nickName: string;
+        userName: string;
     }>();
 </script>
 

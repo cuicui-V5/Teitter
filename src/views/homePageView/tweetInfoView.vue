@@ -32,9 +32,7 @@
     const route = useRoute();
 
     const goHome = () => {
-        router.push({
-            name: "home",
-        });
+        router.back();
     };
     const commentInfo = ref<commentRes | null>(null);
     const init = async () => {

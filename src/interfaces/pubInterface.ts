@@ -73,11 +73,19 @@ export interface noticeData {
     avatar_url: string;
     messageId: bigint;
 }
-export interface followingType {
+export interface followerType {
     uid: bigint;
     fansUserNickname: string;
     fansUserAvatar: string;
     fansUsername: string;
     fansUserProfile: string;
+    createDate: number;
+}
+export interface followingType {
+    uid: bigint;
+    followUserNickname: string;
+    followUserAvatar: string;
+    followsUsername: string;
+    followsUserProfile: string;
     createDate: number;
 }

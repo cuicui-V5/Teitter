@@ -37,18 +37,20 @@
     const store = useTeitterStore();
     const router = useRouter();
 
-    if (!store.userInfo.isLogin) {
-        // 去登陆页面
-        router.push({
-            name: "login",
-        });
-    } else {
-        store.getNotice();
-    }
+    setTimeout(() => {
+        if (!store.userInfo.isLogin) {
+            // 去登陆页面
+            router.push({
+                name: "login",
+            });
+        }
+    }, 500);
+    store.getNotice();
+
     // 清空所有通知
     const clear = () => {
         const promiseArr: Array<Promise<any>> = [];
-        store.notice?.forEach((item) => {
+        store.notice?.forEach(item => {
             // 如果未读, 那么设为已读;
             if (!item.status) {
                 promiseArr.push(reqHaveRead(item.messageId));

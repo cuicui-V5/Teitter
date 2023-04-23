@@ -1,9 +1,9 @@
 <template>
-    <div>关注者123</div>
-    {{ following }}
     <userCard
         v-for="user in following"
-        :user-info="user"
+        :avatar-url="user.followUserAvatar"
+        :nick-name="user.followUserNickname"
+        :user-name="user.followsUsername"
         @click="goAccount(user.uid.toString())"
     ></userCard>
 </template>

@@ -1,6 +1,7 @@
 import request from "./request";
 import type {
     followingType,
+    followerType,
     teitter,
     userInfo,
 } from "@/interfaces/pubInterface";
@@ -410,7 +411,7 @@ export const reqFollower = async (uid: string) => {
     try {
         const res = await request.get(`/follows/getAllFans?uid=${uid}`);
         if (res.data.status == 200) {
-            return res.data.data as followingType[];
+            return res.data.data as followerType[];
         } else {
             return Promise.reject(new Error(res.data.msg));
         }

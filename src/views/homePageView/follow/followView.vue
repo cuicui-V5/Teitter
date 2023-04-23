@@ -7,8 +7,8 @@
                     @click="goHome"
                 ></span>
                 <div class="nickNameAndCount">
-                    <div class="nickName">牛子</div>
-                    <div class="username">@nqzi</div>
+                    <div class="nickName">{{ userInfo?.nickName }}</div>
+                    <div class="username">@{{ userInfo?.userName }}</div>
                 </div>
             </div>
         </div>
@@ -37,25 +37,25 @@
 </template>
 
 <script setup lang="ts">
-    import editUserInfoVue from "@/components/editUserInfo.vue";
     import router from "@/router";
     import { useRoute } from "vue-router";
     import { computed, ref } from "vue";
-    import { useTeitterStore } from "@/stores/teitter";
     import { reqUserInfo, reqUserTweet } from "@/api";
     import type { userInfo, Tweet } from "@/interfaces/pubInterface";
-    import theTeitterCardVue from "@/components/mainArea/theTeitterCard.vue";
     import dayjs from "dayjs";
     import "dayjs/locale/zh-cn";
     dayjs.locale("zh-cn");
 
-    const store = useTeitterStore();
-
     const route = useRoute();
     const userId = route.params.userId as string;
-    const userInfo = ref<userInfo>();
-    const userTweet = ref<Tweet[]>();
+    console.log(route.params);
 
+    const userInfo = ref<userInfo>();
+    const getUserInfo = async () => {
+        const res = await reqUserInfo(userId);
+        userInfo.value = res;
+    };
+    getUserInfo();
     const goHome = () => {
         router.back();
     };
