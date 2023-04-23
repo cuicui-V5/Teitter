@@ -1,6 +1,14 @@
 <template>
     <div class="card animate__animated animate__faster animate__bounceInUp">
         <div
+            v-if="
+                store.userInfo.userName == 'admin' ||
+                teitter.userName == store.userInfo.userName
+            "
+            class="delBtn iconfont icon-close"
+            @click="delTweet"
+        ></div>
+        <div
             class="avatar"
             @click="goAccount"
         >
@@ -48,7 +56,6 @@
                 </span>
                 <span class="forward">
                     <i class="iconfont icon-zhuanfa"></i>
-                    <!--todo <span class="number">{{ teitter.forwardCount }}</span> -->
                     <span class="number">0</span>
                 </span>
                 <span class="likeSpan">
@@ -83,7 +90,7 @@
     import "dayjs/locale/zh-cn";
     import { computed, inject, ref, toRefs } from "vue";
     import type { teitter } from "@/interfaces/pubInterface";
-    import { like, unLike } from "@/api";
+    import { like, reqDelTweet, unLike } from "@/api";
     import router from "@/router";
     import { useTeitterStore } from "@/stores/teitter";
     const sendMsg = inject("sendMsg") as Function;
@@ -95,6 +102,7 @@
     const props = defineProps<{
         teitter: teitter;
     }>();
+    const emit = defineEmits(["flush"]);
     const { teitter } = toRefs(props);
 
     const timeComputed = computed(() => {
@@ -183,16 +191,40 @@
             }
         }
     };
+    const delTweet = async () => {
+        await reqDelTweet(teitter.value.tweetId);
+        emit("flush");
+    };
 </script>
 
 <style scoped lang="scss">
     .card {
+        position: relative;
         display: flex;
         min-height: 10vmax;
         padding: 1vmax;
         transition: all 0.2s;
         &:hover {
             background-color: #f7f7f7;
+        }
+        &:hover .delBtn {
+            display: block;
+        }
+        .delBtn {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 1.5vmax;
+            width: 1.5vmax;
+            height: 1.5vmax;
+            padding: 0.5vmax;
+            border-radius: 50%;
+            transition: all 0.2s;
+            &:hover {
+                background-color: #ff8484c4;
+                color: #e1eef6;
+            }
         }
         .avatar {
             width: 7vmax;
@@ -286,12 +318,12 @@
                         .heart-bg {
                             background: rgba(255, 192, 200, 0);
                             border-radius: 50%;
-                            height: 4vmax;
-                            width: 4vmax;
+                            height: 3.5vmax;
+                            width: 3.5vmax;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            transition: all 100ms ease;
+                            transition: all 0.2s ease;
                             &:hover {
                                 background: rgba(255, 192, 200, 0.7);
                             }

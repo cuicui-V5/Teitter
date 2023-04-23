@@ -13,6 +13,7 @@
         <TheTeitterCard
             v-for="item in teitters"
             :teitter="item"
+            @flush="flush"
         ></TheTeitterCard>
         <theLoad
             class="loader"
@@ -55,6 +56,9 @@
             getTeitter();
         }
     }
+    const flush = () => {
+        getTeitter(true);
+    };
 </script>
 
 <style scoped lang="scss">

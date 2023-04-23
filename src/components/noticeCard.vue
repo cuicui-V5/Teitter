@@ -12,6 +12,7 @@
                 :class="{
                     'icon-xihuan1': type == 1,
                     'icon-pinglun1': type == 2,
+                    'icon-account1': type == 5,
                 }"
             ></div>
         </div>
@@ -71,7 +72,7 @@
             case 4:
                 return "回复了你";
             case 5:
-                return "你关注的人发送了新推文";
+                return "你关注的人发表了新推文";
 
             default:
                 return "未知通知";
@@ -115,6 +116,9 @@
                 color: #f91880;
             }
             .icon-pinglun1 {
+                color: #1da1f2;
+            }
+            .icon-account1 {
                 color: #1da1f2;
             }
         }

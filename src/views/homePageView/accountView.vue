@@ -79,6 +79,7 @@
         </div>
         <theTeitterCardVue
             :teitter="tweet"
+            @flush="getUserTweet"
             v-for="tweet in userTweet"
         />
     </div>

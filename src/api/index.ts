@@ -432,3 +432,27 @@ export const reqFollowing = async (uid: string) => {
         return Promise.reject(error);
     }
 };
+
+// 删除推文
+export const reqDelTweet = async (tweetId: bigint) => {
+    try {
+        const res = await request.post(
+            `/tweet/delTweet`,
+            {
+                tweetId: tweetId.toString(),
+            },
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            },
+        );
+        if (res.data.status == 200) {
+            return res.data.data as followingType[];
+        } else {
+            return Promise.reject(new Error(res.data.msg));
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
