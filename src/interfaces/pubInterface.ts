@@ -15,7 +15,7 @@ export interface teitter {
 
 export interface userInfo {
     isLogin: boolean;
-    userId?: bigint;
+    uid?: bigint;
     avatarUrl?: string;
     backgroundUrl?: string;
     profile?: string;
@@ -74,7 +74,7 @@ export interface noticeData {
     messageId: bigint;
 }
 export interface followingType {
-    uid: number;
+    uid: bigint;
     fansUserNickname: string;
     fansUserAvatar: string;
     fansUsername: string;

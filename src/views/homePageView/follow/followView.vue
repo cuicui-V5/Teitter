@@ -57,9 +57,7 @@
     const userTweet = ref<Tweet[]>();
 
     const goHome = () => {
-        router.push({
-            name: "home",
-        });
+        router.back();
     };
 </script>
 

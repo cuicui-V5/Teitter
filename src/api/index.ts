@@ -103,7 +103,7 @@ export async function isLogin() {
             userInfo.value.avatarUrl = res.data.userInfo.avatarUrl;
             userInfo.value.nickName = res.data.userInfo.nickName;
             userInfo.value.userName = res.data.userInfo.userName;
-            userInfo.value.userId = res.data.userInfo.uid;
+            userInfo.value.uid = res.data.userInfo.uid;
         }
     } catch (error) {
         console.log((error as Error).message);
@@ -127,7 +127,7 @@ export async function login(user: {
             userInfo.value.avatarUrl = res.data.data.avatarUrl;
             userInfo.value.nickName = res.data.data.nickName;
             userInfo.value.userName = res.data.data.userName;
-            userInfo.value.userId = res.data.data.uid;
+            userInfo.value.uid = res.data.data.uid;
 
             // 将token存到localStorage
             localStorage.setItem("token", res.data.map.token);
@@ -419,9 +419,9 @@ export const reqFollower = async (uid: string) => {
     }
 };
 // 获取正在关注
-export const reqFollowing = async () => {
+export const reqFollowing = async (uid: string) => {
     try {
-        const res = await request.get("/follows/getAllFollow");
+        const res = await request.get(`/follows/getAllFollow?uid=${uid}`);
         if (res.data.status == 200) {
             return res.data.data as followingType[];
         } else {

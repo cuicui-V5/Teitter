@@ -4,6 +4,7 @@
     <userCard
         v-for="user in follower"
         :user-info="user"
+        @click="goAccount(user.uid.toString())"
     ></userCard>
 </template>
 
@@ -17,6 +18,7 @@
     import type { followingType } from "@/interfaces/pubInterface";
     import { ref, type Ref } from "vue";
     import userCard from "./userCard.vue";
+    import router from "@/router";
     const props = defineProps<{
         uid: string;
     }>();
@@ -26,6 +28,14 @@
         follower.value = await reqFollower(props.uid);
     };
     getFollower();
+    const goAccount = (uid: string) => {
+        router.push({
+            name: "account",
+            params: {
+                userId: uid,
+            },
+        });
+    };
 </script>
 
 <style scoped lang="less"></style>

@@ -26,15 +26,19 @@
             <button
                 id="editUserInfo"
                 @click="isShowEdit = true"
-                v-if="store.userInfo.userId?.toString() == route.params?.userId"
+                v-if="store.userInfo.uid?.toString() == route.params?.userId"
             >
                 编辑个人资料
             </button>
             <button
                 id="followBtn"
-                v-if="store.userInfo.userId?.toString() != route.params?.userId"
+                @click="changeFollowStatus"
+                :class="{
+                    active: followStatus != 0,
+                }"
+                v-if="store.userInfo.uid?.toString() != route.params?.userId"
             >
-                关注
+                {{ followBtnText }}
             </button>
 
             <div class="text">
@@ -86,7 +90,7 @@
     import { useRoute } from "vue-router";
     import { computed, ref } from "vue";
     import { useTeitterStore } from "@/stores/teitter";
-    import { reqUserInfo, reqUserTweet } from "@/api";
+    import { reqFollowSomeOne, reqUserInfo, reqUserTweet } from "@/api";
     import type { userInfo, Tweet } from "@/interfaces/pubInterface";
     import theTeitterCardVue from "@/components/mainArea/theTeitterCard.vue";
     import dayjs from "dayjs";
@@ -110,6 +114,48 @@
     const backGroundUrlStyle = computed(() => {
         return `background-image: url(${userInfo?.value?.backgroundUrl}); `;
     });
+    const followStatus = computed(() => {
+        if (!userInfo.value?.ptoPRelation) {
+            return 0; //未关注
+        }
+        if (userInfo.value?.ptoPRelation[0] == 1) {
+            return 1; //你关注了对方
+        }
+        if (userInfo.value?.ptoPRelation[0] == 2) {
+            return 2; //对方关注了你
+        }
+        if (userInfo.value?.ptoPRelation?.length == 2) {
+            return 3; //互相关注
+        }
+    });
+    const followBtnText = computed(() => {
+        let text = "";
+        switch (followStatus.value) {
+            case 0:
+                text = "未关注";
+                break;
+            case 1:
+                text = "已关注";
+                break;
+            case 2:
+                text = "对方关注了你";
+                break;
+            case 3:
+                text = "互相关注";
+                break;
+        }
+        return text;
+    });
+    const changeFollowStatus = () => {
+        if (followStatus.value == 1 || followStatus.value == 3) {
+            // 取消关注的操作
+            reqFollowSomeOne(userInfo.value!.uid as bigint, false);
+        }
+        if (followStatus.value == 0 || followStatus.value == 2) {
+            // 关注的操作
+            reqFollowSomeOne(userInfo.value!.uid as bigint, true);
+        }
+    };
 
     const goHome = () => {
         router.push({
@@ -119,13 +165,14 @@
     const close = () => {
         isShowEdit.value = false;
     };
-
-    // 如果没登陆,且没有userId,那么说明是从侧边栏访问的account界面 那么重定向到登陆页面;
-    if (store.userInfo.isLogin == false) {
-        router.push({
-            name: "login",
-        });
-    }
+    // 没登陆不让看
+    setTimeout(() => {
+        if (store.userInfo.isLogin == false) {
+            router.push({
+                name: "login",
+            });
+        }
+    }, 500);
 
     const getUserInfo = async () => {
         const res = await reqUserInfo(userId);
@@ -242,6 +289,10 @@
                 transition: all 200ms;
                 &:hover {
                     background-color: #e7e7e8;
+                }
+                &.active {
+                    background-color: #000;
+                    color: white;
                 }
             }
             .text {
