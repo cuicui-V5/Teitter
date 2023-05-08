@@ -61,13 +61,12 @@
                 store.userInfo.isLogin = false;
                 localStorage.clear();
                 closeCard();
-
-                getTeitter(true);
             }
         } catch {
             // alert("登出失败");
             sendMsg("登出失败", true);
         } finally {
+            location.reload();
         }
     }
 </script>

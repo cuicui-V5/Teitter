@@ -41,6 +41,7 @@
                 </div>
             </RouterLink>
             <RouterLink
+                style="display: none"
                 :to="{
                     name: 'email',
                 }"

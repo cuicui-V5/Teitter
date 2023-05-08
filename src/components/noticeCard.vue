@@ -12,7 +12,7 @@
                 :class="{
                     'icon-xihuan1': type == 1,
                     'icon-pinglun1': type == 2,
-                    'icon-account1': type == 5,
+                    'icon-account1': type == 3 || type == 5,
                 }"
             ></div>
         </div>

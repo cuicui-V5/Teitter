@@ -193,6 +193,14 @@
     };
     const delTweet = async () => {
         await reqDelTweet(teitter.value.tweetId);
+        let index = 0;
+        for (const tweet of store.teitters) {
+            index++;
+            if (tweet.tweetId.toString() === teitter.value.tweetId.toString()) {
+                store.teitters.splice(index - 1, 1);
+            }
+            break;
+        }
         emit("flush");
     };
 </script>
@@ -277,6 +285,7 @@
             }
             .bottom {
                 display: flex;
+
                 justify-content: space-between;
                 font-size: 1.45vmax;
                 @keyframes like-anim {

@@ -89,7 +89,7 @@
     import editUserInfoVue from "@/components/editUserInfo.vue";
     import router from "@/router";
     import { useRoute } from "vue-router";
-    import { computed, ref } from "vue";
+    import { computed, ref, watch } from "vue";
     import { useTeitterStore } from "@/stores/teitter";
     import { reqFollowSomeOne, reqUserInfo, reqUserTweet } from "@/api";
     import type { userInfo, Tweet } from "@/interfaces/pubInterface";
@@ -102,7 +102,14 @@
 
     const isShowEdit = ref(false);
     const route = useRoute();
-    const userId = route.params.userId as string;
+    let userId = route.params.userId as string;
+    watch(route, () => {
+        console.log("改变了");
+        userId = route.params.userId as string;
+
+        getUserInfo();
+        getUserTweet();
+    });
     const userInfo = ref<userInfo>();
     const userTweet = ref<Tweet[]>();
 
