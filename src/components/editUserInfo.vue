@@ -84,7 +84,7 @@
     <imgClipper
         v-if="isShowImgClipper"
         :file="img"
-        :quality="0.8"
+        :quality="0.5"
         @output="getClippedImg"
     ></imgClipper>
 </template>
