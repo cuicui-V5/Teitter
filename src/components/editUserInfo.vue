@@ -81,9 +81,16 @@
             </div>
         </div>
     </div>
+    <imgClipper
+        v-if="isShowImgClipper"
+        :file="img"
+        :quality="0.8"
+        @output="getClippedImg"
+    ></imgClipper>
 </template>
 
 <script setup lang="ts">
+    import imgClipper from "./imgClipper.vue";
     import { editUserInfo, uploadFile } from "@/api";
     import type { userInfo } from "@/interfaces/pubInterface";
     import { useTeitterStore } from "@/stores/teitter";
@@ -92,13 +99,15 @@
     const props = defineProps<{
         userInfo: userInfo;
     }>();
+    const img = ref<File>();
+    const isShowImgClipper = ref(false);
     const { userInfo } = toRefs(props);
 
     const sendMsg = inject("sendMsg") as Function;
     const store = useTeitterStore();
 
-    let bgImgUrl = userInfo.value.backgroundUrl;
-    let avatarImgUrl = userInfo.value.avatarUrl;
+    const bgImgUrl = ref(userInfo.value.backgroundUrl);
+    const avatarImgUrl = ref(userInfo.value.avatarUrl);
 
     const bgInput = ref<HTMLInputElement>();
     const avatarInput = ref<HTMLInputElement>();
@@ -107,8 +116,16 @@
     const nickNameInput = ref<HTMLInputElement>();
     const proFileInput = ref<HTMLTextAreaElement>();
 
+    let uploadType: "avatar" | "bg" = "avatar";
     const emit = defineEmits(["close", "getUserInfo"]);
-
+    const getClippedImg = async (res: File) => {
+        isShowImgClipper.value = false;
+        if (uploadType == "avatar") {
+            avatarImgUrl.value = await uploadFile(res, "image.webp");
+        } else {
+            bgImgUrl.value = await uploadFile(res, "image.webp");
+        }
+    };
     const updateBg = async () => {
         try {
             if (bgInput.value?.files?.length) {
@@ -119,21 +136,24 @@
 
                     return;
                 }
-                const res = await imgCompress(
-                    file,
-                    1920,
-                    1080,
-                    0.92,
-                    "image/webp",
-                );
-                console.log("压缩后的blob为", res);
-                bgImgUrl = await uploadFile(res, "image.webp");
-                // 调用上传接口进行上传
-                console.log("上传完成的url为", bgImgUrl);
+                // const res = await imgCompress(
+                //     file,
+                //     1920,
+                //     1080,
+                //     0.92,
+                //     "image/webp",
+                // );
+                // console.log("压缩后的blob为", res);
+                // bgImgUrl = await uploadFile(res, "image.webp");
+                // // 调用上传接口进行上传
+                // console.log("上传完成的url为", bgImgUrl);
 
-                if (bgContainer.value) {
-                    bgContainer.value.src = bgImgUrl;
-                }
+                // if (bgContainer.value) {
+                //     bgContainer.value.src = bgImgUrl;
+                // }
+                img.value = file;
+                isShowImgClipper.value = true;
+                uploadType = "bg";
             }
         } catch (error) {
             console.log((error as Error).message);
@@ -149,20 +169,24 @@
 
                     return;
                 }
-                const res = await imgCompress(
-                    file,
-                    1920,
-                    1080,
-                    0.5,
-                    "image/webp",
-                );
-                console.log("压缩后的blob为", res);
-                avatarImgUrl = await uploadFile(res, "image.webp");
-                // 调用上传接口进行上传
-                console.log("上传完成的url为", avatarImgUrl);
-                if (avatarContainer.value) {
-                    avatarContainer.value.src = avatarImgUrl;
-                }
+                // const res = await imgCompress(
+                //     file,
+                //     1920,
+                //     1080,
+                //     0.5,
+                //     "image/webp",
+                // );
+                // console.log("压缩后的blob为", res);
+                // avatarImgUrl = await uploadFile(res, "image.webp");
+                // // 调用上传接口进行上传
+                // console.log("上传完成的url为", avatarImgUrl);
+                // if (avatarContainer.value) {
+                //     avatarContainer.value.src = avatarImgUrl;
+                // }
+                img.value = file;
+
+                isShowImgClipper.value = true;
+                uploadType = "avatar";
             }
         } catch (error) {
             console.log((error as Error).message);
@@ -172,8 +196,8 @@
         const userInfo = {
             nickName: nickNameInput.value?.value,
             profile: proFileInput.value?.value,
-            avatarUrl: avatarImgUrl,
-            backgroundUrl: bgImgUrl,
+            avatarUrl: avatarImgUrl.value,
+            backgroundUrl: bgImgUrl.value,
         };
         try {
             const res = await editUserInfo(userInfo);

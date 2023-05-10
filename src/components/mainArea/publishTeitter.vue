@@ -44,7 +44,10 @@
                 class="imageContainer"
                 v-show="imageUrl"
             >
-                <img ref="imageContainer" />
+                <img
+                    :src="imageUrl"
+                    ref="imageContainer"
+                />
             </div>
 
             <div
@@ -52,6 +55,7 @@
                 v-show="videoUrl"
             >
                 <video
+                    :src="videoUrl"
                     ref="videoContainer"
                     controls
                     autoplay
@@ -65,9 +69,16 @@
             </div>
         </div>
     </div>
+    <imgClipper
+        v-if="isShowImgClipper"
+        :file="img"
+        :quality="0.8"
+        @output="getClippedImg"
+    ></imgClipper>
 </template>
 
 <script setup lang="ts">
+    import imgClipper from "../imgClipper.vue";
     import { useTeitterStore } from "@/stores/teitter";
     import { computed, ref, toRefs, watch } from "vue";
     import axios from "axios";
@@ -97,17 +108,22 @@
 
     const activeClass = ref("");
     const content = ref("");
+    const isShowImgClipper = ref(false);
+    const img = ref<File>();
     const imageUrl = ref<string>();
     const videoUrl = ref<string>();
     // 监视是否有内容,有内容就让按钮可用
-    watch([content, imageUrl, videoUrl], (value) => {
+    watch([content, imageUrl, videoUrl], value => {
         if (value.length > 0) {
             activeClass.value = "btnActive";
         } else {
             activeClass.value = "";
         }
     });
-
+    const getClippedImg = async (res: File) => {
+        isShowImgClipper.value = false;
+        imageUrl.value = await uploadFile(res, "image.webp");
+    };
     async function publishBtn() {
         isSending.value = true;
         const fd = new FormData();
@@ -154,26 +170,19 @@
 
                     videoUrl.value = await uploadFile(file, "video.mp4");
                 } else {
-                    const res = await imgCompress(
-                        file,
-                        1920,
-                        1080,
-                        0.6,
-                        "image/webp",
-                    );
-                    console.log("压缩后的blob为", res);
-                    imageUrl.value = await uploadFile(res, "image.webp");
+                    img.value = file;
+                    // const res = await imgCompress(
+                    //     file,
+                    //     1920,
+                    //     1080,
+                    //     0.6,
+                    //     "image/webp",
+                    // );
+                    // console.log("压缩后的blob为", res);
+                    isShowImgClipper.value = true;
                 }
                 // 调用上传接口进行上传
-                console.log("上传完成的url为", imageUrl.value);
                 isUpLoading.value = false;
-
-                if (imageContainer.value) {
-                    imageContainer.value.src = imageUrl.value || "";
-                }
-                if (videoContainer.value) {
-                    videoContainer.value.src = videoUrl.value || "";
-                }
             }
         } catch (error) {
             sendMsg((error as Error).message, true);
