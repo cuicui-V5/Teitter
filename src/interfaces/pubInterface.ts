@@ -36,13 +36,19 @@ export interface commentRes {
 }
 
 export interface Comment {
+    tweetId: bigint;
     uid: bigint;
-    commentContent: string;
+    parentTweetId: bigint;
+    content: string;
+    nickName: string;
     createDate: number;
+    likeCount: number;
+    commentCount: number;
+    pv: number;
     isDeleted: number;
     userName: string;
-    nickName: string;
     avatarUrl: string;
+    likeStatus: boolean;
 }
 
 export interface Tweet {

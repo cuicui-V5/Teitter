@@ -420,6 +420,12 @@
         emit("output", clippedBlob.value);
     };
     clip();
+    document.addEventListener("mouseup", () => {
+        document.removeEventListener("mousemove", handelMoveSelection);
+    });
+    document.addEventListener("mouseup", () => {
+        document.removeEventListener("mousemove", handelMoveHorn);
+    });
 </script>
 
 <style scoped lang="less">

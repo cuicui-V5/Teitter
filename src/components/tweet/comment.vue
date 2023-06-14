@@ -1,6 +1,9 @@
 <template>
     <div class="comment">
-        <div class="publishComment">
+        <div
+            class="publishComment"
+            v-if="store.userInfo.isLogin"
+        >
             <div class="avatar">
                 <span :style="avatarUrlStyle"></span>
             </div>

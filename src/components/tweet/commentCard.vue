@@ -1,8 +1,11 @@
 <template>
-    <div class="card animate__animated animate__faster animate__flipInX">
+    <div
+        class="card animate__animated animate__faster animate__flipInX"
+        @click="goTweetInfo()"
+    >
         <div
             class="avatar"
-            @click="goAccount"
+            @click.stop="goAccount"
         >
             <span :style="avatarUrlStyle"></span>
         </div>
@@ -13,12 +16,11 @@
                 -
                 <span class="time">{{ timeComputed }}</span>
             </div>
-            <div class="content">{{ comment.commentContent }}</div>
+            <div class="content">{{ comment.content }}</div>
             <div class="bottom">
                 <span class="comment">
                     <i class="iconfont icon-pinglun"></i>
-                    <!--todo <span class="number">{{ teitter.commentCount }}</span> -->
-                    <span class="number">0</span>
+                    <span class="number">{{ comment.commentCount }}</span>
                 </span>
                 <span class="forward">
                     <i class="iconfont icon-zhuanfa"></i>
@@ -53,13 +55,8 @@
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
     import { computed, inject, toRefs } from "vue";
-    import type { teitter } from "@/interfaces/pubInterface";
-    import { like, unLike } from "@/api";
     import router from "@/router";
-    import { useTeitterStore } from "@/stores/teitter";
     import type { Comment } from "@/interfaces/pubInterface";
-
-    const sendMsg = inject("sendMsg") as Function;
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
@@ -80,6 +77,16 @@
             name: "account",
             params: {
                 userId: comment.value.uid.toString(),
+            },
+        });
+    };
+    const goTweetInfo = () => {
+        console.log(props.comment.tweetId.toString());
+
+        router.push({
+            name: "tweetInfo",
+            params: {
+                tweetId: props.comment.tweetId.toString(),
             },
         });
     };

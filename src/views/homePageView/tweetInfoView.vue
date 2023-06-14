@@ -26,7 +26,7 @@
     import TweetInfoCard from "@/components/tweet/tweetInfoCard.vue";
     import type { commentRes } from "@/interfaces/pubInterface";
     import router from "@/router";
-    import { ref, toRef, type Ref } from "vue";
+    import { ref, toRef, type Ref, watch } from "vue";
     import { useRoute } from "vue-router";
 
     const route = useRoute();
@@ -39,7 +39,16 @@
         commentInfo.value = await getComment(route.params.tweetId as string);
         console.log(commentInfo);
     };
-    init();
+
+    watch(
+        route,
+        () => {
+            init();
+        },
+        {
+            immediate: true,
+        },
+    );
 </script>
 
 <style scoped lang="less">

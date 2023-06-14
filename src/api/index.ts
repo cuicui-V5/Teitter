@@ -232,13 +232,13 @@ export async function getComment(tweetId: string) {
 }
 export async function publishComment(
     id: bigint,
-    commentContent: string,
+    content: string,
 ): Promise<string> {
     // 发送评论接口
     try {
         const data = {
             tweetId: id.toString(),
-            commentContent,
+            content,
         };
         const res = await request.post("/comment/addComment", data, {
             headers: {

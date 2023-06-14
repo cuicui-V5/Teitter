@@ -4,7 +4,9 @@
         @scroll="scroll"
         ref="mainArea"
     >
-        <div class="tittle animate__animated animate__fadeIn">主页</div>
+        <div class="tittle animate__animated animate__fadeIn">
+            忒特 Version 2.0
+        </div>
         <networkErrorVue
             @event="getTeitter(true)"
             v-if="option.isNetWorkError"

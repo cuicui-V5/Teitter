@@ -4,8 +4,8 @@ import { useTeitterStore } from "@/stores/teitter";
 import jsonbig from "json-bigint";
 const request = axios.create({
     baseURL: import.meta.env.DEV
-        ? "/teitter/api"
-        : "https://teitter.soul87.top:8090/teitter/api",
+        ? "/teitter/v2/api"
+        : "https://www.heron.love:8070/teitter/v2/api",
     withCredentials: true,
     timeout: 5000,
     transformResponse: data => {

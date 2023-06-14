@@ -74,8 +74,8 @@ export default defineConfig({
     server: {
         cors: true,
         proxy: {
-            "/teitter/api": {
-                target: "https://teitter.soul87.top:8090",
+            "/teitter/v2/api": {
+                target: "https://www.heron.love:8070",
                 changeOrigin: true,
                 secure: true,
                 configure: (proxy, options) => {

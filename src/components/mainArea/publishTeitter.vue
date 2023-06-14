@@ -7,7 +7,7 @@
             <textarea
                 placeholder="有什么新鲜事 ?"
                 v-model="content"
-                @keydown.enter="publishBtn()"
+                @keydown.ctrl.enter="publishBtn()"
                 @paste="appendImageOnPaste"
             ></textarea>
             <input

@@ -79,7 +79,6 @@
                     </div>
                 </span>
             </span>
-
             <span class="share">
                 <i class="iconfont icon-fenxiang"></i>
                 <span class="number"></span>
@@ -130,7 +129,7 @@
                     tweetInfo.value.likeStatus = false;
                     tweetInfo.value.likeCount--;
                     // 更改store中的推文点赞状态
-                    store.teitters.forEach((item) => {
+                    store.teitters.forEach(item => {
                         if (
                             item.tweetId.toString() ===
                             tweetInfo.value.tweetId.toString()
@@ -154,7 +153,7 @@
                     tweetInfo.value.likeStatus = true;
                     tweetInfo.value.likeCount++;
                     // 更改store中的推文点赞状态
-                    store.teitters.forEach((item) => {
+                    store.teitters.forEach(item => {
                         if (
                             item.tweetId.toString() ===
                             tweetInfo.value.tweetId.toString()
