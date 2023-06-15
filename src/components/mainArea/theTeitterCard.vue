@@ -6,17 +6,17 @@
                 teitter.userName == store.userInfo.userName
             "
             class="delBtn iconfont icon-close"
-            @click="delTweet"
+            @click.stop="delTweet"
         ></div>
         <div
             class="avatar"
-            @click="goAccount"
+            @click.stop="goAccount"
         >
             <span :style="avatarUrlStyle"></span>
         </div>
         <div
             class="mainArea"
-            @click="goTweetInfo($event)"
+            @click.stop="goTweetInfo($event)"
         >
             <div class="top">
                 <span class="nick">{{ teitter.nickName }}</span>
@@ -45,7 +45,7 @@
                     autoplay
                     muted
                     loop
-                    @click.prevent="clickVideo"
+                    @click.stop.prevent="clickVideo"
                     ref="video"
                     playsinline="true"
                     webkit-playsinline=""
@@ -65,7 +65,7 @@
                 <span class="likeSpan">
                     <span
                         class="like-button"
-                        @click="likeBtn(teitter.tweetId)"
+                        @click.stop="likeBtn(teitter.tweetId)"
                     >
                         <div class="heart-bg">
                             <div
@@ -78,10 +78,16 @@
                         <div class="likes-amount">{{ teitter.likeCount }}</div>
                     </span>
                 </span>
-
-                <span class="share">
+                <span
+                    class="share"
+                    @click.stop="isShowShareCard = !isShowShareCard"
+                >
                     <i class="iconfont icon-fenxiang"></i>
                     <span class="number"></span>
+                    <shareCard
+                        v-if="isShowShareCard"
+                        :tweet-i-d="teitter.tweetId.toString()"
+                    ></shareCard>
                 </span>
             </div>
         </div>
@@ -89,6 +95,7 @@
 </template>
 
 <script setup lang="ts">
+    import shareCard from "@/components/tweet/shareCard.vue";
     import dayjs from "dayjs";
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
@@ -102,6 +109,7 @@
 
     const sendMsg = inject("sendMsg") as Function;
     const video = ref<HTMLVideoElement>();
+    const isShowShareCard = ref(false);
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
@@ -164,25 +172,25 @@
             }
         }
     }
-    const blackList = [
-        "iconfont icon-pinglun",
-        "iconfont icon-zhuanfa",
-        "heart-icon",
-        "heart-icon liked",
-        "iconfont icon-fenxiang",
-        "likes-amount",
-        "video",
-        "img",
-    ];
+    // const blackList = [
+    //     "iconfont icon-pinglun",
+    //     "iconfont icon-zhuanfa",
+    //     "heart-icon",
+    //     "heart-icon liked",
+    //     "iconfont icon-fenxiang",
+    //     "likes-amount",
+    //     "video",
+    //     "img",
+    // ];
     const goTweetInfo = (e: MouseEvent) => {
-        if (!blackList.includes((e.target as HTMLElement).className)) {
-            router.push({
-                name: "tweetInfo",
-                params: {
-                    tweetId: teitter.value.tweetId.toString(),
-                },
-            });
-        }
+        // if (!blackList.includes((e.target as HTMLElement).className)) {
+        router.push({
+            name: "tweetInfo",
+            params: {
+                tweetId: teitter.value.tweetId.toString(),
+            },
+        });
+        // }
     };
     const goAccount = () => {
         router.push({
@@ -291,7 +299,7 @@
                     background: #ffeff0;
                     color: #333;
                     font-family: "Fira Code", monospace;
-                    font-size: 14px;
+                    font-size: 1vmax;
                     line-height: 1.4;
                     border-radius: 4px;
                     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -382,6 +390,7 @@
                 }
 
                 .share {
+                    position: relative;
                     margin-right: 10vmax;
                 }
 

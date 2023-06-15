@@ -82,15 +82,24 @@
                     </div>
                 </span>
             </span>
-            <span class="share">
+            <span
+                class="share"
+                @click.stop="isShowShareCard = !isShowShareCard"
+            >
                 <i class="iconfont icon-fenxiang"></i>
                 <span class="number"></span>
+                <shareCard
+                    v-if="isShowShareCard"
+                    :tweet-i-d="tweetInfo.tweetId.toString()"
+                ></shareCard>
             </span>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+    import shareCard from "@/components/tweet/shareCard.vue";
+
     import type { Tweet } from "@/interfaces/pubInterface";
     import { computed, inject, ref, toRefs } from "vue";
     import dayjs from "dayjs";
@@ -109,6 +118,8 @@
     const props = defineProps<{
         tweetInfo: Tweet;
     }>();
+    const isShowShareCard = ref(false);
+
     const { tweetInfo } = toRefs(props);
     // console.log("------", tweetInfo);
     const contentComputed = computed(() => {
@@ -332,6 +343,7 @@
             }
 
             .share {
+                position: relative;
                 margin-right: 10vmax;
             }
 

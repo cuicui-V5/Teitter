@@ -46,9 +46,16 @@
                     </span>
                 </span>
 
-                <span class="share">
+                <span
+                    class="share"
+                    @click.stop="isShowShareCard = !isShowShareCard"
+                >
                     <i class="iconfont icon-fenxiang"></i>
                     <span class="number"></span>
+                    <shareCard
+                        v-if="isShowShareCard"
+                        :tweet-i-d="comment.tweetId.toString()"
+                    ></shareCard>
                 </span>
             </div>
         </div>
@@ -56,14 +63,17 @@
 </template>
 
 <script setup lang="ts">
+    import shareCard from "@/components/tweet/shareCard.vue";
+
     import dayjs from "dayjs";
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
-    import { computed, inject, toRefs } from "vue";
+    import { computed, inject, ref, toRefs } from "vue";
     import router from "@/router";
     import type { Comment } from "@/interfaces/pubInterface";
     import { marked } from "marked";
     import DOMPurify from "dompurify";
+    const isShowShareCard = ref(false);
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
@@ -217,6 +227,7 @@
                 }
 
                 .share {
+                    position: relative;
                     margin-right: 10vmax;
                 }
 

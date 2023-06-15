@@ -5,7 +5,7 @@
         ref="mainArea"
     >
         <div class="tittle animate__animated animate__fadeIn">
-            忒特 Version 2.0.1
+            忒特 Version v2.0.2
         </div>
         <networkErrorVue
             @event="getTeitter(true)"
