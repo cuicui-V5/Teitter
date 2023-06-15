@@ -25,8 +25,12 @@
                 <span class="time">{{ timeComputed }}</span>
             </div>
             <div class="content">
-                {{ teitter.content }}
-                <br />
+                <!-- {{ teitter.content }} -->
+                <!-- {{ contentComputed }} -->
+                <div
+                    v-html="contentComputed"
+                    class="text"
+                ></div>
                 <img
                     class="img"
                     v-if="teitter.tweetImg"
@@ -93,6 +97,9 @@
     import { like, reqDelTweet, unLike } from "@/api";
     import router from "@/router";
     import { useTeitterStore } from "@/stores/teitter";
+    import { marked } from "marked";
+    import DOMPurify from "dompurify";
+
     const sendMsg = inject("sendMsg") as Function;
     const video = ref<HTMLVideoElement>();
 
@@ -107,6 +114,14 @@
 
     const timeComputed = computed(() => {
         return dayjs(Number(teitter.value.createDate)).fromNow();
+    });
+    const contentComputed = computed(() => {
+        return DOMPurify.sanitize(
+            marked.parse(teitter.value.content || "", {
+                mangle: false,
+                headerIds: false,
+            }),
+        );
     });
 
     const avatarUrlStyle = computed(() => {
@@ -209,7 +224,7 @@
     .card {
         position: relative;
         display: flex;
-        min-height: 10vmax;
+        min-height: 5vmax;
         padding: 1vmax;
         transition: all 0.2s;
         &:hover {
@@ -235,11 +250,11 @@
             }
         }
         .avatar {
-            width: 7vmax;
+            width: 4vmax;
             span {
                 display: block;
-                width: 5.2vmax;
-                height: 5.2vmax;
+                width: 2.4vmax;
+                height: 2.4vmax;
                 margin: 0 auto;
                 border-radius: 50%;
                 // background-image: url(../../img/defaultAvatar.jpg);
@@ -250,7 +265,7 @@
         .mainArea {
             flex: 1;
             .top {
-                font-size: 1.45vmax;
+                font-size: 1.15vmax;
 
                 .nick {
                     color: #0f1419;
@@ -266,10 +281,28 @@
             }
             .content {
                 padding: 0.3vmax;
-                font-size: 1.5vmax;
+                font-size: 1vmax;
                 margin-top: 0.3vmax;
                 color: #0f1419;
-                margin-bottom: 2.5vmax;
+                margin-bottom: 0.2vmax;
+                :global(code) {
+                    display: inline-block;
+                    padding: 8px;
+                    background: #ffeff0;
+                    color: #333;
+                    font-family: "Fira Code", monospace;
+                    font-size: 14px;
+                    line-height: 1.4;
+                    border-radius: 4px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                :global(.text ol) {
+                    padding-left: 20px; /* 根据需要自定义缩进值 */
+                }
+                :global(.text ul) {
+                    padding-left: 20px; /* 根据需要自定义缩进值 */
+                }
+
                 img {
                     margin-top: 1vmax;
                     border-radius: 20px;
@@ -287,7 +320,7 @@
                 display: flex;
 
                 justify-content: space-between;
-                font-size: 1.45vmax;
+                font-size: 1vmax;
                 @keyframes like-anim {
                     to {
                         background-position: right;
@@ -312,8 +345,8 @@
                         align-items: center;
 
                         .heart-icon {
-                            height: 6vmax;
-                            width: 6vmax;
+                            height: 4vmax;
+                            width: 4vmax;
                             background: url("@/img/heart.png");
                             background-size: cover;
                             background-position: left;
@@ -327,8 +360,8 @@
                         .heart-bg {
                             background: rgba(255, 192, 200, 0);
                             border-radius: 50%;
-                            height: 3.5vmax;
-                            width: 3.5vmax;
+                            height: 2.5vmax;
+                            width: 2.5vmax;
                             display: flex;
                             align-items: center;
                             justify-content: center;
@@ -360,8 +393,8 @@
                         color: #46acf1;
                     }
                     i {
-                        padding: 0.5vmax;
-                        font-size: 1.82vmax;
+                        // padding: 0.5vmax;
+                        font-size: 1.2vmax;
                         font-weight: bold;
                         border-radius: 50%;
                         transition: all 0.2s;

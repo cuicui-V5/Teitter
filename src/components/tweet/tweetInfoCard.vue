@@ -13,8 +13,11 @@
             </div>
         </div>
         <div class="content">
-            {{ tweetInfo?.content }}
-            <br />
+            <!-- {{ tweetInfo?.content }} -->
+            <div
+                v-html="contentComputed"
+                class="text"
+            ></div>
             <img
                 v-if="tweetInfo.tweetImg"
                 :src="tweetInfo.tweetImg"
@@ -95,6 +98,9 @@
     import { like, unLike } from "@/api";
     import { useTeitterStore } from "@/stores/teitter";
     import router from "@/router";
+    import { marked } from "marked";
+    import DOMPurify from "dompurify";
+
     const sendMsg = inject("sendMsg") as Function;
     const store = useTeitterStore();
     dayjs.locale("zh-cn");
@@ -105,7 +111,14 @@
     }>();
     const { tweetInfo } = toRefs(props);
     // console.log("------", tweetInfo);
-
+    const contentComputed = computed(() => {
+        return DOMPurify.sanitize(
+            marked.parse(tweetInfo.value.content || "", {
+                mangle: false,
+                headerIds: false,
+            }),
+        );
+    });
     const avatarUrlStyle = computed(() => {
         return `background-image: url(${tweetInfo.value.avatarUrl}); `;
     });
@@ -199,8 +212,8 @@
             .avatar {
                 span {
                     display: block;
-                    width: 5vmax;
-                    height: 5vmax;
+                    width: 3vmax;
+                    height: 3vmax;
                     border-radius: 50%;
                     background-size: cover;
                 }
@@ -211,7 +224,7 @@
                 justify-content: space-evenly;
                 margin-left: 1.5vmax;
                 .nickname {
-                    font-size: 2vmax;
+                    font-size: 1.4vmax;
                     font-weight: bold;
                 }
                 .username {
@@ -220,8 +233,8 @@
             }
         }
         .content {
-            margin-top: 2vmax;
-            font-size: 2.4vmax;
+            margin-top: 1vmax;
+            font-size: 1.4vmax;
             img {
                 border-radius: 20px;
 
@@ -237,14 +250,14 @@
         }
         .info {
             .time {
-                padding: 3vmax 0;
+                padding: 1vmax 0;
 
-                font-size: 1.5vmax;
+                font-size: 1.2vmax;
                 border-bottom: 1px solid #eff3f4;
             }
             .detail {
-                margin-top: 2vmax;
-                font-size: 1.5vmax;
+                margin-top: 1vmax;
+                font-size: 1.2vmax;
 
                 i {
                     font-weight: bold;
@@ -252,7 +265,7 @@
             }
         }
         .bottom {
-            padding: 3vmax 0;
+            padding: 1vmax 0;
             border: 1px solid #eff3f4;
             display: flex;
             justify-content: space-around;
@@ -271,19 +284,19 @@
                 }
             }
             .likeSpan {
-                width: 5vmax;
-                height: 5vmax;
+                width: 4vmax;
+                // height: 4vmax;
                 position: relative;
                 .like-button {
                     display: block;
                     position: absolute;
                     display: flex;
                     align-items: center;
-                    bottom: 1.5vmax;
+                    bottom: -0.5vmax;
 
                     .heart-icon {
-                        height: 8vmax;
-                        width: 8vmax;
+                        height: 5vmax;
+                        width: 5vmax;
                         background: url("@/img/heart.png");
                         background-size: cover;
                         background-position: left;
@@ -297,8 +310,8 @@
                     .heart-bg {
                         background: rgba(255, 192, 200, 0);
                         border-radius: 50%;
-                        height: 4vmax;
-                        width: 4vmax;
+                        height: 3vmax;
+                        width: 3vmax;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -331,7 +344,7 @@
                 }
                 i {
                     padding: 0.5vmax;
-                    font-size: 3vmax;
+                    font-size: 1.5vmax;
                     font-weight: bold;
                     border-radius: 50%;
                     transition: all 0.2s;

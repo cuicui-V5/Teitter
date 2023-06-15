@@ -16,7 +16,12 @@
                 -
                 <span class="time">{{ timeComputed }}</span>
             </div>
-            <div class="content">{{ comment.content }}</div>
+            <div class="content">
+                <div
+                    class="text"
+                    v-html="contentComputed"
+                ></div>
+            </div>
             <div class="bottom">
                 <span class="comment">
                     <i class="iconfont icon-pinglun"></i>
@@ -57,13 +62,22 @@
     import { computed, inject, toRefs } from "vue";
     import router from "@/router";
     import type { Comment } from "@/interfaces/pubInterface";
+    import { marked } from "marked";
+    import DOMPurify from "dompurify";
 
     dayjs.extend(RelativeTime);
     dayjs.locale("zh-cn");
     const props = defineProps<{ comment: Comment }>();
     const { comment } = toRefs(props);
     // console.log(comment);
-
+    const contentComputed = computed(() => {
+        return DOMPurify.sanitize(
+            marked.parse(comment.value.content || "", {
+                mangle: false,
+                headerIds: false,
+            }),
+        );
+    });
     const timeComputed = computed(() => {
         return dayjs(Number(comment.value.createDate)).fromNow();
     });
@@ -95,18 +109,18 @@
 <style scoped lang="scss">
     .card {
         display: flex;
-        min-height: 10vmax;
+        min-height: 5vmax;
         padding: 1vmax;
         transition: all 0.2s;
         &:hover {
             background-color: #f7f7f7;
         }
         .avatar {
-            width: 7vmax;
+            width: 4vmax;
             span {
                 display: block;
-                width: 5.2vmax;
-                height: 5.2vmax;
+                width: 2.4vmax;
+                height: 2.4vmax;
                 margin: 0 auto;
                 border-radius: 50%;
                 // background-image: url(../../img/defaultAvatar.jpg);
@@ -117,7 +131,7 @@
         .mainArea {
             flex: 1;
             .top {
-                font-size: 1.45vmax;
+                font-size: 1.25vmax;
 
                 .nick {
                     color: #0f1419;
@@ -133,10 +147,10 @@
             }
             .content {
                 padding: 0.3vmax;
-                font-size: 1.5vmax;
+                font-size: 1.2vmax;
                 margin-top: 0.3vmax;
                 color: #0f1419;
-                margin-bottom: 2.5vmax;
+                margin-bottom: 0.5vmax;
             }
             .bottom {
                 display: flex;

@@ -76,13 +76,13 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            height: 8vmax;
+            height: 4vmax;
             .avatar {
                 margin-left: 2vmax;
                 span {
                     display: block;
-                    width: 5vmax;
-                    height: 5vmax;
+                    width: 2.4vmax;
+                    height: 2.4vmax;
                     border-radius: 50%;
                     background-size: cover;
                 }
@@ -92,7 +92,7 @@
                 flex: 6;
                 height: 100%;
                 border: 0;
-                font-size: 2vmax;
+                font-size: 1.5vmax;
                 &:focus {
                     outline: 0;
                     border: 0;

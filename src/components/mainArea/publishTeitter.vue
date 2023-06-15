@@ -5,7 +5,7 @@
         </div>
         <div class="publish">
             <textarea
-                placeholder="有什么新鲜事 ?"
+                placeholder="有什么新鲜事 ? !  支持Markdown语法, ctrl+enter发送"
                 v-model="content"
                 @keydown.ctrl.enter="publishBtn()"
                 @paste="appendImageOnPaste"
@@ -240,11 +240,11 @@
         min-height: 13vmax;
         border-bottom: #eff3f4 1px solid;
         .avatarShow {
-            width: 7vmax;
+            width: 4vmax;
             span {
                 display: block;
-                width: 5.2vmax;
-                height: 5.2vmax;
+                width: 4vmax;
+                height: 4vmax;
                 margin: 0 auto;
                 border-radius: 50%;
                 // background-image: url(../../img/defaultAvatar.jpg);
@@ -263,7 +263,7 @@
                 border: 0;
                 color: #000000;
                 font-weight: normal;
-                font-size: 2.1vmax;
+                font-size: 1.5vmax;
                 resize: none;
                 margin-bottom: 2vmax;
                 &:focus {

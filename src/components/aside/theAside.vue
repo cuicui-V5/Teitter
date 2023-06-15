@@ -105,6 +105,9 @@
 
 <style scoped lang="scss">
     .aside_main {
+        & > ul {
+            list-style: none;
+        }
         z-index: 9;
         // width: 8.3vmax;
         flex: 0.0875;
