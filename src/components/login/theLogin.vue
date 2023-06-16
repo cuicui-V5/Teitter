@@ -48,6 +48,9 @@
     import router from "@/router/index";
     import TheLoad from "../theLoad.vue";
     import { login } from "@/api";
+    import JSConfetti from "js-confetti";
+    const jsConfetti = new JSConfetti();
+
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);
     const sendMsg = inject("sendMsg") as Function;
@@ -70,6 +73,10 @@
             // console.log("登录成功");
             router.push({
                 name: "home",
+            });
+            jsConfetti.addConfetti({
+                confettiRadius: 6,
+                confettiNumber: 1000,
             });
         } else {
             // alert(res);

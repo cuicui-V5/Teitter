@@ -106,7 +106,8 @@
     import { useTeitterStore } from "@/stores/teitter";
     import { marked } from "marked";
     import DOMPurify from "dompurify";
-
+    import JSConfetti from "js-confetti";
+    const jsConfetti = new JSConfetti();
     const sendMsg = inject("sendMsg") as Function;
     const video = ref<HTMLVideoElement>();
     const isShowShareCard = ref(false);
@@ -161,7 +162,10 @@
                 const res = await like(id);
                 if (res == "ok") {
                     sendMsg("点赞成功 " + id.toString());
-
+                    jsConfetti.addConfetti({
+                        confettiRadius: 6,
+                        confettiNumber: 1000,
+                    });
                     // alert("点赞成功");
                     teitter.value.likeStatus = true;
                     teitter.value.likeCount++;
@@ -172,25 +176,14 @@
             }
         }
     }
-    // const blackList = [
-    //     "iconfont icon-pinglun",
-    //     "iconfont icon-zhuanfa",
-    //     "heart-icon",
-    //     "heart-icon liked",
-    //     "iconfont icon-fenxiang",
-    //     "likes-amount",
-    //     "video",
-    //     "img",
-    // ];
+
     const goTweetInfo = (e: MouseEvent) => {
-        // if (!blackList.includes((e.target as HTMLElement).className)) {
         router.push({
             name: "tweetInfo",
             params: {
                 tweetId: teitter.value.tweetId.toString(),
             },
         });
-        // }
     };
     const goAccount = () => {
         router.push({
@@ -289,7 +282,7 @@
             }
             .content {
                 padding: 0.3vmax;
-                font-size: 1vmax;
+                font-size: 1.2vmax;
                 margin-top: 0.3vmax;
                 color: #0f1419;
                 margin-bottom: 0.2vmax;

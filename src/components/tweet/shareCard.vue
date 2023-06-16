@@ -12,7 +12,7 @@
         <img
             id="qrcode"
             :src="dataUrl"
-            width="100"
+            style="width: 100%"
         />
     </div>
 </template>
@@ -34,7 +34,11 @@
 
     const copyLink = () => {
         clipboardy
-            .write(url + props.tweetID)
+            .write(
+                "我在忒特上发现一个很有趣的内容, 你也来看看吧! \r\n" +
+                    url +
+                    props.tweetID,
+            )
             .then(() => {
                 sendMsg("复制成功");
                 console.log("成功复制");

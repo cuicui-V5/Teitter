@@ -12,7 +12,7 @@
                 type="text"
                 placeholder="发布你的回复"
                 v-model="cmtContent"
-                @keydown.enter="pubCmtBtn"
+                @keydown.ctrl.enter="pubCmtBtn"
             />
             <div
                 class="btn"
@@ -30,6 +30,7 @@
         <CommentCard
             v-for="comment in comments"
             :comment="comment"
+            @flush="flushComment"
         ></CommentCard>
     </div>
 </template>
@@ -66,6 +67,9 @@
     const avatarUrlStyle = computed(() => {
         return `background-image: url(${store.userInfo.avatarUrl}); `;
     });
+    const flushComment = () => {
+        emit("init");
+    };
 </script>
 
 <style scoped lang="less">

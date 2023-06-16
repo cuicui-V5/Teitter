@@ -109,7 +109,8 @@
     import router from "@/router";
     import { marked } from "marked";
     import DOMPurify from "dompurify";
-
+    import JSConfetti from "js-confetti";
+    const jsConfetti = new JSConfetti();
     const sendMsg = inject("sendMsg") as Function;
     const store = useTeitterStore();
     dayjs.locale("zh-cn");
@@ -172,7 +173,10 @@
                 const res = await like(id);
                 if (res == "ok") {
                     sendMsg("点赞成功 " + id.toString());
-
+                    jsConfetti.addConfetti({
+                        confettiRadius: 6,
+                        confettiNumber: 1000,
+                    });
                     // alert("点赞成功");
                     tweetInfo.value.likeStatus = true;
                     tweetInfo.value.likeCount++;

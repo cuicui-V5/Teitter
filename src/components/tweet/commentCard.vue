@@ -4,6 +4,14 @@
         @click="goTweetInfo()"
     >
         <div
+            v-if="
+                store.userInfo.userName == 'admin' ||
+                comment.userName == store.userInfo.userName
+            "
+            class="delBtn iconfont icon-close"
+            @click.stop="delTweet"
+        ></div>
+        <div
             class="avatar"
             @click.stop="goAccount"
         >
@@ -33,16 +41,17 @@
                     <span class="number">0</span>
                 </span>
                 <span class="likeSpan">
-                    <span class="like-button">
-                        <!-- @click="likeBtn(teitter.tweetId)" -->
+                    <span
+                        class="like-button"
+                        @click.stop="likeBtn(comment.tweetId)"
+                    >
                         <div class="heart-bg">
                             <div
                                 class="heart-icon"
-                                :class="{}"
+                                :class="{ liked: comment.likeStatus }"
                             ></div>
-                            <!-- liked: teitter.likeStatus, -->
                         </div>
-                        <!-- <div class="likes-amount">{{ teitter.likeCount }}</div> -->
+                        <div class="likes-amount">{{ comment.likeCount }}</div>
                     </span>
                 </span>
 
@@ -73,6 +82,15 @@
     import type { Comment } from "@/interfaces/pubInterface";
     import { marked } from "marked";
     import DOMPurify from "dompurify";
+    import { useTeitterStore } from "@/stores/teitter";
+    import { like, reqDelTweet, unLike } from "@/api";
+    import JSConfetti from "js-confetti";
+    const jsConfetti = new JSConfetti();
+
+    const sendMsg = inject("sendMsg") as Function;
+    const store = useTeitterStore();
+    const emit = defineEmits(["flush"]);
+
     const isShowShareCard = ref(false);
 
     dayjs.extend(RelativeTime);
@@ -114,6 +132,49 @@
             },
         });
     };
+    async function likeBtn(id: bigint) {
+        if (!store.userInfo.isLogin) {
+            // 去登陆页面
+            router.push({
+                name: "login",
+            });
+        } else {
+            if (comment.value.likeStatus) {
+                //取消点赞的逻辑
+                const res = await unLike(id);
+                if (res == "ok") {
+                    sendMsg("取消点赞成功 " + id.toString());
+                    comment.value.likeStatus = false;
+                    comment.value.likeCount--;
+                } else {
+                    sendMsg(res, true);
+
+                    // alert(res);
+                }
+            } else {
+                // 点赞的逻辑
+                const res = await like(id);
+                if (res == "ok") {
+                    sendMsg("点赞成功 " + id.toString());
+                    jsConfetti.addConfetti({
+                        confettiRadius: 6,
+                        confettiNumber: 1000,
+                    });
+                    // alert("点赞成功");
+                    comment.value.likeStatus = true;
+                    comment.value.likeCount++;
+                } else {
+                    // alert(res);
+                    sendMsg(res, true);
+                }
+            }
+        }
+    }
+    const delTweet = async () => {
+        await reqDelTweet(comment.value.tweetId);
+
+        emit("flush");
+    };
 </script>
 
 <style scoped lang="scss">
@@ -124,6 +185,25 @@
         transition: all 0.2s;
         &:hover {
             background-color: #f7f7f7;
+        }
+        &:hover .delBtn {
+            display: block;
+        }
+        .delBtn {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 1.5vmax;
+            width: 1.5vmax;
+            height: 1.5vmax;
+            padding: 0.5vmax;
+            border-radius: 50%;
+            transition: all 0.2s;
+            &:hover {
+                background-color: #ff8484c4;
+                color: #e1eef6;
+            }
         }
         .avatar {
             width: 4vmax;
