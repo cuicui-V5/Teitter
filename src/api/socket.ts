@@ -11,3 +11,4 @@ socket.addEventListener("message", event => {
 socket.addEventListener("close", () => {
     console.log("WebSocket connection closed.");
 });
+export {};

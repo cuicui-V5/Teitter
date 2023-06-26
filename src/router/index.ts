@@ -1,19 +1,38 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import mainView from "@/views/homePageView/mainView.vue";
 import homepageView from "../views/homePageView/homePageView.vue";
-import accountView from "../views/homePageView/accountView.vue";
-import searchView from "../views/homePageView/searchView.vue";
-import noticeView from "../views/homePageView/noticeView.vue";
-import emailView from "../views/homePageView/emailView.vue";
-import followView from "../views/homePageView/follow/followView.vue";
-import followerView from "../views/homePageView/follow/follower.vue";
-import followingView from "../views/homePageView/follow/following.vue";
+// import accountView from "../views/homePageView/accountView.vue";
+// import searchView from "../views/homePageView/searchView.vue";
+// import noticeView from "../views/homePageView/noticeView.vue";
+// import emailView from "../views/homePageView/emailView.vue";
+// import followView from "../views/homePageView/follow/followView.vue";
+// import followerView from "../views/homePageView/follow/follower.vue";
+// import followingView from "../views/homePageView/follow/following.vue";
 
-import tweetInfoView from "../views/homePageView/tweetInfoView.vue";
+// import tweetInfoView from "../views/homePageView/tweetInfoView.vue";
 
-import loginRegisterView from "@/views/loginView/loginRegisterView.vue";
-import theLoginVue from "@/components/login/theLogin.vue";
-import theRegisterVue from "@/components/login/theRegister.vue";
+// import loginRegisterView from "@/views/loginView/loginRegisterView.vue";
+// import theLoginVue from "@/components/login/theLogin.vue";
+// import theRegisterVue from "@/components/login/theRegister.vue";
+
+// 将原来的静态导入语句替换成动态导入语句
+// const mainView = () => import("@/views/homePageView/mainView.vue");
+// const homepageView = () => import("../views/homePageView/homePageView.vue");
+const accountView = () => import("../views/homePageView/accountView.vue");
+const searchView = () => import("../views/homePageView/searchView.vue");
+const noticeView = () => import("../views/homePageView/noticeView.vue");
+const emailView = () => import("../views/homePageView/emailView.vue");
+const followView = () => import("../views/homePageView/follow/followView.vue");
+const followerView = () => import("../views/homePageView/follow/follower.vue");
+const followingView = () =>
+    import("../views/homePageView/follow/following.vue");
+
+const tweetInfoView = () => import("../views/homePageView/tweetInfoView.vue");
+
+const loginRegisterView = () =>
+    import("@/views/loginView/loginRegisterView.vue");
+const theLoginVue = () => import("@/components/login/theLogin.vue");
+const theRegisterVue = () => import("@/components/login/theRegister.vue");
 
 const router = createRouter({
     history: createWebHashHistory(),

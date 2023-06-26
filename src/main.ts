@@ -6,6 +6,10 @@ import "./style/main.less";
 import "animate.css";
 import "nprogress/nprogress.css";
 import networkErrorVue from "@/components/networkError.vue";
+import { registerSW } from "virtual:pwa-register";
+
+// 自动更新
+registerSW({ immediate: true });
 
 const app = createApp(App);
 

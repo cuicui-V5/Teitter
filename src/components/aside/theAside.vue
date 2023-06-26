@@ -6,7 +6,11 @@
                     name: 'home',
                 }"
             >
-                <span class="logo"></span>
+                <span
+                    class="logo"
+                    ref="logo"
+                    @mouseenter="play()"
+                ></span>
             </RouterLink>
             <RouterLink
                 :to="{
@@ -74,10 +78,24 @@
 </template>
 
 <script setup lang="ts">
-    import { computed, ref, toRefs } from "vue";
+    import { computed, ref, toRefs, type Ref, onMounted } from "vue";
     import userInfoCard from "./userInfoCard.vue";
     import { useTeitterStore } from "../../stores/teitter";
     import { RouterLink } from "vue-router";
+    import lottie from "lottie-web";
+    import emojiLogoJson from "@/lottie/lf20_1xoQN5jlXh.json";
+
+    const logo = ref() as Ref<Element>;
+    onMounted(() => {
+        lottie.loadAnimation({
+            container: logo.value,
+            animationData: emojiLogoJson,
+            // path: "https://assets8.lottiefiles.com/packages/lf20_1xoQN5jlXh.json",
+            loop: false, // Optional
+            autoplay: true, // Optional
+            renderer: "svg",
+        });
+    });
 
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);
@@ -101,6 +119,10 @@
             return !item.status;
         }).length;
     });
+    const play = () => {
+        lottie.stop();
+        lottie.play();
+    };
 </script>
 
 <style scoped lang="scss">
@@ -130,10 +152,10 @@
                 width: 5.12vmax;
                 height: 5.12vmax;
                 margin: 0.5vmax auto;
-                background-image: url(../../img/logo.png);
-                background-size: contain;
+                // background-image: url(../../img/logo.png);
+                // background-size: contain;
                 &:hover {
-                    background-image: url(../../img/CLIPLY_372109260_TWITTER_LOGO_400.gif);
+                    // background-image: url(../../img/CLIPLY_372109260_TWITTER_LOGO_400.gif);
                 }
             }
             .iconfont {
