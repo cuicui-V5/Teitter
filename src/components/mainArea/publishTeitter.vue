@@ -239,8 +239,13 @@
         display: flex;
         min-height: 13vmax;
         border-bottom: #eff3f4 1px solid;
+        transition: all 0.3s;
+        &:hover {
+            background-color: #f7f7f7;
+        }
         .avatarShow {
             width: 4vmax;
+
             span {
                 display: block;
                 width: 4vmax;
@@ -250,6 +255,11 @@
                 // background-image: url(../../img/defaultAvatar.jpg);
                 background-size: cover;
                 background-position: center;
+                transition: all 0.3s;
+                z-index: 999999999;
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
         }
         .publish {
@@ -262,6 +272,7 @@
                 padding: 1vmax;
                 border: 0;
                 color: #000000;
+                background-color: transparent;
                 font-weight: normal;
                 font-size: 1.5vmax;
                 resize: none;

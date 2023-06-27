@@ -216,6 +216,10 @@
                 // background-image: url(../../img/defaultAvatar.jpg);
                 background-size: cover;
                 background-position: center;
+                transition: all 0.3s;
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
         }
         .mainArea {

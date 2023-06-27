@@ -89,6 +89,10 @@
                     height: 2.4vmax;
                     border-radius: 50%;
                     background-size: cover;
+                    transition: all 0.3s;
+                    &:hover {
+                        transform: scale(1.1);
+                    }
                 }
             }
             .input {

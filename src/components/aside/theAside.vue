@@ -9,7 +9,6 @@
                 <span
                     class="logo"
                     ref="logo"
-                    @mouseenter="play()"
                 ></span>
             </RouterLink>
             <RouterLink
@@ -119,10 +118,6 @@
             return !item.status;
         }).length;
     });
-    const play = () => {
-        lottie.stop();
-        lottie.play();
-    };
 </script>
 
 <style scoped lang="scss">
@@ -146,6 +141,10 @@
                 &:active {
                     color: black;
                 }
+                transition: all 0.3s;
+                &:hover {
+                    transform: scale(1.5);
+                }
             }
             .logo {
                 display: block;
@@ -154,17 +153,18 @@
                 margin: 0.5vmax auto;
                 // background-image: url(../../img/logo.png);
                 // background-size: contain;
+                transition: all 0.3s;
                 &:hover {
-                    // background-image: url(../../img/CLIPLY_372109260_TWITTER_LOGO_400.gif);
+                    transform: scale(1.5);
                 }
             }
             .iconfont {
                 display: block;
-                width: 2.6vmax;
+                width: 1.8vmax;
                 margin: 1vmax auto;
                 padding: 1vmax;
                 border-radius: 50%;
-                font-size: 2.6vmax;
+                font-size: 1.8vmax;
                 transition: all 0.2s;
                 &:hover {
                     background-color: #e7e7e8;
@@ -182,6 +182,8 @@
 
                 &:hover {
                     background-color: #e7e7e8;
+
+                    transform: translateX(-50%) scale(1.1);
                 }
                 span {
                     position: relative;

@@ -254,13 +254,17 @@
             width: 4vmax;
             span {
                 display: block;
-                width: 2.4vmax;
-                height: 2.4vmax;
+                width: 2.7vmax;
+                height: 2.7vmax;
                 margin: 0 auto;
                 border-radius: 50%;
                 // background-image: url(../../img/defaultAvatar.jpg);
                 background-size: cover;
                 background-position: center;
+                transition: all 0.3s;
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
         }
         .mainArea {

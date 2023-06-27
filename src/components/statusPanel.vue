@@ -141,7 +141,8 @@
                 border: 1px solid #47aef2;
                 transition: all 200ms;
 
-                &:focus {
+                &:focus,
+                &:hover {
                     border: 1px dotted #1d9bf0;
                     outline: 0;
                     background-color: #eff3f4;
