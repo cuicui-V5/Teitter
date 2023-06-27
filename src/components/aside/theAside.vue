@@ -6,10 +6,11 @@
                     name: 'home',
                 }"
             >
-                <span
+                <lottieComponent
+                    :json="emojiLogoJson"
+                    :loop="false"
                     class="logo"
-                    ref="logo"
-                ></span>
+                />
             </RouterLink>
             <RouterLink
                 :to="{
@@ -81,20 +82,9 @@
     import userInfoCard from "./userInfoCard.vue";
     import { useTeitterStore } from "../../stores/teitter";
     import { RouterLink } from "vue-router";
-    import lottie from "lottie-web";
-    import emojiLogoJson from "@/lottie/lf20_1xoQN5jlXh.json";
+    import lottieComponent from "@/components/lottie.vue";
 
-    const logo = ref() as Ref<Element>;
-    onMounted(() => {
-        lottie.loadAnimation({
-            container: logo.value,
-            animationData: emojiLogoJson,
-            // path: "https://assets8.lottiefiles.com/packages/lf20_1xoQN5jlXh.json",
-            loop: false, // Optional
-            autoplay: true, // Optional
-            renderer: "svg",
-        });
-    });
+    import emojiLogoJson from "@/lottie/logo.json";
 
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);

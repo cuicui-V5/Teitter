@@ -337,19 +337,19 @@
                     background-color: #e8f5fd;
                 }
                 .tooltip {
-                    font-size: 1.5vmax;
+                    font-size: 1.1vmax;
                     background: #1da1f2;
                     bottom: 100%;
                     color: #fff;
                     display: block;
-                    left: -25px;
+                    left: -40px;
                     margin-bottom: 15px;
                     opacity: 0;
                     padding: 1vmax;
                     pointer-events: none;
                     position: absolute;
                     width: 20vmax;
-                    height: 4vmax;
+                    border-radius: 20px;
                     transform: translateY(10px);
                     transition: all 0.25s ease-out;
                     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);

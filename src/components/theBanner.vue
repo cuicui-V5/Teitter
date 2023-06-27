@@ -46,16 +46,16 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        height: 7.3vmax;
+        height: 5vmax;
         width: 100vw;
         background-color: #1d9bf0;
         .text {
             margin: 1vmax -6vmax 1vmax 7vmax;
             h1 {
-                font-size: 2.125vmax;
+                font-size: 1.525vmax;
             }
             h2 {
-                font-size: 1.375vmax;
+                font-size: 0.975vmax;
                 font-weight: normal;
             }
         }
@@ -63,18 +63,18 @@
             margin-right: 2vmax;
             height: 100%;
             width: 15vmax;
-            justify-content: space-around;
             display: flex;
+            justify-content: center;
             align-items: center;
             button {
                 background-color: #fff;
-                width: 6vmax;
-                height: 4vmax;
+                width: 4vmax;
+                height: 3vmax;
                 border: 1px solid #71c0f6;
-                border-radius: 2vmax;
+                border-radius: 1.5vmax;
                 background-color: #1a8cd8;
                 color: white;
-                font-size: 1.5vmax;
+                font-size: 1vmax;
                 font-weight: bold;
             }
             .register {

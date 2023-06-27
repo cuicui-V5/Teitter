@@ -20,15 +20,43 @@
             class="noResult"
             v-if="$route.params.keyWord && !store.searchResultTeitters"
         >
-            <span class="emoji iconfont icon-kulian"></span>
-            <div class="text">没有搜索到有效内容</div>
+            <lottieComponent
+                class="emoji"
+                :json="sadLottie"
+                :loop="true"
+            />
+            <div class="text">没有搜索到结果</div>
         </div>
         <div
             class="welcome"
             v-if="!$route.params.keyWord"
         >
-            <span class="emoji iconfont icon-search"></span>
-            <div class="text">点击搜索 打开新世界大门</div>
+            <lottieComponent
+                class="emoji"
+                :json="searchLottie"
+                :loop="true"
+            />
+            <div class="text">忒特热搜</div>
+            <div class="hot">
+                <ul>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当众写代码</li>
+                    <li>震惊 一男子竟然当待待待待待待待待待待带带带</li>
+                </ul>
+            </div>
         </div>
         <networkErrorVue
             @event="search()"
@@ -47,6 +75,9 @@
     import { useRoute } from "vue-router";
     import { ref, watch, onUnmounted } from "vue";
     import router from "@/router";
+    import lottieComponent from "@/components/lottie.vue";
+    import searchLottie from "@/lottie/search.json";
+    import sadLottie from "@/lottie/sad.json";
 
     const route = useRoute();
     const store = useTeitterStore();
@@ -83,8 +114,8 @@
     .searchContainer {
         flex: 605;
         position: relative;
-
         overflow-y: scroll;
+        margin-bottom: 7.3vmax;
         &::-webkit-scrollbar {
             display: none;
         }
@@ -92,7 +123,7 @@
             .search {
                 margin: 0.5vmax 1vmax;
                 input {
-                    width: 80%;
+                    width: 100%;
                     height: 4vmax;
                     border-radius: 2vmax;
                     padding-left: 1vmax;
@@ -128,7 +159,9 @@
             text-align: center;
             margin-top: 5vmax;
             .emoji {
-                font-size: 6vmax;
+                display: inline-block;
+                width: 10vmax;
+                height: 10vmax;
             }
             .text {
                 font-size: 2vmax;
@@ -141,12 +174,35 @@
             transform: translate(-50%);
             text-align: center;
             margin-top: 5vmax;
+            width: 70%;
             .emoji {
-                font-size: 6vmax;
+                display: inline-block;
+                width: 10vmax;
+                height: 10vmax;
             }
             .text {
-                font-size: 2vmax;
+                font-size: 1.5vmax;
                 margin-top: 1vmax;
+            }
+        }
+        .hot {
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                list-style: none;
+                justify-content: center;
+
+                li {
+                    padding: 0.5vmax;
+                    width: 200px;
+                    // 显示省略号
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
             }
         }
     }
