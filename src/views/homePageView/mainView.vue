@@ -16,6 +16,7 @@
                 v-if="!$route.meta.keepAlive"
             ></component>
         </RouterView>
+
         <theBannerVue v-if="!userInfo.isLogin"></theBannerVue>
         <statusPanel v-if="!isMobile"></statusPanel>
     </div>
@@ -64,5 +65,17 @@
         left: 0;
         display: flex;
         overflow: hidden;
+    }
+    .v-enter-from,
+    .v-leave-to {
+        opacity: 0;
+    }
+    .v-leave-from,
+    .v-enter-to {
+        opacity: 1;
+    }
+    .v-enter-active,
+    .v-leave-active {
+        transition: 0.3s;
     }
 </style>

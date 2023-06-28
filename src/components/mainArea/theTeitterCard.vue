@@ -1,5 +1,6 @@
 <template>
-    <div class="card animate__animated animate__faster animate__bounceInUp">
+    <!-- animate__animated animate__faster animate__bounceInUp -->
+    <div class="card">
         <div
             v-if="
                 store.userInfo.userName == 'admin' ||

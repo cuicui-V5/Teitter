@@ -95,3 +95,59 @@ export interface followingType {
     followsUserProfile: string;
     createDate: number;
 }
+export interface hotNews {
+    status: number;
+    msg: string;
+    data: hotNewsDataType[];
+}
+
+export interface hotNewsDataType {
+    type: string;
+    style_type: string;
+    id: string;
+    card_id: string;
+    card_label?: CardLabel;
+    target: Target;
+    attached_info: string;
+    detail_text: string;
+    trend: number;
+    debut: boolean;
+    children: Children[];
+}
+
+export interface CardLabel {
+    type: string;
+    icon: string;
+    night_icon: string;
+}
+
+export interface Target {
+    id: number;
+    title: string;
+    url: string;
+    type: string;
+    created: number;
+    answer_count: number;
+    follower_count: number;
+    author: Author;
+    bound_topic_ids: number[];
+    comment_count: number;
+    is_following: boolean;
+    excerpt: string;
+}
+
+export interface Author {
+    type: string;
+    user_type: string;
+    id: string;
+    url_token: string;
+    url: string;
+    name: string;
+    headline: string;
+    avatar_url: string;
+}
+
+export interface Children {
+    type: string;
+    thumbnail: string;
+}

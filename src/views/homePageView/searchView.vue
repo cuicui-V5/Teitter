@@ -36,25 +36,17 @@
                 :json="searchLottie"
                 :loop="true"
             />
-            <div class="text">忒特热搜</div>
+            <div class="text">全网热搜</div>
             <div class="hot">
                 <ul>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当众写代码</li>
-                    <li>震惊 一男子竟然当待待待待待待待待待待带带带</li>
+                    <li v-for="item in hotNews">
+                        <a
+                            :href="computedUrl(item.target.url)"
+                            target="_blank"
+                        >
+                            {{ item.target.title }}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -73,15 +65,20 @@
     import { useTeitterStore } from "@/stores/teitter";
     import theTeitterCardVue from "@/components/mainArea/theTeitterCard.vue";
     import { useRoute } from "vue-router";
-    import { ref, watch, onUnmounted } from "vue";
+    import { ref, watch, onUnmounted, type Ref, computed } from "vue";
     import router from "@/router";
     import lottieComponent from "@/components/lottie.vue";
     import searchLottie from "@/lottie/search.json";
     import sadLottie from "@/lottie/sad.json";
+    import type { hotNewsDataType } from "@/interfaces/pubInterface";
+    import { reqHotNews } from "@/api";
 
     const route = useRoute();
     const store = useTeitterStore();
     const keyWord = ref("");
+
+    const hotNews = ref() as Ref<hotNewsDataType[]>;
+
     keyWord.value = route.params.keyWord as string;
     if (route.params.keyWord) {
         console.log(route.params.keyWord);
@@ -107,6 +104,17 @@
     };
     onUnmounted(() => {
         store.searchResultTeitters = [];
+    });
+    const getHotNews = async () => {
+        hotNews.value = await reqHotNews();
+    };
+    getHotNews();
+    const computedUrl = computed(() => (url: string) => {
+        // https://api.zhihu.com/questions/608976349
+        // https://zhihu.com/question/608976349
+        url = url.replace("api.", "");
+        url = url.replace("questions", "question");
+        return url;
     });
 </script>
 
@@ -195,13 +203,20 @@
 
                 li {
                     padding: 0.5vmax;
-                    width: 200px;
+                    width: 300px;
                     // 显示省略号
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     overflow: hidden;
-                    text-decoration: underline;
                     cursor: pointer;
+                    a {
+                        color: var(--text-main);
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
                 }
             }
         }

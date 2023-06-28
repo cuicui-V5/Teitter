@@ -4,6 +4,7 @@ import type {
     followerType,
     teitter,
     userInfo,
+    hotNewsDataType,
 } from "@/interfaces/pubInterface";
 
 import { useTeitterStore } from "./../stores/teitter";
@@ -449,6 +450,18 @@ export const reqDelTweet = async (tweetId: bigint) => {
         );
         if (res.data.status == 200) {
             return res.data.data as followingType[];
+        } else {
+            return Promise.reject(new Error(res.data.msg));
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};
+export const reqHotNews = async () => {
+    try {
+        const res = await request.get(`/news/getHot`);
+        if (res.data.status == 200) {
+            return res.data.data as hotNewsDataType[];
         } else {
             return Promise.reject(new Error(res.data.msg));
         }

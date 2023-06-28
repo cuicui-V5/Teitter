@@ -1,7 +1,8 @@
 <template>
     <div class="panel">
+        <!-- animate__animated animate__bounceInDown -->
         <div
-            class="search animate__animated animate__bounceInDown"
+            class="search"
             v-if="$route.name == `home`"
         >
             <input
