@@ -230,7 +230,7 @@
                     width: 100%;
                     height: 100%;
                     border-radius: 4%;
-                    background-color: #fff;
+                    background-color: var(--primary-bg);
                     overflow-y: scroll;
                     &::-webkit-scrollbar {
                         display: none;
@@ -262,7 +262,7 @@
                             margin-left: auto;
                             width: 6vmax;
                             height: 3vmax;
-                            color: #fff;
+                            color: var(--primary-bg);
                             font-size: 1.4vmax;
                             font-weight: bol;
                             background-color: #0f1419;
@@ -274,7 +274,7 @@
                         height: 20vmax;
                         margin-bottom: 12vmax;
                         background-size: cover;
-                        background-color: #1d9bf0;
+                        background-color: var(--main-color);
                         img {
                             width: 100%;
                             height: 100%;
@@ -286,7 +286,7 @@
                             left: 50%;
                             transform: translate(-50%, -50%);
                             font-size: 3vmax;
-                            color: #fff;
+                            color: var(--primary-bg);
                             padding: 1vmax;
                             background-color: #56595c;
                             border-radius: 50%;
@@ -302,8 +302,8 @@
                         top: 19vmax;
                         left: 2vmax;
                         border-radius: 50%;
-                        border: 2px solid #1d9bf0;
-                        background-color: #fff;
+                        border: 2px solid var(--main-color);
+                        background-color: var(--primary-bg);
                         img {
                             border-radius: 50%;
                             width: 100%;
@@ -317,7 +317,7 @@
                             left: 50%;
                             transform: translate(-50%, -50%);
                             font-size: 3vmax;
-                            color: #fff;
+                            color: var(--primary-bg);
                             padding: 1vmax;
                             background-color: #56595c;
                             border-radius: 50%;
@@ -349,7 +349,7 @@
                             border: 1px solid #cfd9de;
                             transition: all 200ms;
                             &:focus {
-                                border: 4px solid #1d9bf0;
+                                border: 4px solid var(--main-color);
                                 outline: 0;
                             }
                         }
@@ -379,7 +379,7 @@
                             transition: all 200ms;
 
                             &:focus {
-                                border: 4px solid #1d9bf0;
+                                border: 4px solid var(--main-color);
                                 outline: 0;
                             }
                         }
@@ -408,7 +408,7 @@
                             transition: all 200ms;
 
                             &:focus {
-                                border: 4px solid #1d9bf0;
+                                border: 4px solid var(--main-color);
                                 outline: 0;
                             }
                         }

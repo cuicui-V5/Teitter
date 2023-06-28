@@ -19,6 +19,7 @@
         <v-chart
             class="chart"
             :option="charOption"
+            :theme="store.isDarkMode ? 'dark' : 'light'"
         />
     </div>
 </template>
@@ -36,10 +37,9 @@
         TooltipComponent,
         LegendComponent,
     } from "echarts/components";
-    import VChart, { THEME_KEY } from "vue-echarts";
+    import VChart from "vue-echarts";
 
     const store = useTeitterStore();
-    const { userInfo, option } = toRefs(store);
     const keyWord = ref("");
 
     const goSearch = () => {
@@ -61,9 +61,8 @@
         LegendComponent,
     ]);
 
-    provide(THEME_KEY, "ligjt");
-
     const charOption = ref({
+        backgroundColor: "transparent",
         title: {
             text: "粉丝排名",
             // subtext: "副标题",
@@ -121,7 +120,7 @@
 <style scoped lang="scss">
     .panel {
         z-index: 2;
-        background-color: #f7f9f9;
+        background-color: var(--secondary-bg);
         flex: 0.306;
         flex: 306;
         font-size: 1vmax;
@@ -136,7 +135,7 @@
                 border-radius: 2vmax;
                 padding-left: 1vmax;
                 font-size: 1.3vmax;
-                background-color: #ffffff;
+                background-color: var(--primary-bg);
                 outline: 0;
                 border: 1px solid #47aef2;
                 transition: all 200ms;
@@ -145,7 +144,10 @@
                 &:hover {
                     border: 1px dotted #1d9bf0;
                     outline: 0;
-                    background-color: #eff3f4;
+                    background-color: var(--secondary-bg);
+                }
+                &::placeholder {
+                    color: var(--text-second);
                 }
             }
             .searchBtn {

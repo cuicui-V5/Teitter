@@ -1,27 +1,14 @@
 <template>
-    <span class="loader"></span>
+    <lottieComponent
+        :json="loadingJson"
+        :loop="true"
+    />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import lottieComponent from "@/components/lottie.vue";
 
-<style scoped>
-    .loader {
-        width: 48px;
-        height: 48px;
-        border: 0.6vmax solid #d2ebfc;
-        border-bottom-color: #1d9bf0;
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-    }
+    import loadingJson from "@/lottie/loading.json";
+</script>
 
-    @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-</style>
+<style scoped></style>

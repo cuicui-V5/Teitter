@@ -103,9 +103,9 @@
 
 <style scoped lang="less">
     .warp {
-        border-bottom: 1px solid #f7f7f7;
+        border-bottom: 1px solid var(--secondary-bg);
         padding: 1.5vmax 3vmax;
-        background-color: #fff;
+        background-color: var(--primary-bg);
         transition: all 0.2s;
         display: flex;
         .left {
@@ -149,7 +149,7 @@
         }
     }
     .warp:hover {
-        background-color: #f7f7f7;
+        background-color: var(--secondary-bg);
     }
     .read {
         background-color: #1da0f210;

@@ -26,7 +26,7 @@
             margin: 1vmax;
             border: 0;
             border-radius: 1.82vmax;
-            background-color: #1d9bf0;
+            background-color: var(--main-color);
             color: white;
             font-size: 1.62vmax;
             &:hover {

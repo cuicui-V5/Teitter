@@ -228,8 +228,10 @@
         min-height: 5vmax;
         padding: 1vmax;
         transition: all 0.2s;
+        background-color: var(--primary-bg);
+        color: var(--text-main);
         &:hover {
-            background-color: #f7f7f7;
+            background-color: var(--secondary-bg);
         }
         &:hover .delBtn {
             display: block;
@@ -273,28 +275,26 @@
                 font-size: 1.15vmax;
 
                 .nick {
-                    color: #0f1419;
                     font-weight: bold;
                 }
                 .username {
                     margin-left: 4px;
-                    color: #536471;
+                    color: var(--text-second);
                 }
                 .time {
-                    color: #536471;
+                    color: var(--text-second);
                 }
             }
             .content {
                 padding: 0.3vmax;
                 font-size: 1.2vmax;
                 margin-top: 0.3vmax;
-                color: #0f1419;
                 margin-bottom: 0.2vmax;
                 :global(code) {
                     display: inline-block;
                     padding: 8px;
                     background: #ffeff0;
-                    color: #333;
+                    color: var(--text-code);
                     font-family: "Fira Code", monospace;
                     font-size: 1vmax;
                     line-height: 1.4;
@@ -377,10 +377,7 @@
                         }
 
                         .likes-amount {
-                            font-size: 1.2vmax;
-                            font-family: "Roboto", sans-serif;
-                            color: #888;
-                            font-weight: 900;
+                            font-size: 1vmax;
                             margin-left: 6px;
                         }
                     }

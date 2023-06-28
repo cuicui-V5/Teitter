@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5320519",
+      "name": "太阳",
+      "font_class": "taiyang",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "20009239",
+      "name": "moon月亮",
+      "font_class": "moonyueliang",
+      "unicode": "e6dd",
+      "unicode_decimal": 59101
+    },
+    {
       "icon_id": "21523095",
       "name": "标记为已读",
       "font_class": "biaojiweiyidu",

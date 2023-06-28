@@ -56,7 +56,7 @@
                 :to="{
                     name: 'account',
                     params: {
-                        userId: store.userInfo.uid?.toString(),
+                        userId: store.userInfo.uid?.toString() || 0,
                     },
                 }"
                 class="iconfont icon-account"
@@ -64,6 +64,7 @@
             ></RouterLink>
             <li
                 class="userAvatar"
+                v-if="store.userInfo.isLogin"
                 @click.stop="isShowUserInfoCard = !isShowUserInfoCard"
             >
                 <span :style="avatarUrlStyle"></span>
@@ -120,16 +121,16 @@
         flex: 0.0875;
         flex: 87;
         height: 100vh;
+        background-color: var(--primary-bg);
         ul {
             position: relative;
-            height: 100vh;
             display: flex;
             flex-direction: column;
             a {
-                color: black;
+                color: var(--text-main);
                 text-decoration: none;
                 &:active {
-                    color: black;
+                    color: var(--text-main);
                 }
                 transition: all 0.3s;
                 &:hover {
@@ -157,7 +158,7 @@
                 font-size: 1.8vmax;
                 transition: all 0.2s;
                 &:hover {
-                    background-color: #e7e7e8;
+                    background-color: var(--secondary-bg);
                 }
             }
             .userAvatar {
@@ -171,7 +172,7 @@
                 transform: translateX(-50%);
 
                 &:hover {
-                    background-color: #e7e7e8;
+                    background-color: var(--secondary-bg);
 
                     transform: translateX(-50%) scale(1.1);
                 }
@@ -198,7 +199,7 @@
 
                     text-align: center;
                     font-size: 1vmax;
-                    color: #fff;
+                    color: var(--primary-bg);
                     line-height: 2vmax;
                     width: 2vmax;
                     height: 2vmax;

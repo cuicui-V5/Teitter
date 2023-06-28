@@ -26,7 +26,7 @@
             min-width: 20vmax;
             height: 5vmax;
 
-            background-color: #1d9bf0;
+            background-color: var(--main-color);
             display: flex;
             justify-content: center;
             align-items: center;

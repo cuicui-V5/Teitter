@@ -136,7 +136,7 @@
                     &:focus {
                         border: 1px solid #47aef2;
                         outline: 0;
-                        background-color: #ffffff;
+                        background-color: var(--primary-bg);
                     }
                 }
                 .searchBtn {

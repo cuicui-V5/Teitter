@@ -65,7 +65,7 @@
     #shareCard {
         min-width: 8vmax;
         height: 10vmax;
-        background-color: #ffffff;
+        background-color: var(--primary-bg);
         border-radius: 20px;
         position: absolute;
         top: -12vmax;
@@ -79,7 +79,7 @@
         border-radius: 20px;
         user-select: none;
         &:hover {
-            background-color: #f7f7f7;
+            background-color: var(--secondary-bg);
         }
     }
 </style>

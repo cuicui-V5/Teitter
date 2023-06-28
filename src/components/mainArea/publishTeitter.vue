@@ -238,10 +238,11 @@
     .publishTeitter {
         display: flex;
         min-height: 13vmax;
-        border-bottom: #eff3f4 1px solid;
+        border-bottom: var(--secondary-bg) 1px solid;
         transition: all 0.3s;
+        background-color: var(--primary-bg);
         &:hover {
-            background-color: #f7f7f7;
+            background-color: var(--secondary-bg);
         }
         .avatarShow {
             width: 4vmax;
@@ -340,7 +341,7 @@
                     font-size: 1.1vmax;
                     background: #1da1f2;
                     bottom: 100%;
-                    color: #fff;
+                    color: var(--primary-bg);
                     display: block;
                     left: -40px;
                     margin-bottom: 15px;

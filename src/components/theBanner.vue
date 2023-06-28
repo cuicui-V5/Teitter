@@ -48,7 +48,7 @@
         left: 0;
         height: 5vmax;
         width: 100vw;
-        background-color: #1d9bf0;
+        background-color: var(--main-color);
         .text {
             margin: 1vmax -6vmax 1vmax 7vmax;
             h1 {
@@ -67,7 +67,7 @@
             justify-content: center;
             align-items: center;
             button {
-                background-color: #fff;
+                background-color: var(--primary-bg);
                 width: 4vmax;
                 height: 3vmax;
                 border: 1px solid #71c0f6;

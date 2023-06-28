@@ -46,4 +46,4 @@
     }, 10000);
 </script>
 
-<style scoped></style>
+<style></style>

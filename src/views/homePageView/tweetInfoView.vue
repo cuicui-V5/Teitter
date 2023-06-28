@@ -74,7 +74,7 @@
             line-height: 5vmax;
             user-select: none;
             backdrop-filter: blur(20px);
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: var(--primary-bg);
             .back {
                 // width: 3vmax;
                 // height: 3vmax;
@@ -85,7 +85,7 @@
                 transition: 0.2s all;
                 font-size: 3vmax;
                 &:hover {
-                    background-color: #a4a4a44b;
+                    background-color: var(--secondary-bg);
                 }
             }
         }

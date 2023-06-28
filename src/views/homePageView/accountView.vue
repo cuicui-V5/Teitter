@@ -102,7 +102,24 @@
 
     const isShowEdit = ref(false);
     const route = useRoute();
+    const getUserInfo = async () => {
+        const res = await reqUserInfo(userId);
+        userInfo.value = res;
+    };
+
+    const getUserTweet = async () => {
+        const res = await reqUserTweet(userId);
+        userTweet.value = res;
+    };
     let userId = route.params.userId as string;
+    if (!userId || userId === "0") {
+        router.push({
+            name: "login",
+        });
+    } else {
+        getUserInfo();
+        getUserTweet();
+    }
     watch(route, () => {
         console.log("改变了");
         userId = route.params.userId as string;
@@ -180,20 +197,6 @@
             });
         }
     }, 500);
-
-    const getUserInfo = async () => {
-        const res = await reqUserInfo(userId);
-        console.log(res);
-
-        userInfo.value = res;
-    };
-    getUserInfo();
-
-    const getUserTweet = async () => {
-        const res = await reqUserTweet(userId);
-        userTweet.value = res;
-    };
-    getUserTweet();
 </script>
 
 <style scoped lang="less">
@@ -252,7 +255,7 @@
             .bgImg {
                 height: 20vmax;
                 margin-bottom: 10vmax;
-                background-color: #1d9bf0;
+                background-color: var(--main-color);
                 background-position: center;
                 background-size: cover;
             }
@@ -262,10 +265,10 @@
                 height: 15vmax;
                 top: 13vmax;
                 left: 2vmax;
-                border: 2px solid #1d9bf0;
+                border: 2px solid var(--main-color);
                 border-radius: 50%;
                 background-size: cover;
-                background-color: #fff;
+                background-color: var(--primary-bg);
                 background-position: center;
             }
             #editUserInfo {

@@ -20,3 +20,25 @@ html::-webkit-scrollbar {
   background-color: #add8e6;
   color: #000;
 }
+:root,
+.light-mode {
+  --main-color: #1d9bf0;
+  --primary-bg: #fff;
+  --secondary-bg: #f7f9f9;
+  --text-main: black;
+  --text-second: #536471;
+  --text-code: #333;
+}
+.dark-mode {
+  --main-color: #1d9bf0;
+  --primary-bg: #15202b;
+  --secondary-bg: #1c2732;
+  --text-main: #f7f9f9;
+  --text-second: #8a97a4;
+  --text-code: #8a97a4;
+}
+html {
+  color: var(--text-main);
+  background-color: var(--primary-bg);
+  transition: 0.3s background-color;
+}

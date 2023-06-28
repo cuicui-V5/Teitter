@@ -442,7 +442,7 @@
     .main {
         position: relative;
         width: 80vw;
-        background-color: #fff;
+        background-color: var(--primary-bg);
         margin: auto;
         border-radius: 30px;
         box-shadow: #00000065 0 0 50px 20px;
@@ -465,8 +465,8 @@
             // top: 25%;
             width: 20px;
             height: 20px;
-            border-left: 5px solid #ffffff;
-            border-top: 5px solid #ffffff;
+            border-left: 5px solid var(--primary-bg);
+            border-top: 5px solid var(--primary-bg);
             mix-blend-mode: difference;
         }
         #rightTop {
@@ -476,8 +476,8 @@
             // top: 25%;
             width: 20px;
             height: 20px;
-            border-right: 5px solid #ffffff;
-            border-top: 5px solid #ffffff;
+            border-right: 5px solid var(--primary-bg);
+            border-top: 5px solid var(--primary-bg);
             mix-blend-mode: difference;
         }
         #leftBottom {
@@ -487,8 +487,8 @@
             // top: 75%;
             width: 20px;
             height: 20px;
-            border-left: 5px solid #ffffff;
-            border-bottom: 5px solid #ffffff;
+            border-left: 5px solid var(--primary-bg);
+            border-bottom: 5px solid var(--primary-bg);
             mix-blend-mode: difference;
         }
         #rightBottom {
@@ -498,8 +498,8 @@
             // top: 75%;
             width: 20px;
             height: 20px;
-            border-right: 5px solid #ffffff;
-            border-bottom: 5px solid #ffffff;
+            border-right: 5px solid var(--primary-bg);
+            border-bottom: 5px solid var(--primary-bg);
             mix-blend-mode: difference;
         }
     }

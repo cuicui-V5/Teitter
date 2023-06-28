@@ -247,7 +247,7 @@
                     font-weight: bold;
                 }
                 .username {
-                    color: #546572;
+                    color: var(--text-second);
                 }
             }
         }
@@ -272,7 +272,7 @@
                 padding: 1vmax 0;
 
                 font-size: 1.2vmax;
-                border-bottom: 1px solid #eff3f4;
+                border-bottom: 1px solid var(--secondary-bg);
             }
             .detail {
                 margin-top: 1vmax;
@@ -285,7 +285,7 @@
         }
         .bottom {
             padding: 1vmax 0;
-            border: 1px solid #eff3f4;
+            border: 1px solid var(--secondary-bg);
             display: flex;
             justify-content: space-around;
             font-size: 1.45vmax;
@@ -341,10 +341,7 @@
                     }
 
                     .likes-amount {
-                        font-size: 1.2vmax;
-                        font-family: "Roboto", sans-serif;
-                        color: #888;
-                        font-weight: 900;
+                        font-size: 1vmax;
                         margin-left: 6px;
                     }
                 }

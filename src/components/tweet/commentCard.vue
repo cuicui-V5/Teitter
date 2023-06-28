@@ -184,7 +184,7 @@
         padding: 1vmax;
         transition: all 0.2s;
         &:hover {
-            background-color: #f7f7f7;
+            background-color: var(--secondary-bg);
         }
         &:hover .delBtn {
             display: block;
@@ -228,22 +228,20 @@
                 font-size: 1.25vmax;
 
                 .nick {
-                    color: #0f1419;
                     font-weight: bold;
                 }
                 .username {
                     margin-left: 4px;
-                    color: #536471;
+                    color: var(--text-second);
                 }
                 .time {
-                    color: #536471;
+                    color: var(--text-second);
                 }
             }
             .content {
                 padding: 0.3vmax;
                 font-size: 1.2vmax;
                 margin-top: 0.3vmax;
-                color: #0f1419;
                 margin-bottom: 0.5vmax;
             }
             .bottom {
@@ -301,10 +299,7 @@
                         }
 
                         .likes-amount {
-                            font-size: 1.2vmax;
-                            font-family: "Roboto", sans-serif;
-                            color: #888;
-                            font-weight: 900;
+                            font-size: 1vmax;
                             margin-left: 6px;
                         }
                     }

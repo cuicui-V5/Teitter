@@ -123,7 +123,7 @@
                 text-align: center;
                 cursor: pointer;
                 &.current {
-                    border-bottom: solid 6px #1d9bf0;
+                    border-bottom: solid 6px var(--main-color);
                 }
             }
         }

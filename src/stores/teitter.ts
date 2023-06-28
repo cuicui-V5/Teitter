@@ -37,6 +37,8 @@ export const useTeitterStore = defineStore("teitter", () => {
         }
     };
 
+    const isDarkMode = ref(false);
+
     return {
         teitters,
         searchResultTeitters,
@@ -45,5 +47,6 @@ export const useTeitterStore = defineStore("teitter", () => {
         getSearchRes,
         notice,
         getNotice,
+        isDarkMode,
     };
 });
