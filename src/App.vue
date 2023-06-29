@@ -14,6 +14,8 @@
     import msgBox from "@/components/msgBox.vue";
     import { provide, ref } from "vue";
     import { useTeitterStore } from "./stores/teitter";
+    import { checkDarkMode, changeDarkModeAsSystem } from "@/utils/darkMode";
+
     const store = useTeitterStore();
 
     const showMsgBox = ref(false);
@@ -44,6 +46,11 @@
     setInterval(() => {
         store.getNotice();
     }, 10000);
+
+    checkDarkMode();
+    window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", changeDarkModeAsSystem);
 </script>
 
 <style></style>

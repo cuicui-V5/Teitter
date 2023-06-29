@@ -101,6 +101,7 @@
                 height: 100%;
                 border: 0;
                 font-size: 1.5vmax;
+                background-color: transparent;
                 &:focus {
                     outline: 0;
                     border: 0;

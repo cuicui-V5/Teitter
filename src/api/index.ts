@@ -5,6 +5,7 @@ import type {
     teitter,
     userInfo,
     hotNewsDataType,
+    commentRes,
 } from "@/interfaces/pubInterface";
 
 import { useTeitterStore } from "./../stores/teitter";
@@ -50,7 +51,7 @@ export async function getTeitter(isFlush?: boolean) {
 
         option.value.teitterCount = res.data.data.total;
 
-        const resTeitters: Array<teitter> = res.data.data.records;
+        const resTeitters: Array<Tweet> = res.data.data.records;
 
         // 追加到现有的数据中
         resTeitters.forEach(item => {
@@ -223,12 +224,10 @@ export async function getComment(tweetId: string) {
         const res = await request.get(`/comment/getComment/${tweetId}`);
         // console.log(res.data);
 
-        return res.data;
+        return res.data as commentRes;
     } catch (error) {
         sendMsg((error as Error).message);
-        return {
-            status: 400,
-        };
+        return Promise.reject(error);
     }
 }
 export async function publishComment(

@@ -1,21 +1,25 @@
 <template>
     <div class="noNetWork">
-        <span class="noNetWorkSpan iconfont icon-lixian"></span>
-        <div class="content">出错了。请尝试重新加载。</div>
+        <lottieComponent
+            style="width: 40%; margin: 0 auto"
+            :json="networkErrJson"
+            :loop="true"
+        />
         <button @click="$emit(`event`)">重试</button>
     </div>
 </template>
 
 <script setup lang="ts">
+    import lottieComponent from "@/components/lottie.vue";
+
+    import networkErrJson from "@/lottie/networderr.json";
     defineEmits(["event"]);
 </script>
 
 <style scoped lang="less">
     .noNetWork {
         text-align: center;
-        .noNetWorkSpan {
-            font-size: 6vmax;
-        }
+
         .content {
             margin-top: 1vmax;
             font-size: 3vmax;

@@ -13,7 +13,6 @@
             </div>
         </div>
         <div class="content">
-            <!-- {{ tweetInfo?.content }} -->
             <div
                 v-html="contentComputed"
                 class="text"
@@ -222,13 +221,18 @@
 
 <style scoped lang="less">
     .twtCard {
+        padding: 1vmax;
+        background-color: var(--secondary-bg);
         .top {
             display: flex;
             .avatar {
+                width: 4vmax;
+                z-index: 999;
                 span {
                     display: block;
-                    width: 3vmax;
-                    height: 3vmax;
+                    width: 2.7vmax;
+                    height: 2.7vmax;
+                    margin: 0 auto;
                     border-radius: 50%;
                     background-size: cover;
                     transition: all 0.3s;
@@ -241,7 +245,6 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-evenly;
-                margin-left: 1.5vmax;
                 .nickname {
                     font-size: 1.4vmax;
                     font-weight: bold;
@@ -269,13 +272,12 @@
         }
         .info {
             .time {
-                padding: 1vmax 0;
+                padding-top: 1vmax;
 
                 font-size: 1.2vmax;
                 border-bottom: 1px solid var(--secondary-bg);
             }
             .detail {
-                margin-top: 1vmax;
                 font-size: 1.2vmax;
 
                 i {

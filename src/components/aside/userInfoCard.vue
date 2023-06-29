@@ -77,9 +77,9 @@
         top: -17vmax;
         width: 20vmax;
         padding: 2vmax;
-        border: 1px solid #e1e4e6;
+        border: 1px solid var(--secondary-bg);
         border-radius: 2vmax;
-        background-color: white;
+        background-color: var(--primary-bg);
         box-shadow: 0 0 1vmax 0.1vmax #e1e4e6;
         .info {
             display: flex;
@@ -115,13 +115,13 @@
         .option {
             display: block;
             padding: 1.2vmax 0;
-            color: black;
             text-decoration: none;
             font-size: 1.2vmax;
             user-select: none;
             transition: all 0.2s;
+            color: var(--text-main);
             &:hover {
-                background-color: #f7f9f9;
+                background-color: var(--secondary-bg);
             }
         }
     }

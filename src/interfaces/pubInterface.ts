@@ -54,6 +54,8 @@ export interface Comment {
 export interface Tweet {
     tweetId: bigint;
     uid: bigint;
+    level: number;
+    parentTweetId: bigint;
     content: string;
     createDate: number;
     likeCount: number;
@@ -66,6 +68,7 @@ export interface Tweet {
     likeStatus: boolean;
     tweetImg: string;
     tweetVideo: string;
+    repliedNickNameTo: string;
 }
 export interface noticeData {
     nickName: string;

@@ -94,7 +94,7 @@
     import { editUserInfo, uploadFile } from "@/api";
     import type { userInfo } from "@/interfaces/pubInterface";
     import { useTeitterStore } from "@/stores/teitter";
-    import { imgCompress } from "@/utils";
+    import { imgCompress } from "@/utils/imgCompress";
     import { computed, inject, ref, toRaw, toRefs } from "vue";
     const props = defineProps<{
         userInfo: userInfo;

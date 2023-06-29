@@ -89,7 +89,7 @@
     import { inject } from "vue";
 
     // 引入图片压缩
-    import { imgCompress } from "@/utils/index";
+    import { imgCompress } from "@/utils/imgCompress";
 
     const fileInput = ref<HTMLInputElement>();
     const imageContainer = ref<HTMLImageElement>();
@@ -272,12 +272,12 @@
                 height: 5vmax;
                 padding: 1vmax;
                 border: 0;
-                color: #000000;
                 background-color: transparent;
                 font-weight: normal;
                 font-size: 1.5vmax;
                 resize: none;
                 margin-bottom: 2vmax;
+                color: var(--text-main);
                 &:focus {
                     outline: 0;
                     border: 0;
@@ -341,8 +341,8 @@
                     font-size: 1.1vmax;
                     background: #1da1f2;
                     bottom: 100%;
-                    color: var(--primary-bg);
                     display: block;
+                    color: var(--text-main);
                     left: -40px;
                     margin-bottom: 15px;
                     opacity: 0;

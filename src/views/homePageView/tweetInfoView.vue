@@ -7,11 +7,18 @@
             ></span>
             <span>忒文</span>
         </div>
+        <template v-if="replyList">
+            <theTeitterCard
+                v-for="tweet in replyList"
+                :key="tweet.tweetId.toString"
+                :teitter="tweet"
+                :is-show-dividing="true"
+            ></theTeitterCard>
+        </template>
+        <template v-if="commentInfo">
+            <TweetInfoCard :tweetInfo="commentInfo.tweet"></TweetInfoCard>
+        </template>
 
-        <TweetInfoCard
-            v-if="commentInfo"
-            :tweetInfo="commentInfo?.tweet"
-        ></TweetInfoCard>
         <Comment
             v-if="commentInfo"
             :comments="commentInfo?.comments || []"
@@ -25,7 +32,8 @@
     import { getComment } from "@/api";
     import Comment from "@/components/tweet/comment.vue";
     import TweetInfoCard from "@/components/tweet/tweetInfoCard.vue";
-    import type { commentRes } from "@/interfaces/pubInterface";
+    import theTeitterCard from "@/components/mainArea/theTeitterCard.vue";
+    import type { commentRes, Tweet } from "@/interfaces/pubInterface";
     import router from "@/router";
     import { ref, toRef, type Ref, watch } from "vue";
     import { useRoute } from "vue-router";
@@ -36,20 +44,41 @@
         router.back();
     };
     const commentInfo = ref<commentRes | null>(null);
+    const replyList = ref([]) as Ref<Tweet[]>;
+
     const init = async () => {
         commentInfo.value = await getComment(route.params.tweetId as string);
         console.log(commentInfo);
+        getReplyList();
     };
 
     watch(
         route,
         () => {
             init();
+            replyList.value.length = 0;
         },
         {
             immediate: true,
         },
     );
+
+    const getReplyList = async () => {
+        // 生成回复列表
+        if (commentInfo.value) {
+            replyList.value.unshift(commentInfo.value.tweet);
+        }
+        // 如果此推文存在parentTweetId, 那么就获取此父推文, unshift 加入replyList中
+        while (replyList.value.length && replyList.value[0].parentTweetId) {
+            const reply = await getComment(
+                replyList.value[0].parentTweetId.toString(),
+            );
+
+            replyList.value.unshift(reply.tweet);
+        }
+        replyList.value.pop();
+        console.log(replyList.value);
+    };
 </script>
 
 <style scoped lang="less">

@@ -23,19 +23,19 @@
         z-index: 9999;
         transform: translate(-50%);
         .msgBox {
-            min-width: 20vmax;
-            height: 5vmax;
+            min-width: 12vmax;
+            height: 3vmax;
 
             background-color: var(--main-color);
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 1vmax;
+            border-radius: 1.5vmax;
             box-shadow: #333 0vmax 0vmax 17px -6px;
-            padding: 0 1vmax;
+            padding: 0 0.3vmax;
             span {
                 color: white;
-                font-size: 1.5vmax;
+                font-size: 1.2vmax;
             }
         }
         .warn {

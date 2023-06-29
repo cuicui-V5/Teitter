@@ -1,6 +1,6 @@
 <template>
     <div class="account">
-        <div class="tittle animate__animated animate__fadeIn faster">
+        <div class="tittle">
             <div class="top">
                 <span
                     class="back iconfont icon-jiantou_xiangzuo"
@@ -79,6 +79,7 @@
         </div>
         <theTeitterCardVue
             :teitter="tweet"
+            :replyTo="tweet.repliedNickNameTo"
             @flush="getUserTweet"
             v-for="tweet in userTweet"
         />
@@ -215,7 +216,7 @@
             width: 100%;
             user-select: none;
             backdrop-filter: blur(20px);
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: var(--primary-bg);
             position: fixed;
             top: 0;
             .top {
@@ -229,7 +230,7 @@
                     transition: 0.2s all;
                     font-size: 3vmax;
                     &:hover {
-                        background-color: #a4a4a44b;
+                        background-color: var(--secondary-bg);
                     }
                 }
                 .nickNameAndCount {
@@ -250,7 +251,7 @@
             width: 100%;
             position: relative;
             padding-bottom: 2vmax;
-            border-bottom: 1px solid #e7e7e8;
+            border-bottom: 1px solid var(--secondary-bg);
 
             .bgImg {
                 height: 20vmax;

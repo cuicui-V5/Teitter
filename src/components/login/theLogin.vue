@@ -94,6 +94,7 @@
         }
         input {
             border-radius: 0.2vmax;
+            background-color: var(--secondary-bg);
             border: #cfd9de 1px solid;
             padding: 0.2vmax;
             width: 100%;

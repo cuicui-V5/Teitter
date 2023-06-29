@@ -13,7 +13,14 @@
             class="avatar"
             @click.stop="goAccount"
         >
-            <span :style="avatarUrlStyle"></span>
+            <span
+                class="avatarSpan"
+                :style="avatarUrlStyle"
+            ></span>
+            <span
+                class="dividing"
+                v-if="isShowDividing"
+            ></span>
         </div>
         <div
             class="mainArea"
@@ -24,6 +31,15 @@
                 <span class="username">@{{ teitter.userName }}</span>
                 -
                 <span class="time">{{ timeComputed }}</span>
+            </div>
+            <div
+                class="reply-to"
+                v-if="replyTo"
+            >
+                回复
+                <span style="color: var(--text-second)">
+                    {{ replyTo }}
+                </span>
             </div>
             <div class="content">
                 <!-- {{ teitter.content }} -->
@@ -101,7 +117,7 @@
     import RelativeTime from "dayjs/plugin/relativeTime";
     import "dayjs/locale/zh-cn";
     import { computed, inject, ref, toRefs } from "vue";
-    import type { teitter } from "@/interfaces/pubInterface";
+    import type { teitter, Tweet } from "@/interfaces/pubInterface";
     import { like, reqDelTweet, unLike } from "@/api";
     import router from "@/router";
     import { useTeitterStore } from "@/stores/teitter";
@@ -117,7 +133,9 @@
     dayjs.locale("zh-cn");
 
     const props = defineProps<{
-        teitter: teitter;
+        teitter: Tweet;
+        replyTo?: string;
+        isShowDividing?: boolean;
     }>();
     const emit = defineEmits(["flush"]);
     const { teitter } = toRefs(props);
@@ -255,7 +273,8 @@
         }
         .avatar {
             width: 4vmax;
-            span {
+            position: relative;
+            .avatarSpan {
                 display: block;
                 width: 2.7vmax;
                 height: 2.7vmax;
@@ -268,6 +287,16 @@
                 &:hover {
                     transform: scale(1.1);
                 }
+            }
+            .dividing {
+                position: absolute;
+                left: 50%;
+                top: 3.3vmax;
+                display: block;
+                width: 0.2vmax;
+                height: 100%;
+                background-color: var(--text-main);
+                opacity: 40%;
             }
         }
         .mainArea {
@@ -286,10 +315,13 @@
                     color: var(--text-second);
                 }
             }
+            .reply-to {
+                font-size: 1vmax;
+            }
             .content {
                 padding: 0.3vmax;
                 font-size: 1.2vmax;
-                margin-top: 0.3vmax;
+                // margin-top: 0.3vmax;
                 margin-bottom: 0.2vmax;
                 :global(code) {
                     display: inline-block;

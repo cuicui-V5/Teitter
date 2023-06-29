@@ -5,8 +5,8 @@ import { reqNotice, reqSearch } from "@/api";
 import type { Tweet, noticeData } from "./../interfaces/pubInterface";
 
 export const useTeitterStore = defineStore("teitter", () => {
-    const teitters = ref<teitter[]>([]);
-    const searchResultTeitters = ref<teitter[]>([]);
+    const teitters = ref<Tweet[]>([]);
+    const searchResultTeitters = ref<Tweet[]>([]);
 
     const userInfo = ref<userInfo>({
         isLogin: false,
