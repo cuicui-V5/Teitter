@@ -84,7 +84,7 @@
 <style scoped lang="less">
     .twtInfo {
         flex: 605;
-        padding-top: 6vmax;
+        padding-top: 5vmax;
         overflow-y: scroll;
         &::-webkit-scrollbar {
             display: none;
@@ -99,7 +99,7 @@
             // width: 59.3vmax;
             width: 67%;
             font-weight: bold;
-            font-size: 2vmax;
+            font-size: 1.5vmax;
             line-height: 5vmax;
             user-select: none;
             backdrop-filter: blur(20px);

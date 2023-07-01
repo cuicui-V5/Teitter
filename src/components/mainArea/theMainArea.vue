@@ -6,7 +6,7 @@
     >
         <!-- animate__animated animate__fadeIn -->
         <div class="tittle">
-            忒特 v2.1.0 20230629
+            忒特 v2.1.0 20230701
             <span
                 class="iconfont"
                 :class="{

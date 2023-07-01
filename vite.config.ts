@@ -62,14 +62,9 @@ export default defineConfig({
                 ],
             },
             workbox: {
+                cleanupOutdatedCaches: true,
+                skipWaiting: true,
                 runtimeCaching: [
-                    {
-                        urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts静态资源缓存
-                        handler: "NetworkFirst",
-                        options: {
-                            cacheName: "js-css-cache",
-                        },
-                    },
                     {
                         urlPattern:
                             /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
