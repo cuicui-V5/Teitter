@@ -82,6 +82,7 @@
         v-if="isShowImgClipper"
         :file="img"
         :quality="0.5"
+        @cancel="cancelClip"
         @output="getClippedImg"
     ></imgClipper>
 </template>
@@ -134,6 +135,7 @@
         isShowImgClipper.value = false;
         imageUrl.value = await uploadFile(res, "image.webp");
     };
+
     async function publishBtn() {
         isSending.value = true;
         const fd = new FormData();
@@ -241,6 +243,9 @@
                 isUpLoading.value = false;
             }
         }
+    };
+    const cancelClip = () => {
+        isShowImgClipper.value = false;
     };
 </script>
 

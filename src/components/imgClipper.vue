@@ -11,6 +11,7 @@
                         v-if="imgURL"
                         :src="imgURL"
                         draggable="false"
+                        ref="previewImg"
                         style="width: 100%"
                     />
                     <div
@@ -70,6 +71,7 @@
                 />
                 <div class="btns">
                     <button @click="submit">确定</button>
+                    <button @click="cancel">取消</button>
                 </div>
             </div>
         </div>
@@ -82,19 +84,20 @@
     };
 </script>
 <script setup lang="ts">
-    import { toRefs, ref, watch, reactive, computed } from "vue";
+    import { toRefs, ref, watch, reactive, computed, onMounted } from "vue";
     import lodash from "lodash";
     const imgURL = ref("");
     const clippedBlob = ref<Blob>();
     const contain = ref<HTMLDivElement>();
     const selection = ref<HTMLDivElement>();
     const preview = ref<HTMLImageElement>();
+    const previewImg = ref<HTMLImageElement>();
     const currentHorn = ref<HTMLDivElement>();
     const props = defineProps<{
         file: File | undefined;
         quality: number;
     }>();
-    const emit = defineEmits(["output"]);
+    const emit = defineEmits(["output", "cancel"]);
     let initPosition = {
         mouseX: 0,
         mouseY: 0,
@@ -103,15 +106,15 @@
 
     const hornPosition = reactive({
         leftTop: {
-            positionX: 50,
-            positionY: 50,
+            positionX: 0,
+            positionY: 0,
         },
         rightTop: {
             positionX: 150,
-            positionY: 50,
+            positionY: 0,
         },
         leftBottom: {
-            positionX: 50,
+            positionX: 0,
             positionY: 150,
         },
         rightBottom: {
@@ -119,6 +122,25 @@
             positionY: 150,
         },
     });
+    watch(
+        previewImg,
+        () => {
+            if (previewImg.value) {
+                previewImg.value.onload = () => {
+                    hornPosition.rightTop.positionX =
+                        previewImg.value!.width - 20;
+                    hornPosition.leftBottom.positionY =
+                        previewImg.value!.height - 20;
+                    hornPosition.rightBottom.positionX =
+                        previewImg.value!.width - 20;
+                    hornPosition.rightBottom.positionY =
+                        previewImg.value!.height - 20;
+                };
+            }
+        },
+        {},
+    );
+
     let initHornPosition = {} as any;
     const selectionPosition = computed(() => {
         const leftTopX = hornPosition.leftTop.positionX;
@@ -419,6 +441,9 @@
     const submit = () => {
         emit("output", clippedBlob.value);
     };
+    const cancel = () => {
+        emit("cancel");
+    };
     clip();
     document.addEventListener("mouseup", () => {
         document.removeEventListener("mousemove", handelMoveSelection);
@@ -426,6 +451,8 @@
     document.addEventListener("mouseup", () => {
         document.removeEventListener("mousemove", handelMoveHorn);
     });
+
+    // 如果是移动端, 则不使用裁剪
 </script>
 
 <style scoped lang="less">
@@ -511,6 +538,7 @@
         top: 5%;
         right: 5%;
         button {
+            display: block;
             width: 5.12vmax;
             height: 3.65vmax;
             margin: 1vmax;
