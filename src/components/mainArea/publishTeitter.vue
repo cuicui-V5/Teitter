@@ -115,8 +115,9 @@
     });
     const props = defineProps<{
         isReply?: boolean;
+        parentTweetId?: string;
     }>();
-
+    const emit = defineEmits(["flush"]);
     const activeClass = ref("");
     const content = ref("");
     const isShowImgClipper = ref(false);
@@ -138,18 +139,20 @@
 
     async function publishBtn() {
         isSending.value = true;
-        const fd = new FormData();
+        if (content.value == "") {
+            content.value = " ";
+        }
+        const opt = {
+            content: content.value,
+            tweetImg: imageUrl.value,
+            tweetVideo: videoUrl.value,
+            parentTweetId: props.parentTweetId,
+        };
 
-        fd.append("content", content.value);
-        if (imageUrl.value) {
-            fd.append("tweetImg", imageUrl.value);
-        }
-        if (videoUrl.value) {
-            fd.append("tweetVideo ", videoUrl.value);
-        }
-        const res = await publish(fd);
+        const res = await publish(opt);
         if (res == "ok") {
             getTeitter(true);
+            emit("flush");
             content.value = "";
             isSending.value = false;
             imageUrl.value = undefined;
@@ -329,7 +332,8 @@
                 width: 60%;
                 img {
                     border-radius: 20px;
-                    width: 100%;
+                    max-height: 80vh;
+                    max-width: 100%;
                 }
             }
             .videoContainer {
@@ -337,8 +341,8 @@
                 width: 60%;
                 video {
                     border-radius: 20px;
-
-                    width: 100%;
+                    max-height: 80vh;
+                    max-width: 100%;
                 }
             }
             .imageInput {

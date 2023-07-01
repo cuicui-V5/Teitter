@@ -30,18 +30,28 @@
         <publishTeitter
             v-if="store.userInfo.isLogin"
             :is-reply="true"
+            :parent-tweet-id="twtId.toString()"
+            @flush="flushComment"
         ></publishTeitter>
 
-        <CommentCard
+        <!-- <CommentCard
             v-for="comment in comments"
             :comment="comment"
             @flush="flushComment"
-        ></CommentCard>
+        ></CommentCard> -->
+        <theTeitterCard
+            v-for="tweet in comments"
+            :key="tweet.tweetId.toString"
+            :teitter="tweet"
+            @flush="flushComment"
+            :is-show-dividing="false"
+        ></theTeitterCard>
     </div>
 </template>
 
 <script setup lang="ts">
     import CommentCard from "./commentCard.vue";
+    import theTeitterCard from "@/components/mainArea/theTeitterCard.vue";
     import publishTeitter from "@/components/mainArea/publishTeitter.vue";
     import type { Comment } from "@/interfaces/pubInterface";
     import { publishComment } from "@/api";
