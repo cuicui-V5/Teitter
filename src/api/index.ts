@@ -468,3 +468,15 @@ export const reqHotNews = async () => {
         return Promise.reject(error);
     }
 };
+export const reqFansChart = async () => {
+    try {
+        const res = await request.get(`/news/getHot`);
+        if (res.data.status == 200) {
+            return res.data.data as hotNewsDataType[];
+        } else {
+            return Promise.reject(new Error(res.data.msg));
+        }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+};

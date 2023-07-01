@@ -199,7 +199,7 @@
 
                     text-align: center;
                     font-size: 1vmax;
-                    color: var(--text-main);
+                    color: white;
                     line-height: 2vmax;
                     width: 2vmax;
                     height: 2vmax;

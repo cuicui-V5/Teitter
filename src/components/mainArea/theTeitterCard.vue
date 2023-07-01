@@ -276,8 +276,8 @@
             position: relative;
             .avatarSpan {
                 display: block;
-                width: 2.7vmax;
-                height: 2.7vmax;
+                width: 3.2vmax;
+                height: 3.2vmax;
                 margin: 0 auto;
                 border-radius: 50%;
                 // background-image: url(../../img/defaultAvatar.jpg);
@@ -344,14 +344,12 @@
                 img {
                     margin-top: 1vmax;
                     border-radius: 20px;
-
-                    width: 80%;
+                    max-height: 80vh;
                 }
                 video {
                     margin-top: 1vmax;
                     border-radius: 20px;
-
-                    width: 80%;
+                    max-height: 80vh;
                 }
             }
             .bottom {

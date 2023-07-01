@@ -1,11 +1,20 @@
 <template>
-    <div class="publishTeitter">
+    <div
+        class="publishTeitter"
+        :style="{
+            minHeight: isReply ? '2vmax' : '13vmax',
+        }"
+    >
         <div class="avatarShow">
             <span :style="avatarUrlStyle"></span>
         </div>
         <div class="publish">
             <textarea
-                placeholder="有什么新鲜事 ? !  支持Markdown语法, ctrl+enter发送"
+                :placeholder="
+                    isReply
+                        ? '发布你的回复 !'
+                        : '有什么新鲜事 ? !  支持Markdown, ctrl+enter发送'
+                "
                 v-model="content"
                 @keydown.ctrl.enter="publishBtn()"
                 @paste="appendImageOnPaste"
@@ -22,7 +31,7 @@
                 @click="fileInput?.click()"
                 v-if="!isUpLoading"
             >
-                <div class="tooltip">可上传图片与MP4视频, 大小20Mb以内!</div>
+                <div class="tooltip">上传20Mb以内的媒体</div>
             </span>
             <div class="uploadLoader">
                 <TheLoad v-if="isUpLoading"></TheLoad>
@@ -33,7 +42,7 @@
                 @click="publishBtn"
                 v-if="!isSending"
             >
-                发忒
+                {{ isReply ? "回复" : "发忒" }}
             </button>
             <TheLoad
                 v-if="isSending"
@@ -81,11 +90,9 @@
     import imgClipper from "../imgClipper.vue";
     import { useTeitterStore } from "@/stores/teitter";
     import { computed, ref, toRefs, watch } from "vue";
-    import axios from "axios";
     import TheLoad from "../theLoad.vue";
 
     import { publish, getTeitter, uploadFile } from "@/api";
-    import request from "@/api/request";
     import { inject } from "vue";
 
     // 引入图片压缩
@@ -105,6 +112,9 @@
     const avatarUrlStyle = computed(() => {
         return `background-image: url(${userInfo.value.avatarUrl}); `;
     });
+    const props = defineProps<{
+        isReply?: boolean;
+    }>();
 
     const activeClass = ref("");
     const content = ref("");
@@ -237,7 +247,7 @@
 <style scoped lang="scss">
     .publishTeitter {
         display: flex;
-        min-height: 13vmax;
+        // min-height: 13vmax;
         border-bottom: var(--secondary-bg) 1px solid;
         transition: all 0.3s;
         background-color: var(--primary-bg);
@@ -269,8 +279,9 @@
             textarea {
                 position: relative;
                 width: 100%;
-                height: 5vmax;
-                padding: 1vmax;
+                // height: 5vmax;
+                padding-left: 1vmax;
+                padding-top: 1vmax;
                 border: 0;
                 background-color: transparent;
                 font-weight: normal;
@@ -329,7 +340,8 @@
                 display: none;
             }
             .imageSelector {
-                position: relative;
+                position: absolute;
+                bottom: 0;
                 color: #56b4f4;
                 font-size: 2vmax;
                 border-radius: 50%;
@@ -342,14 +354,15 @@
                     background: #1da1f2;
                     bottom: 100%;
                     display: block;
-                    color: var(--text-main);
-                    left: -40px;
+                    color: white;
+                    left: -1vmax;
                     margin-bottom: 15px;
                     opacity: 0;
                     padding: 1vmax;
                     pointer-events: none;
                     position: absolute;
-                    width: 20vmax;
+                    width: 15vmax;
+                    text-align: center;
                     border-radius: 20px;
                     transform: translateY(10px);
                     transition: all 0.25s ease-out;

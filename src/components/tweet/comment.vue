@@ -2,7 +2,7 @@
     <div class="comment">
         <div
             class="publishComment"
-            v-if="store.userInfo.isLogin"
+            v-if="false"
         >
             <div class="avatar">
                 <span :style="avatarUrlStyle"></span>
@@ -27,6 +27,11 @@
                 </button>
             </div>
         </div>
+        <publishTeitter
+            v-if="store.userInfo.isLogin"
+            :is-reply="true"
+        ></publishTeitter>
+
         <CommentCard
             v-for="comment in comments"
             :comment="comment"
@@ -37,6 +42,7 @@
 
 <script setup lang="ts">
     import CommentCard from "./commentCard.vue";
+    import publishTeitter from "@/components/mainArea/publishTeitter.vue";
     import type { Comment } from "@/interfaces/pubInterface";
     import { publishComment } from "@/api";
     import { ref, inject, computed, toRefs } from "vue";
