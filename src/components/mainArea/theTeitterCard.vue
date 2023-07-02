@@ -403,7 +403,7 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            transition: all 0.2s ease;
+                            transition: all 0.2s;
                             &:hover {
                                 background: rgba(255, 192, 200, 0.7);
                             }

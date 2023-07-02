@@ -139,7 +139,7 @@
                     background-color: #eff3f4;
                     outline: 0;
                     border: 1px solid transparent;
-                    transition: all 200ms;
+                    transition: all 0.2s;
 
                     &:focus {
                         border: 1px solid #47aef2;

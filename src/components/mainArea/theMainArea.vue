@@ -110,7 +110,7 @@
                 display: block;
 
                 font-size: 2vmax;
-                transition: all 0.3s;
+                transition: all 0.2s;
                 &:hover {
                     transform: scale(1.5);
                 }

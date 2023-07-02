@@ -65,7 +65,7 @@
                 background-color: var(--primary-bg);
                 outline: 0;
                 border: 1px solid #47aef2;
-                transition: all 200ms;
+                transition: all 0.2s;
 
                 &:focus,
                 &:hover {

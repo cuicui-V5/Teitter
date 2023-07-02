@@ -282,7 +282,7 @@
                 font-size: 1.4vmax;
                 font-weight: bold;
                 border: 1px solid #d4dde1;
-                transition: all 200ms;
+                transition: all 0.2s;
                 &:hover {
                     background-color: #e7e7e8;
                 }
@@ -297,7 +297,7 @@
                 font-size: 1.4vmax;
                 font-weight: bold;
                 border: 1px solid #d4dde1;
-                transition: all 200ms;
+                transition: all 0.2s;
                 &:hover {
                     background-color: #e7e7e8;
                 }

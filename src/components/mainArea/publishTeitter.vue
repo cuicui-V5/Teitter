@@ -374,7 +374,7 @@
                     text-align: center;
                     border-radius: 20px;
                     transform: translateY(10px);
-                    transition: all 0.25s ease-out;
+                    transition: all 0.2s;
                     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
                 }
 

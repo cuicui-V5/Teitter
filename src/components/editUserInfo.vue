@@ -347,7 +347,7 @@
                             font-size: 1.5vmax;
                             border-radius: 15px;
                             border: 1px solid #cfd9de;
-                            transition: all 200ms;
+                            transition: all 0.2s;
                             &:focus {
                                 border: 4px solid var(--main-color);
                                 outline: 0;
@@ -376,7 +376,7 @@
                             border-radius: 15px;
                             border: 1px solid #cfd9de;
                             resize: none;
-                            transition: all 200ms;
+                            transition: all 0.2s;
 
                             &:focus {
                                 border: 4px solid var(--main-color);
@@ -405,7 +405,7 @@
                             font-size: 1.5vmax;
                             border-radius: 15px;
                             border: 1px solid #cfd9de;
-                            transition: all 200ms;
+                            transition: all 0.2s;
 
                             &:focus {
                                 border: 4px solid var(--main-color);
