@@ -246,7 +246,6 @@
         display: flex;
         min-height: 5vmax;
         padding: 1vmax;
-        transition: all 0.2s;
         background-color: var(--primary-bg);
         color: var(--text-main);
         &:hover {
