@@ -1,5 +1,5 @@
 <template>
-    <div class="animate__animated animate__fadeIn faster container">
+    <div class="container">
         <div class="title">私信</div>
     </div>
 </template>

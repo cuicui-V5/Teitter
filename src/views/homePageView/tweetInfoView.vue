@@ -48,10 +48,14 @@
     const replyList = ref([]) as Ref<Tweet[]>;
 
     const init = async () => {
-        replyList.value.length = 0;
-        commentInfo.value = await getComment(route.params.tweetId as string);
-        console.log(commentInfo);
-        getReplyList();
+        if (route.params.tweetId) {
+            replyList.value.length = 0;
+            commentInfo.value = await getComment(
+                route.params.tweetId as string,
+            );
+            console.log(commentInfo);
+            getReplyList();
+        }
     };
 
     watch(

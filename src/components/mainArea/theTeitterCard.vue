@@ -345,13 +345,13 @@
                     margin-top: 1vmax;
                     border-radius: 20px;
                     max-height: 80vh;
-                    max-width: 100%;
+                    max-width: 90%;
                 }
                 video {
                     margin-top: 1vmax;
                     border-radius: 20px;
                     max-height: 80vh;
-                    max-width: 100%;
+                    max-width: 90%;
                 }
             }
             .bottom {

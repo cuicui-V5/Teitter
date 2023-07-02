@@ -140,3 +140,8 @@ export interface Children {
     type: string;
     thumbnail: string;
 }
+export interface FansChart {
+    nickName: string[];
+    fansCount: number[];
+    userAvatarUrl: string[];
+}

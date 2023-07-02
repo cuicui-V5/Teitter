@@ -45,9 +45,8 @@
                 </div>
             </RouterLink>
             <RouterLink
-                style="display: none"
                 :to="{
-                    name: 'email',
+                    name: 'chat',
                 }"
                 class="iconfont icon-email"
                 active-class="emailActive"
@@ -61,6 +60,16 @@
                 }"
                 class="iconfont icon-account"
                 active-class="accountActive"
+            ></RouterLink>
+            <RouterLink
+                :to="{
+                    name: 'status',
+                    params: {
+                        userId: store.userInfo.uid?.toString() || 0,
+                    },
+                }"
+                class="iconfont icon-tongji"
+                active-class="statusActive"
             ></RouterLink>
             <li
                 class="userAvatar"
@@ -153,7 +162,7 @@
                 display: block;
                 width: 1.8vmax;
                 margin: 1vmax auto;
-                padding: 1vmax;
+                // padding: 1vmax;
                 border-radius: 50%;
                 font-size: 1.8vmax;
                 transition: all 0.2s;
@@ -231,6 +240,11 @@
             .accountActive {
                 &::before {
                     content: "\e655";
+                }
+            }
+            .statusActive {
+                &::before {
+                    content: "\e61b";
                 }
             }
         }

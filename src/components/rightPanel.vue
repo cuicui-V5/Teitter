@@ -1,6 +1,5 @@
 <template>
     <div class="panel">
-        <!-- animate__animated animate__bounceInDown -->
         <div
             class="search"
             v-if="$route.name == `home`"
@@ -17,11 +16,12 @@
                 class="searchBtn iconfont icon-search"
             ></span>
         </div>
-        <v-chart
-            class="chart"
-            :option="charOption"
-            :theme="store.isDarkMode ? 'dark' : 'light'"
-        />
+
+        <div class="links">
+            <a href="">关于</a>
+            <a href="">用户准则</a>
+            <a href="">更新日志</a>
+        </div>
     </div>
 </template>
 
@@ -29,16 +29,6 @@
     import { ref, toRefs, provide } from "vue";
     import { useTeitterStore } from "@/stores/teitter";
     import router from "@/router/index";
-    import { use } from "echarts/core";
-    import { CanvasRenderer } from "echarts/renderers";
-    import { BarChart } from "echarts/charts";
-    import {
-        GridComponent,
-        TitleComponent,
-        TooltipComponent,
-        LegendComponent,
-    } from "echarts/components";
-    import VChart from "vue-echarts";
 
     const store = useTeitterStore();
     const keyWord = ref("");
@@ -52,70 +42,6 @@
             },
         });
     };
-
-    use([
-        GridComponent,
-        CanvasRenderer,
-        BarChart,
-        TitleComponent,
-        TooltipComponent,
-        LegendComponent,
-    ]);
-
-    const charOption = ref({
-        backgroundColor: "transparent",
-        title: {
-            text: "粉丝排名",
-            // subtext: "副标题",
-            // left: "center",
-        },
-        tooltip: {
-            // 提示框触发方式: item 只有在图形上才会触发, axis在范围内都会触发
-            trigger: "axis",
-            // 坐标轴指示器 line 线, shadow 阴影, cross , 十字线准星效果
-            axisPointer: {
-                type: "cross",
-            },
-            // 是否显示提示框
-            showContent: true,
-            // 样式
-            backgroundColor: "#1d9bf0",
-            textStyle: {
-                color: "white",
-                fontSize: "20",
-            },
-            // 内容格式化
-            // formatter: (p) => {
-            //     return "value=" + p;
-            // },
-        },
-        xAxis: {
-            type: "category",
-            data: [
-                "12312",
-                "管理员大爹",
-                "user01",
-                "wdwad",
-                "dawdwad",
-                "1231231",
-                "12",
-            ],
-        },
-        yAxis: {
-            type: "value",
-        },
-        series: [
-            {
-                data: [15, 4, 2, 13, 12, 5, 16],
-                type: "bar",
-                showBackground: true,
-                backgroundStyle: {
-                    color: "rgba(180, 180, 180, 0.2)",
-                },
-                color: "#1d9bf0",
-            },
-        ],
-    });
 </script>
 
 <style scoped lang="scss">
@@ -126,8 +52,8 @@
         flex: 306;
         font-size: 1vmax;
         overflow: hidden;
+        padding: 2vmax;
         .search {
-            padding: 2vmax;
             text-align: center;
             input {
                 margin-left: -1vmax;
@@ -163,8 +89,10 @@
                 }
             }
         }
-    }
-    .chart {
-        height: 400px;
+        .links {
+            a {
+                display: block;
+            }
+        }
     }
 </style>

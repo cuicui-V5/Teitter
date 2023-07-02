@@ -66,8 +66,7 @@ export default defineConfig({
                 skipWaiting: true,
                 runtimeCaching: [
                     {
-                        urlPattern:
-                            /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 图片缓存
+                        urlPattern: /(.*?)\.(png|jpe?g|svg|gif|webp|webm|mp4)/, // 图片缓存
                         handler: "CacheFirst",
                         options: {
                             cacheName: "image-cache",

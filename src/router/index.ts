@@ -4,7 +4,7 @@ import homepageView from "../views/homePageView/homePageView.vue";
 // import accountView from "../views/homePageView/accountView.vue";
 // import searchView from "../views/homePageView/searchView.vue";
 // import noticeView from "../views/homePageView/noticeView.vue";
-// import emailView from "../views/homePageView/emailView.vue";
+// import chatView from "../views/homePageView/chatView.vue";
 // import followView from "../views/homePageView/follow/followView.vue";
 // import followerView from "../views/homePageView/follow/follower.vue";
 // import followingView from "../views/homePageView/follow/following.vue";
@@ -21,7 +21,8 @@ import homepageView from "../views/homePageView/homePageView.vue";
 const accountView = () => import("../views/homePageView/accountView.vue");
 const searchView = () => import("../views/homePageView/searchView.vue");
 const noticeView = () => import("../views/homePageView/noticeView.vue");
-const emailView = () => import("../views/homePageView/emailView.vue");
+const chatView = () => import("../views/homePageView/chatView.vue");
+const statusView = () => import("../views/statusView.vue");
 const followView = () => import("../views/homePageView/follow/followView.vue");
 const followerView = () => import("../views/homePageView/follow/follower.vue");
 const followingView = () =>
@@ -70,9 +71,9 @@ const router = createRouter({
                     },
                 },
                 {
-                    path: "/email",
-                    name: "email",
-                    component: emailView,
+                    path: "/chat",
+                    name: "chat",
+                    component: chatView,
                     meta: {
                         cname: "私信/Teitter",
                     },
@@ -83,6 +84,14 @@ const router = createRouter({
                     component: accountView,
                     meta: {
                         cname: "个人信息/Teitter",
+                    },
+                },
+                {
+                    path: "/status/:userId?",
+                    name: "status",
+                    component: statusView,
+                    meta: {
+                        cname: "统计信息/Teitter",
                     },
                 },
                 {

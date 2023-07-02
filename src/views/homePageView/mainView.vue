@@ -18,14 +18,14 @@
         </RouterView>
 
         <theBannerVue v-if="!userInfo.isLogin"></theBannerVue>
-        <statusPanel v-if="!isMobile"></statusPanel>
+        <rightPanel v-if="!isMobile"></rightPanel>
     </div>
 </template>
 
 <script setup lang="ts">
     import TheAside from "../../components/aside/theAside.vue";
     import theBannerVue from "@/components/theBanner.vue";
-    import statusPanel from "@/components/statusPanel.vue";
+    import rightPanel from "@/components/rightPanel.vue";
 
     import { useTeitterStore } from "@/stores/teitter";
     import { computed, nextTick, ref, toRefs } from "vue";

@@ -6,6 +6,7 @@ import type {
     userInfo,
     hotNewsDataType,
     commentRes,
+    FansChart,
 } from "@/interfaces/pubInterface";
 
 import { useTeitterStore } from "./../stores/teitter";
@@ -475,9 +476,9 @@ export const reqHotNews = async () => {
 };
 export const reqFansChart = async () => {
     try {
-        const res = await request.get(`/news/getHot`);
+        const res = await request.post(`/chart/getFansTop`);
         if (res.data.status == 200) {
-            return res.data.data as hotNewsDataType[];
+            return res.data.data as FansChart;
         } else {
             return Promise.reject(new Error(res.data.msg));
         }

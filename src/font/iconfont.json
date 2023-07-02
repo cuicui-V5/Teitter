@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1115839",
+      "name": "统计",
+      "font_class": "tongji",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "5712920",
+      "name": "统计",
+      "font_class": "tongji1",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
       "icon_id": "5320519",
       "name": "太阳",
       "font_class": "taiyang",
