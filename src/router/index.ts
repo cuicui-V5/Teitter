@@ -23,6 +23,9 @@ const searchView = () => import("../views/homePageView/searchView.vue");
 const noticeView = () => import("../views/homePageView/noticeView.vue");
 const chatView = () => import("../views/homePageView/chatView.vue");
 const statusView = () => import("../views/statusView.vue");
+const aboutView = () => import("../views/aboutView.vue");
+const changeLogView = () => import("../views/changeLogView.vue");
+const EULAView = () => import("../views/EULAView.vue");
 const followView = () => import("../views/homePageView/follow/followView.vue");
 const followerView = () => import("../views/homePageView/follow/follower.vue");
 const followingView = () =>
@@ -92,6 +95,30 @@ const router = createRouter({
                     component: statusView,
                     meta: {
                         cname: "统计信息/Teitter",
+                    },
+                },
+                {
+                    path: "/about",
+                    name: "about",
+                    component: aboutView,
+                    meta: {
+                        cname: "关于/Teitter",
+                    },
+                },
+                {
+                    path: "/EULA",
+                    name: "EULA",
+                    component: EULAView,
+                    meta: {
+                        cname: "用户协议/Teitter",
+                    },
+                },
+                {
+                    path: "/changeLog",
+                    name: "changeLog",
+                    component: changeLogView,
+                    meta: {
+                        cname: "更新日志/Teitter",
                     },
                 },
                 {

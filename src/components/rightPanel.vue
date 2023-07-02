@@ -1,9 +1,6 @@
 <template>
     <div class="panel">
-        <div
-            class="search"
-            v-if="$route.name == `home`"
-        >
+        <div class="search">
             <input
                 type="text"
                 class="searchBar"
@@ -18,9 +15,9 @@
         </div>
 
         <div class="links">
-            <a href="">关于</a>
-            <a href="">用户准则</a>
-            <a href="">更新日志</a>
+            <RouterLink to="/about">关于</RouterLink>
+            <RouterLink to="/EULA">最终用户许可协议</RouterLink>
+            <RouterLink to="/search/更新">更新日志</RouterLink>
         </div>
     </div>
 </template>
@@ -90,8 +87,12 @@
             }
         }
         .links {
+            margin-top: 1vmax;
             a {
                 display: block;
+                font-size: 1vmax;
+                text-decoration: none;
+                color: var(--text-second);
             }
         }
     }
