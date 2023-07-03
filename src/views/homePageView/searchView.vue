@@ -136,7 +136,7 @@
                     border-radius: 2vmax;
                     padding-left: 1vmax;
                     font-size: 1.3vmax;
-                    background-color: #eff3f4;
+                    background-color: var(--secondary-bg);
                     outline: 0;
                     border: 1px solid transparent;
                     transition: all 0.2s;

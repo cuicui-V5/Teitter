@@ -1,10 +1,18 @@
 <template>
     <div class="container">
         <div class="title">私信</div>
+        <div class="main">
+            <button @click="testws">测试websocket</button>
+        </div>
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import { createSocket } from "@/api/socket";
+    const testws = () => {
+        createSocket();
+    };
+</script>
 
 <style scoped lang="less">
     .container {
@@ -24,6 +32,9 @@
             text-indent: 2vmax;
             backdrop-filter: blur(30px);
             background-color: rgba(255, 255, 255, 0.8);
+        }
+        .main {
+            padding-top: 5vmax;
         }
     }
 </style>
