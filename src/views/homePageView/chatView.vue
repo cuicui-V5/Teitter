@@ -31,7 +31,7 @@
             user-select: none;
             text-indent: 2vmax;
             backdrop-filter: blur(30px);
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: var(--primary-bg);
         }
         .main {
             padding-top: 5vmax;
