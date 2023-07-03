@@ -76,7 +76,7 @@
             });
             jsConfetti.addConfetti({
                 confettiRadius: 6,
-                confettiNumber: 1000,
+                confettiNumber: 500,
             });
         } else {
             // alert(res);

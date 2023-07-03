@@ -183,7 +183,7 @@
                     sendMsg("点赞成功 " + id.toString());
                     jsConfetti.addConfetti({
                         confettiRadius: 6,
-                        confettiNumber: 1000,
+                        confettiNumber: 500,
                     });
                     // alert("点赞成功");
                     teitter.value.likeStatus = true;

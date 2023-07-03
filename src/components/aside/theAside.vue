@@ -203,15 +203,15 @@
                 position: relative;
                 .noticeCount {
                     position: absolute;
-                    right: 0;
-                    top: 0;
+                    right: -30%;
+                    top: -30%;
 
                     text-align: center;
                     font-size: 1vmax;
                     color: white;
-                    line-height: 2vmax;
-                    width: 2vmax;
-                    height: 2vmax;
+                    line-height: 1.2vmax;
+                    width: 1.2vmax;
+                    height: 1.2vmax;
                     border-radius: 50%;
                     background-color: #1da1f2;
                 }
