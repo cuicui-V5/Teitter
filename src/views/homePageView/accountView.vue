@@ -31,6 +31,12 @@
                 编辑个人资料
             </button>
             <button
+                id="chat"
+                @click="chatTo"
+            >
+                私信
+            </button>
+            <button
                 id="followBtn"
                 @click="changeFollowStatus"
                 :class="{
@@ -198,6 +204,16 @@
             });
         }
     }, 500);
+    const chatTo = () => {
+        router.push({
+            name: "chatTo",
+            query: {
+                avatarUrl: userInfo.value?.avatarUrl,
+                nickName: userInfo.value?.nickName,
+                userName: userInfo.value?.userName,
+            },
+        });
+    };
 </script>
 
 <style scoped lang="less">
@@ -272,7 +288,8 @@
                 background-color: var(--primary-bg);
                 background-position: center;
             }
-            #editUserInfo {
+            #editUserInfo,
+            #chat {
                 position: absolute;
                 top: 21vmax;
                 left: 45vmax;
@@ -286,6 +303,9 @@
                 &:hover {
                     background-color: #e7e7e8;
                 }
+            }
+            #chat {
+                top: 26vmax;
             }
             #followBtn {
                 position: absolute;

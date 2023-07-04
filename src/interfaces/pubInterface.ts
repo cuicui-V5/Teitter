@@ -145,3 +145,47 @@ export interface FansChart {
     fansCount: number[];
     userAvatarUrl: string[];
 }
+export interface GetChats {
+    status: number;
+    message: string;
+    content: any;
+    sendUsernickname: string;
+    receiveUsernickname: any;
+    users: GetChatsUser[];
+    messages: any;
+}
+
+export interface GetChatsUser {
+    uid: number;
+    userName: string;
+    userPassword: string;
+    nickName: string;
+    createDate: number;
+    avatarUrl: string;
+    status: number;
+    profile: string;
+    backgroundUrl: string;
+    openId: any;
+    fansCount: number;
+    followsCount: number;
+    ptoPRelation: any;
+    tweetCount: any;
+    isDeleted: number;
+}
+export interface LoadMessage {
+    status: number;
+    message: string;
+    content: any;
+    sendUsernickname: any;
+    receiveUsernickname: string;
+    users: any;
+    messages: Message[];
+}
+
+export interface Message {
+    UserId: number;
+    message: string;
+    isSender: boolean;
+    sender: boolean;
+    userId: number;
+}

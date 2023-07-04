@@ -476,7 +476,7 @@ export const reqHotNews = async () => {
 };
 export const reqFansChart = async () => {
     try {
-        const res = await request.post(`/chart/getFansTop`);
+        const res = await request.get(`/chart/getFansTop`);
         if (res.data.status == 200) {
             return res.data.data as FansChart;
         } else {

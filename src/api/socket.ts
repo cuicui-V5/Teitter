@@ -1,20 +1,39 @@
-export const createSocket = () => {
-    const token = localStorage.getItem("token") || undefined;
+import { reactive, ref } from "vue";
 
-    const socket = new WebSocket(
+let socket: WebSocket | null = null;
+enum status {
+    open,
+    close,
+}
+export const connectionStatus = ref(status.close);
+export const createSocket = (receiveHandler: (msg: any) => void) => {
+    const token = localStorage.getItem("token") || "";
+
+    socket = new WebSocket(
         "wss://www.heron.love:8070/teitter/v2/api/intoChat",
-        token,
+        [token],
     );
 
     socket.addEventListener("open", () => {
         console.log("WebSocket connection established.");
+        connectionStatus.value = status.open;
     });
 
-    socket.addEventListener("message", event => {
-        console.log("Received message:", event.data);
+    socket.addEventListener("message", receiveHandler);
+    socket.addEventListener("error", event => {
+        console.log("Error:");
+        connectionStatus.value = status.close;
     });
 
-    socket.addEventListener("close", () => {
-        console.log("WebSocket connection closed.");
+    socket.addEventListener("close", e => {
+        console.log("WebSocket connection closed.", e);
+        connectionStatus.value = status.open;
     });
+};
+export const sendMessage = (msg: object) => {
+    if (socket) {
+        socket.send(JSON.stringify(msg));
+    } else {
+        console.log("socket 不存在");
+    }
 };

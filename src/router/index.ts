@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import mainView from "@/views/homePageView/mainView.vue";
 import homepageView from "../views/homePageView/homePageView.vue";
+import path from "path";
 // import accountView from "../views/homePageView/accountView.vue";
 // import searchView from "../views/homePageView/searchView.vue";
 // import noticeView from "../views/homePageView/noticeView.vue";
@@ -21,7 +22,9 @@ import homepageView from "../views/homePageView/homePageView.vue";
 const accountView = () => import("../views/homePageView/accountView.vue");
 const searchView = () => import("../views/homePageView/searchView.vue");
 const noticeView = () => import("../views/homePageView/noticeView.vue");
-const chatView = () => import("../views/homePageView/chatView.vue");
+const chatView = () => import("../views/homePageView/chat/chatView.vue");
+const chatWindowView = () =>
+    import("../views/homePageView/chat/chatMainWindow.vue");
 const statusView = () => import("../views/statusView.vue");
 const aboutView = () => import("../views/aboutView.vue");
 const changeLogView = () => import("../views/changeLogView.vue");
@@ -80,6 +83,16 @@ const router = createRouter({
                     meta: {
                         cname: "私信/Teitter",
                     },
+                    children: [
+                        {
+                            path: "user",
+                            name: "chatTo",
+                            component: chatWindowView,
+                            meta: {
+                                cname: "私信/Teitter",
+                            },
+                        },
+                    ],
                 },
                 {
                     path: "/account/:userId?",
