@@ -101,10 +101,8 @@
 <style scoped lang="less">
     .container {
         width: 100%;
-        display: flex;
         position: relative;
         overflow-y: scroll;
-        flex-direction: column;
         &::-webkit-scrollbar {
             display: none;
         }
@@ -175,8 +173,9 @@
             }
         }
         .sender {
-            position: absolute;
-            bottom: 0;
+            // position: absolute;
+            // bottom: 0;
+            position: relative;
             width: 100%;
             input {
                 height: 2vmax;

@@ -5,7 +5,7 @@
         ref="mainArea"
     >
         <div class="tittle">
-            忒特 v2.2.0 20230705pm
+            忒特 v2.2.0 2023070502
             <span
                 class="iconfont"
                 :class="{

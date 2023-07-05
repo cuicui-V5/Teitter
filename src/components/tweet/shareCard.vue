@@ -23,13 +23,15 @@
     };
 </script>
 <script setup lang="ts">
+    import { useTeitterStore } from "@/stores/teitter";
     import clipboardy from "clipboardy";
     import qrcode from "qrcode";
     import { computed, inject, ref } from "vue";
     const props = defineProps<{
         tweetID: string;
     }>();
-    const url = "https://teitter-v2.cuijunyu.win:8443/#/tweet/";
+    const store = useTeitterStore();
+    const url = "https://teitter.cuijunyu.win/#/tweet/";
     const sendMsg = inject("sendMsg") as Function;
 
     const copyLink = () => {
@@ -52,7 +54,7 @@
     var opts = {
         color: {
             dark: "#1da1f2",
-            light: "#f7f9f9",
+            light: !store.isDarkMode ? "#f7f9f9" : "#1f272e",
         },
     };
     const convertQrcode = async () => {

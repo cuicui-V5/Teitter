@@ -58,7 +58,6 @@
                     :src="teitter.tweetVideo"
                     v-if="teitter.tweetVideo"
                     controls
-                    autoplay
                     muted
                     loop
                     @click.stop.prevent="clickVideo"

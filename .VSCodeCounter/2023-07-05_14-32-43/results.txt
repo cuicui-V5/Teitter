@@ -1,0 +1,114 @@
+Date : 2023-07-05 14:32:43
+Directory : c:\学习\前端\Teitter\src
+Total : 61 files,  34465 codes, 109 comments, 658 blanks, all 35232 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          6 |     26,207 |          0 |          1 |     26,208 |
+| vue        |         40 |      5,771 |         15 |        351 |      6,137 |
+| TypeScript |          9 |      1,056 |         63 |         86 |      1,205 |
+| HTML       |          1 |        731 |          2 |        100 |        833 |
+| CSS        |          3 |        576 |         19 |        118 |        713 |
+| Less       |          1 |        123 |         10 |          2 |        135 |
+| JavaScript |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                            | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                               |         61 |     34,465 |        109 |        658 |     35,232 |
+| . (Files)                                                       |          2 |         64 |          1 |         13 |         78 |
+| api                                                             |          3 |        522 |         24 |         43 |        589 |
+| components                                                      |         20 |      3,837 |         15 |        218 |      4,070 |
+| components (Files)                                              |          9 |      1,378 |          7 |         73 |      1,458 |
+| components\aside                                                |          2 |        367 |          0 |         18 |        385 |
+| components\login                                                |          2 |        262 |          0 |         28 |        290 |
+| components\mainArea                                             |          3 |        935 |          2 |         54 |        991 |
+| components\tweet                                                |          4 |        895 |          6 |         45 |        946 |
+| css                                                             |          1 |         44 |          0 |          1 |         45 |
+| font                                                            |          5 |      1,469 |         21 |        218 |      1,708 |
+| interfaces                                                      |          1 |        179 |          0 |         12 |        191 |
+| lottie                                                          |          5 |     26,002 |          0 |          0 |     26,002 |
+| router                                                          |          1 |        183 |         14 |          9 |        206 |
+| stores                                                          |          1 |         46 |          1 |          6 |         53 |
+| style                                                           |          1 |        123 |         10 |          2 |        135 |
+| utils                                                           |          2 |        111 |         23 |         11 |        145 |
+| views                                                           |         19 |      1,885 |          0 |        125 |      2,010 |
+| views (Files)                                                   |          4 |        333 |          0 |         21 |        354 |
+| views\homePageView                                              |         12 |      1,466 |          0 |         94 |      1,560 |
+| views\homePageView (Files)                                      |          6 |        869 |          0 |         57 |        926 |
+| views\homePageView\chat                                         |          2 |        307 |          0 |         20 |        327 |
+| views\homePageView\follow                                       |          4 |        290 |          0 |         17 |        307 |
+| views\loginView                                                 |          3 |         86 |          0 |         10 |         96 |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                        | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\学习\前端\Teitter\src\App.vue                                    | vue        |         49 |          0 |          8 |         57 |
+| c:\学习\前端\Teitter\src\api\index.ts                               | TypeScript |        439 |         20 |         30 |        489 |
+| c:\学习\前端\Teitter\src\api\request.ts                             | TypeScript |         48 |          4 |          7 |         59 |
+| c:\学习\前端\Teitter\src\api\socket.ts                              | TypeScript |         35 |          0 |          6 |         41 |
+| c:\学习\前端\Teitter\src\components\aside\theAside.vue              | vue        |        241 |          0 |         12 |        253 |
+| c:\学习\前端\Teitter\src\components\aside\userInfoCard.vue          | vue        |        126 |          0 |          6 |        132 |
+| c:\学习\前端\Teitter\src\components\editUserInfo.vue                | vue        |        400 |          7 |         14 |        421 |
+| c:\学习\前端\Teitter\src\components\imgClipper.vue                  | vue        |        532 |          0 |         21 |        553 |
+| c:\学习\前端\Teitter\src\components\login\theLogin.vue              | vue        |        108 |          0 |         12 |        120 |
+| c:\学习\前端\Teitter\src\components\login\theRegister.vue           | vue        |        154 |          0 |         16 |        170 |
+| c:\学习\前端\Teitter\src\components\lottie.vue                      | vue        |         30 |          0 |          6 |         36 |
+| c:\学习\前端\Teitter\src\components\mainArea\publishTeitter.vue     | vue        |        395 |          0 |         26 |        421 |
+| c:\学习\前端\Teitter\src\components\mainArea\theMainArea.vue        | vue        |        116 |          0 |         10 |        126 |
+| c:\学习\前端\Teitter\src\components\mainArea\theTeitterCard.vue     | vue        |        424 |          2 |         18 |        444 |
+| c:\学习\前端\Teitter\src\components\msgBox.vue                      | vue        |         42 |          0 |          4 |         46 |
+| c:\学习\前端\Teitter\src\components\networkError.vue                | vue        |         37 |          0 |          5 |         42 |
+| c:\学习\前端\Teitter\src\components\noticeCard.vue                  | vue        |        150 |          0 |          8 |        158 |
+| c:\学习\前端\Teitter\src\components\rightPanel.vue                  | vue        |         93 |          0 |          7 |        100 |
+| c:\学习\前端\Teitter\src\components\theBanner.vue                   | vue        |         83 |          0 |          4 |         87 |
+| c:\学习\前端\Teitter\src\components\theLoad.vue                     | vue        |         11 |          0 |          4 |         15 |
+| c:\学习\前端\Teitter\src\components\tweet\comment.vue               | vue        |        136 |          5 |          6 |        147 |
+| c:\学习\前端\Teitter\src\components\tweet\commentCard.vue           | vue        |        315 |          1 |         19 |        335 |
+| c:\学习\前端\Teitter\src\components\tweet\shareCard.vue             | vue        |         82 |          0 |          4 |         86 |
+| c:\学习\前端\Teitter\src\components\tweet\tweetInfoCard.vue         | vue        |        362 |          0 |         16 |        378 |
+| c:\学习\前端\Teitter\src\css\main.css                               | CSS        |         44 |          0 |          1 |         45 |
+| c:\学习\前端\Teitter\src\font\demo.css                              | CSS        |        435 |         19 |         86 |        540 |
+| c:\学习\前端\Teitter\src\font\demo_index.html                       | HTML       |        731 |          2 |        100 |        833 |
+| c:\学习\前端\Teitter\src\font\iconfont.css                          | CSS        |         97 |          0 |         31 |        128 |
+| c:\学习\前端\Teitter\src\font\iconfont.js                           | JavaScript |          1 |          0 |          0 |          1 |
+| c:\学习\前端\Teitter\src\font\iconfont.json                         | JSON       |        205 |          0 |          1 |        206 |
+| c:\学习\前端\Teitter\src\interfaces\pubInterface.ts                 | TypeScript |        179 |          0 |         12 |        191 |
+| c:\学习\前端\Teitter\src\lottie\loading.json                        | JSON       |          1 |          0 |          0 |          1 |
+| c:\学习\前端\Teitter\src\lottie\logo.json                           | JSON       |          1 |          0 |          0 |          1 |
+| c:\学习\前端\Teitter\src\lottie\networderr.json                     | JSON       |          1 |          0 |          0 |          1 |
+| c:\学习\前端\Teitter\src\lottie\sad.json                            | JSON       |     25,998 |          0 |          0 |     25,998 |
+| c:\学习\前端\Teitter\src\lottie\search.json                         | JSON       |          1 |          0 |          0 |          1 |
+| c:\学习\前端\Teitter\src\main.ts                                    | TypeScript |         15 |          1 |          5 |         21 |
+| c:\学习\前端\Teitter\src\router\index.ts                            | TypeScript |        183 |         14 |          9 |        206 |
+| c:\学习\前端\Teitter\src\stores\teitter.ts                          | TypeScript |         46 |          1 |          6 |         53 |
+| c:\学习\前端\Teitter\src\style\main.less                            | Less       |        123 |         10 |          2 |        135 |
+| c:\学习\前端\Teitter\src\utils\darkMode.ts                          | TypeScript |         48 |         10 |          8 |         66 |
+| c:\学习\前端\Teitter\src\utils\imgCompress.ts                       | TypeScript |         63 |         13 |          3 |         79 |
+| c:\学习\前端\Teitter\src\views\EULAView.vue                         | vue        |        112 |          0 |          3 |        115 |
+| c:\学习\前端\Teitter\src\views\aboutView.vue                        | vue        |         61 |          0 |          9 |         70 |
+| c:\学习\前端\Teitter\src\views\changeLogView.vue                    | vue        |         39 |          0 |          3 |         42 |
+| c:\学习\前端\Teitter\src\views\homePageView\accountView.vue         | vue        |        348 |          0 |         14 |        362 |
+| c:\学习\前端\Teitter\src\views\homePageView\chat\chatMainWindow.vue | vue        |        206 |          0 |         10 |        216 |
+| c:\学习\前端\Teitter\src\views\homePageView\chat\chatView.vue       | vue        |        101 |          0 |         10 |        111 |
+| c:\学习\前端\Teitter\src\views\homePageView\follow\followView.vue   | vue        |        124 |          0 |          8 |        132 |
+| c:\学习\前端\Teitter\src\views\homePageView\follow\follower.vue     | vue        |         42 |          0 |          3 |         45 |
+| c:\学习\前端\Teitter\src\views\homePageView\follow\following.vue    | vue        |         39 |          0 |          3 |         42 |
+| c:\学习\前端\Teitter\src\views\homePageView\follow\userCard.vue     | vue        |         85 |          0 |          3 |         88 |
+| c:\学习\前端\Teitter\src\views\homePageView\homePageView.vue        | vue        |          7 |          0 |          3 |         10 |
+| c:\学习\前端\Teitter\src\views\homePageView\mainView.vue            | vue        |         76 |          0 |          6 |         82 |
+| c:\学习\前端\Teitter\src\views\homePageView\noticeView.vue          | vue        |        110 |          0 |          9 |        119 |
+| c:\学习\前端\Teitter\src\views\homePageView\searchView.vue          | vue        |        212 |          0 |         13 |        225 |
+| c:\学习\前端\Teitter\src\views\homePageView\tweetInfoView.vue       | vue        |        116 |          0 |         12 |        128 |
+| c:\学习\前端\Teitter\src\views\loginView\loginRegisterView.vue      | vue        |         68 |          0 |          4 |         72 |
+| c:\学习\前端\Teitter\src\views\loginView\loginView.vue              | vue        |          9 |          0 |          3 |         12 |
+| c:\学习\前端\Teitter\src\views\loginView\register.vue               | vue        |          9 |          0 |          3 |         12 |
+| c:\学习\前端\Teitter\src\views\statusView.vue                       | vue        |        121 |          0 |          6 |        127 |
+| Total                                                           |            |     34,465 |        109 |        658 |     35,232 |
++-----------------------------------------------------------------+------------+------------+------------+------------+------------+
