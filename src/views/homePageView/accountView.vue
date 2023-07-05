@@ -33,6 +33,7 @@
             <button
                 id="chat"
                 @click="chatTo"
+                v-if="store.userInfo.uid?.toString() != route.params?.userId"
             >
                 私信
             </button>

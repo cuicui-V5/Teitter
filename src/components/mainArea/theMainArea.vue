@@ -4,9 +4,8 @@
         @scroll="scroll"
         ref="mainArea"
     >
-        <!-- animate__animated animate__fadeIn -->
         <div class="tittle">
-            忒特 v2.1.7 20230703pm
+            忒特 v2.2.0 20230705pm
             <span
                 class="iconfont"
                 :class="{

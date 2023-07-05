@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-        <div class="title">私信</div>
+        <div class="title">
+            私信 ws状态: {{ connectionStatus == 1 ? "已连接" : "断开" }}
+        </div>
         <div class="main">
             <div class="chat">
                 <div class="userList">
@@ -12,7 +14,7 @@
                     />
                 </div>
                 <RouterView
-                    v-if="connectionStatus == 0"
+                    v-if="connectionStatus == 1"
                     :sendMessage="sendMessage"
                     :messages="messages || []"
                 ></RouterView>
@@ -24,33 +26,58 @@
 <script setup lang="ts">
     import chatMainWindow from "./chatMainWindow.vue";
     import userCard from "../follow/userCard.vue";
-    import { createSocket, sendMessage, connectionStatus } from "@/api/socket";
+    import {
+        createSocket,
+        sendMessage,
+        connectionStatus,
+        closeConnect,
+    } from "@/api/socket";
     import type {
         GetChats,
         GetChatsUser,
         Message,
     } from "@/interfaces/pubInterface";
-    import { onMounted, ref } from "vue";
+    import { onMounted, onUnmounted, ref, watch } from "vue";
+
     const chatsUser = ref<GetChatsUser[]>();
     const messages = ref<Message[]>();
 
     const receiveHandler = (msg: any) => {
         const data: any = JSON.parse(msg.data);
-        console.log(data);
+
+        console.log("收到ws消息", data);
 
         if (data.message == "getChats") {
             chatsUser.value = data.users;
         } else if (data.message == "loadMessage") {
-            messages.value = data.messages;
+            if (data.messages) {
+                messages.value = data.messages;
+            } else {
+                messages.value = [];
+            }
+        } else if (data.message == "sendMessage") {
+            messages.value?.unshift(data.messages[0]);
         }
     };
 
     createSocket(receiveHandler);
+    let retryCount = 0;
+    watch(connectionStatus, () => {
+        setTimeout(() => {
+            createSocket(receiveHandler);
+            retryCount++;
+        }, 1000);
+    });
+    onUnmounted(() => {
+        closeConnect();
+    });
 </script>
 
 <style scoped lang="less">
     .container {
         flex: 605;
+        padding-bottom: 5vmax;
+
         .title {
             z-index: 2;
             position: fixed;
@@ -75,7 +102,7 @@
                 display: flex;
                 height: 100%;
                 .userList {
-                    width: 20vmax;
+                    width: 18vmax;
                 }
             }
         }

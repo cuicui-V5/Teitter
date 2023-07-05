@@ -74,10 +74,10 @@
             router.push({
                 name: "home",
             });
-            jsConfetti.addConfetti({
-                confettiRadius: 6,
-                confettiNumber: 500,
-            });
+            // jsConfetti.addConfetti({
+            //     confettiRadius: 6,
+            //     confettiNumber: 500,
+            // });
         } else {
             // alert(res);
             sendMsg(res, true);

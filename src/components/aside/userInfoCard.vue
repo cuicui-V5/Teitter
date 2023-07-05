@@ -38,6 +38,7 @@
     import { getTeitter, logout } from "@/api";
     import { computed, nextTick, toRefs, inject } from "vue";
     import { RouterLink } from "vue-router";
+    import router from "@/router";
     const sendMsg = inject("sendMsg") as Function;
 
     // 调用父组件的事件来关闭卡片
@@ -66,7 +67,9 @@
             // alert("登出失败");
             sendMsg("登出失败", true);
         } finally {
-            location.reload();
+            router.push({
+                name: "home",
+            });
         }
     }
 </script>

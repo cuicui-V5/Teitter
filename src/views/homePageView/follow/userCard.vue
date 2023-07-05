@@ -8,6 +8,7 @@
             <div class="userName">@{{ props.userName }}</div>
         </div>
         <RouterLink
+            class="chat"
             :to="{
                 name: 'chatTo',
                 query: {
@@ -41,6 +42,7 @@
 
 <style scoped lang="less">
     .info {
+        position: relative;
         display: flex;
         height: 4vmax;
         margin-bottom: 1vmax;
@@ -72,6 +74,14 @@
                 margin-top: 0.2vmax;
                 margin-left: -0.1vmax;
             }
+        }
+        .chat {
+            position: absolute;
+            right: 0;
+            color: var(--text-main);
+            text-decoration: none;
+            line-height: 4vmax;
+            margin-left: 1vmax;
         }
     }
 </style>

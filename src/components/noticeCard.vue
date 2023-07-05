@@ -140,11 +140,11 @@
             .msg {
                 margin: 1vmax 0;
                 font-size: 1.5vmax;
-                color: #60707c;
+                color: var(--text-main);
             }
             .content {
                 font-size: 1.3vmax;
-                color: #60707c;
+                color: var(--text-second);
             }
         }
     }

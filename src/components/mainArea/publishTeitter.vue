@@ -287,6 +287,7 @@
             textarea {
                 position: relative;
                 width: 100%;
+                height: 50%;
                 // height: 5vmax;
                 padding-left: 1vmax;
                 padding-top: 1vmax;

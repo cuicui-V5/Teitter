@@ -34,7 +34,7 @@
             min-height: 31vmax;
             padding: 1vmax;
             border-radius: 2vmax;
-            background-color: var(--secondary-bg);
+            background-color: var(--primary-bg);
 
             transform: translate(-50%, -50%);
             box-shadow: 0 0 3vmax 0.5vmax rgba(0, 0, 0, 0.5);

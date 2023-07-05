@@ -183,9 +183,8 @@ export interface LoadMessage {
 }
 
 export interface Message {
-    UserId: number;
     message: string;
-    isSender: boolean;
     sender: boolean;
     userId: number;
+    date: string;
 }

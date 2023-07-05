@@ -1,5 +1,5 @@
 <template>
-    <div class="animate__animated animate__fadeIn faster container">
+    <div class="container">
         <div class="top">
             <span class="text">通知</span>
             <span
@@ -70,6 +70,7 @@
 <style scoped lang="less">
     .container {
         flex: 605;
+
         .top {
             z-index: 2;
             position: fixed;
@@ -79,7 +80,6 @@
             width: 59.3vmax;
 
             backdrop-filter: blur(30px);
-            background-color: rgba(255, 255, 255, 0.8);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -110,6 +110,9 @@
             margin-top: 5vmax;
             height: calc(100% - 5vmax);
             overflow-y: scroll;
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
     }
 </style>

@@ -1,5 +1,4 @@
 <template>
-    <!-- animate__animated animate__faster animate__bounceInUp -->
     <div class="card">
         <div
             v-if="
