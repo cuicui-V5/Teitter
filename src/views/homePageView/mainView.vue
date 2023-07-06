@@ -16,6 +16,7 @@
                 v-if="!$route.meta.keepAlive"
             ></component>
         </RouterView>
+        <reloadPrompt />
 
         <theBannerVue v-if="!userInfo.isLogin"></theBannerVue>
         <rightPanel v-if="!isMobile"></rightPanel>
@@ -24,6 +25,7 @@
 
 <script setup lang="ts">
     import TheAside from "../../components/aside/theAside.vue";
+    import reloadPrompt from "@/components/reloadPrompt.vue";
     import theBannerVue from "@/components/theBanner.vue";
     import rightPanel from "@/components/rightPanel.vue";
 
