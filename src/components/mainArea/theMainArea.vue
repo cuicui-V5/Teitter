@@ -1,11 +1,11 @@
 <template>
     <div
         class="mainArea"
-        @scroll="scroll"
+        @scroll.passive="scroll"
         ref="mainArea"
     >
         <div class="tittle">
-            忒特 v2.2.1 2023070601
+            忒特 v2.2.1 2023070602
             <span
                 class="iconfont"
                 :class="{
@@ -58,7 +58,7 @@
     const { option, userInfo, teitters } = toRefs(store);
     getTeitter(true);
 
-    async function scroll(e: any) {
+    function scroll(e: any) {
         scrollTop = e.target.scrollTop;
         let scrollProgress =
             e.target.scrollTop /
