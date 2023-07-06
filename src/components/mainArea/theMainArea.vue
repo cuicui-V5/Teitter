@@ -5,7 +5,7 @@
         ref="mainArea"
     >
         <div class="tittle">
-            忒特 v2.2.1 2023070602
+            忒特 v2.2.1 2023070603
             <span
                 class="iconfont"
                 :class="{
@@ -42,9 +42,10 @@
 
     import { getTeitter } from "@/api";
     import { toRefs, onActivated, onDeactivated, ref } from "vue";
+    import { throttle } from "lodash";
+
     const mainArea = ref<HTMLElement>();
 
-    let scrollTop: number;
     onActivated(() => {
         // 恢复滚动位置
         mainArea.value?.scrollTo({
@@ -58,15 +59,28 @@
     const { option, userInfo, teitters } = toRefs(store);
     getTeitter(true);
 
-    function scroll(e: any) {
+    let scrollTop: number;
+    let scrollHeight: number;
+    let offsetHeight: number;
+
+    const scrollHandler = (e: any) => {
+        scrollHeight = e.target.scrollHeight;
+        offsetHeight = e.target.offsetHeight;
+    };
+
+    const scroll = throttle((e: any) => {
+        if (!scrollHeight || !offsetHeight) {
+            scrollHandler(e);
+        }
+        // scrollTop需要每次都获取
         scrollTop = e.target.scrollTop;
-        let scrollProgress =
-            e.target.scrollTop /
-            (e.target.scrollHeight - e.target.offsetHeight);
+        // scrollHeight 和 offsetHeight不需要每次都获取, getTeitter之后获取就行
+        let scrollProgress = e.target.scrollTop / (scrollHeight - offsetHeight);
         if (scrollProgress > 0.8 && !option.value.isBusy) {
             getTeitter();
+            scrollHandler(e);
         }
-    }
+    }, 500);
     const flush = () => {
         getTeitter(true);
     };
