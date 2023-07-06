@@ -75,7 +75,7 @@
         // scrollTop需要每次都获取
         scrollTop = e.target.scrollTop;
         // scrollHeight 和 offsetHeight不需要每次都获取, getTeitter之后获取就行
-        let scrollProgress = e.target.scrollTop / (scrollHeight - offsetHeight);
+        let scrollProgress = scrollTop / (scrollHeight - offsetHeight);
         if (scrollProgress > 0.8 && !option.value.isBusy) {
             getTeitter();
             scrollHandler(e);
