@@ -64,11 +64,11 @@ export default defineConfig({
             workbox: {
                 cleanupOutdatedCaches: true,
                 skipWaiting: true,
-
+                globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,webm,mp4}"],
                 runtimeCaching: [
                     {
                         urlPattern: /(.*?)\.(png|jpe?g|svg|gif|webp|webm|mp4)/, // 图片缓存
-                        handler: "NetworkFirst",
+                        handler: "CacheFirst",
                         options: {
                             cacheName: "image-cache",
                         },

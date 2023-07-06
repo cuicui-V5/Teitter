@@ -1,22 +1,48 @@
 <script setup lang="ts">
     import { useRegisterSW } from "virtual:pwa-register/vue";
+    // import { pwaInfo } from "virtual:pwa-info";
 
-    const { needRefresh, updateServiceWorker } = useRegisterSW();
+    // eslint-disable-next-line no-console
+    // console.log(pwaInfo);
+
+    // replaced dyanmicaly
+    const reloadSW: any = "__RELOAD_SW__";
+
+    const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
+        immediate: true,
+        onRegisteredSW(swUrl, r) {
+            // eslint-disable-next-line no-console
+            console.log(`Service Worker at: ${swUrl}`);
+            if (reloadSW === "true") {
+                r &&
+                    setInterval(async () => {
+                        // eslint-disable-next-line no-console
+                        console.log("Checking for sw update");
+                        await r.update();
+                    }, 20000 /* 20s for testing purposes */);
+            } else {
+                // eslint-disable-next-line no-console
+                console.log(`SW Registered: ${r}`);
+            }
+        },
+    });
 
     const close = async () => {
+        offlineReady.value = false;
         needRefresh.value = false;
     };
 </script>
 
 <template>
     <div
-        v-if="needRefresh"
+        v-if="offlineReady || needRefresh"
         class="pwa-toast"
         role="alert"
     >
         <div class="message">
-            <span v-if="needRefresh">
-                有新内容可用，请点击重新加载按钮进行更新。
+            <span v-if="offlineReady">App ready to work offline</span>
+            <span v-else>
+                New content available, click on reload button to update.
             </span>
         </div>
         <button
