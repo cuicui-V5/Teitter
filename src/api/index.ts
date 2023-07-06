@@ -108,6 +108,7 @@ export async function isLogin() {
             userInfo.value.nickName = res.data.userInfo.nickName;
             userInfo.value.userName = res.data.userInfo.userName;
             userInfo.value.uid = res.data.userInfo.uid;
+            userInfo.value.LetterCount = res.data.LetterCount;
         }
     } catch (error) {
         console.log((error as Error).message);

@@ -15,6 +15,7 @@ export interface teitter {
 
 export interface userInfo {
     isLogin: boolean;
+    LetterCount?: number;
     uid?: bigint;
     avatarUrl?: string;
     backgroundUrl?: string;

@@ -11,6 +11,16 @@
                         :user-name="user.userName"
                         :nick-name="user.nickName"
                         :avatar-url="user.avatarUrl"
+                        @click="
+                            $router.push({
+                                name: 'chatTo',
+                                query: {
+                                    avatarUrl: user.avatarUrl,
+                                    nickName: user.nickName,
+                                    userName: user.userName,
+                                },
+                            })
+                        "
                     />
                 </div>
                 <RouterView
@@ -38,7 +48,9 @@
         Message,
     } from "@/interfaces/pubInterface";
     import { onMounted, onUnmounted, ref, watch } from "vue";
+    import { useRouter } from "vue-router";
 
+    const router = useRouter();
     const chatsUser = ref<GetChatsUser[]>();
     const messages = ref<Message[]>();
 
@@ -71,6 +83,14 @@
     onUnmounted(() => {
         closeConnect();
     });
+    const goAccount = (uid: string) => {
+        router.push({
+            name: "account",
+            params: {
+                userId: uid,
+            },
+        });
+    };
 </script>
 
 <style scoped lang="less">

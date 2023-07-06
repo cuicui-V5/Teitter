@@ -29,6 +29,7 @@
                 exact
             ></RouterLink>
             <RouterLink
+                v-if="store.userInfo.isLogin"
                 :to="{
                     name: 'notice',
                 }"
@@ -45,13 +46,28 @@
                 </div>
             </RouterLink>
             <RouterLink
+                v-if="store.userInfo.isLogin"
                 :to="{
                     name: 'chat',
                 }"
-                class="iconfont icon-email"
+                class="iconfont icon-email chatUnread"
                 active-class="emailActive"
-            ></RouterLink>
+            >
+                <div
+                    class="chatUnreadCount"
+                    :style="{
+                        display:
+                            store.userInfo.LetterCount &&
+                            store.userInfo.LetterCount > 0
+                                ? `block`
+                                : `none`,
+                    }"
+                >
+                    {{ store.userInfo.LetterCount }}
+                </div>
+            </RouterLink>
             <RouterLink
+                v-if="store.userInfo.isLogin"
                 :to="{
                     name: 'account',
                     params: {
@@ -62,6 +78,7 @@
                 active-class="accountActive"
             ></RouterLink>
             <RouterLink
+                v-if="store.userInfo.isLogin"
                 :to="{
                     name: 'status',
                     params: {
@@ -199,9 +216,11 @@
                     background-position: center;
                 }
             }
-            .notice {
+            .notice,
+            .chatUnread {
                 position: relative;
-                .noticeCount {
+                .noticeCount,
+                .chatUnreadCount {
                     position: absolute;
                     right: -30%;
                     top: -30%;
@@ -209,13 +228,30 @@
                     text-align: center;
                     font-size: 1vmax;
                     color: white;
-                    line-height: 1.2vmax;
-                    width: 1.2vmax;
-                    height: 1.2vmax;
+                    line-height: 1.5vmax;
+                    width: 1.5vmax;
+                    height: 1.5vmax;
                     border-radius: 50%;
                     background-color: #1da1f2;
                 }
             }
+            // .chatUnread {
+            //     position: relative;
+            //     .chatUnreadCount {
+            //         position: absolute;
+            //         right: -30%;
+            //         top: -30%;
+
+            //         text-align: center;
+            //         font-size: 1vmax;
+            //         color: white;
+            //         line-height: 1.2vmax;
+            //         width: 1.2vmax;
+            //         height: 1.2vmax;
+            //         border-radius: 50%;
+            //         background-color: #1da1f2;
+            //     }
+            // }
 
             .homeActive {
                 &::before {

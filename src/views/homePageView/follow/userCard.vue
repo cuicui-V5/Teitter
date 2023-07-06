@@ -7,19 +7,6 @@
             <div class="nickName">{{ props.nickName }}</div>
             <div class="userName">@{{ props.userName }}</div>
         </div>
-        <RouterLink
-            class="chat"
-            :to="{
-                name: 'chatTo',
-                query: {
-                    avatarUrl,
-                    nickName,
-                    userName,
-                },
-            }"
-        >
-            私信
-        </RouterLink>
     </div>
 </template>
 
@@ -45,9 +32,12 @@
         position: relative;
         display: flex;
         height: 4vmax;
-        margin-bottom: 1vmax;
         margin-right: 1vmax;
         border-bottom: 2px solid var(--secondary-bg);
+        transition: background 0.3s;
+        &:hover {
+            background-color: var(--secondary-bg);
+        }
         .avatarDiv {
             width: 3.5vmax;
             margin-right: 1vmax;
@@ -74,14 +64,6 @@
                 margin-top: 0.2vmax;
                 margin-left: -0.1vmax;
             }
-        }
-        .chat {
-            position: absolute;
-            right: 0;
-            color: var(--text-main);
-            text-decoration: none;
-            line-height: 4vmax;
-            margin-left: 1vmax;
         }
     }
 </style>
