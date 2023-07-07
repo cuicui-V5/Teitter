@@ -3,10 +3,11 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
 import compressPlugin from "vite-plugin-compression";
+import { visualizer } from "rollup-plugin-visualizer";
 
 export function configCompressPlugin(
     compress: "gzip" | "brotli" | "none",
-    deleteOriginFile = false,
+    deleteOriginFile = true,
 ) {
     const compressList = compress.split(",");
 
@@ -35,6 +36,7 @@ export function configCompressPlugin(
 export default defineConfig({
     plugins: [
         vue(),
+        configCompressPlugin("brotli"),
         VitePWA({
             registerType: "autoUpdate",
             injectRegister: "auto",
@@ -76,7 +78,13 @@ export default defineConfig({
                 ],
             },
         }),
-        configCompressPlugin("gzip"),
+        visualizer({
+            gzipSize: true,
+            brotliSize: true,
+            emitFile: false,
+            filename: "test.html", //分析图生成的文件名
+            open: true, //如果存在本地服务端口，将在打包后自动展示
+        }),
     ],
     resolve: {
         alias: {

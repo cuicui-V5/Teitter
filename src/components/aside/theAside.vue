@@ -6,11 +6,7 @@
                     name: 'home',
                 }"
             >
-                <lottieComponent
-                    :json="emojiLogoJson"
-                    :loop="false"
-                    class="logo"
-                />
+                <span class="logo"></span>
             </RouterLink>
             <RouterLink
                 :to="{
@@ -109,9 +105,9 @@
     import userInfoCard from "./userInfoCard.vue";
     import { useTeitterStore } from "../../stores/teitter";
     import { RouterLink } from "vue-router";
-    import lottieComponent from "@/components/lottie.vue";
+    // import lottieComponent from "@/components/lottie.vue";
 
-    import emojiLogoJson from "@/lottie/logo.json";
+    // import emojiLogoJson from "@/lottie/logo.json";
 
     const store = useTeitterStore();
     const { userInfo } = toRefs(store);
@@ -163,16 +159,27 @@
                     transform: scale(1.5);
                 }
             }
+            // .logo {
+            //     display: block;
+            //     width: 5.12vmax;
+            //     height: 5.12vmax;
+            //     margin: 0.5vmax auto;
+            //     // background-image: url(../../img/logo.png);
+            //     // background-size: contain;
+            //     transition: all 0.3s;
+            //     &:hover {
+            //         transform: scale(1.5);
+            //     }
+            // }
             .logo {
                 display: block;
                 width: 5.12vmax;
                 height: 5.12vmax;
                 margin: 0.5vmax auto;
-                // background-image: url(../../img/logo.png);
-                // background-size: contain;
-                transition: all 0.3s;
+                background-image: url(../../img/logo.png);
+                background-size: contain;
                 &:hover {
-                    transform: scale(1.5);
+                    background-image: url(../../img/CLIPLY_372109260_TWITTER_LOGO_400.gif);
                 }
             }
             .iconfont {

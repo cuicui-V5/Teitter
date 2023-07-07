@@ -85,7 +85,7 @@
 </script>
 <script setup lang="ts">
     import { toRefs, ref, watch, reactive, computed, onMounted } from "vue";
-    import lodash from "lodash";
+    import { throttle } from "lodash-es";
     const imgURL = ref("");
     const clippedBlob = ref<Blob>();
     const contain = ref<HTMLDivElement>();
@@ -307,7 +307,7 @@
                 break;
         }
     };
-    const throttledClip = lodash.throttle(() => {
+    const throttledClip = throttle(() => {
         clip();
     }, 16);
     const clip = async () => {

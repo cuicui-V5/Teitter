@@ -42,7 +42,7 @@
 
     import { getTeitter } from "@/api";
     import { toRefs, onActivated, onDeactivated, ref } from "vue";
-    import { throttle } from "lodash";
+    import { throttle } from "lodash-es";
 
     const mainArea = ref<HTMLElement>();
 
