@@ -287,7 +287,7 @@
             textarea {
                 position: relative;
                 width: 100%;
-                height: 50%;
+                height: 5vmax;
                 // height: 5vmax;
                 padding-left: 1vmax;
                 padding-top: 1vmax;
@@ -300,7 +300,6 @@
                 color: var(--text-main);
                 &:focus {
                     outline: 0;
-                    border: 0;
                 }
             }
             button {
@@ -329,7 +328,8 @@
                 right: 2vmax;
             }
             .imageContainer {
-                margin-top: 2vmax;
+                margin-top: 1vmax;
+                margin-bottom: 3vmax;
                 width: 60%;
                 img {
                     border-radius: 20px;
@@ -338,7 +338,9 @@
                 }
             }
             .videoContainer {
-                margin-top: 2vmax;
+                margin-top: 1vmax;
+                margin-bottom: 3vmax;
+
                 width: 60%;
                 video {
                     border-radius: 20px;

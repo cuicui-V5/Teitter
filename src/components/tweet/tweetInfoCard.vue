@@ -227,7 +227,7 @@
             display: flex;
             .avatar {
                 width: 4vmax;
-                z-index: 999;
+                z-index: 10;
                 span {
                     display: block;
                     width: 2.7vmax;
@@ -250,6 +250,8 @@
                     font-weight: bold;
                 }
                 .username {
+                    font-size: 1vmax;
+
                     color: var(--text-second);
                 }
             }
