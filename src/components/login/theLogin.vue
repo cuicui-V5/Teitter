@@ -49,6 +49,8 @@
     import TheLoad from "../theLoad.vue";
     import { login } from "@/api";
     import JSConfetti from "js-confetti";
+    import { isLogin } from "@/api";
+
     const jsConfetti = new JSConfetti();
 
     const store = useTeitterStore();
@@ -78,6 +80,7 @@
             //     confettiRadius: 6,
             //     confettiNumber: 500,
             // });
+            await isLogin();
         } else {
             // alert(res);
             sendMsg(res, true);

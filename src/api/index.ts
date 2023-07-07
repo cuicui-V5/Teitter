@@ -96,19 +96,23 @@ export async function logout() {
 }
 export async function isLogin() {
     // 如果登陆了, 返回用户信息, 如果没登陆,返回false
+    const store = useTeitterStore();
+    const { userInfo } = storeToRefs(store);
     try {
         const res = await request.get("/user/isLogin");
 
         if (res.data.isLogin == true) {
             //    登陆成功后, 用户信息写入store
-            const store = useTeitterStore();
-            const { userInfo } = storeToRefs(store);
             userInfo.value.isLogin = true;
             userInfo.value.avatarUrl = res.data.userInfo.avatarUrl;
             userInfo.value.nickName = res.data.userInfo.nickName;
             userInfo.value.userName = res.data.userInfo.userName;
             userInfo.value.uid = res.data.userInfo.uid;
             userInfo.value.LetterCount = res.data.LetterCount;
+        } else {
+            store.userInfo = {
+                isLogin: false,
+            };
         }
     } catch (error) {
         console.log((error as Error).message);

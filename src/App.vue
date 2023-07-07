@@ -44,8 +44,8 @@
 
     // 定时获取通知
     setInterval(() => {
-        store.getNotice();
-    }, 10000);
+        init();
+    }, 20000);
 
     checkDarkMode();
     window
