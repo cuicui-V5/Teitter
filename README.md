@@ -1,16 +1,27 @@
-# teitter-忒特 
-基于 Vue3 的社交网站, 前端由我个人从0到1完成,  后端由我工作室的小伙伴使用Java完成, 网站功能完善, 实现了用户注册登录, 发送推文, 评论, 点赞, 搜索, 查看个人资料, 修改个人资料等功能.
+# Teitter/忒特
 
-项目网址: https://teitter.cuijunyu.win:8443/
+项目网址: https://teitter.cuijunyu.win
 
-技术栈:  Vue3+TypeScript+Pinia+Axios+Animate.css
+Github 地址: https://github.com/cuicui-V5/Teitter
 
-- 使用 Vue-Router 实现单页应用, 使用 KeepAlive 配合路由的 meta 字段实现缓存指定组件
-- 二次封装 Axios, 实现请求自动携带 Token 以及Token 失效跳转登录页
-- 首页实现无限滚动无缝加载, 既减少了每次请求的数据量又不影响用户体验
-- app 挂载时与窗口尺寸变化时判断设备尺寸, 对竖屏和横屏设备进行 UI 适配 
-- 采用组件化思维, 复用多次使用的组件, 使用组件绑定 v-model 来实现父子组件数据的双向绑定
-- 拦截剪切板黏贴事件实现图片/视频的上传, 图片上传使用 Canvas 导出 Webp 格式的图片压缩方案, 极大节省服务器空间并提高资源加载速度 (1Mb=>100k)
-- 使用 dayjs 进行时间戳日期转换, qrcode 生成分享二维码 
-- 使用 animate.css 实现动画效果, vue3-lazyload 实现图片的懒加载
-- 使用 CloudFlare CDN 加快访问速度
+这是一个基于 Vue3 构建的现代社交网站。前端由我个人独立完成，后端由我工作室的小伙伴使用 Java 完成。
+
+该网站具有完善的功能，包括用户注册登录、个人资料修改、用户互相关注、用户私信、推文的发送、点赞、评论、搜索和消息通知等。
+
+项目的亮点在于采用了现代前端技术构建，拥有精心设计的用户界面、流畅的动画效果以及自动切换深色模式的功能。同时支持推文嵌套评论和基于 Websocket 的实时私信等特性。
+
+技术栈：Vite+Vue3+TypeScript+Pinia+Axios+WebSocket+Animate.css
+
+-   封装了 Axios 拦截器，实现请求携带 Token 并处理 Token 失效的情况。
+-   使用 vue-virtual-scroller 虚拟列表优化主页信息流加载，确保即使加载大量数据也没有卡顿。
+-   针对不同屏幕比例进行 UI 适配，并通过媒体查询与 CSS 变量来实现深色模式的自动切换。
+-   图片上传采用 Canvas 导出 Webp 格式的图片压缩方案，在保持画质不变的情况下大幅提高传输速度（1Mb=>100k）。
+-   使用 lottie-web 动画库实现清晰，流畅的动画效果，使用 dayjs 进行时间戳转换，qrcode 生成分享二维码，animate.css 实现动画效果，vue3-lazyload 实现图片的懒加载，marked 配合 dompurify 实现 markdown 渲染并防止 XSS 攻击。
+-   基于 WebSocket 封装了通信模块，实现私信系统的实时通信。
+-   使用 Vercel 进行自动化部署，启用 brotli 压缩算法优化传输大小，并使用 CloudFlare CDN 加快访问速度（国内可能是减速）。
+-   进行 Electron 和 PWA 改造，并使用 Uni-app 制作小程序端应用，实现多端适配。
+
+## 项目遇到的问题:
+
+-   首页滚动卡顿: 经过排查是因为 触底加载新数据的滚动事件回调中读取了 offsetHeight 和 scrollTop, 引起重排导致滚动性能很差. 解决办法: 滚动事件使用节流函数, 缓存 offsetHeight 等不变的数据.
+-   打包体积很大, index.js 达到了 1.5M: 经过使用 rollup-plugin-visualizer 插件查看文件大小占用. 发现是因为 lottie 动画的资源文件较大和使用了不支持 tree-shaking 的库 lodash 造成的. 解决办法: 资源文件从 CDN 加载, 使用支持 tree-shaking 的 lodash-es 库, 把压缩方式从 gzip 改为 brotli 等方法, 成功的把 index.js 的文件大小从 1.5M 优化到了 150KB. 优化程度达到了 90%之多。
