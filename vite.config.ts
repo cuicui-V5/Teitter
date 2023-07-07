@@ -7,7 +7,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 export function configCompressPlugin(
     compress: "gzip" | "brotli" | "none",
-    deleteOriginFile = true,
+    deleteOriginFile = false,
 ) {
     const compressList = compress.split(",");
 
@@ -78,13 +78,13 @@ export default defineConfig({
                 ],
             },
         }),
-        visualizer({
-            gzipSize: true,
-            brotliSize: true,
-            emitFile: false,
-            filename: "test.html", //分析图生成的文件名
-            open: true, //如果存在本地服务端口，将在打包后自动展示
-        }),
+        // visualizer({
+        //     gzipSize: true,
+        //     brotliSize: true,
+        //     emitFile: false,
+        //     filename: "test.html", //分析图生成的文件名
+        //     open: true, //如果存在本地服务端口，将在打包后自动展示
+        // }),
     ],
     resolve: {
         alias: {
