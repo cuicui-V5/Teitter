@@ -5,7 +5,7 @@
         ref="mainArea"
     >
         <div class="tittle">
-            忒特 v2.2.2 2023070704
+            忒特 v2.2.3 2023070801
             <span
                 class="iconfont"
                 :class="{
@@ -95,6 +95,7 @@
         // height: calc(100% - 6vmax);
         overflow-y: scroll;
         overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
         &::-webkit-scrollbar {
             display: none;
         }
