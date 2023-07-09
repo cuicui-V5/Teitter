@@ -223,9 +223,9 @@
                 } else {
                     const res = await imgCompress(
                         file,
-                        1920,
-                        1080,
-                        0.6,
+                        2000,
+                        2000,
+                        0.5,
                         "image/webp",
                     );
                     console.log("压缩后的blob为", res);

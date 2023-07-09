@@ -325,8 +325,8 @@
             );
             const blob = await imgToBlobCompress(
                 clippedImg,
-                1000,
-                1000,
+                2000,
+                2000,
                 quality.value,
                 "image/webp",
             );
