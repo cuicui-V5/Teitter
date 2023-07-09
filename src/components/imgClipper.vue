@@ -328,9 +328,11 @@
                 1000,
                 1000,
                 quality.value,
-                "image/png",
+                "image/webp",
             );
             clippedBlob.value = blob;
+            console.log("压缩质量为:", quality, "压缩后的文件为:", clippedBlob);
+
             const reader = new FileReader();
             reader.readAsDataURL(blob);
             reader.onload = () => {
