@@ -1,6 +1,7 @@
 <template>
     <div class="login animate__animated animate__fadeInLeft animate__faster">
         <h1>登录 Teitter</h1>
+        <h2>测试账号: admin/admin</h2>
 
         <input
             type="text"
