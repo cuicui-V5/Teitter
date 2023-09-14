@@ -7,7 +7,7 @@ const request = axios.create({
         ? "/teitter/v2/api"
         : "https://www.heron.love:8070/teitter/v2/api",
     withCredentials: true,
-    timeout: 5000,
+    timeout: 15000,
     transformResponse: data => {
         return jsonbig.parse(data);
     },

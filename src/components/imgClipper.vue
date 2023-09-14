@@ -148,11 +148,11 @@
         const width =
             hornPosition.rightTop.positionX -
             hornPosition.leftTop.positionX +
-            25;
+            20;
         const height =
             hornPosition.leftBottom.positionY -
             hornPosition.leftTop.positionY +
-            25;
+            20;
         return {
             leftTopX,
             leftTopY,

@@ -322,7 +322,6 @@
             }
             .sendLoader {
                 width: 3vmax;
-
                 height: 3vmax;
                 position: absolute;
                 right: 2vmax;
@@ -412,10 +411,8 @@
                 }
             }
             .uploadLoader {
-                span {
-                    width: 3vmax;
-                    height: 3vmax;
-                }
+                width: 3vmax;
+                height: 3vmax;
             }
         }
     }

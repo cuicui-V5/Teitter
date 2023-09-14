@@ -316,7 +316,7 @@ export const uploadFile = async (blob: Blob, fileName: string) => {
         const fd = new FormData();
         fd.append("file", blob, fileName);
         const res = await request.post("/upload", fd, {
-            timeout: 10000,
+            timeout: 30000,
             headers: {
                 "Content-Type": "multipart/form-data; ",
             },
