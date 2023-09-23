@@ -123,7 +123,7 @@
         flex: 605;
         position: relative;
         overflow-y: scroll;
-        margin-bottom: 7.3vmax;
+        // margin-bottom: 7.3vmax;
         &::-webkit-scrollbar {
             display: none;
         }
