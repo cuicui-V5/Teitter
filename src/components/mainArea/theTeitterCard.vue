@@ -60,6 +60,8 @@
                     controls
                     muted
                     loop
+                    preload="none"
+                    poster="/pwa-384x384.png"
                     @click.stop.prevent="clickVideo"
                     ref="video"
                     playsinline="true"

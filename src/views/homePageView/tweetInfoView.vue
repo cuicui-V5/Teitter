@@ -10,7 +10,7 @@
         <template v-if="replyList">
             <theTeitterCard
                 v-for="tweet in replyList"
-                :key="tweet.tweetId.toString"
+                :key="tweet.tweetId.toString()"
                 :teitter="tweet"
                 @flush="init"
                 :is-show-dividing="true"

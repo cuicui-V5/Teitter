@@ -28,7 +28,7 @@
     import reloadPrompt from "@/components/reloadPrompt.vue";
     import theBannerVue from "@/components/theBanner.vue";
     import rightPanel from "@/components/rightPanel.vue";
-
+    import { throttle } from "lodash-es";
     import { useTeitterStore } from "@/stores/teitter";
     import { computed, nextTick, ref, toRefs } from "vue";
     import { RouterView } from "vue-router";
@@ -47,15 +47,20 @@
     });
 
     // 判断是否是手机端, 如果是那么隐藏状态区域
-    window.addEventListener("resize", () => {
-        if (container.value) {
-            if (container.value.offsetHeight > container.value.offsetWidth) {
-                isMobile.value = true;
-            } else {
-                isMobile.value = false;
+    window.addEventListener(
+        "resize",
+        throttle(() => {
+            if (container.value) {
+                if (
+                    container.value.offsetHeight > container.value.offsetWidth
+                ) {
+                    isMobile.value = true;
+                } else {
+                    isMobile.value = false;
+                }
             }
-        }
-    });
+        }, 100),
+    );
 </script>
 
 <style scoped>
