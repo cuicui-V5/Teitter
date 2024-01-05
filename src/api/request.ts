@@ -5,7 +5,8 @@ import jsonbig from "json-bigint";
 const request = axios.create({
     baseURL: import.meta.env.DEV
         ? "/teitter/v2/api"
-        : "https://www.heron.love:8070/teitter/v2/api",
+        : // : "https://www.heron.love:8070/teitter/v2/api",
+          "https://teitter.heron.ltd:8070/teitter/v2/api",
     withCredentials: true,
     timeout: 15000,
     transformResponse: data => {
